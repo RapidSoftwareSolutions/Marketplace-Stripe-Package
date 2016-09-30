@@ -1956,6 +1956,2139 @@ module.exports.do = function(req, res){
                     'info': 'Success'
                 }
             ]
-        },]
+        }, {
+            "name":"createCard",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "accountId",
+                    type: "String",
+                    info: "The account ID obtained from Stripe.",
+                },
+                {
+                    name: "source",
+                    type: "String",
+                    info: "When adding a bank account to a customer, the parameter name is source. When adding to an account, the parameter name is external_account. The value can either be a token, like the ones returned by Stripe.js, or a dictionary containing a user’s bank account details (with the options shown below).",
+                },
+                {
+                    name: "externalAccount",
+                    type: "String",
+                    info: "When adding a bank account to a customer, the parameter name is source. When adding to an account, the parameter name is external_account. The value can either be a token, like the ones returned by Stripe.js, or a dictionary containing a user’s bank account details (with the options shown below).",
+                },
+                {
+                    name: "defaultForCurrency",
+                    type: "String",
+                    info: "If you set this to true (or if this is the first bank account being added in this currency) this bank account will become the default bank account for its currency.",
+                },
+                {
+                    name: "metadata",
+                    type: "JSON",
+                    info: "A set of key/value pairs that you can attach to an external account object. It can be useful for storing additional information about the external account in a structured format.",
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"getCard",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "accountId",
+                    type: "String",
+                    info: "The account ID obtained from Stripe.",
+                },
+                {
+                    name: "cardId",
+                    type: "String",
+                    info: "The card ID obtained from Stripe.",
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"updateCard",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "accountId",
+                    type: "String",
+                    info: "The account ID obtained from Stripe.",
+                },
+                {
+                    name: "cardId",
+                    type: "String",
+                    info: "The card ID obtained from Stripe.",
+                },
+                {
+                    name: "addressCity",
+                    type: "String",
+                    info: "City.",
+                },
+                {
+                    name: "addressCountry",
+                    type: "String",
+                    info: "Country.",
+                },
+                {
+                    name: "addressLine1",
+                    type: "String",
+                    info: "Line 1.",
+                },
+                {
+                    name: "addressLine2",
+                    type: "String",
+                    info: "Line 2.",
+                },
+                {
+                    name: "addressState",
+                    type: "String",
+                    info: "State.",
+                },
+                {
+                    name: "addressZip",
+                    type: "String",
+                    info: "State.",
+                },
+                {
+                    name: "defaultForCurrency",
+                    type: "String",
+                    info: "Only applicable on accounts (not customers or recipients). If set to true, this card will become the default external account for its currency..",
+                },
+                {
+                    name: "expMonth",
+                    type: "String",
+                    info: "Month.",
+                },
+                {
+                    name: "expYear",
+                    type: "String",
+                    info: "Year.",
+                },
+                {
+                    name: "metadata",
+                    type: "String",
+                    info: "A set of key/value pairs that you can attach to a customer object. It can be useful for storing additional information about the customer in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.",
+                },
+                {
+                    name: "name",
+                    type: "String",
+                    info: "Name.",
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"deleteCard",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "accountId",
+                    type: "String",
+                    info: "The account ID obtained from Stripe.",
+                },
+                {
+                    name: "cardId",
+                    type: "String",
+                    info: "The card ID obtained from Stripe.",
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"getCardList",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "accountId",
+                    type: "String",
+                    info: "The account ID obtained from Stripe.",
+                },
+                {
+                    name: "endingBefore",
+                    type: "String",
+                    info: "A cursor for use in pagination. ending_before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_bar, your subsequent call can include ending_before=obj_bar in order to fetch the previous page of the list.",
+                },
+                {
+                    name: "limit",
+                    type: "String",
+                    info: "A limit on the number of objects to be returned. Limit can range between 1 and 100 items.",
+                },
+                {
+                    name: "startingAfter",
+                    type: "String",
+                    info: "A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list."
+                }
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"createReceiver",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "amount",
+                    type: "String",
+                    info: "The account ID obtained from Stripe.",
+                },
+                {
+                    name: "currency",
+                    type: "String",
+                    info: "Only USD currently supported",
+                },
+                {
+                    name: "email",
+                    type: "String",
+                    info: "A cursor for use in pagination. ending_before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_bar, your subsequent call can include ending_before=obj_bar in order to fetch the previous page of the list.",
+                },
+                {
+                    name: "description",
+                    type: "String",
+                    info: "A limit on the number of objects to be returned. Limit can range between 1 and 100 items.",
+                },
+                {
+                    name: "metadata",
+                    type: "String",
+                    info: "",
+                },
+                {
+                    name: "refundMispayments",
+                    type: "String",
+                    info: "",
+                }
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"getReceiver",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "receiverId",
+                    type: "String",
+                    info: "Id of receiver to retrive.",
+                }
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"getReceiverList",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"createOrder",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "currency",
+                    type: "String",
+                    info: "3-letter ISO code representing the currency in which the order should be made. Stripe will validate that all entries in items match the currency specified here.",
+                },
+                {
+                    name: "coupon",
+                    type: "String",
+                    info: "A coupon code that represents a discount to be applied to this order. Must be one-time duration and in same currency as the order.",
+                },
+                {
+                    name: "customer",
+                    type: "String",
+                    info: "The ID of an existing customer to use for this order. If provided, the customer email and shipping address will be used to create the order. Subsequently, the customer will also be charged to pay the order. If email or shipping are also provided, they will override the values retrieved from the customer object.",
+                },
+                {
+                    name: "email",
+                    type: "String",
+                    info: "The email address of the customer placing the order.",
+                },
+                {
+                    name: "items",
+                    type: "JSON",
+                    info: "List of items constituting the order.",
+                },
+                {
+                    name: "metadata",
+                    type: "JSON",
+                    info: "A set of key/value pairs that you can attach to an order object. It can be useful for storing additional information about the order in a structured format.",
+                },
+                {
+                    name: "shipping",
+                    type: "JSON",
+                    info: "Shipping address for the order. Required if any of the SKUs are for products that have shippable set to true.",
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"getOrder",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "orderId",
+                    type: "String",
+                    info: "Id of receiver to retrive.",
+                }
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"updateOrder",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "orderId",
+                    type: "credentials",
+                    info: "Id of order to update.",
+                },
+                {
+                    name: "coupon",
+                    type: "String",
+                    info: "A coupon code that represents a discount to be applied to this order. Must be one-time duration and in same currency as the order.",
+                },
+                {
+                    name: "metadata",
+                    type: "JSON",
+                    info: "A set of key/value pairs that you can attach to an order object. It can be useful for storing additional information about the order in a structured format.",
+                },
+                {
+                    name: "shipping",
+                    type: "JSON",
+                    info: "Shipping address for the order. Required if any of the SKUs are for products that have shippable set to true.",
+                },
+                {
+                    name: "status",
+                    type: "credentials",
+                    info: "Current order status. One of `created`, `paid`, `canceled`, `fulfilled`, or `returned`.",
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"payOrder",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "orderId",
+                    type: "String",
+                    info: "The ID of an order to pay.",
+                },
+                {
+                    name: "customer",
+                    type: "String",
+                    info: "The ID of an existing customer that will be charged in this request.",
+                },
+                {
+                    name: "source",
+                    type: "String",
+                    info: "A payment source to be charged, such as a credit card. If you also pass a customer ID, the source must be the ID of a source belonging to the customer. Otherwise, if you do not pass a customer ID, the source you provide must either be a token, like the ones returned by Stripe.js, or a object containing a user's credit card details, with the options described below. Although not all information is required, the extra info helps prevent fraud."
+                },
+                {
+                    name: "metadata",
+                    type: "JSON",
+                    info: "A set of key/value pairs that you can attach to an order object. It can be useful for storing additional information about the order in a structured format.",
+                },
+                {
+                    name: "email",
+                    type: "String",
+                    info: "The email address of the customer placing the order. If a customer is specified, that customer's email address will be used.",
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"getOrderList",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "created",
+                    type: "String",
+                    info: "A filter on the list based on the object created field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with the following options:",
+                },
+                {
+                    name: "customer",
+                    type: "String",
+                    info: "Only return orders for the given customer.",
+                },
+                {
+                    name: "ids",
+                    type: "String",
+                    info: "Only return orders with the given IDs.",
+                },
+                {
+                    name: "status",
+                    type: "String",
+                    info: "Only return orders that have the given status. One of `created`, `paid`, `fulfilled`, or `refunded`.",
+                },
+                {
+                    name: "statusTransitions",
+                    type: "String",
+                    info: "Filter orders based on when they were paid, fulfilled, canceled, or returned.",
+                },
+                {
+                    name: "upstreamIds",
+                    type: "String",
+                    info: "Only return orders with the given upstream order IDs.",
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"returnOrder",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "orderId",
+                    type: "JSON",
+                    info: "Order id."
+                },
+                {
+                    name: "items",
+                    type: "JSON",
+                    info: "List of items to return."
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"getOrderReturn",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "orderId",
+                    type: "JSON",
+                    info: "The identifier of the order return to be retrieved."
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"getOrderReturnList",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "created",
+                    type: "String",
+                    info: "A filter on the list based on the object created field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with the following options:"
+                },
+                {
+                    name: "order",
+                    type: "String",
+                    info: "The order to retrieve returns for.",
+                },
+
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"createProduct",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "name",
+                    type: "String",
+                    info: "The product’s name, meant to be displayable to the customer.",
+                },
+                {
+                    name: "active",
+                    type: "String",
+                    info: "Whether or not the product is currently available for purchase. Defaults to `true`.",
+                },
+                {
+                    name: "attributes",
+                    type: "JSON",
+                    info: 'A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g. `["color", "size"]`).',
+                },
+                {
+                    name: "caption",
+                    type: "String",
+                    info: "A short one-line description of the product, meant to be displayable to the customer.",
+                },
+                {
+                    name: "deactivateOn",
+                    type: "JSON",
+                    info: "An array of Connect application names or identifiers that should not be able to order the SKUs for this product.",
+                },
+                {
+                    name: "description",
+                    type: "String",
+                    info: "The product’s description, meant to be displayable to the customer.",
+                },
+                {
+                    name: "images",
+                    type: "JSON",
+                    info: "A list of up to 8 URLs of images for this product, meant to be displayable to the customer.",
+                },
+                {
+                    name: "metadata",
+                    type: "JSON",
+                    info: "A set of key/value pairs that you can attach to a product object. It can be useful for storing additional information about the product in a structured format.",
+                },
+                {
+                    name: "packageDimensions",
+                    type: "String",
+                    info: "The dimensions of this product for shipping purposes. A SKU associated with this product can override this value by having its own package_dimensions.",
+                },
+                {
+                    name: "shippable",
+                    type: "String",
+                    info: "Whether this product is shipped (i.e. physical goods). Defaults to true.",
+                },
+                {
+                    name: "url",
+                    type: "String",
+                    info: "A URL of a publicly-accessible webpage for this product.",
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"getProduct",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "productId",
+                    type: "String",
+                    info: "The identifier of the product to be retrieved.",
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"updateProduct",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "productId",
+                    type: "String",
+                    info: "The id of product to update.",
+                },
+                {
+                    name: "name",
+                    type: "String",
+                    info: "The product’s name, meant to be displayable to the customer.",
+                },
+                {
+                    name: "active",
+                    type: "String",
+                    info: "Whether or not the product is currently available for purchase. Defaults to `true`.",
+                },
+                {
+                    name: "attributes",
+                    type: "JSON",
+                    info: 'A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g. `["color", "size"]`).',
+                },
+                {
+                    name: "caption",
+                    type: "String",
+                    info: "A short one-line description of the product, meant to be displayable to the customer.",
+                },
+                {
+                    name: "deactivateOn",
+                    type: "JSON",
+                    info: "An array of Connect application names or identifiers that should not be able to order the SKUs for this product.",
+                },
+                {
+                    name: "description",
+                    type: "String",
+                    info: "The product’s description, meant to be displayable to the customer.",
+                },
+                {
+                    name: "images",
+                    type: "JSON",
+                    info: "A list of up to 8 URLs of images for this product, meant to be displayable to the customer.",
+                },
+                {
+                    name: "metadata",
+                    type: "JSON",
+                    info: "A set of key/value pairs that you can attach to a product object. It can be useful for storing additional information about the product in a structured format.",
+                },
+                {
+                    name: "packageDimensions",
+                    type: "String",
+                    info: "The dimensions of this product for shipping purposes. A SKU associated with this product can override this value by having its own package_dimensions.",
+                },
+                {
+                    name: "shippable",
+                    type: "String",
+                    info: "Whether this product is shipped (i.e. physical goods). Defaults to true.",
+                },
+                {
+                    name: "url",
+                    type: "String",
+                    info: "A URL of a publicly-accessible webpage for this product.",
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"getProductList",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "ids",
+                    type: "String",
+                    info: "Only return products with the given IDs.",
+                },
+                {
+                    name: "shippable",
+                    type: "String",
+                    info: "Only return products that can be shipped (i.e., physical, not digital products).",
+                },
+                {
+                    name: "url",
+                    type: "String",
+                    info: "Only return products with the given url.",
+                },
+                
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"deleteProduct",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "productId",
+                    type: "String",
+                    info: "The ID of the product to delete.",
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"createSKU",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "currency",
+                    type: "String",
+                    info: "3-letter ISO code for currency.",
+                },
+                {
+                    name: "inventory",
+                    type: "String",
+                    info: "Description of the SKU’s inventory.",
+                },
+                {
+                    name: "price",
+                    type: "Number",
+                    info: "The cost of the item as a nonnegative integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a 0-decimal currency).",
+                },
+                {
+                    name: "product",
+                    type: "String",
+                    info: "The ID of the product this SKU is associated with.",
+                },
+                {
+                    name: "active",
+                    type: "String",
+                    info: "Whether or not the SKU is available for purchase. Default to true.",
+                },
+                {
+                    name: "attributes",
+                    type: "JSON",
+                    info: 'A dictionary of attributes and values for the attributes defined by the product. If, for example, a product’s attributes are ["size", "gender"], a valid SKU has the following dictionary of attributes: {"size": "Medium", "gender": "Unisex"}.',
+                },
+                {
+                    name: "image",
+                    type: "String",
+                    info: "The URL of an image for this SKU, meant to be displayable to the customer.",
+                },
+                {
+                    name: "metadata",
+                    type: "JSON",
+                    info: "A set of key/value pairs that you can attach to a SKU object. It can be useful for storing additional information about the SKU in a structured format.",
+                },
+                {
+                    name: "packageDimensions",
+                    type: "JSON",
+                    info: "The dimensions of this SKU for shipping purposes.",
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"getSKU",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "skuId",
+                    type: "String",
+                    info: "The identifier of the SKU to be retrieved.",
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"updateSKU",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "skuId",
+                    type: "String",
+                    info: "The identifier of the SKU to be updated.",
+                },
+                {
+                    name: "currency",
+                    type: "String",
+                    info: "3-letter ISO code for currency.",
+                },
+                {
+                    name: "inventory",
+                    type: "String",
+                    info: "Description of the SKU’s inventory.",
+                },
+                {
+                    name: "price",
+                    type: "String",
+                    info: "The cost of the item as a nonnegative integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a 0-decimal currency).",
+                },
+                {
+                    name: "product",
+                    type: "String",
+                    info: "The ID of the product this SKU is associated with.",
+                },
+                {
+                    name: "active",
+                    type: "String",
+                    info: "Whether or not the SKU is available for purchase. Default to true.",
+                },
+                {
+                    name: "attributes",
+                    type: "JSON",
+                    info: 'A dictionary of attributes and values for the attributes defined by the product. If, for example, a product’s attributes are ["size", "gender"], a valid SKU has the following dictionary of attributes: {"size": "Medium", "gender": "Unisex"}.',
+                },
+                {
+                    name: "image",
+                    type: "String",
+                    info: "The URL of an image for this SKU, meant to be displayable to the customer.",
+                },
+                {
+                    name: "metadata",
+                    type: "JSON",
+                    info: "A set of key/value pairs that you can attach to a SKU object. It can be useful for storing additional information about the SKU in a structured format.",
+                },
+                {
+                    name: "packageDimensions",
+                    type: "JSON",
+                    info: "The dimensions of this SKU for shipping purposes.",
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"getSKUList",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "attributes",
+                    type: "String",
+                    info: "",
+                },
+                {
+                    name: "ids",
+                    type: "String",
+                    info: "Only return SKUs with the given IDs.",
+                },
+                {
+                    name: "productId",
+                    type: "String",
+                    info: "The ID of the product whose SKUs will be retrieved.",
+                },
+
+                
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"deleteSKU",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "skuId",
+                    type: "String",
+                    info: "The identifier of the SKU to be deleted.",
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"createCoupon",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "couponId",
+                    type: "String",
+                    info: "Unique string of your choice that will be used to identify this coupon when applying it to a customer. This is often a specific code you’ll give to your customer to use when signing up (e.g. FALL25OFF). If you don’t want to specify a particular code, you can leave the ID blank and we’ll generate a random code for you.",
+                },
+                {
+                    name: "duration",
+                    type: "String",
+                    info: "Specifies how long the discount will be in effect. Can be `forever`, `once`, or `repeating`.",
+                },
+                {
+                    name: "amountOff",
+                    type: "String",
+                    info: "A positive integer representing the amount to subtract from an invoice total (required if percent_off is not passed)",
+                },
+                {
+                    name: "currency",
+                    type: "String",
+                    info: "Currency of the amount_off parameter (required if amount_off is passed)",
+                },
+                {
+                    name: "durationInMonths",
+                    type: "String",
+                    info: "Required only if duration is repeating, in which case it must be a positive integer that specifies the number of months the discount will be in effect.",
+                },
+                {
+                    name: "maxRedemptions",
+                    type: "String",
+                    info: "A positive integer specifying the number of times the coupon can be redeemed before it’s no longer valid. For example, you might have a 50% off coupon that the first 20 readers of your blog can use.",
+                },
+                {
+                    name: "metadata",
+                    type: "JSON",
+                    info: "A set of key/value pairs that you can attach to a coupon object. It can be useful for storing additional information about the coupon in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.",
+                },
+                {
+                    name: "percentOff",
+                    type: "String",
+                    info: "A positive integer between 1 and 100 that represents the discount the coupon will apply (required if amount_off is not passed)",
+                },
+                {
+                    name: "redeemBy",
+                    type: "String",
+                    info: "Unix timestamp specifying the last time at which the coupon can be redeemed. After the redeem_by date, the coupon can no longer be applied to new customers.",
+                },
+
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"getCoupon",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "couponId",
+                    type: "String",
+                    info: "Unique string of your choice that will be used to identify this coupon when applying it to a customer. This is often a specific code you’ll give to your customer to use when signing up (e.g. FALL25OFF). If you don’t want to specify a particular code, you can leave the ID blank and we’ll generate a random code for you.",
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"updateCoupon",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "couponId",
+                    type: "String",
+                    info: "Unique string of your choice that will be used to identify this coupon when applying it to a customer. This is often a specific code you’ll give to your customer to use when signing up (e.g. FALL25OFF). If you don’t want to specify a particular code, you can leave the ID blank and we’ll generate a random code for you.",
+                },
+                {
+                    name: "metadata",
+                    type: "JSON",
+                    info: "A set of key/value pairs that you can attach to a coupon object. It can be useful for storing additional information about the coupon in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.",
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"deleteCoupon",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "couponId",
+                    type: "String",
+                    info: "Unique string of your choice that will be used to identify this coupon when applying it to a customer. This is often a specific code you’ll give to your customer to use when signing up (e.g. FALL25OFF). If you don’t want to specify a particular code, you can leave the ID blank and we’ll generate a random code for you.",
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"getCouponList",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"deleteCustomerDiscount",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "customerId",
+                    type: "String",
+                    info: "Id of customer to delete."
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"deleteSubscriptionDiscount",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "subscriptionId",
+                    type: "String",
+                    info: "Id of subscribtion to delete."
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"createInvoice",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "customer",
+                    type: "String",
+                    info: "Customer Id"
+                },
+                {
+                    name: "applicationFee",
+                    type: "String",
+                    info: "A fee in cents that will be applied to the invoice and transferred to the application owner’s Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. "
+                },
+                {
+                    name: "description",
+                    type: "String",
+                    info: "An arbitrary string which you can attach to a charge object. It is displayed when in the web interface alongside the charge. Note that if you use Stripe to send automatic email receipts to your customers, your receipt emails will include the description of the charge(s) that they are describing.",
+
+                },
+                {
+                    name: "metadata",
+                    type: "JSON",
+                    info: "A set of key/value pairs that you can attach to a customer object. It can be useful for storing additional information about the customer in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.",
+                },
+                {
+                    name: "statementDescriptor",
+                    type: "String",
+                    info: "Extra information about a charge for the customer’s credit card statement."
+                },
+                {
+                    name: "subscription",
+                    type: "String",
+                    info: "The ID of the subscription to invoice. If not set, the created invoice will include all pending invoice items for the customer. If set, the created invoice will exclude pending invoice items that pertain to other subscriptions."
+                },
+                {
+                    name: "taxPercent",
+                    type: "String",
+                    info: "The percent tax rate applied to the invoice, represented as a decimal number."
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"getInvoice",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "invoiceId",
+                    type: "String",
+                    info: "Invoice id."
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"getInvoiceLineItems",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "invoice",
+                    type: "String",
+                    info: "Invoice id."
+                },
+                {
+                    name: "coupon",
+                    type: "String",
+                    info: "Counpon id."
+                },
+                {
+                    name: "customer",
+                    type: "String",
+                    info: "In the case of upcoming invoices, the customer of the upcoming invoice is required. In other cases it is ignored."
+                },
+                {
+                    name: "subscription",
+                    type: "String",
+                    info: "In the case of upcoming invoices, the subscription of the upcoming invoice is optional. In other cases it is ignored."
+                },
+                {
+                    name: "subscriptionPlan",
+                    type: "String",
+                    info: "Subscription Plan"
+                },
+                {
+                    name: "subscriptionProrate",
+                    type: "String",
+                    info: "Subscription Prorate"
+                },
+                {
+                    name: "subscriptionProrationDate",
+                    type: "String",
+                    info: "Subscription Proration Date"
+                },
+                {
+                    name: "subscriptionQuantity",
+                    type: "String",
+                    info: "Subscription Quantity"
+                },
+                {
+                    name: "subscriptionTrialEnd",
+                    type: "String",
+                    info: "Subscription Trial End"
+                },
+
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"updateInvoice",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "invoiceId",
+                    type: "String",
+                    info: "Invoice id."
+                },
+                {
+                    name: "applicationFee",
+                    type: "String",
+                    info: "A fee in cents that will be applied to the invoice and transferred to the application owner’s Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. "
+                },
+                {
+                    name: "description",
+                    type: "String",
+                    info: "An arbitrary string which you can attach to a charge object. It is displayed when in the web interface alongside the charge. Note that if you use Stripe to send automatic email receipts to your customers, your receipt emails will include the description of the charge(s) that they are describing.",
+
+                },
+                {
+                    name: "metadata",
+                    type: "String",
+                    info: "A set of key/value pairs that you can attach to a customer object. It can be useful for storing additional information about the customer in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.",
+                },
+                {
+                    name: "statementDescriptor",
+                    type: "String",
+                    info: "Extra information about a charge for the customer’s credit card statement."
+                },
+                {
+                    name: "subscription",
+                    type: "String",
+                    info: "The ID of the subscription to invoice. If not set, the created invoice will include all pending invoice items for the customer. If set, the created invoice will exclude pending invoice items that pertain to other subscriptions."
+                },
+                {
+                    name: "forgiven",
+                    type: "String",
+                    info: "Boolean representing whether an invoice is forgiven or not. To forgive an invoice, pass true. Forgiving an invoice instructs us to update the subscription status as if the invoice were successfully paid. Once an invoice has been forgiven, it cannot be unforgiven or reopened."
+                },
+                {
+                    name: "closed",
+                    type: "String",
+                    info: "Boolean representing whether an invoice is closed or not. To close an invoice, pass true."
+                },
+                {
+                    name: "taxPercent",
+                    type: "String",
+                    info: "The percent tax rate applied to the invoice, represented as a decimal number."
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"payInvoice",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "invoiceId",
+                    type: "String",
+                    info: "Invoice id."
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"getInvoiceList",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "customer",
+                    type: "String",
+                    info: "The identifier of the customer whose invoices to return. If none is provided, all invoices will be returned."
+                }
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"getInvoiceList",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "customer",
+                    type: "String",
+                    info: "The identifier of the customer whose invoices to return. If none is provided, all invoices will be returned."
+                }
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"createInvoiceItem",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "amount",
+                    type: "Number",
+                    info: "The integer amount in cents of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer’s account, pass a negative amount.",
+                },
+                {
+                    name: "currency",
+                    type: "String",
+                    info: "3-letter ISO code for currency.",
+                },
+                {
+                    name: "customer",
+                    type: "String",
+                    info: "The ID of the customer who will be billed when this invoice item is billed.",
+                },
+                {
+                    name: "description",
+                    type: "String",
+                    info: "An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.",
+                },
+                {
+                    name: "discountable",
+                    type: "String",
+                    info: "Controls whether discounts apply to this invoice item. Defaults to false for prorations or negative invoice items, and true for all other invoice items.",
+                },
+                {
+                    name: "invoice",
+                    type: "String",
+                    info: "The ID of an existing invoice to add this invoice item to. When left blank, the invoice item will be added to the next upcoming scheduled invoice. Use this when adding invoice items in response to an invoice.created webhook. You cannot add an invoice item to an invoice that has already been paid, attempted or closed.",
+                },
+                {
+                    name: "metadata",
+                    type: "JSON",
+                    info: "A set of key/value pairs that you can attach to an invoice item object. It can be useful for storing additional information about the invoice item in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving."
+                },
+                {
+                    name: "subscription",
+                    type: "String",
+                    info: "The ID of a subscription to add this invoice item to. When left blank, the invoice item will be be added to the next upcoming scheduled invoice. When set, scheduled invoices for subscriptions other than the specified subscription will ignore the invoice item. Use this when you want to express that an invoice item has been accrued within the context of a particular subscription."
+                }
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"getInvoiceItem",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "invoiceitem",
+                    type: "String",
+                    info: "The ID of the desired invoice item."
+                }
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"updateInvoiceItem",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "itemId",
+                    type: "String",
+                    info: "Item id.",
+                },
+                {
+                    name: "amount",
+                    type: "Number",
+                    info: "The integer amount in cents of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer's account, pass a negative amount."
+                },
+                {
+                    name: "description",
+                    type: "String",
+                    info: "An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving."
+                },
+                {
+                    name: "discountable",
+                    type: "String",
+                    info: "Controls whether discounts apply to this invoice item. Defaults to false for prorations or negative invoice items, and true for all other invoice items. Cannot be set to true for prorations."
+                },
+                {
+                    name: "metadata",
+                    type: "JSON",
+                    info: "A set of key/value pairs that you can attach to an invoice item object. It can be useful for storing additional information about the invoice item in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save."
+                }
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"deleteInvoiceItem",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "invoiceitem",
+                    type: "String",
+                    info: "The ID of the desired invoice item."
+                }
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"getInvoiceItemsList",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "customer",
+                    type: "String",
+                    info: "The identifier of the customer whose invoice items to return. If none is provided, all invoice items will be returned."
+                }
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"createPlan",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "planId",
+                    type: "String",
+                    info: "Unique string of your choice that will be used to identify this plan when subscribing a customer. This could be an identifier like “gold” or a primary key from your own database."
+                },
+                {
+                    name: "amount",
+                    type: "String",
+                    info: "A positive integer in cents (or 0 for a free plan) representing how much to charge (on a recurring basis)."
+                },
+                {
+                    name: "currency",
+                    type: "String",
+                    info: "3-letter ISO code for currency."
+                },
+                {
+                    name: "interval",
+                    type: "String",
+                    info: "Specifies billing frequency. Either day, week, month or year."
+                },
+                {
+                    name: "name",
+                    type: "String",
+                    info: "Name of the plan, to be displayed on invoices and in the web interface."
+                },
+                {
+                    name: "intervalCount",
+                    type: "String",
+                    info: "The number of intervals between each subscription billing. For example, interval=month and interval_count=3 bills every 3 months. Maximum of one year interval allowed (1 year, 12 months, or 52 weeks)."
+                },
+                {
+                    name: "metadata",
+                    type: "String",
+                    info: "A set of key/value pairs that you can attach to a plan object. It can be useful for storing additional information about the plan in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving."
+                },
+                {
+                    name: "statementDescriptor",
+                    type: "String",
+                    info: `An arbitrary string to be displayed on your customer’s credit card statement. This may be up to 22 characters. As an example, if your website is RunClub and the item you’re charging for is your Silver Plan, you may want to specify a statement_descriptor of RunClub Silver Plan. The statement description may not include <>"' characters, and will appear on your customer’s statement in capital letters. Non-ASCII characters are automatically stripped. While most banks display this information consistently, some may display it incorrectly or not at all.`
+                },
+                {
+                    name: "trialPeriodDays",
+                    type: "String",
+                    info: "Specifies a trial period in (an integer number of) days. If you include a trial period, the customer won’t be billed for the first time until the trial period ends. If the customer cancels before the trial period is over, she’ll never be billed at all."
+                }
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"getPlan",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "planId",
+                    type: "String",
+                    info: "The ID of the desired plan."
+                }
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"updatePlan",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "planId",
+                    type: "String",
+                    info: "The identifier of the plan to be updated."
+                },
+                {
+                    name: "name",
+                    type: "String",
+                    info: "Name of the plan, to be displayed on invoices and in the web interface."
+                },
+                {
+                    name: "metadata",
+                    type: "String",
+                    info: "A set of key/value pairs that you can attach to a plan object. It can be useful for storing additional information about the plan in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving."
+                },
+                {
+                    name: "statementDescriptor",
+                    type: "String",
+                    info: `An arbitrary string to be displayed on your customer’s credit card statement. This may be up to 22 characters. As an example, if your website is RunClub and the item you’re charging for is your Silver Plan, you may want to specify a statement_descriptor of RunClub Silver Plan. The statement description may not include <>"' characters, and will appear on your customer’s statement in capital letters. Non-ASCII characters are automatically stripped. While most banks display this information consistently, some may display it incorrectly or not at all.`
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"deletePlan",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "planId",
+                    type: "String",
+                    info: "The identifier of the plan to be deleted."
+                }
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"getPlanList",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "planId",
+                    type: "String",
+                    info: "The identifier of the plan to be deleted."
+                }
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"createSubscription",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "applicationFeePercent",
+                    type: "String",
+                    info: "A positive decimal (with at most four decimal places) between 1 and 100. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner’s Stripe account. The request must be made with an OAuth key in order to set an application fee percentage."
+                },
+                {
+                    name: "coupon",
+                    type: "String",
+                    info: "The code of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription."
+                },
+                {
+                    name: "customer",
+                    type: "String",
+                    info: "The identifier of the customer to subscribe."
+                },
+                {
+                    name: "plan",
+                    type: "String",
+                    info: "The identifier of the plan to subscribe the customer to."
+                },
+                {
+                    name: "source",
+                    type: "JSON",
+                    info: "The source can either be a token, like the ones returned by our Stripe.js, or a object containing a user's credit card details (with the options shown below). You must provide a source if the customer does not already have a valid source attached, and you are subscribing the customer for a plan that is not free. Passing source will create a new source object, make it the customer default source, and delete the old customer default if one exists. If you want to add an additional source to use with subscriptions, instead use the card creation API to add the card and then the customer update API to set it as the default. Whenever you attach a card to a customer, Stripe will automatically validate the card."
+                },
+                {
+                    name: "quantity",
+                    type: "Number",
+                    info: "The quantity you'd like to apply to the subscription you're creating. For example, if your plan is $10/user/month, and your customer has 5 users, you could pass 5 as the quantity to have the customer charged $50 (5 x $10) monthly. If you update a subscription but don't change the plan ID (e.g. changing only the trial_end), the subscription will inherit the old subscription's quantity attribute unless you pass a new quantity parameter. If you update a subscription and change the plan ID, the new subscription will not inherit the quantity attribute and will default to 1 unless you pass a quantity parameter."
+                },
+                {
+                    name: "metadata",
+                    type: "JSON",
+                    info: "A set of key/value pairs that you can attach to a subscription object. It can be useful for storing additional information about the subscription in a structured format."
+                },
+                {
+                    name: "taxPercent",
+                    type: "String",
+                    info: "A positive decimal (with at most four decimal places) between 1 and 100. This represents the percentage of the subscription invoice subtotal that will be calculated and added as tax to the final amount each billing period. For example, a plan which charges $10/month with a tax_percent of 20.0 will charge $12 per invoice."
+                },
+                {
+                    name: "trialEnd",
+                    type: "String",
+                    info: "Unix timestamp representing the end of the trial period the customer will get before being charged for the first time. If set, trial_end will override the default trial period of the plan the customer is being subscribed to. The special value now can be provided to end the customer's trial immediately."
+                }
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"getSubscription",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "subscriptionId",
+                    type: "String",
+                    info: "ID of subscription to retrieve."
+                }
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"updateSubscription",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "subscriptionId",
+                    type: "String",
+                    info: "ID of subscription to updated."
+                },
+                {
+                    name: "applicationFeePercent",
+                    type: "String",
+                    info: "A positive decimal (with at most four decimal places) between 1 and 100. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner’s Stripe account. The request must be made with an OAuth key in order to set an application fee percentage."
+                },
+                {
+                    name: "coupon",
+                    type: "String",
+                    info: "The code of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription."
+                },
+                {
+                    name: "customer",
+                    type: "String",
+                    info: "The identifier of the customer to subscribe."
+                },
+                {
+                    name: "plan",
+                    type: "String",
+                    info: "The identifier of the plan to subscribe the customer to."
+                },
+                {
+                    name: "source",
+                    type: "JSON",
+                    info: "The source can either be a token, like the ones returned by our Stripe.js, or a object containing a user's credit card details (with the options shown below). You must provide a source if the customer does not already have a valid source attached, and you are subscribing the customer for a plan that is not free. Passing source will create a new source object, make it the customer default source, and delete the old customer default if one exists. If you want to add an additional source to use with subscriptions, instead use the card creation API to add the card and then the customer update API to set it as the default. Whenever you attach a card to a customer, Stripe will automatically validate the card."
+                },
+                {
+                    name: "quantity",
+                    type: "Number",
+                    info: "The quantity you'd like to apply to the subscription you're creating. For example, if your plan is $10/user/month, and your customer has 5 users, you could pass 5 as the quantity to have the customer charged $50 (5 x $10) monthly. If you update a subscription but don't change the plan ID (e.g. changing only the trial_end), the subscription will inherit the old subscription's quantity attribute unless you pass a new quantity parameter. If you update a subscription and change the plan ID, the new subscription will not inherit the quantity attribute and will default to 1 unless you pass a quantity parameter."
+                },
+                {
+                    name: "metadata",
+                    type: "JSON",
+                    info: "A set of key/value pairs that you can attach to a subscription object. It can be useful for storing additional information about the subscription in a structured format."
+                },
+                {
+                    name: "taxPercent",
+                    type: "String",
+                    info: "A positive decimal (with at most four decimal places) between 1 and 100. This represents the percentage of the subscription invoice subtotal that will be calculated and added as tax to the final amount each billing period. For example, a plan which charges $10/month with a tax_percent of 20.0 will charge $12 per invoice."
+                },
+                {
+                    name: "trialEnd",
+                    type: "String",
+                    info: "Unix timestamp representing the end of the trial period the customer will get before being charged for the first time. If set, trial_end will override the default trial period of the plan the customer is being subscribed to. The special value now can be provided to end the customer's trial immediately."
+                }
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"cancelSubscription",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "subscriptionId",
+                    type: "String",
+                    info: "ID of subscription to retrieve."
+                },
+                {
+                    name: "atPeriodEnd",
+                    type: "String",
+                    info: "A flag that if set to true will delay the cancellation of the subscription until the end of the current period."
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }, {
+            "name":"getSubscriptionList",
+            "args":[
+                {
+                    name: "apiKey",
+                    type: "credentials",
+                    info: "The api key obtained from Stripe.",
+                },
+                {
+                    name: "subscriptionId",
+                    type: "String",
+                    info: "ID of subscription to retrieve."
+                },
+                {
+                    name: "customer",
+                    type: "String",
+                    info: "The ID of the customer whose subscriptions will be retrieved"
+                },
+                {
+                    name: "plan",
+                    type: "String",
+                    info: "The ID of the plan whose subscriptions will be retrieved"
+                },
+                {
+                    name: "status",
+                    type: "String",
+                    info: "The status of the subscriptions to retrieve. One of: trialing, active, past_due, unpaid, canceled, or all. Passing in a value of canceled will return all canceled subscriptions, including those belonging to deleted customers. Passing in a value of all will return subscriptions of all statuses."
+                },
+            ],
+            'callbacks':[
+                {
+                    'name':'error',
+                    'info': 'Error'
+                },
+                {
+                    'name':'success',
+                    'info': 'Success'
+                }
+            ]
+        }]
      })
 };

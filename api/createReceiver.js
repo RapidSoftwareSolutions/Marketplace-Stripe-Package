@@ -1,36 +1,34 @@
 'use strict';
 
 const _           = require('../lib/functions')
+const request     = require('request');
 const initStripe  = require('stripe');
-
 
 module.exports = (req, res) => {
 
 	req.body.args = _.clearArgs(req.body.args);
 
 	let { 
-		apiKey,
-		amount,
+		apiKey, 
 		currency,
-		capture,
+		email,
 		description,
+		amount,
 		metadata,
-		receiptEmail,
-		customer,
-		source,
-		statementDescriptor,
-	 	to="to" 
-	 } = req.body.args;
+		refundMispayments,
+		to="to" } = req.body.args;
 
 	let r  = {
         callback     : "",
         contextWrites: {}
     };
 
-	if(!apiKey || !amount || !currency) {
+	if(!apiKey || !email) {
 		_.echoBadEnd(r, to, res);
 		return;
 	}
+
+	let stripe = initStripe(apiKey);
 
 	if(metadata)
 	try {
@@ -43,27 +41,21 @@ module.exports = (req, res) => {
         return;
 	}
 
-	let stripe = initStripe(apiKey);
-
-	let options = {
+	let options = _.clearArgs({
 		amount: amount,
 		currency: currency,
-		capture: capture == 'false' ? false : true,
+		email: email,
 		description: description,
 		metadata: metadata,
-		receipt_email: receiptEmail,
-		customer: customer,
-		source: source,
-		statement_descriptor: statementDescriptor
-	};
+		refund_mispayments: refundMispayments
+	});
 
-	options = _.clearArgs(options);
-
-	stripe.charges.create(options, function(err, result) {
+	stripe.bitcoinReceivers.create(options, function(err, result) {
 		if(!err) {
     		r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 
         } else {
+        	console.log(err);
             r.contextWrites[to] = JSON.stringify(err);
             r.callback = 'error';
         }

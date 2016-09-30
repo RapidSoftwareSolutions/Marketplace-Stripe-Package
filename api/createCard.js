@@ -1,6 +1,7 @@
 'use strict';
 
 const _           = require('../lib/functions')
+const request     = require('request');
 const initStripe  = require('stripe');
 
 
@@ -10,15 +11,11 @@ module.exports = (req, res) => {
 
 	let { 
 		apiKey,
-		amount,
-		currency,
-		capture,
-		description,
-		metadata,
-		receiptEmail,
-		customer,
+		accountId,
 		source,
-		statementDescriptor,
+		externalAccount,
+		defaultForCurrency,
+		metadata,
 	 	to="to" 
 	 } = req.body.args;
 
@@ -27,14 +24,19 @@ module.exports = (req, res) => {
         contextWrites: {}
     };
 
-	if(!apiKey || !amount || !currency) {
+	if(!apiKey || !(source || externalAccount) || !accountId) {
 		_.echoBadEnd(r, to, res);
 		return;
 	}
 
+	let stripe = initStripe(apiKey);
+
+	let options = {};
+
 	if(metadata)
 	try {
-		metadata = JSON.parse(metadata)
+		metadata = JSON.parse(metadata);
+		options.metadata = metadata;
 	} catch(e) {
 		r.contextWrites[to] = 'Invalid JSON value.';
         r.callback = 'error';
@@ -43,23 +45,11 @@ module.exports = (req, res) => {
         return;
 	}
 
-	let stripe = initStripe(apiKey);
+	if(externalAccount) options.external_account = externalAccount;
+	else                options.source           = source;
 
-	let options = {
-		amount: amount,
-		currency: currency,
-		capture: capture == 'false' ? false : true,
-		description: description,
-		metadata: metadata,
-		receipt_email: receiptEmail,
-		customer: customer,
-		source: source,
-		statement_descriptor: statementDescriptor
-	};
 
-	options = _.clearArgs(options);
-
-	stripe.charges.create(options, function(err, result) {
+	stripe.accounts.createExternalAccount(accountId, options, function(err, result) {
 		if(!err) {
     		r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 

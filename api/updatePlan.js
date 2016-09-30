@@ -1,6 +1,7 @@
 'use strict';
 
 const _           = require('../lib/functions')
+const request     = require('request');
 const initStripe  = require('stripe');
 
 
@@ -10,14 +11,9 @@ module.exports = (req, res) => {
 
 	let { 
 		apiKey,
-		amount,
-		currency,
-		capture,
-		description,
+		planId,
+		name,
 		metadata,
-		receiptEmail,
-		customer,
-		source,
 		statementDescriptor,
 	 	to="to" 
 	 } = req.body.args;
@@ -27,14 +23,16 @@ module.exports = (req, res) => {
         contextWrites: {}
     };
 
-	if(!apiKey || !amount || !currency) {
+	if(!apiKey || !planId) {
 		_.echoBadEnd(r, to, res);
 		return;
 	}
 
+	let stripe = initStripe(apiKey);
+
 	if(metadata)
 	try {
-		metadata = JSON.parse(metadata)
+		metadata = JSON.parse(metadata);
 	} catch(e) {
 		r.contextWrites[to] = 'Invalid JSON value.';
         r.callback = 'error';
@@ -43,23 +41,13 @@ module.exports = (req, res) => {
         return;
 	}
 
-	let stripe = initStripe(apiKey);
-
-	let options = {
-		amount: amount,
-		currency: currency,
-		capture: capture == 'false' ? false : true,
-		description: description,
-		metadata: metadata,
-		receipt_email: receiptEmail,
-		customer: customer,
-		source: source,
+	let options = _.clearArgs({
+		name,
+		metadata,
 		statement_descriptor: statementDescriptor
-	};
+	});
 
-	options = _.clearArgs(options);
-
-	stripe.charges.create(options, function(err, result) {
+	stripe.plans.update(planeId, options, function(err, result) {
 		if(!err) {
     		r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 

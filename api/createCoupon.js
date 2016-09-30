@@ -1,6 +1,7 @@
 'use strict';
 
 const _           = require('../lib/functions')
+const request     = require('request');
 const initStripe  = require('stripe');
 
 
@@ -10,15 +11,15 @@ module.exports = (req, res) => {
 
 	let { 
 		apiKey,
-		amount,
+		couponId,
+		duration,
+		amountOff,
 		currency,
-		capture,
-		description,
+		durationInMonths,
+		maxRedemptions,
 		metadata,
-		receiptEmail,
-		customer,
-		source,
-		statementDescriptor,
+		percentOff,
+		redeemBy,
 	 	to="to" 
 	 } = req.body.args;
 
@@ -27,7 +28,7 @@ module.exports = (req, res) => {
         contextWrites: {}
     };
 
-	if(!apiKey || !amount || !currency) {
+	if(!apiKey) {
 		_.echoBadEnd(r, to, res);
 		return;
 	}
@@ -46,20 +47,20 @@ module.exports = (req, res) => {
 	let stripe = initStripe(apiKey);
 
 	let options = {
-		amount: amount,
+		coupon_id: couponId,
+		duration: duration,
+		amount_off: amountOff,
 		currency: currency,
-		capture: capture == 'false' ? false : true,
-		description: description,
+		duration_in_months: durationInMonths,
+		max_redemptions: maxRedemptions,
 		metadata: metadata,
-		receipt_email: receiptEmail,
-		customer: customer,
-		source: source,
-		statement_descriptor: statementDescriptor
+		percent_off: percentOff,
+		redeem_by: redeemBy	
 	};
 
 	options = _.clearArgs(options);
 
-	stripe.charges.create(options, function(err, result) {
+	stripe.coupons.create(options, function(err, result) {
 		if(!err) {
     		r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 

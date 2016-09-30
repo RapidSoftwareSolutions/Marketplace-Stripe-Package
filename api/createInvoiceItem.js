@@ -12,13 +12,12 @@ module.exports = (req, res) => {
 		apiKey,
 		amount,
 		currency,
-		capture,
-		description,
-		metadata,
-		receiptEmail,
 		customer,
-		source,
-		statementDescriptor,
+		description,
+		discountable,
+		invoice,
+		metadata,
+		subscription,
 	 	to="to" 
 	 } = req.body.args;
 
@@ -27,7 +26,7 @@ module.exports = (req, res) => {
         contextWrites: {}
     };
 
-	if(!apiKey || !amount || !currency) {
+	if(!apiKey || !currency || !customer) {
 		_.echoBadEnd(r, to, res);
 		return;
 	}
@@ -46,20 +45,19 @@ module.exports = (req, res) => {
 	let stripe = initStripe(apiKey);
 
 	let options = {
-		amount: amount,
-		currency: currency,
-		capture: capture == 'false' ? false : true,
-		description: description,
-		metadata: metadata,
-		receipt_email: receiptEmail,
-		customer: customer,
-		source: source,
-		statement_descriptor: statementDescriptor
+		amount,
+		currency,
+		customer,
+		description,
+		discountable,
+		invoice,
+		metadata,
+		subscription
 	};
 
 	options = _.clearArgs(options);
 
-	stripe.charges.create(options, function(err, result) {
+	stripe.invoiceItems.create(options, function(err, result) {
 		if(!err) {
     		r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 

@@ -1,8 +1,8 @@
 'use strict';
 
 const _           = require('../lib/functions')
+const request     = require('request');
 const initStripe  = require('stripe');
-
 
 module.exports = (req, res) => {
 
@@ -10,15 +10,19 @@ module.exports = (req, res) => {
 
 	let { 
 		apiKey,
-		amount,
-		currency,
-		capture,
-		description,
+		accountId,
+		cardId,
+		addressCity,
+		addressCountry,
+		addressLine1,
+		addressLine2,
+		addressState,
+		addressZip,
+		defaultForCurrency,
+		expMonth,
+		expYear,
 		metadata,
-		receiptEmail,
-		customer,
-		source,
-		statementDescriptor,
+		name,
 	 	to="to" 
 	 } = req.body.args;
 
@@ -27,7 +31,7 @@ module.exports = (req, res) => {
         contextWrites: {}
     };
 
-	if(!apiKey || !amount || !currency) {
+	if(!apiKey || !accountId || !cardId) {
 		_.echoBadEnd(r, to, res);
 		return;
 	}
@@ -45,21 +49,20 @@ module.exports = (req, res) => {
 
 	let stripe = initStripe(apiKey);
 
-	let options = {
-		amount: amount,
-		currency: currency,
-		capture: capture == 'false' ? false : true,
-		description: description,
-		metadata: metadata,
-		receipt_email: receiptEmail,
-		customer: customer,
-		source: source,
-		statement_descriptor: statementDescriptor
-	};
+	let options = _.clearArgs({
+		address_city: addressCity,
+		address_country: addressCountry,
+		address_line1: addressLine1,
+		address_line2: addressLine2,
+		address_state: addressState,
+		address_zip: addressZip,
+		default_for_currency: defaultForCurrency,
+		exp_month: expMonth,
+		exp_year: expYear,
+		name: name
+	});
 
-	options = _.clearArgs(options);
-
-	stripe.charges.create(options, function(err, result) {
+	stripe.accounts.updateExternalAccount(accountId, cardId, options, function(err, result) {
 		if(!err) {
     		r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 
@@ -69,5 +72,6 @@ module.exports = (req, res) => {
         }
 
         res.status(200).send(r);
-	});	
+	});
+
 }
