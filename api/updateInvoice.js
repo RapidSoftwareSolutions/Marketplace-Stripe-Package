@@ -11,11 +11,16 @@ module.exports = (req, res) => {
 
 	let { 
 		apiKey,
-		itemId,
-		amount,
+		invoiceId,
+		closed,
+		forgiven,
+		customer,
+		applicationFee,
 		description,
-		discountable,
 		metadata,
+		statementDescriptor,
+		taxPercent,
+		subscription,
 	 	to="to"
 	 } = req.body.args;
 
@@ -24,7 +29,7 @@ module.exports = (req, res) => {
         contextWrites: {}
     };
 
-	if(!apiKey || !itemId) {
+	if(!apiKey || !customer) {
 		_.echoBadEnd(r, to, res);
 		return;
 	}
@@ -43,13 +48,18 @@ module.exports = (req, res) => {
 	}
 
 	let options = _.clearArgs({
-		amount,
+		closed,
+		forgiven,
+		customer,
+		application_fee: applicationFee,
 		description,
-		discountable,
-		metadata
+		metadata,
+		statement_descriptor: statementDescriptor,
+		subscription,
+		tax_percent: taxPercent
 	});
 
-	stripe.invoiceItems.update(itemId, options, function(err, result) {
+	stripe.invoices.update(invoiceId, options, function(err, result) {
 		if(!err) {
     		r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 

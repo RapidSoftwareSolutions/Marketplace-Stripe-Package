@@ -6,9 +6,6 @@ const initStripe  = require('stripe');
 
 
 module.exports = (req, res) => {
-
-	console.log(req.route);
-
 	let { 
 		apiKey,
 		orderId,

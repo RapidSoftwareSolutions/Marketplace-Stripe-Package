@@ -894,6 +894,14 @@ it('/payInvoice', () => {
 	.then((res) => {});
 });
 
+it('/getInvoiceList', () => {
+	return request(app)
+	.post('/api/Stripe/getInvoiceList')
+	.send({args:{ apiKey, customer,}})
+	.expect(200)
+	.then((res) => {});
+});
+
 it('/createInvoiceItem', () => {
 	return request(app)
 	.post('/api/Stripe/createInvoiceItem')

@@ -30,7 +30,7 @@ module.exports = (req, res) => {
 	let options = _.clearArgs({
 		attributes,
 		ids,
-		product_id: productId
+		product: productId
 	});
 
 	stripe.skus.list(options, function(err, result) {

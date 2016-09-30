@@ -20,7 +20,7 @@ module.exports = (req, res) => {
         contextWrites: {}
     };
 
-	if(!apiKey || !appId) {
+	if(!apiKey || !feeId) {
 		_.echoBadEnd(r, to, res);
 		return;
 	}

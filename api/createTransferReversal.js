@@ -12,7 +12,6 @@ module.exports = (req, res) => {
 		apiKey, 
 		amount,
 		metadata,
-		description,
 		refundApplicationFee,
 		to="to",
 	} = req.body.args;
@@ -40,7 +39,6 @@ module.exports = (req, res) => {
 
 	let options = _.clearArgs({
 		amount: amount,
-		description: description,
 		metadata: metadata,
 		refund_application_fee: refundApplicationFee
 	});

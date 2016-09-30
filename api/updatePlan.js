@@ -47,7 +47,7 @@ module.exports = (req, res) => {
 		statement_descriptor: statementDescriptor
 	});
 
-	stripe.plans.update(planeId, options, function(err, result) {
+	stripe.plans.update(planId, options, function(err, result) {
 		if(!err) {
     		r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 
