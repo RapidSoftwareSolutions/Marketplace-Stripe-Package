@@ -206,7 +206,8 @@ it('/captureCharge', () => {
 	.then((res) => {});
 });
 
-it('/getChargesList', () => {
+it('/getChargesList', function() {
+	this.timeout(5000);
 	return request(app)
 	.post('/api/Stripe/getChargesList')
 	.send({args:{ apiKey, created, customer, endingBefore, limit, source, startingAfter,}})

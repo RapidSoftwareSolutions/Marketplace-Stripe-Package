@@ -1145,6 +1145,11 @@ module.exports.do = function(req, res){
                     info: "The api key obtained from Stripe.",
                 },
                 {
+                    name: "transferId",
+                    type: "credentials",
+                    info: "The identifier of the transfer to be reversed.",
+                },
+                {
                     name: "description",
                     type: "String",
                     info: "An arbitrary string which you can attach to a reversal object. It is displayed alongside the reversal in the dashboard. This will be unset if you POST an empty value.",

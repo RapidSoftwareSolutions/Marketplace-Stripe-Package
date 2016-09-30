@@ -10,6 +10,7 @@ module.exports = (req, res) => {
 
 	let { 
 		apiKey, 
+		transferId,
 		amount,
 		metadata,
 		refundApplicationFee,
@@ -45,7 +46,7 @@ module.exports = (req, res) => {
 
 	let stripe = initStripe(apiKey);
 
-	stripe.transfers.list(options, function(err, result) {
+	stripe.transfers.createReversal(transferId, options, function(err, result) {
 		if(!err) {
     		r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 

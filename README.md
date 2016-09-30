@@ -122,7 +122,7 @@ This blocks allows you to translates a sting of text from one language to anothe
  
 <a name="getAccountBalance"/>
 ## Stripe.getAccountBalance
-Method description
+Retrieves the current account balance, based on the authentication that was used to make the request.
 
 | Field | Type       | Description
 |-------|------------|----------
@@ -139,7 +139,60 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "object": "balance",
+			  "available": [
+			    {
+			      "currency": "aud",
+			      "amount": -88,
+			      "source_types": {
+			        "card": -88
+			      }
+			    },
+			    {
+			      "currency": "jpy",
+			      "amount": -40320,
+			      "source_types": {
+			        "card": -40320
+			      }
+			    },
+			    {
+			      "currency": "usd",
+			      "amount": 13702549683,
+			      "source_types": {
+			        "card": 13598002733,
+			        "bank_account": 103002760,
+			        "bitcoin_receiver": 1544190
+			      }
+			    }
+			  ],
+			  "livemode": false,
+			  "pending": [
+			    {
+			      "currency": "aud",
+			      "amount": 0,
+			      "source_types": {
+			        "card": 0
+			      }
+			    },
+			    {
+			      "currency": "jpy",
+			      "amount": 0,
+			      "source_types": {
+			        "card": 0
+			      }
+			    },
+			    {
+			      "currency": "usd",
+			      "amount": 396093624,
+			      "source_types": {
+			        "card": 396093624,
+			        "bank_account": 0,
+			        "bitcoin_receiver": 0
+			      }
+			    }
+			  ]
+			}
 		}
 	}
 }
@@ -147,7 +200,7 @@ Method description
 
 <a name="getBalanceHistory"/>
 ## Stripe.getBalanceHistory
-Method description
+Returns a list of transactions that have contributed to the Stripe account balance (e.g., charges, transfers, and so forth). The transactions are returned in sorted order, with the most recent transactions appearing first.
 
 | Field        | Type       | Description
 |--------------|------------|----------
@@ -160,9 +213,9 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"currency": "...",
+	"currency": "usd",
 	"startingAfter": "...",
-	"limit": 0,
+	"limit": 3,
 	"type": "..."
 }
 ```
@@ -172,7 +225,45 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "object": "list",
+			  "url": "/v1/balance/history",
+			  "has_more": false,
+			  "data": [
+			    {
+			      "id": "txn_18tiU12eZvKYlo2CetxoRTDG",
+			      "object": "balance_transaction",
+			      "amount": 5001,
+			      "available_on": 1474416000,
+			      "created": 1473879105,
+			      "currency": "usd",
+			      "description": "User: 813. Events: 1267. Total Tickets: 1.",
+			      "fee": 175,
+			      "fee_details": [
+			        {
+			          "amount": 175,
+			          "application": null,
+			          "currency": "usd",
+			          "description": "Stripe processing fees",
+			          "type": "stripe_fee"
+			        }
+			      ],
+			      "net": 4826,
+			      "source": "ch_18tiU12eZvKYlo2CliINmYLR",
+			      "sourced_transfers": {
+			        "object": "list",
+			        "data": [],
+			        "has_more": false,
+			        "total_count": 0,
+			        "url": "/v1/transfers?source_transaction=ch_18tiU12eZvKYlo2CliINmYLR"
+			      },
+			      "status": "pending",
+			      "type": "charge"
+			    },
+			    {...},
+			    {...}
+			  ]
+			}
 		}
 	}
 }
@@ -180,7 +271,7 @@ Method description
 
 <a name="createCharge"/>
 ## Stripe.createCharge
-Method description
+To charge a credit card, you create a charge object. If your API key is in test mode, the supplied payment source (e.g., card or Bitcoin receiver) won't actually be charged, though everything else will occur as if in live mode. (Stripe assumes that the charge would have completed successfully).
 
 | Field              | Type       | Description
 |--------------------|------------|----------
@@ -197,14 +288,9 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"amount": "...",
-	"currency": "...",
-	"capture": "...",
-	"description": "...",
-	"receiptEmail": "...",
-	"customer": "...",
-	"source": "...",
-	"statementDescriptor": "..."
+	"amount": 2000,
+	"currency": "usd",
+	"source": "tok_189fTS2eZvKYlo2CcYJIOGkr",
 }
 ```
 #### Response example
@@ -213,7 +299,72 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "ch_18zQ402eZvKYlo2CvQYLBOJ4",
+			  "object": "charge",
+			  "amount": 999,
+			  "amount_refunded": 0,
+			  "application_fee": null,
+			  "balance_transaction": "txn_18tiU12eZvKYlo2CetxoRTDG",
+			  "captured": true,
+			  "created": 1475238268,
+			  "currency": "usd",
+			  "customer": "cus_96kH68CmcC5XcM",
+			  "description": null,
+			  "destination": null,
+			  "dispute": null,
+			  "failure_code": null,
+			  "failure_message": null,
+			  "fraud_details": {
+			  },
+			  "invoice": "in_18zP7g2eZvKYlo2CUqGHFAlX",
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "order": null,
+			  "paid": true,
+			  "receipt_email": null,
+			  "receipt_number": null,
+			  "refunded": false,
+			  "refunds": {
+			    "object": "list",
+			    "data": [
+
+			    ],
+			    "has_more": false,
+			    "total_count": 0,
+			    "url": "/v1/charges/ch_18zQ402eZvKYlo2CvQYLBOJ4/refunds"
+			  },
+			  "shipping": null,
+			  "source": {
+			    "id": "card_18oWmJ2eZvKYlo2CApIJRrtd",
+			    "object": "card",
+			    "address_city": null,
+			    "address_country": null,
+			    "address_line1": null,
+			    "address_line1_check": null,
+			    "address_line2": null,
+			    "address_state": null,
+			    "address_zip": null,
+			    "address_zip_check": null,
+			    "brand": "Visa",
+			    "country": "US",
+			    "customer": "cus_96kH68CmcC5XcM",
+			    "cvc_check": null,
+			    "dynamic_last4": null,
+			    "exp_month": 12,
+			    "exp_year": 2017,
+			    "funding": "credit",
+			    "last4": "4242",
+			    "metadata": {
+			    },
+			    "name": null,
+			    "tokenization_method": null
+			  },
+			  "source_transfer": null,
+			  "statement_descriptor": null,
+			  "status": "succeeded"
+			}
 		}
 	}
 }
@@ -221,7 +372,7 @@ Method description
 
 <a name="createCustomer"/>
 ## Stripe.createCustomer
-Method description
+Creates a new customer object.
 
 | Field         | Type       | Description
 |---------------|------------|----------
@@ -240,16 +391,8 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"source": "...",
-	"accountBalance": "...",
-	"businessVatId": "...",
-	"coupon": "...",
-	"description": "...",
-	"email": "...",
-	"metadata": "...",
-	"plan": "...",
-	"taxPercent": "...",
-	"trialEnd": "..."
+	"source": "tok_189fTS2eZvKYlo2CcYJIOGkr",
+	"description": "Customer for andrew.martinez@example.com",
 }
 ```
 #### Response example
@@ -258,7 +401,64 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "cus_9I04eaA61hXf5W",
+			  "object": "customer",
+			  "account_balance": 0,
+			  "created": 1475238307,
+			  "currency": "usd",
+			  "default_source": "card_18zQ422eZvKYlo2CIznAqoaV",
+			  "delinquent": false,
+			  "description": "Emily Martin",
+			  "discount": null,
+			  "email": "emily.martin.57@example.com",
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "shipping": null,
+			  "sources": {
+			    "object": "list",
+			    "data": [
+			      {
+			        "id": "card_18zQ422eZvKYlo2CIznAqoaV",
+			        "object": "card",
+			        "address_city": null,
+			        "address_country": null,
+			        "address_line1": null,
+			        "address_line1_check": null,
+			        "address_line2": null,
+			        "address_state": null,
+			        "address_zip": null,
+			        "address_zip_check": null,
+			        "brand": "Visa",
+			        "country": "US",
+			        "customer": "cus_9I04eaA61hXf5W",
+			        "cvc_check": "pass",
+			        "dynamic_last4": null,
+			        "exp_month": 12,
+			        "exp_year": 2017,
+			        "funding": "credit",
+			        "last4": "4242",
+			        "metadata": {
+			        },
+			        "name": null,
+			        "tokenization_method": null
+			      }
+			    ],
+			    "has_more": false,
+			    "total_count": 1,
+			    "url": "/v1/customers/cus_9I04eaA61hXf5W/sources"
+			  },
+			  "subscriptions": {
+			    "object": "list",
+			    "data": [
+
+			    ],
+			    "has_more": false,
+			    "total_count": 0,
+			    "url": "/v1/customers/cus_9I04eaA61hXf5W/subscriptions"
+			  }
+			}
 		}
 	}
 }
@@ -266,7 +466,7 @@ Method description
 
 <a name="getBalanceTransaction"/>
 ## Stripe.getBalanceTransaction
-Method description
+Retrieves the balance transaction with the given ID.
 
 | Field | Type       | Description
 |-------|------------|----------
@@ -276,7 +476,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"id": "..."
+	"id": "txn_18tiU12eZvKYlo2CetxoRTDG"
 }
 ```
 #### Response example
@@ -285,7 +485,38 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "txn_18tiU12eZvKYlo2CetxoRTDG",
+			  "object": "balance_transaction",
+			  "amount": 5001,
+			  "available_on": 1474416000,
+			  "created": 1473879105,
+			  "currency": "usd",
+			  "description": "User: 813. Events: 1267. Total Tickets: 1.",
+			  "fee": 175,
+			  "fee_details": [
+			    {
+			      "amount": 175,
+			      "application": null,
+			      "currency": "usd",
+			      "description": "Stripe processing fees",
+			      "type": "stripe_fee"
+			    }
+			  ],
+			  "net": 4826,
+			  "source": "ch_18tiU12eZvKYlo2CliINmYLR",
+			  "sourced_transfers": {
+			    "object": "list",
+			    "data": [
+
+			    ],
+			    "has_more": false,
+			    "total_count": 0,
+			    "url": "/v1/transfers?source_transaction=ch_18tiU12eZvKYlo2CliINmYLR"
+			  },
+			  "status": "pending",
+			  "type": "charge"
+			}
 		}
 	}
 }
@@ -293,7 +524,7 @@ Method description
 
 <a name="getCharge"/>
 ## Stripe.getCharge
-Method description
+Retrieves the details of a charge that has previously been created. Supply the unique charge ID that was returned from your previous request, and Stripe will return the corresponding charge information. The same information is returned when creating or refunding the charge.
 
 | Field   | Type       | Description
 |---------|------------|----------
@@ -303,7 +534,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"chargeId": "..."
+	"chargeId": "ch_18zQ402eZvKYlo2CvQYLBOJ4"
 }
 ```
 #### Response example
@@ -312,7 +543,70 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "ch_18zQ402eZvKYlo2CvQYLBOJ4",
+			  "object": "charge",
+			  "amount": 999,
+			  "amount_refunded": 0,
+			  "application_fee": null,
+			  "balance_transaction": "txn_18tiU12eZvKYlo2CetxoRTDG",
+			  "captured": true,
+			  "created": 1475238268,
+			  "currency": "usd",
+			  "customer": "cus_96kH68CmcC5XcM",
+			  "description": null,
+			  "destination": null,
+			  "dispute": null,
+			  "failure_code": null,
+			  "failure_message": null,
+			  "fraud_details": {
+			  },
+			  "invoice": "in_18zP7g2eZvKYlo2CUqGHFAlX",
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "order": null,
+			  "paid": true,
+			  "receipt_email": null,
+			  "receipt_number": null,
+			  "refunded": false,
+			  "refunds": {
+			    "object": "list",
+			    "data": [],
+			    "has_more": false,
+			    "total_count": 0,
+			    "url": "/v1/charges/ch_18zQ402eZvKYlo2CvQYLBOJ4/refunds"
+			  },
+			  "shipping": null,
+			  "source": {
+			    "id": "card_18oWmJ2eZvKYlo2CApIJRrtd",
+			    "object": "card",
+			    "address_city": null,
+			    "address_country": null,
+			    "address_line1": null,
+			    "address_line1_check": null,
+			    "address_line2": null,
+			    "address_state": null,
+			    "address_zip": null,
+			    "address_zip_check": null,
+			    "brand": "Visa",
+			    "country": "US",
+			    "customer": "cus_96kH68CmcC5XcM",
+			    "cvc_check": null,
+			    "dynamic_last4": null,
+			    "exp_month": 12,
+			    "exp_year": 2017,
+			    "funding": "credit",
+			    "last4": "4242",
+			    "metadata": {
+			    },
+			    "name": null,
+			    "tokenization_method": null
+			  },
+			  "source_transfer": null,
+			  "statement_descriptor": null,
+			  "status": "succeeded"
+			}
 		}
 	}
 }
@@ -320,7 +614,8 @@ Method description
 
 <a name="updateCharge"/>
 ## Stripe.updateCharge
-Method description
+Updates the specified charge by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+This request accepts only the `description`, `metadata`, `receipt_email`, `fraud_details`, and `shipping` as arguments.
 
 | Field       | Type       | Description
 |-------------|------------|----------
@@ -335,12 +630,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"chargeId": "...",
-	"description": "...",
-	"receiptEmail": "...",
-	"fraudDetails": "...",
-	"metadata": "...",
-	"shipping": "..."
+	"description": "Charge for andrew.martinez@example.com",
 }
 ```
 #### Response example
@@ -349,7 +639,70 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "id": "ch_18zQ402eZvKYlo2CvQYLBOJ4",
+			  "object": "charge",
+			  "amount": 999,
+			  "amount_refunded": 0,
+			  "application_fee": null,
+			  "balance_transaction": "txn_18tiU12eZvKYlo2CetxoRTDG",
+			  "captured": true,
+			  "created": 1475238268,
+			  "currency": "usd",
+			  "customer": "cus_96kH68CmcC5XcM",
+			  "description": "Charge for andrew.martinez@example.com",
+			  "destination": null,
+			  "dispute": null,
+			  "failure_code": null,
+			  "failure_message": null,
+			  "fraud_details": {
+			  },
+			  "invoice": "in_18zP7g2eZvKYlo2CUqGHFAlX",
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "order": null,
+			  "paid": true,
+			  "receipt_email": null,
+			  "receipt_number": null,
+			  "refunded": false,
+			  "refunds": {
+			    "object": "list",
+			    "data": [],
+			    "has_more": false,
+			    "total_count": 0,
+			    "url": "/v1/charges/ch_18zQ402eZvKYlo2CvQYLBOJ4/refunds"
+			  },
+			  "shipping": null,
+			  "source": {
+			    "id": "card_18oWmJ2eZvKYlo2CApIJRrtd",
+			    "object": "card",
+			    "address_city": null,
+			    "address_country": null,
+			    "address_line1": null,
+			    "address_line1_check": null,
+			    "address_line2": null,
+			    "address_state": null,
+			    "address_zip": null,
+			    "address_zip_check": null,
+			    "brand": "Visa",
+			    "country": "US",
+			    "customer": "cus_96kH68CmcC5XcM",
+			    "cvc_check": null,
+			    "dynamic_last4": null,
+			    "exp_month": 12,
+			    "exp_year": 2017,
+			    "funding": "credit",
+			    "last4": "4242",
+			    "metadata": {
+			    },
+			    "name": null,
+			    "tokenization_method": null
+			  },
+			  "source_transfer": null,
+			  "statement_descriptor": null,
+			  "status": "succeeded"
+			}
 		}
 	}
 }
@@ -357,7 +710,8 @@ Method description
 
 <a name="captureCharge"/>
 ## Stripe.captureCharge
-Method description
+Capture the payment of an existing, uncaptured, charge. This is the second half of the two-step payment flow, where first you created a charge with the capture option set to false.
+Uncaptured payments expire exactly seven days after they are created. If they are not captured by that point in time, they will be marked as refunded and will no longer be capturable.
 
 | Field              | Type       | Description
 |--------------------|------------|----------
@@ -371,11 +725,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"chargeId": "...",
-	"amount": "...",
-	"applicationFee": "...",
-	"receiptEmail": "...",
-	"statementDescriptor": "..."
+	"chargeId": "sk_test_BQokikJOvBiI2HlWgH4olfQ2",
 }
 ```
 #### Response example
@@ -384,7 +734,70 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "ch_18zQ402eZvKYlo2CvQYLBOJ4",
+			  "object": "charge",
+			  "amount": 999,
+			  "amount_refunded": 0,
+			  "application_fee": null,
+			  "balance_transaction": "txn_18tiU12eZvKYlo2CetxoRTDG",
+			  "captured": "true",
+			  "created": 1475238268,
+			  "currency": "usd",
+			  "customer": "cus_96kH68CmcC5XcM",
+			  "description": null,
+			  "destination": null,
+			  "dispute": null,
+			  "failure_code": null,
+			  "failure_message": null,
+			  "fraud_details": {
+			  },
+			  "invoice": "in_18zP7g2eZvKYlo2CUqGHFAlX",
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "order": null,
+			  "paid": true,
+			  "receipt_email": null,
+			  "receipt_number": null,
+			  "refunded": false,
+			  "refunds": {
+			    "object": "list",
+			    "data": [ ],
+			    "has_more": false,
+			    "total_count": 0,
+			    "url": "/v1/charges/ch_18zQ402eZvKYlo2CvQYLBOJ4/refunds"
+			  },
+			  "shipping": null,
+			  "source": {
+			    "id": "card_18oWmJ2eZvKYlo2CApIJRrtd",
+			    "object": "card",
+			    "address_city": null,
+			    "address_country": null,
+			    "address_line1": null,
+			    "address_line1_check": null,
+			    "address_line2": null,
+			    "address_state": null,
+			    "address_zip": null,
+			    "address_zip_check": null,
+			    "brand": "Visa",
+			    "country": "US",
+			    "customer": "cus_96kH68CmcC5XcM",
+			    "cvc_check": null,
+			    "dynamic_last4": null,
+			    "exp_month": 12,
+			    "exp_year": 2017,
+			    "funding": "credit",
+			    "last4": "4242",
+			    "metadata": {
+			    },
+			    "name": null,
+			    "tokenization_method": null
+			  },
+			  "source_transfer": null,
+			  "statement_descriptor": null,
+			  "status": "succeeded"
+			}
 		}
 	}
 }
@@ -392,7 +805,7 @@ Method description
 
 <a name="getChargesList"/>
 ## Stripe.getChargesList
-Method description
+Returns a list of charges you’ve previously created. The charges are returned in sorted order, with the most recent charges appearing first.
 
 | Field        | Type       | Description
 |--------------|------------|----------
@@ -406,13 +819,9 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"created": "...",
-	"customer": "...",
-	"endingBefore": "...",
-	"limit": "...",
-	"source": "...",
-	"startingAfter": "..."
+{	
+	"apiKey": "...",
+	"limit": 3,
 }
 ```
 #### Response example
@@ -429,7 +838,7 @@ Method description
 
 <a name="getCustomer"/>
 ## Stripe.getCustomer
-Method description
+Retrieves the details of an existing customer. You need only supply the unique customer identifier that was returned upon customer creation.
 
 | Field     | Type       | Description
 |-----------|------------|----------
@@ -438,8 +847,9 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"customerId": "..."
+{	
+	"apiKey": "...",
+	"customerId": "sk_test_BQokikJOvBiI2HlWgH4olfQ2"
 }
 ```
 #### Response example
@@ -448,7 +858,62 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "cus_9I04eaA61hXf5W",
+			  "object": "customer",
+			  "account_balance": 0,
+			  "created": 1475238307,
+			  "currency": "usd",
+			  "default_source": "card_18zQ422eZvKYlo2CIznAqoaV",
+			  "delinquent": false,
+			  "description": "Emily Martin",
+			  "discount": null,
+			  "email": "emily.martin.57@example.com",
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "shipping": null,
+			  "sources": {
+			    "object": "list",
+			    "data": [
+			      {
+			        "id": "card_18zQ422eZvKYlo2CIznAqoaV",
+			        "object": "card",
+			        "address_city": null,
+			        "address_country": null,
+			        "address_line1": null,
+			        "address_line1_check": null,
+			        "address_line2": null,
+			        "address_state": null,
+			        "address_zip": null,
+			        "address_zip_check": null,
+			        "brand": "Visa",
+			        "country": "US",
+			        "customer": "cus_9I04eaA61hXf5W",
+			        "cvc_check": "pass",
+			        "dynamic_last4": null,
+			        "exp_month": 12,
+			        "exp_year": 2017,
+			        "funding": "credit",
+			        "last4": "4242",
+			        "metadata": {
+			        },
+			        "name": null,
+			        "tokenization_method": null
+			      }
+			    ],
+			    "has_more": false,
+			    "total_count": 1,
+			    "url": "/v1/customers/cus_9I04eaA61hXf5W/sources"
+			  },
+			  "subscriptions": {
+			    "object": "list",
+			    "data": [ ],
+			    "has_more": false,
+			    "total_count": 0,
+			    "url": "/v1/customers/cus_9I04eaA61hXf5W/subscriptions"
+			  }
+			}
 		}
 	}
 }
@@ -456,7 +921,8 @@ Method description
 
 <a name="updateCustomer"/>
 ## Stripe.updateCustomer
-Method description
+Updates the specified customer by setting the values of the parameters passed. Any parameters not provided will be left unchanged. For example, if you pass the source parameter, that becomes the customer's active source (e.g., a card) to be used for all charges in the future. When you update a customer to a new valid source: for each of the customer's current subscriptions, if the subscription is in the past_due state, then the latest unpaid, unclosed invoice for the subscription will be retried (note that this retry will not count as an automatic retry, and will not affect the next regularly scheduled payment for the invoice). (Note also that no invoices pertaining to subscriptions in the unpaid state, or invoices pertaining to canceled subscriptions, will be retried as a result of updating the customer's source.)
+This request accepts mostly the same arguments as the customer creation call.
 
 | Field         | Type       | Description
 |---------------|------------|----------
@@ -476,17 +942,8 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"customerId": "...",
-	"source": "...",
-	"accountBalance": "...",
-	"businessVatId": "...",
-	"coupon": "...",
-	"description": "...",
-	"email": "...",
-	"metadata": "...",
-	"plan": "...",
-	"taxPercent": "...",
-	"trialEnd": "..."
+	"customerId": "cus_9I04eaA61hXf5W",
+	"description": "Test",
 }
 ```
 #### Response example
@@ -495,14 +952,70 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "cus_9I04eaA61hXf5W",
+			  "object": "customer",
+			  "account_balance": 0,
+			  "created": 1475238307,
+			  "currency": "usd",
+			  "default_source": "card_18zQ422eZvKYlo2CIznAqoaV",
+			  "delinquent": false,
+			  "description": "Customer for andrew.martinez@example.com",
+			  "discount": null,
+			  "email": "emily.martin.57@example.com",
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "shipping": null,
+			  "sources": {
+			    "object": "list",
+			    "data": [
+			      {
+			        "id": "card_18zQ422eZvKYlo2CIznAqoaV",
+			        "object": "card",
+			        "address_city": null,
+			        "address_country": null,
+			        "address_line1": null,
+			        "address_line1_check": null,
+			        "address_line2": null,
+			        "address_state": null,
+			        "address_zip": null,
+			        "address_zip_check": null,
+			        "brand": "Visa",
+			        "country": "US",
+			        "customer": "cus_9I04eaA61hXf5W",
+			        "cvc_check": "pass",
+			        "dynamic_last4": null,
+			        "exp_month": 12,
+			        "exp_year": 2017,
+			        "funding": "credit",
+			        "last4": "4242",
+			        "metadata": {
+			        },
+			        "name": null,
+			        "tokenization_method": null
+			      }
+			    ],
+			    "has_more": false,
+			    "total_count": 1,
+			    "url": "/v1/customers/cus_9I04eaA61hXf5W/sources"
+			  },
+			  "subscriptions": {
+			    "object": "list",
+			    "data": [],
+			    "has_more": false,
+			    "total_count": 0,
+			    "url": "/v1/customers/cus_9I04eaA61hXf5W/subscriptions"
+			  }
+			}
 		}
 	}
 }
 ```
 
 <a name="getBalanceTransaction"/>
-## Stripe.getBalanceTransaction
+Retrieves the balance transaction with the given ID.
+
 Method description
 
 | Field | Type       | Description
@@ -513,7 +1026,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"id": "..."
+	"id": "txn_18tiU12eZvKYlo2CetxoRTDG"
 }
 ```
 #### Response example
@@ -522,7 +1035,36 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "txn_18tiU12eZvKYlo2CetxoRTDG",
+			  "object": "balance_transaction",
+			  "amount": 5001,
+			  "available_on": 1474416000,
+			  "created": 1473879105,
+			  "currency": "usd",
+			  "description": "User: 813. Events: 1267. Total Tickets: 1.",
+			  "fee": 175,
+			  "fee_details": [
+			    {
+			      "amount": 175,
+			      "application": null,
+			      "currency": "usd",
+			      "description": "Stripe processing fees",
+			      "type": "stripe_fee"
+			    }
+			  ],
+			  "net": 4826,
+			  "source": "ch_18tiU12eZvKYlo2CliINmYLR",
+			  "sourced_transfers": {
+			    "object": "list",
+			    "data": [],
+			    "has_more": false,
+			    "total_count": 0,
+			    "url": "/v1/transfers?source_transaction=ch_18tiU12eZvKYlo2CliINmYLR"
+			  },
+			  "status": "pending",
+			  "type": "charge"
+			}
 		}
 	}
 }
@@ -530,7 +1072,7 @@ Method description
 
 <a name="deleteCustomer"/>
 ## Stripe.deleteCustomer
-Method description
+Permanently deletes a customer. It cannot be undone. Also immediately cancels any active subscriptions on the customer.
 
 | Field     | Type       | Description
 |-----------|------------|----------
@@ -540,7 +1082,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"customerId": "..."
+	"customerId": "cus_9I04eaA61hXf5W"
 }
 ```
 #### Response example
@@ -549,7 +1091,10 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "deleted": true,
+			  "id": "cus_9I04eaA61hXf5W"
+			}
 		}
 	}
 }
@@ -565,7 +1110,8 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "..."
+{	
+	"apiKey": "..."
 }
 ```
 #### Response example
@@ -574,7 +1120,71 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "object": "list",
+			  "url": "/v1/customers",
+			  "has_more": false,
+			  "data": [
+			    {
+			      "id": "cus_9I04eaA61hXf5W",
+			      "object": "customer",
+			      "account_balance": 0,
+			      "created": 1475238307,
+			      "currency": "usd",
+			      "default_source": "card_18zQ422eZvKYlo2CIznAqoaV",
+			      "delinquent": false,
+			      "description": "Emily Martin",
+			      "discount": null,
+			      "email": "emily.martin.57@example.com",
+			      "livemode": false,
+			      "metadata": {
+			      },
+			      "shipping": null,
+			      "sources": {
+			        "object": "list",
+			        "data": [
+			          {
+			            "id": "card_18zQ422eZvKYlo2CIznAqoaV",
+			            "object": "card",
+			            "address_city": null,
+			            "address_country": null,
+			            "address_line1": null,
+			            "address_line1_check": null,
+			            "address_line2": null,
+			            "address_state": null,
+			            "address_zip": null,
+			            "address_zip_check": null,
+			            "brand": "Visa",
+			            "country": "US",
+			            "customer": "cus_9I04eaA61hXf5W",
+			            "cvc_check": "pass",
+			            "dynamic_last4": null,
+			            "exp_month": 12,
+			            "exp_year": 2017,
+			            "funding": "credit",
+			            "last4": "4242",
+			            "metadata": {
+			            },
+			            "name": null,
+			            "tokenization_method": null
+			          }
+			        ],
+			        "has_more": false,
+			        "total_count": 1,
+			        "url": "/v1/customers/cus_9I04eaA61hXf5W/sources"
+			      },
+			      "subscriptions": {
+			        "object": "list",
+			        "data": [],
+			        "has_more": false,
+			        "total_count": 0,
+			        "url": "/v1/customers/cus_9I04eaA61hXf5W/subscriptions"
+			      }
+			    },
+			    {...},
+			    {...}
+			  ]
+			}
 		}
 	}
 }
@@ -592,7 +1202,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"disputeId": "..."
+	"disputeId": "dp_17Vv962eZvKYlo2CU7XhGGzB"
 }
 ```
 #### Response example
@@ -601,7 +1211,87 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "id": "dp_17Vv962eZvKYlo2CU7XhGGzB",
+			  "object": "dispute",
+			  "amount": 100,
+			  "balance_transactions": [
+			    {
+			      "id": "txn_17Vv962eZvKYlo2ChC4UKwX7",
+			      "object": "balance_transaction",
+			      "amount": -100,
+			      "available_on": 1454025600,
+			      "created": 1453431572,
+			      "currency": "usd",
+			      "description": "Chargeback withdrawal for ch_17Vv952eZvKYlo2ChNXOPPWS",
+			      "fee": 1500,
+			      "fee_details": [
+			        {
+			          "amount": 1500,
+			          "application": null,
+			          "currency": "usd",
+			          "description": "Dispute fee",
+			          "type": "stripe_fee"
+			        }
+			      ],
+			      "net": -1600,
+			      "source": "dp_17Vv962eZvKYlo2CU7XhGGzB",
+			      "sourced_transfers": {
+			        "object": "list",
+			        "data": [],
+			        "has_more": false,
+			        "total_count": 0,
+			        "url": "/v1/transfers?source_transaction=ad_17Vv962eZvKYlo2CHxgHaG1p"
+			      },
+			      "status": "available",
+			      "type": "adjustment"
+			    }
+			  ],
+			  "charge": "ch_17Vv952eZvKYlo2ChNXOPPWS",
+			  "created": 1453431572,
+			  "currency": "usd",
+			  "evidence": {
+			    "access_activity_log": null,
+			    "billing_address": null,
+			    "cancellation_policy": null,
+			    "cancellation_policy_disclosure": null,
+			    "cancellation_rebuttal": null,
+			    "customer_communication": null,
+			    "customer_email_address": null,
+			    "customer_name": null,
+			    "customer_purchase_ip": null,
+			    "customer_signature": null,
+			    "duplicate_charge_documentation": null,
+			    "duplicate_charge_explanation": null,
+			    "duplicate_charge_id": null,
+			    "product_description": null,
+			    "receipt": null,
+			    "refund_policy": null,
+			    "refund_policy_disclosure": null,
+			    "refund_refusal_explanation": null,
+			    "service_date": null,
+			    "service_documentation": null,
+			    "shipping_address": null,
+			    "shipping_carrier": null,
+			    "shipping_date": null,
+			    "shipping_documentation": null,
+			    "shipping_tracking_number": null,
+			    "uncategorized_file": null,
+			    "uncategorized_text": null
+			  },
+			  "evidence_details": {
+			    "due_by": 1454889599,
+			    "has_evidence": false,
+			    "past_due": false,
+			    "submission_count": 0
+			  },
+			  "is_charge_refundable": false,
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "reason": "general",
+			  "status": "lost"
+			}
 		}
 	}
 }
@@ -609,7 +1299,7 @@ Method description
 
 <a name="updateDispute"/>
 ## Stripe.updateDispute
-Method description
+When you get a dispute, contacting your customer is always the best first step. If that doesn’t work, you can submit evidence in order to help us resolve the dispute in your favor. You can do this in your dashboard, but if you prefer, you can use the API to submit evidence programmatically.
 
 | Field    | Type       | Description
 |----------|------------|----------
@@ -621,8 +1311,12 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"disputeId": "...",
-	"evidence": "...",
+	"disputeId": "dp_17Vv962eZvKYlo2CU7XhGGzB",
+	"evidence": "{
+      \"customer_name\": "Sophia Moore",
+      \"product_description\": \"Comfortable cotton t-shirt\",
+      \"shipping_documentation\": \"file_18wzPK2eZvKYlo2CKdXyu53D\"
+    }",
 	"metadata": "..."
 }
 ```
@@ -632,7 +1326,87 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "id": "dp_17Vv962eZvKYlo2CU7XhGGzB",
+			  "object": "dispute",
+			  "amount": 100,
+			  "balance_transactions": [
+			    {
+			      "id": "txn_17Vv962eZvKYlo2ChC4UKwX7",
+			      "object": "balance_transaction",
+			      "amount": -100,
+			      "available_on": 1454025600,
+			      "created": 1453431572,
+			      "currency": "usd",
+			      "description": "Chargeback withdrawal for ch_17Vv952eZvKYlo2ChNXOPPWS",
+			      "fee": 1500,
+			      "fee_details": [
+			        {
+			          "amount": 1500,
+			          "application": null,
+			          "currency": "usd",
+			          "description": "Dispute fee",
+			          "type": "stripe_fee"
+			        }
+			      ],
+			      "net": -1600,
+			      "source": "dp_17Vv962eZvKYlo2CU7XhGGzB",
+			      "sourced_transfers": {
+			        "object": "list",
+			        "data": [],
+			        "has_more": false,
+			        "total_count": 0,
+			        "url": "/v1/transfers?source_transaction=ad_17Vv962eZvKYlo2CHxgHaG1p"
+			      },
+			      "status": "available",
+			      "type": "adjustment"
+			    }
+			  ],
+			  "charge": "ch_17Vv952eZvKYlo2ChNXOPPWS",
+			  "created": 1453431572,
+			  "currency": "usd",
+			  "evidence": {
+			    "product_description": "Comfortable cotton t-shirt",
+			    "customer_name": "Sophia Moore",
+			    "customer_email_address": null,
+			    "billing_address": null,
+			    "customer_purchase_ip": null,
+			    "shipping_address": null,
+			    "shipping_date": null,
+			    "shipping_carrier": null,
+			    "shipping_tracking_number": null,
+			    "service_date": null,
+			    "access_activity_log": null,
+			    "duplicate_charge_id": null,
+			    "duplicate_charge_explanation": null,
+			    "refund_policy_disclosure": null,
+			    "refund_refusal_explanation": null,
+			    "cancellation_policy_disclosure": null,
+			    "cancellation_rebuttal": null,
+			    "uncategorized_text": null,
+			    "customer_signature": null,
+			    "receipt": null,
+			    "shipping_documentation": "file_18wzPK2eZvKYlo2CKdXyu53D",
+			    "service_documentation": null,
+			    "duplicate_charge_documentation": null,
+			    "refund_policy": null,
+			    "cancellation_policy": null,
+			    "customer_communication": null,
+			    "uncategorized_file": null
+			  },
+			  "evidence_details": {
+			    "due_by": 1454889599,
+			    "has_evidence": false,
+			    "past_due": false,
+			    "submission_count": 0
+			  },
+			  "is_charge_refundable": false,
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "reason": "general",
+			  "status": "lost"
+			}
 		}
 	}
 }
@@ -650,7 +1424,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"disputeId": "..."
+	"disputeId": "dp_17Vv962eZvKYlo2CU7XhGGzB"
 }
 ```
 #### Response example
@@ -659,7 +1433,87 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "dp_17Vv962eZvKYlo2CU7XhGGzB",
+			  "object": "dispute",
+			  "amount": 100,
+			  "balance_transactions": [
+			    {
+			      "id": "txn_17Vv962eZvKYlo2ChC4UKwX7",
+			      "object": "balance_transaction",
+			      "amount": -100,
+			      "available_on": 1454025600,
+			      "created": 1453431572,
+			      "currency": "usd",
+			      "description": "Chargeback withdrawal for ch_17Vv952eZvKYlo2ChNXOPPWS",
+			      "fee": 1500,
+			      "fee_details": [
+			        {
+			          "amount": 1500,
+			          "application": null,
+			          "currency": "usd",
+			          "description": "Dispute fee",
+			          "type": "stripe_fee"
+			        }
+			      ],
+			      "net": -1600,
+			      "source": "dp_17Vv962eZvKYlo2CU7XhGGzB",
+			      "sourced_transfers": {
+			        "object": "list",
+			        "data": [ ],
+			        "has_more": false,
+			        "total_count": 0,
+			        "url": "/v1/transfers?source_transaction=ad_17Vv962eZvKYlo2CHxgHaG1p"
+			      },
+			      "status": "available",
+			      "type": "adjustment"
+			    }
+			  ],
+			  "charge": "ch_17Vv952eZvKYlo2ChNXOPPWS",
+			  "created": 1453431572,
+			  "currency": "usd",
+			  "evidence": {
+			    "access_activity_log": null,
+			    "billing_address": null,
+			    "cancellation_policy": null,
+			    "cancellation_policy_disclosure": null,
+			    "cancellation_rebuttal": null,
+			    "customer_communication": null,
+			    "customer_email_address": null,
+			    "customer_name": null,
+			    "customer_purchase_ip": null,
+			    "customer_signature": null,
+			    "duplicate_charge_documentation": null,
+			    "duplicate_charge_explanation": null,
+			    "duplicate_charge_id": null,
+			    "product_description": null,
+			    "receipt": null,
+			    "refund_policy": null,
+			    "refund_policy_disclosure": null,
+			    "refund_refusal_explanation": null,
+			    "service_date": null,
+			    "service_documentation": null,
+			    "shipping_address": null,
+			    "shipping_carrier": null,
+			    "shipping_date": null,
+			    "shipping_documentation": null,
+			    "shipping_tracking_number": null,
+			    "uncategorized_file": null,
+			    "uncategorized_text": null
+			  },
+			  "evidence_details": {
+			    "due_by": 1454889599,
+			    "has_evidence": false,
+			    "past_due": false,
+			    "submission_count": 0
+			  },
+			  "is_charge_refundable": false,
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "reason": "general",
+			  "status": "lost"
+			}
 		}
 	}
 }
@@ -684,7 +1538,96 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "object": "list",
+			  "url": "/v1/disputes",
+			  "has_more": false,
+			  "data": [
+			    {
+			      "id": "dp_17Vv962eZvKYlo2CU7XhGGzB",
+			      "object": "dispute",
+			      "amount": 100,
+			      "balance_transactions": [
+			        {
+			          "id": "txn_17Vv962eZvKYlo2ChC4UKwX7",
+			          "object": "balance_transaction",
+			          "amount": -100,
+			          "available_on": 1454025600,
+			          "created": 1453431572,
+			          "currency": "usd",
+			          "description": "Chargeback withdrawal for ch_17Vv952eZvKYlo2ChNXOPPWS",
+			          "fee": 1500,
+			          "fee_details": [
+			            {
+			              "amount": 1500,
+			              "application": null,
+			              "currency": "usd",
+			              "description": "Dispute fee",
+			              "type": "stripe_fee"
+			            }
+			          ],
+			          "net": -1600,
+			          "source": "dp_17Vv962eZvKYlo2CU7XhGGzB",
+			          "sourced_transfers": {
+			            "object": "list",
+			            "data": [],
+			            "has_more": false,
+			            "total_count": 0,
+			            "url": "/v1/transfers?source_transaction=ad_17Vv962eZvKYlo2CHxgHaG1p"
+			          },
+			          "status": "available",
+			          "type": "adjustment"
+			        }
+			      ],
+			      "charge": "ch_17Vv952eZvKYlo2ChNXOPPWS",
+			      "created": 1453431572,
+			      "currency": "usd",
+			      "evidence": {
+			        "access_activity_log": null,
+			        "billing_address": null,
+			        "cancellation_policy": null,
+			        "cancellation_policy_disclosure": null,
+			        "cancellation_rebuttal": null,
+			        "customer_communication": null,
+			        "customer_email_address": null,
+			        "customer_name": null,
+			        "customer_purchase_ip": null,
+			        "customer_signature": null,
+			        "duplicate_charge_documentation": null,
+			        "duplicate_charge_explanation": null,
+			        "duplicate_charge_id": null,
+			        "product_description": null,
+			        "receipt": null,
+			        "refund_policy": null,
+			        "refund_policy_disclosure": null,
+			        "refund_refusal_explanation": null,
+			        "service_date": null,
+			        "service_documentation": null,
+			        "shipping_address": null,
+			        "shipping_carrier": null,
+			        "shipping_date": null,
+			        "shipping_documentation": null,
+			        "shipping_tracking_number": null,
+			        "uncategorized_file": null,
+			        "uncategorized_text": null
+			      },
+			      "evidence_details": {
+			        "due_by": 1454889599,
+			        "has_evidence": false,
+			        "past_due": false,
+			        "submission_count": 0
+			      },
+			      "is_charge_refundable": false,
+			      "livemode": false,
+			      "metadata": {
+			      },
+			      "reason": "general",
+			      "status": "lost"
+			    },
+			    {...},
+			    {...}
+			  ]
+			}
 		}
 	}
 }
@@ -702,7 +1645,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"eventId": "..."
+	"eventId": "evt_18zQ4e2eZvKYlo2Cd9eGkwal"
 }
 ```
 #### Response example
@@ -711,7 +1654,44 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "evt_18zQ4e2eZvKYlo2Cd9eGkwal",
+			  "object": "event",
+			  "api_version": "2016-07-06",
+			  "created": 1475238308,
+			  "data": {
+			    "object": {
+			      "id": "card_18zQ422eZvKYlo2CIznAqoaV",
+			      "object": "card",
+			      "address_city": null,
+			      "address_country": null,
+			      "address_line1": null,
+			      "address_line1_check": null,
+			      "address_line2": null,
+			      "address_state": null,
+			      "address_zip": null,
+			      "address_zip_check": null,
+			      "brand": "Visa",
+			      "country": "US",
+			      "customer": "cus_9I04eaA61hXf5W",
+			      "cvc_check": "pass",
+			      "dynamic_last4": null,
+			      "exp_month": 12,
+			      "exp_year": 2017,
+			      "fingerprint": "Xt5EWLLDS7FJjR1c",
+			      "funding": "credit",
+			      "last4": "4242",
+			      "metadata": {
+			      },
+			      "name": null,
+			      "tokenization_method": null
+			    }
+			  },
+			  "livemode": false,
+			  "pending_webhooks": 0,
+			  "request": "req_9I04Pra7tfXffn",
+			  "type": "customer.source.created"
+			}
 		}
 	}
 }
@@ -728,8 +1708,8 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"type": "..."
+{	
+	"apiKey": "...",
 }
 ```
 #### Response example
@@ -738,7 +1718,53 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "object": "list",
+			  "url": "/v1/events",
+			  "has_more": false,
+			  "data": [
+			    {
+			      "id": "evt_18zQ4e2eZvKYlo2Cd9eGkwal",
+			      "object": "event",
+			      "api_version": "2016-07-06",
+			      "created": 1475238308,
+			      "data": {
+			        "object": {
+			          "id": "card_18zQ422eZvKYlo2CIznAqoaV",
+			          "object": "card",
+			          "address_city": null,
+			          "address_country": null,
+			          "address_line1": null,
+			          "address_line1_check": null,
+			          "address_line2": null,
+			          "address_state": null,
+			          "address_zip": null,
+			          "address_zip_check": null,
+			          "brand": "Visa",
+			          "country": "US",
+			          "customer": "cus_9I04eaA61hXf5W",
+			          "cvc_check": "pass",
+			          "dynamic_last4": null,
+			          "exp_month": 12,
+			          "exp_year": 2017,
+			          "fingerprint": "Xt5EWLLDS7FJjR1c",
+			          "funding": "credit",
+			          "last4": "4242",
+			          "metadata": {
+			          },
+			          "name": null,
+			          "tokenization_method": null
+			        }
+			      },
+			      "livemode": false,
+			      "pending_webhooks": 0,
+			      "request": "req_9I04Pra7tfXffn",
+			      "type": "customer.source.created"
+			    },
+			    {...},
+			    {...}
+			  ]
+			}
 		}
 	}
 }
@@ -767,7 +1793,14 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "file_18wzPK2eZvKYlo2CKdXyu53D",
+			  "object": "file_upload",
+			  "created": 1474659146,
+			  "purpose": "identity_document",
+			  "size": 76545,
+			  "type": "jpg"
+			}
 		}
 	}
 }
@@ -775,7 +1808,10 @@ Method description
 
 <a name="createRefund"/>
 ## Stripe.createRefund
-Method description
+When you create a new refund, you must specify a charge to create it on.
+Creating a new refund will refund a charge that has previously been created but not yet refunded. Funds will be refunded to the credit or debit card that was originally charged. The fees you were originally charged are also refunded.
+You can optionally refund only part of a charge. You can do so as many times as you wish until the entire charge has been refunded.
+Once entirely refunded, a charge can't be refunded again. This method will throw an error when called on an already-refunded charge, or when trying to refund more money than is left on a charge.
 
 | Field               | Type       | Description
 |---------------------|------------|----------
@@ -790,12 +1826,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"chargeId": "...",
-	"amount": "...",
-	"metadata": "...",
-	"reason": "...",
-	"refundApplicationFee": "...",
-	"reverseTransfer": "..."
+	"chargeId": "ch_18zQ402eZvKYlo2CvQYLBOJ4",
 }
 ```
 #### Response example
@@ -804,7 +1835,20 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "re_18zP2v2eZvKYlo2Ct9PUKMPw",
+			  "object": "refund",
+			  "amount": 300,
+			  "balance_transaction": "txn_18zP2v2eZvKYlo2C5HkvErZJ",
+			  "charge": "ch_18zNpY2eZvKYlo2Cm37H95Sz",
+			  "created": 1475234357,
+			  "currency": "usd",
+			  "metadata": {
+			  },
+			  "reason": null,
+			  "receipt_number": null,
+			  "status": "succeeded"
+			}
 		}
 	}
 }
@@ -812,7 +1856,7 @@ Method description
 
 <a name="getRefund"/>
 ## Stripe.getRefund
-Method description
+Retrieves the details of an existing refund.
 
 | Field   | Type       | Description
 |---------|------------|----------
@@ -822,7 +1866,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"refundId": "..."
+	"refundId": "re_18zP2v2eZvKYlo2Ct9PUKMPw"
 }
 ```
 #### Response example
@@ -831,7 +1875,20 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "re_18zP2v2eZvKYlo2Ct9PUKMPw",
+			  "object": "refund",
+			  "amount": 300,
+			  "balance_transaction": "txn_18zP2v2eZvKYlo2C5HkvErZJ",
+			  "charge": "ch_18zNpY2eZvKYlo2Cm37H95Sz",
+			  "created": 1475234357,
+			  "currency": "usd",
+			  "metadata": {
+			  },
+			  "reason": null,
+			  "receipt_number": null,
+			  "status": "succeeded"
+			}
 		}
 	}
 }
@@ -839,7 +1896,8 @@ Method description
 
 <a name="updateRefund"/>
 ## Stripe.updateRefund
-Method description
+Updates the specified refund by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+This request only accepts metadata as an argument.
 
 | Field   | Type       | Description
 |---------|------------|----------
@@ -850,7 +1908,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"refundId": "...",
+	"refundId": "re_18zP2v2eZvKYlo2Ct9PUKMPw",
 	"metadata": "..."
 }
 ```
@@ -860,7 +1918,21 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "re_18zP2v2eZvKYlo2Ct9PUKMPw",
+			  "object": "refund",
+			  "amount": 300,
+			  "balance_transaction": "txn_18tiU12eZvKYlo2CetxoRTDG",
+			  "charge": "ch_18zNpY2eZvKYlo2Cm37H95Sz",
+			  "created": 1475234357,
+			  "currency": "usd",
+			  "metadata": {
+			    "key": "value"
+			  },
+			  "reason": null,
+			  "receipt_number": null,
+			  "status": "succeeded"
+			}
 		}
 	}
 }
@@ -868,7 +1940,7 @@ Method description
 
 <a name="getRefundList"/>
 ## Stripe.getRefundList
-Method description
+Returns a list of all refunds you’ve previously created. The refunds are returned in sorted order, with the most recent refunds appearing first. For convenience, the 10 most recent refunds are always available by default on the charge object.
 
 | Field | Type       | Description
 |-------|------------|----------
@@ -885,7 +1957,29 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "object": "list",
+			  "url": "/v1/refunds",
+			  "has_more": false,
+			  "data": [
+			    {
+			      "id": "re_18zP2v2eZvKYlo2Ct9PUKMPw",
+			      "object": "refund",
+			      "amount": 300,
+			      "balance_transaction": "txn_18zP2v2eZvKYlo2C5HkvErZJ",
+			      "charge": "ch_18zNpY2eZvKYlo2Cm37H95Sz",
+			      "created": 1475234357,
+			      "currency": "usd",
+			      "metadata": {
+			      },
+			      "reason": null,
+			      "receipt_number": null,
+			      "status": "succeeded"
+			    },
+			    {...},
+			    {...}
+			  ]
+			}
 		}
 	}
 }
@@ -893,7 +1987,7 @@ Method description
 
 <a name="createCardToken"/>
 ## Stripe.createCardToken
-Method description
+Creates a single use token that wraps the details of a credit card. This token can be used in place of a credit card object with any API method. These tokens can only be used once: by creating a new charge object, or attaching them to a customer.
 
 | Field              | Type       | Description
 |--------------------|------------|----------
@@ -906,10 +2000,10 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"cardNumber": "...",
-	"cardExpirationMonth": 0,
-	"cardExpirationYear": 0,
-	"cardCvc": "..."
+	"cardNumber": "4242424242424242",
+	"cardExpirationMonth": 12,
+	"cardExpirationYear": 2017,
+	"cardCvc": "123"
 }
 ```
 #### Response example
@@ -918,15 +2012,47 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
-		}
+			"to": {
+			  "id": "tok_189fTS2eZvKYlo2CcYJIOGkr",
+			  "object": "token",
+			  "card": {
+			    "id": "card_189fTR2eZvKYlo2CnJ7asfrs",
+			    "object": "card",
+			    "address_city": null,
+			    "address_country": null,
+			    "address_line1": null,
+			    "address_line1_check": null,
+			    "address_line2": null,
+			    "address_state": null,
+			    "address_zip": null,
+			    "address_zip_check": null,
+			    "brand": "Visa",
+			    "country": "US",
+			    "cvc_check": null,
+			    "dynamic_last4": null,
+			    "exp_month": 8,
+			    "exp_year": 2017,
+			    "funding": "credit",
+			    "last4": "4242",
+			    "metadata": {
+			    },
+			    "name": null,
+			    "tokenization_method": null
+			  },
+			  "client_ip": null,
+			  "created": 1462904450,
+			  "livemode": false,
+			  "type": "card",
+			  "used": false
+			}
+					}
 	}
 }
 ```
 
 <a name="createBankAccountToken"/>
 ## Stripe.createBankAccountToken
-Method description
+Creates a single use token that wraps the details of a bank account. This token can be used in place of a bank account object with any API method. These tokens can only be used once: by attaching them to a recipient or managed account.
 
 | Field                       | Type       | Description
 |-----------------------------|------------|----------
@@ -941,12 +2067,12 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"bankAccountCountry": "...",
-	"bankAccountCurrency": "...",
-	"bankAccountAccountHolderName": "...",
-	"bankAccountAccountHolderType": "...",
-	"bankAccountRoutingNumber": "...",
-	"bankAccountNumber": "..."
+	"bankAccountCountry": "US",
+	"bankAccountCurrency": "usd",
+	"bankAccountAccountHolderName": "Anthony Anderson",
+	"bankAccountAccountHolderType": "individual",
+	"bankAccountRoutingNumber": "110000000",
+	"bankAccountNumber": "000123456789"
 }
 ```
 #### Response example
@@ -955,7 +2081,28 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "id": "btok_9I05hAdQf5iXZ8",
+			  "object": "token",
+			  "bank_account": {
+			    "id": "ba_18zQ5k2eZvKYlo2C5dxFlaCC",
+			    "object": "bank_account",
+			    "account_holder_name": "Jane Austen",
+			    "account_holder_type": "individual",
+			    "bank_name": "STRIPE TEST BANK",
+			    "country": "US",
+			    "currency": "usd",
+			    "fingerprint": "1JWtPxqbdX5Gamtc",
+			    "last4": "6789",
+			    "routing_number": "110000000",
+			    "status": "new"
+			  },
+			  "client_ip": null,
+			  "created": 1475238376,
+			  "livemode": false,
+			  "type": "bank_account",
+			  "used": false
+			}
 		}
 	}
 }
@@ -963,7 +2110,7 @@ Method description
 
 <a name="createPiiToken"/>
 ## Stripe.createPiiToken
-Method description
+Creates a single use token that wraps the details of personally identifiable information (PII). This token can be used in place of a personal_id_number in the Account Update API method. These tokens can only be used once.
 
 | Field           | Type       | Description
 |-----------------|------------|----------
@@ -973,7 +2120,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"personalIdNumber": "..."
+	"personalIdNumber": "000000000"
 }
 ```
 #### Response example
@@ -982,7 +2129,15 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "pii_17RAJV2eZvKYlo2CDyqjNWJ4",
+			  "object": "token",
+			  "client_ip": "8.21.168.72",
+			  "created": 1452298237,
+			  "livemode": false,
+			  "type": "pii",
+			  "used": false
+			}
 		}
 	}
 }
@@ -990,7 +2145,7 @@ Method description
 
 <a name="getToken"/>
 ## Stripe.getToken
-Method description
+Retrieves the token with the given ID.
 
 | Field  | Type       | Description
 |--------|------------|----------
@@ -1000,7 +2155,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"tokenId": "..."
+	"tokenId": "tok_189fTS2eZvKYlo2CcYJIOGkr"
 }
 ```
 #### Response example
@@ -1009,7 +2164,39 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "tok_189fTS2eZvKYlo2CcYJIOGkr",
+			  "object": "token",
+			  "card": {
+			    "id": "card_189fTR2eZvKYlo2CnJ7asfrs",
+			    "object": "card",
+			    "address_city": null,
+			    "address_country": null,
+			    "address_line1": null,
+			    "address_line1_check": null,
+			    "address_line2": null,
+			    "address_state": null,
+			    "address_zip": null,
+			    "address_zip_check": null,
+			    "brand": "Visa",
+			    "country": "US",
+			    "cvc_check": null,
+			    "dynamic_last4": null,
+			    "exp_month": 8,
+			    "exp_year": 2017,
+			    "funding": "credit",
+			    "last4": "4242",
+			    "metadata": {
+			    },
+			    "name": null,
+			    "tokenization_method": null
+			  },
+			  "client_ip": null,
+			  "created": 1462904450,
+			  "livemode": false,
+			  "type": "card",
+			  "used": false
+			}
 		}
 	}
 }
@@ -1017,7 +2204,9 @@ Method description
 
 <a name="createTransfer"/>
 ## Stripe.createTransfer
-Method description
+To send funds from your Stripe account to a third-party recipient or to your own bank account, you create a new transfer object. Your Stripe balance must be able to cover the transfer amount, or you'll receive an "Insufficient Funds" error.
+If your API key is in test mode, money won't actually be sent, though everything else will occur as if in live mode.
+If you are creating a manual transfer or a special case transfer on a Stripe account that uses multiple payment source types, you'll need to specify the source type balance that the transfer should draw from. The balance object details available and pending amounts by source type.
 
 | Field              | Type       | Description
 |--------------------|------------|----------
@@ -1033,13 +2222,10 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"amount": 0,
-	"currency": "...",
-	"destination": "...",
-	"description": "...",
-	"sourceTransaction": "...",
-	"statementDescriptor": "...",
-	"sourceType": "..."
+	"amount": 400,
+	"currency": "usd",
+	"destination": "acct_1032D82eZvKYlo2C",
+	"description": "Transfer for test@example.com",
 }
 ```
 #### Response example
@@ -1048,7 +2234,53 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "tr_18yKar2eZvKYlo2CoN8TUvb6",
+			  "object": "transfer",
+			  "amount": 1,
+			  "amount_reversed": 0,
+			  "application_fee": null,
+			  "balance_transaction": "txn_18tiU12eZvKYlo2CetxoRTDG",
+			  "bank_account": {
+			    "id": "ba_18yKal2eZvKYlo2CeAIrKO9G",
+			    "object": "bank_account",
+			    "account_holder_name": null,
+			    "account_holder_type": null,
+			    "bank_name": "STRIPE TEST BANK",
+			    "country": "US",
+			    "currency": "usd",
+			    "fingerprint": "1JWtPxqbdX5Gamtc",
+			    "last4": "6789",
+			    "routing_number": "110000000",
+			    "status": "new"
+			  },
+			  "created": 1474978913,
+			  "currency": "usd",
+			  "date": 1474978913,
+			  "description": null,
+			  "destination": "ba_18yKal2eZvKYlo2CeAIrKO9G",
+			  "failure_code": null,
+			  "failure_message": null,
+			  "livemode": false,
+			  "metadata": {
+			    "foo": "bar"
+			  },
+			  "method": "standard",
+			  "recipient": "rp_18yKaq2eZvKYlo2CJq5scG7j",
+			  "reversals": {
+			    "object": "list",
+			    "data": [],
+			    "has_more": false,
+			    "total_count": 0,
+			    "url": "/v1/transfers/tr_18yKar2eZvKYlo2CoN8TUvb6/reversals"
+			  },
+			  "reversed": false,
+			  "source_transaction": null,
+			  "source_type": "card",
+			  "statement_descriptor": null,
+			  "status": "paid",
+			  "type": "bank_account"
+			}
 		}
 	}
 }
@@ -1056,7 +2288,7 @@ Method description
 
 <a name="getTransfer"/>
 ## Stripe.getTransfer
-Method description
+Retrieves the details of an existing transfer. Supply the unique transfer ID from either a transfer creation request or the transfer list, and Stripe will return the corresponding transfer information.
 
 | Field     | Type       | Description
 |-----------|------------|----------
@@ -1066,7 +2298,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"transferId": "..."
+	"transferId": "tr_18yKar2eZvKYlo2CoN8TUvb6"
 }
 ```
 #### Response example
@@ -1075,7 +2307,53 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "tr_18yKar2eZvKYlo2CoN8TUvb6",
+			  "object": "transfer",
+			  "amount": 1,
+			  "amount_reversed": 0,
+			  "application_fee": null,
+			  "balance_transaction": "txn_18tiU12eZvKYlo2CetxoRTDG",
+			  "bank_account": {
+			    "id": "ba_18yKal2eZvKYlo2CeAIrKO9G",
+			    "object": "bank_account",
+			    "account_holder_name": null,
+			    "account_holder_type": null,
+			    "bank_name": "STRIPE TEST BANK",
+			    "country": "US",
+			    "currency": "usd",
+			    "fingerprint": "1JWtPxqbdX5Gamtc",
+			    "last4": "6789",
+			    "routing_number": "110000000",
+			    "status": "new"
+			  },
+			  "created": 1474978913,
+			  "currency": "usd",
+			  "date": 1474978913,
+			  "description": null,
+			  "destination": "ba_18yKal2eZvKYlo2CeAIrKO9G",
+			  "failure_code": null,
+			  "failure_message": null,
+			  "livemode": false,
+			  "metadata": {
+			    "foo": "bar"
+			  },
+			  "method": "standard",
+			  "recipient": "rp_18yKaq2eZvKYlo2CJq5scG7j",
+			  "reversals": {
+			    "object": "list",
+			    "data": [],
+			    "has_more": false,
+			    "total_count": 0,
+			    "url": "/v1/transfers/tr_18yKar2eZvKYlo2CoN8TUvb6/reversals"
+			  },
+			  "reversed": false,
+			  "source_transaction": null,
+			  "source_type": "card",
+			  "statement_descriptor": null,
+			  "status": "paid",
+			  "type": "bank_account"
+			}
 		}
 	}
 }
@@ -1083,8 +2361,8 @@ Method description
 
 <a name="updateTransfer"/>
 ## Stripe.updateTransfer
-Method description
-
+Updates the specified transfer by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+This request accepts only the description and metadata as arguments.
 | Field      | Type       | Description
 |------------|------------|----------
 | apiKey     | credentials| The api key obtained from Stripe.
@@ -1126,9 +2404,6 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"destination": "...",
-	"recipientstatus": "...",
-	"status": "..."
 }
 ```
 #### Response example
@@ -1137,38 +2412,62 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
-<a name="createTransferReversal"/>
-## Stripe.createTransferReversal
-Method description
-
-| Field               | Type       | Description
-|---------------------|------------|----------
-| apiKey              | credentials| The api key obtained from Stripe.
-| description         | String     | An arbitrary string which you can attach to a reversal object. It is displayed alongside the reversal in the dashboard. This will be unset if you POST an empty value.
-| metadata            | String     | A set of key/value pairs that you can attach to a reversal object. It can be useful for storing additional information about the reversal in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.
-| refundApplicationFee| String     | Boolean indicating whether the application fee should be refunded when reversing this transfer. If a full transfer reversal is given, the full application fee will be refunded. Otherwise, the application fee will be refunded with an amount proportional to the amount of the transfer reversed.
-
-#### Request example
-```json
-{	"apiKey": "...",
-	"description": "...",
-	"metadata": "...",
-	"refundApplicationFee": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
+			"to": {
+			  "object": "list",
+			  "url": "/v1/transfers",
+			  "has_more": false,
+			  "data": [
+			    {
+			      "id": "tr_18yKar2eZvKYlo2CoN8TUvb6",
+			      "object": "transfer",
+			      "amount": 1,
+			      "amount_reversed": 0,
+			      "application_fee": null,
+			      "balance_transaction": "txn_18tiU12eZvKYlo2CetxoRTDG",
+			      "bank_account": {
+			        "id": "ba_18yKal2eZvKYlo2CeAIrKO9G",
+			        "object": "bank_account",
+			        "account_holder_name": null,
+			        "account_holder_type": null,
+			        "bank_name": "STRIPE TEST BANK",
+			        "country": "US",
+			        "currency": "usd",
+			        "fingerprint": "1JWtPxqbdX5Gamtc",
+			        "last4": "6789",
+			        "routing_number": "110000000",
+			        "status": "new"
+			      },
+			      "created": 1474978913,
+			      "currency": "usd",
+			      "date": 1474978913,
+			      "description": null,
+			      "destination": "ba_18yKal2eZvKYlo2CeAIrKO9G",
+			      "failure_code": null,
+			      "failure_message": null,
+			      "livemode": false,
+			      "metadata": {
+			        "foo": "bar"
+			      },
+			      "method": "standard",
+			      "recipient": "rp_18yKaq2eZvKYlo2CJq5scG7j",
+			      "reversals": {
+			        "object": "list",
+			        "data": [ ],
+			        "has_more": false,
+			        "total_count": 0,
+			        "url": "/v1/transfers/tr_18yKar2eZvKYlo2CoN8TUvb6/reversals"
+			      },
+			      "reversed": false,
+			      "source_transaction": null,
+			      "source_type": "card",
+			      "statement_descriptor": null,
+			      "status": "paid",
+			      "type": "bank_account"
+			    },
+			    {...},
+			    {...}
+			  ]
+			}
 		}
 	}
 }
@@ -1176,7 +2475,8 @@ Method description
 
 <a name="getTransferReversal"/>
 ## Stripe.getTransferReversal
-Method description
+Method By default, you can see the 10 most recent reversals stored directly on the transfer object, but you can also retrieve details about a specific reversal stored on the transfer.
+
 
 | Field     | Type       | Description
 |-----------|------------|----------
@@ -1187,8 +2487,8 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"id": "...",
-	"transferId": "..."
+	"id": "trr_18wHEl2eZvKYlo2CIIzWDBVe",
+	"transferId": "tr_18yKar2eZvKYlo2CoN8TUvb6"
 }
 ```
 #### Response example
@@ -1197,7 +2497,17 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "id": "trr_18wHEl2eZvKYlo2CIIzWDBVe",
+			  "object": "transfer_reversal",
+			  "amount": 5000,
+			  "balance_transaction": "txn_18tiU12eZvKYlo2CetxoRTDG",
+			  "created": 1474489355,
+			  "currency": "usd",
+			  "metadata": {
+			  },
+			  "transfer": "tr_18wHEj2eZvKYlo2CmoWPui9Y"
+			}
 		}
 	}
 }
@@ -1205,7 +2515,7 @@ Method description
 
 <a name="updateTransferReversal"/>
 ## Stripe.updateTransferReversal
-Method description
+Updates the specified reversal by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
 
 | Field      | Type       | Description
 |------------|------------|----------
@@ -1218,10 +2528,9 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"id": "...",
-	"transferId": "...",
-	"metadata": "...",
-	"description": "..."
+	"id": "trr_18wHEl2eZvKYlo2CIIzWDBVe",
+	"transferId": "tr_18wHEj2eZvKYlo2CmoWPui9Y",
+	"metadata": { \"order_id\": \"6735\" },
 }
 ```
 #### Response example
@@ -1238,7 +2547,7 @@ Method description
 
 <a name="getTransferReversalList"/>
 ## Stripe.getTransferReversalList
-Method description
+You can see a list of the reversals belonging to a specific transfer. Note that the 10 most recent reversals are always available by default on the transfer object.
 
 | Field     | Type       | Description
 |-----------|------------|----------
@@ -1248,7 +2557,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"transferId": "..."
+	"transferId": "tr_18yKar2eZvKYlo2CoN8TUvb6"
 }
 ```
 #### Response example
@@ -1257,7 +2566,26 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "object": "list",
+			  "url": "/v1/transfers/tr_18yKar2eZvKYlo2CoN8TUvb6/reversals",
+			  "has_more": false,
+			  "data": [
+			    {
+			      "id": "trr_18wHEl2eZvKYlo2CIIzWDBVe",
+			      "object": "transfer_reversal",
+			      "amount": 5000,
+			      "balance_transaction": "txn_18tiU12eZvKYlo2CetxoRTDG",
+			      "created": 1474489355,
+			      "currency": "usd",
+			      "metadata": {
+			      },
+			      "transfer": "tr_18wHEj2eZvKYlo2CmoWPui9Y"
+			    },
+			    {...},
+			    {...}
+			  ]
+			}
 		}
 	}
 }
@@ -1265,7 +2593,7 @@ Method description
 
 <a name="createAccount"/>
 ## Stripe.createAccount
-Method description
+With Connect, you can create Stripe accounts for your users. To do this, you'll first need to register your platform.
 
 | Field  | Type       | Description
 |--------|------------|----------
@@ -1277,9 +2605,9 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"country": "...",
-	"email": "...",
-	"managed": "..."
+	"country": "US",
+	"email": "bob@example.com'",
+	"managed": "true"
 }
 ```
 #### Response example
@@ -1288,7 +2616,99 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "acct_1032D82eZvKYlo2C",
+			  "object": "account",
+			  "business_logo": null,
+			  "business_name": "Stripe.com",
+			  "business_url": null,
+			  "charges_enabled": false,
+			  "country": "US",
+			  "debit_negative_balances": true,
+			  "decline_charge_on": {
+			    "avs_failure": true,
+			    "cvc_failure": false
+			  },
+			  "default_currency": "usd",
+			  "details_submitted": false,
+			  "display_name": "Stripe.com",
+			  "email": "bob@example.com",
+			  "external_accounts": {
+			    "object": "list",
+			    "data": [],
+			    "has_more": false,
+			    "total_count": 0,
+			    "url": "/v1/accounts/acct_1032D82eZvKYlo2C/external_accounts"
+			  },
+			  "legal_entity": {
+			    "address": {
+			      "city": null,
+			      "country": "US",
+			      "line1": null,
+			      "line2": null,
+			      "postal_code": null,
+			      "state": null
+			    },
+			    "business_name": null,
+			    "business_tax_id_provided": false,
+			    "dob": {
+			      "day": null,
+			      "month": null,
+			      "year": null
+			    },
+			    "first_name": null,
+			    "last_name": null,
+			    "personal_address": {
+			      "city": null,
+			      "country": "US",
+			      "line1": null,
+			      "line2": null,
+			      "postal_code": null,
+			      "state": null
+			    },
+			    "personal_id_number_provided": false,
+			    "ssn_last_4_provided": false,
+			    "type": null,
+			    "verification": {
+			      "details": null,
+			      "details_code": "failed_other",
+			      "document": null,
+			      "status": "unverified"
+			    }
+			  },
+			  "managed": false,
+			  "product_description": null,
+			  "statement_descriptor": null,
+			  "support_email": null,
+			  "support_phone": null,
+			  "timezone": "US/Pacific",
+			  "tos_acceptance": {
+			    "date": null,
+			    "ip": null,
+			    "user_agent": null
+			  },
+			  "transfer_schedule": {
+			    "delay_days": 7,
+			    "interval": "daily"
+			  },
+			  "transfers_enabled": false,
+			  "verification": {
+			    "disabled_reason": "fields_needed",
+			    "due_by": null,
+			    "fields_needed": [
+			      "business_url",
+			      "external_account",
+			      "product_description",
+			      "support_phone",
+			      "tos_acceptance.date",
+			      "tos_acceptance.ip"
+			    ]
+			  },
+			  "keys": {
+			    "secret": "sk_test_YXPYjAOEIIJOhEszvghLNMFw",
+			    "publishable": "pk_test_kGAoWInjeNfXVOuRl84TJFgP"
+			  }
+			}
 		}
 	}
 }
@@ -1296,7 +2716,7 @@ Method description
 
 <a name="getAccount"/>
 ## Stripe.getAccount
-Method description
+Retrieves the details of the account.
 
 | Field    | Type       | Description
 |----------|------------|----------
@@ -1306,7 +2726,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"accountId": "..."
+	"accountId": "acct_1032D82eZvKYlo2C"
 }
 ```
 #### Response example
@@ -1315,7 +2735,95 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "acct_1032D82eZvKYlo2C",
+			  "object": "account",
+			  "business_logo": null,
+			  "business_name": "Stripe.com",
+			  "business_url": null,
+			  "charges_enabled": false,
+			  "country": "US",
+			  "debit_negative_balances": true,
+			  "decline_charge_on": {
+			    "avs_failure": true,
+			    "cvc_failure": false
+			  },
+			  "default_currency": "usd",
+			  "details_submitted": false,
+			  "display_name": "Stripe.com",
+			  "email": "site@stripe.com",
+			  "external_accounts": {
+			    "object": "list",
+			    "data": [],
+			    "has_more": false,
+			    "total_count": 0,
+			    "url": "/v1/accounts/acct_1032D82eZvKYlo2C/external_accounts"
+			  },
+			  "legal_entity": {
+			    "address": {
+			      "city": null,
+			      "country": "US",
+			      "line1": null,
+			      "line2": null,
+			      "postal_code": null,
+			      "state": null
+			    },
+			    "business_name": null,
+			    "business_tax_id_provided": false,
+			    "dob": {
+			      "day": null,
+			      "month": null,
+			      "year": null
+			    },
+			    "first_name": null,
+			    "last_name": null,
+			    "personal_address": {
+			      "city": null,
+			      "country": "US",
+			      "line1": null,
+			      "line2": null,
+			      "postal_code": null,
+			      "state": null
+			    },
+			    "personal_id_number_provided": false,
+			    "ssn_last_4_provided": false,
+			    "type": null,
+			    "verification": {
+			      "details": null,
+			      "details_code": "failed_other",
+			      "document": null,
+			      "status": "unverified"
+			    }
+			  },
+			  "managed": false,
+			  "product_description": null,
+			  "statement_descriptor": null,
+			  "support_email": null,
+			  "support_phone": null,
+			  "timezone": "US/Pacific",
+			  "tos_acceptance": {
+			    "date": null,
+			    "ip": null,
+			    "user_agent": null
+			  },
+			  "transfer_schedule": {
+			    "delay_days": 7,
+			    "interval": "daily"
+			  },
+			  "transfers_enabled": false,
+			  "verification": {
+			    "disabled_reason": "fields_needed",
+			    "due_by": null,
+			    "fields_needed": [
+			      "business_url",
+			      "external_account",
+			      "product_description",
+			      "support_phone",
+			      "tos_acceptance.date",
+			      "tos_acceptance.ip"
+			    ]
+			  }
+			}
 		}
 	}
 }
@@ -1323,7 +2831,8 @@ Method description
 
 <a name="updateAccount"/>
 ## Stripe.updateAccount
-Method description
+Updates an account by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+You may only update accounts that you manage. 
 
 | Field                | Type       | Description
 |----------------------|------------|----------
@@ -1351,25 +2860,8 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"accountId": "...",
-	"businessLogo": "...",
-	"businessName": "...",
-	"businessPrimaryColor": "...",
-	"businessUrl": "...",
-	"debitNegativeBalances": "...",
-	"declineChargeOn": "...",
-	"defaultCurrency": "...",
-	"email": "...",
-	"externalAccount": "...",
-	"legalEntity": "...",
-	"metadata": "...",
-	"productDescription": "...",
-	"statementDescriptor": "...",
-	"supportEmail": "...",
-	"supportPhone": "...",
-	"supportUrl": "...",
-	"tosAcceptance": "...",
-	"transferSchedule": "..."
+	"accountId": "acct_1032D82eZvKYlo2C",
+	"supportPhone": "555-867-5309",
 }
 ```
 #### Response example
@@ -1378,7 +2870,95 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "id": "acct_1032D82eZvKYlo2C",
+			  "object": "account",
+			  "business_logo": null,
+			  "business_name": "Stripe.com",
+			  "business_url": null,
+			  "charges_enabled": false,
+			  "country": "US",
+			  "debit_negative_balances": true,
+			  "decline_charge_on": {
+			    "avs_failure": true,
+			    "cvc_failure": false
+			  },
+			  "default_currency": "usd",
+			  "details_submitted": false,
+			  "display_name": "Stripe.com",
+			  "email": "site@stripe.com",
+			  "external_accounts": {
+			    "object": "list",
+			    "data": [],
+			    "has_more": false,
+			    "total_count": 0,
+			    "url": "/v1/accounts/acct_1032D82eZvKYlo2C/external_accounts"
+			  },
+			  "legal_entity": {
+			    "address": {
+			      "city": null,
+			      "country": "US",
+			      "line1": null,
+			      "line2": null,
+			      "postal_code": null,
+			      "state": null
+			    },
+			    "business_name": null,
+			    "business_tax_id_provided": false,
+			    "dob": {
+			      "day": null,
+			      "month": null,
+			      "year": null
+			    },
+			    "first_name": null,
+			    "last_name": null,
+			    "personal_address": {
+			      "city": null,
+			      "country": "US",
+			      "line1": null,
+			      "line2": null,
+			      "postal_code": null,
+			      "state": null
+			    },
+			    "personal_id_number_provided": false,
+			    "ssn_last_4_provided": false,
+			    "type": null,
+			    "verification": {
+			      "details": null,
+			      "details_code": "failed_other",
+			      "document": null,
+			      "status": "unverified"
+			    }
+			  },
+			  "managed": false,
+			  "product_description": null,
+			  "statement_descriptor": null,
+			  "support_email": null,
+			  "support_phone": "555-867-5309",
+			  "timezone": "US/Pacific",
+			  "tos_acceptance": {
+			    "date": null,
+			    "ip": null,
+			    "user_agent": null
+			  },
+			  "transfer_schedule": {
+			    "delay_days": 7,
+			    "interval": "daily"
+			  },
+			  "transfers_enabled": false,
+			  "verification": {
+			    "disabled_reason": "fields_needed",
+			    "due_by": null,
+			    "fields_needed": [
+			      "business_url",
+			      "external_account",
+			      "product_description",
+			      "support_phone",
+			      "tos_acceptance.date",
+			      "tos_acceptance.ip"
+			    ]
+			  }
+			}
 		}
 	}
 }
@@ -1386,7 +2966,9 @@ Method description
 
 <a name="deleteAccount"/>
 ## Stripe.deleteAccount
-Method description
+With Connect, you may delete Stripe accounts you manage.
+Managed accounts created using test-mode keys can be deleted at any time. Managed accounts created using live-mode keys may only be deleted once all balances are zero.
+If you are looking to close your own account, use the data tab in your account settings instead.
 
 | Field    | Type       | Description
 |----------|------------|----------
@@ -1396,7 +2978,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"accountId": "..."
+	"accountId": "acct_1032D82eZvKYlo2C"
 }
 ```
 #### Response example
@@ -1405,7 +2987,10 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "deleted": true,
+			  "id": "acct_1032D82eZvKYlo2C"
+			}
 		}
 	}
 }
@@ -1413,7 +2998,7 @@ Method description
 
 <a name="rejectAccount"/>
 ## Stripe.rejectAccount
-Method description
+Managed accounts created using test-mode keys can be rejected at any time. Managed accounts created using live-mode keys may only be rejected once all balances are zero.
 
 | Field    | Type       | Description
 |----------|------------|----------
@@ -1424,8 +3009,8 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"accountId": "...",
-	"reason": "..."
+	"accountId": "acct_1032D82eZvKYlo2C",
+	"reason": "fraud"
 }
 ```
 #### Response example
@@ -1434,7 +3019,86 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "acct_1032D82eZvKYlo2C",
+			  "object": "account",
+			  "business_logo": null,
+			  "business_name": "Stripe.com",
+			  "business_url": null,
+			  "charges_enabled": false,
+			  "country": "US",
+			  "debit_negative_balances": true,
+			  "decline_charge_on": {
+			    "avs_failure": true,
+			    "cvc_failure": false
+			  },
+			  "default_currency": "usd",
+			  "details_submitted": false,
+			  "display_name": "Stripe.com",
+			  "email": "site@stripe.com",
+			  "external_accounts": {
+			    "object": "list",
+			    "data": [],
+			    "has_more": false,
+			    "total_count": 0,
+			    "url": "/v1/accounts/acct_1032D82eZvKYlo2C/external_accounts"
+			  },
+			  "legal_entity": {
+			    "address": {
+			      "city": null,
+			      "country": "US",
+			      "line1": null,
+			      "line2": null,
+			      "postal_code": null,
+			      "state": null
+			    },
+			    "business_name": null,
+			    "business_tax_id_provided": false,
+			    "dob": {
+			      "day": null,
+			      "month": null,
+			      "year": null
+			    },
+			    "first_name": null,
+			    "last_name": null,
+			    "personal_address": {
+			      "city": null,
+			      "country": "US",
+			      "line1": null,
+			      "line2": null,
+			      "postal_code": null,
+			      "state": null
+			    },
+			    "personal_id_number_provided": false,
+			    "ssn_last_4_provided": false,
+			    "type": null,
+			    "verification": {
+			      "details": null,
+			      "details_code": "failed_other",
+			      "document": null,
+			      "status": "unverified"
+			    }
+			  },
+			  "managed": false,
+			  "product_description": null,
+			  "statement_descriptor": null,
+			  "support_email": null,
+			  "support_phone": null,
+			  "timezone": "US/Pacific",
+			  "tos_acceptance": {
+			    "date": null,
+			    "ip": null,
+			    "user_agent": null
+			  },
+			  "transfer_schedule": {
+			    "delay_days": 7,
+			    "interval": "daily"
+			  },
+			  "transfers_enabled": false,
+			  "verification": {
+			    "disabled_reason": "rejected.fraud"
+			  }
+			}
 		}
 	}
 }
@@ -1442,7 +3106,7 @@ Method description
 
 <a name="getAccountList"/>
 ## Stripe.getAccountList
-Method description
+Returns a list of accounts connected to your platform via Connect. If you’re not a platform, the list will be empty.
 
 | Field        | Type       | Description
 |--------------|------------|----------
@@ -1465,7 +3129,104 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "object": "list",
+			  "url": "/v1/accounts",
+			  "has_more": false,
+			  "data": [
+			    {
+			      "id": "acct_1032D82eZvKYlo2C",
+			      "object": "account",
+			      "business_logo": null,
+			      "business_name": "Stripe.com",
+			      "business_url": null,
+			      "charges_enabled": false,
+			      "country": "US",
+			      "debit_negative_balances": true,
+			      "decline_charge_on": {
+			        "avs_failure": true,
+			        "cvc_failure": false
+			      },
+			      "default_currency": "usd",
+			      "details_submitted": false,
+			      "display_name": "Stripe.com",
+			      "email": "site@stripe.com",
+			      "external_accounts": {
+			        "object": "list",
+			        "data": [],
+			        "has_more": false,
+			        "total_count": 0,
+			        "url": "/v1/accounts/acct_1032D82eZvKYlo2C/external_accounts"
+			      },
+			      "legal_entity": {
+			        "address": {
+			          "city": null,
+			          "country": "US",
+			          "line1": null,
+			          "line2": null,
+			          "postal_code": null,
+			          "state": null
+			        },
+			        "business_name": null,
+			        "business_tax_id_provided": false,
+			        "dob": {
+			          "day": null,
+			          "month": null,
+			          "year": null
+			        },
+			        "first_name": null,
+			        "last_name": null,
+			        "personal_address": {
+			          "city": null,
+			          "country": "US",
+			          "line1": null,
+			          "line2": null,
+			          "postal_code": null,
+			          "state": null
+			        },
+			        "personal_id_number_provided": false,
+			        "ssn_last_4_provided": false,
+			        "type": null,
+			        "verification": {
+			          "details": null,
+			          "details_code": "failed_other",
+			          "document": null,
+			          "status": "unverified"
+			        }
+			      },
+			      "managed": false,
+			      "product_description": null,
+			      "statement_descriptor": null,
+			      "support_email": null,
+			      "support_phone": null,
+			      "timezone": "US/Pacific",
+			      "tos_acceptance": {
+			        "date": null,
+			        "ip": null,
+			        "user_agent": null
+			      },
+			      "transfer_schedule": {
+			        "delay_days": 7,
+			        "interval": "daily"
+			      },
+			      "transfers_enabled": false,
+			      "verification": {
+			        "disabled_reason": "fields_needed",
+			        "due_by": null,
+			        "fields_needed": [
+			          "business_url",
+			          "external_account",
+			          "product_description",
+			          "support_phone",
+			          "tos_acceptance.date",
+			          "tos_acceptance.ip"
+			        ]
+			      }
+			    },
+			    {...},
+			    {...}
+			  ]
+			}
 		}
 	}
 }
@@ -1473,7 +3234,9 @@ Method description
 
 <a name="createFeeRefund"/>
 ## Stripe.createFeeRefund
-Method description
+Refunds an application fee that has previously been collected but not yet refunded. Funds will be refunded to the Stripe account that the fee was originally collected from.
+You can optionally refund only part of an application fee. You can do so as many times as you wish until the entire fee has been refunded.
+Once entirely refunded, an application fee can't be refunded again. This method will throw an error when called on an already-refunded application fee, or when trying to refund more money than is left on an application fee.
 
 | Field   | Type       | Description
 |---------|------------|----------
@@ -1485,9 +3248,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"appId": "...",
-	"amount": 0,
-	"metadata": "..."
+	"appId": "fee_9EkkFV1uz0mEyZ",
 }
 ```
 #### Response example
@@ -1504,7 +3265,7 @@ Method description
 
 <a name="getFeeRefund"/>
 ## Stripe.getFeeRefund
-Method description
+By default, you can see the 10 most recent refunds stored directly on the application fee object, but you can also retrieve details about a specific refund stored on the application fee.
 
 | Field   | Type       | Description
 |---------|------------|----------
@@ -1515,8 +3276,8 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"feeId": "...",
-	"refundId": "..."
+	"feeId": "fee_9EkkFV1uz0mEyZ",
+	"refundId": "fr_9I0kzxDiLcgFxX"
 }
 ```
 #### Response example
@@ -1525,7 +3286,17 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "id": "fr_9I0kzxDiLcgFxX",
+			  "object": "fee_refund",
+			  "amount": 100,
+			  "balance_transaction": "txn_18tiU12eZvKYlo2CetxoRTDG",
+			  "created": 1475240830,
+			  "currency": "usd",
+			  "fee": "fee_9EkkFV1uz0mEyZ",
+			  "metadata": {
+			  }
+			}
 		}
 	}
 }
@@ -1533,7 +3304,8 @@ Method description
 
 <a name="updateFeeRefund"/>
 ## Stripe.updateFeeRefund
-Method description
+Updates the specified application fee refund by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+This request only accepts metadata as an argument.
 
 | Field   | Type       | Description
 |---------|------------|----------
@@ -1545,9 +3317,9 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"feeId": "...",
-	"refundId": "...",
-	"metadata": "..."
+	"feeId": "fee_9EkkFV1uz0mEyZ",
+	"refundId": "fr_9I0kzxDiLcgFxX",
+	"metadata": "{ \"order_id\": \"6735\"}"
 }
 ```
 #### Response example
@@ -1556,7 +3328,18 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "id": "fr_9I0kzxDiLcgFxX",
+			  "object": "fee_refund",
+			  "amount": 100,
+			  "balance_transaction": "txn_18tiU12eZvKYlo2CetxoRTDG",
+			  "created": 1475240830,
+			  "currency": "usd",
+			  "fee": "fee_9EkkFV1uz0mEyZ",
+			  "metadata": {
+			    "key": "value"
+			  }
+			}
 		}
 	}
 }
@@ -1564,7 +3347,7 @@ Method description
 
 <a name="getFeeRefundList"/>
 ## Stripe.getFeeRefundList
-Method description
+You can see a list of the refunds belonging to a specific application fee. Note that the 10 most recent refunds are always available by default on the application fee object. If you need more than those 10, you can use this API method and the limit and starting_after parameters to page through additional refunds.
 
 | Field        | Type       | Description
 |--------------|------------|----------
@@ -1577,10 +3360,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"appId": "...",
-	"endingBefore": "...",
-	"limit": 0,
-	"startingAfter": "..."
+	"appId": "fee_9EkkFV1uz0mEyZ",
 }
 ```
 #### Response example
@@ -1589,7 +3369,26 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "object": "list",
+			  "url": "/v1/application_fees/fee_9EkkFV1uz0mEyZ/refunds",
+			  "has_more": false,
+			  "data": [
+			    {
+			      "id": "fr_9I0kzxDiLcgFxX",
+			      "object": "fee_refund",
+			      "amount": 100,
+			      "balance_transaction": "txn_18tiU12eZvKYlo2CetxoRTDG",
+			      "created": 1475240830,
+			      "currency": "usd",
+			      "fee": "fee_9EkkFV1uz0mEyZ",
+			      "metadata": {
+			      }
+			    },
+			    {...},
+			    {...}
+			  ]
+			}
 		}
 	}
 }
@@ -1597,7 +3396,7 @@ Method description
 
 <a name="getApplicationFee"/>
 ## Stripe.getApplicationFee
-Method description
+Retrieves the details of an application fee that your account has collected. The same information is returned when refunding the application fee.
 
 | Field | Type       | Description
 |-------|------------|----------
@@ -1607,7 +3406,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"feeId": "..."
+	"feeId": "fee_9EkkFV1uz0mEyZ"
 }
 ```
 #### Response example
@@ -1616,7 +3415,40 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "fee_9EkkFV1uz0mEyZ",
+			  "object": "application_fee",
+			  "account": "acct_181heUI2xUg5aQMA",
+			  "amount": 1000,
+			  "amount_refunded": 1000,
+			  "application": "ca_32D88BD1qLklliziD7gYQvctJIhWBSQ7",
+			  "balance_transaction": "txn_18tiU12eZvKYlo2CetxoRTDG",
+			  "charge": "py_18wHEjI2xUg5aQMAsAX1AYPD",
+			  "created": 1474489353,
+			  "currency": "usd",
+			  "livemode": false,
+			  "originating_transaction": "tr_18wHEj2eZvKYlo2CmoWPui9Y",
+			  "refunded": true,
+			  "refunds": {
+			    "object": "list",
+			    "data": [
+			      {
+			        "id": "fr_9EkkTaYshcJogQ",
+			        "object": "fee_refund",
+			        "amount": 1000,
+			        "balance_transaction": "txn_18wHEm2eZvKYlo2Ch4blmHzq",
+			        "created": 1474489355,
+			        "currency": "usd",
+			        "fee": "fee_9EkkFV1uz0mEyZ",
+			        "metadata": {
+			        }
+			      }
+			    ],
+			    "has_more": false,
+			    "total_count": 1,
+			    "url": "/v1/application_fees/fee_9EkkFV1uz0mEyZ/refunds"
+			  }
+			}
 		}
 	}
 }
@@ -1624,7 +3456,7 @@ Method description
 
 <a name="getApplicationFeeList"/>
 ## Stripe.getApplicationFeeList
-Method description
+Returns a list of application fees you’ve previously collected. The application fees are returned in sorted order, with the most recent fees appearing first.
 
 | Field        | Type       | Description
 |--------------|------------|----------
@@ -1636,11 +3468,7 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"chargeId": "...",
-	"endingBefore": "...",
-	"limit": "...",
-	"startingAfter": "..."
+{	"apiKey": ,
 }
 ```
 #### Response example
@@ -1649,7 +3477,49 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "object": "list",
+			  "url": "/v1/application_fees",
+			  "has_more": false,
+			  "data": [
+			    {
+			      "id": "fee_9EkkFV1uz0mEyZ",
+			      "object": "application_fee",
+			      "account": "acct_181heUI2xUg5aQMA",
+			      "amount": 1000,
+			      "amount_refunded": 1000,
+			      "application": "ca_32D88BD1qLklliziD7gYQvctJIhWBSQ7",
+			      "balance_transaction": "txn_18tiU12eZvKYlo2CetxoRTDG",
+			      "charge": "py_18wHEjI2xUg5aQMAsAX1AYPD",
+			      "created": 1474489353,
+			      "currency": "usd",
+			      "livemode": false,
+			      "originating_transaction": "tr_18wHEj2eZvKYlo2CmoWPui9Y",
+			      "refunded": true,
+			      "refunds": {
+			        "object": "list",
+			        "data": [
+			          {
+			            "id": "fr_9EkkTaYshcJogQ",
+			            "object": "fee_refund",
+			            "amount": 1000,
+			            "balance_transaction": "txn_18wHEm2eZvKYlo2Ch4blmHzq",
+			            "created": 1474489355,
+			            "currency": "usd",
+			            "fee": "fee_9EkkFV1uz0mEyZ",
+			            "metadata": {
+			            }
+			          }
+			        ],
+			        "has_more": false,
+			        "total_count": 1,
+			        "url": "/v1/application_fees/fee_9EkkFV1uz0mEyZ/refunds"
+			      }
+			    },
+			    {...},
+			    {...}
+			  ]
+			}
 		}
 	}
 }
@@ -1657,7 +3527,7 @@ Method description
 
 <a name="getCountrySpecsList"/>
 ## Stripe.getCountrySpecsList
-Method description
+Lists all Country Spec objects available in the API.
 
 | Field        | Type       | Description
 |--------------|------------|----------
@@ -1669,9 +3539,6 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"endingBefore": "...",
-	"limit": "...",
-	"startingAfter": "..."
 }
 ```
 #### Response example
@@ -1680,7 +3547,84 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "object": "list",
+			  "url": "/v1/country_specs",
+			  "has_more": false,
+			  "data": [
+			    {
+			      "id": "US",
+			      "object": "country_spec",
+			      "default_currency": "usd",
+			      "supported_bank_account_currencies": {
+			        "usd": [
+			          "US"
+			        ]
+			      },
+			      "supported_payment_currencies": [
+			        "usd",
+			        "aed",
+			        "afn",
+			        "..."
+			      ],
+			      "supported_payment_methods": [
+			        "alipay",
+			        "card",
+			        "stripe"
+			      ],
+			      "verification_fields": {
+			        "individual": {
+			          "minimum": [
+			            "external_account",
+			            "legal_entity.address.city",
+			            "legal_entity.address.line1",
+			            "legal_entity.address.postal_code",
+			            "legal_entity.address.state",
+			            "legal_entity.dob.day",
+			            "legal_entity.dob.month",
+			            "legal_entity.dob.year",
+			            "legal_entity.first_name",
+			            "legal_entity.last_name",
+			            "legal_entity.ssn_last_4",
+			            "legal_entity.type",
+			            "tos_acceptance.date",
+			            "tos_acceptance.ip"
+			          ],
+			          "additional": [
+			            "legal_entity.personal_id_number",
+			            "legal_entity.verification.document"
+			          ]
+			        },
+			        "company": {
+			          "minimum": [
+			            "external_account",
+			            "legal_entity.address.city",
+			            "legal_entity.address.line1",
+			            "legal_entity.address.postal_code",
+			            "legal_entity.address.state",
+			            "legal_entity.business_name",
+			            "legal_entity.business_tax_id",
+			            "legal_entity.dob.day",
+			            "legal_entity.dob.month",
+			            "legal_entity.dob.year",
+			            "legal_entity.first_name",
+			            "legal_entity.last_name",
+			            "legal_entity.ssn_last_4",
+			            "legal_entity.type",
+			            "tos_acceptance.date",
+			            "tos_acceptance.ip"
+			          ],
+			          "additional": [
+			            "legal_entity.personal_id_number",
+			            "legal_entity.verification.document"
+			          ]
+			        }
+			      }
+			    },
+			    {...},
+			    {...}
+			  ]
+			}
 		}
 	}
 }
@@ -1688,7 +3632,7 @@ Method description
 
 <a name="getCountrySpec"/>
 ## Stripe.getCountrySpec
-Method description
+Returns a Country Spec for a given Country code.
 
 | Field  | Type       | Description
 |--------|------------|----------
@@ -1698,7 +3642,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"country": "..."
+	"country": "US"
 }
 ```
 #### Response example
@@ -1707,7 +3651,75 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "id": "US",
+			  "object": "country_spec",
+			  "default_currency": "usd",
+			  "supported_bank_account_currencies": {
+			    "usd": [
+			      "US"
+			    ]
+			  },
+			  "supported_payment_currencies": [
+			    "usd",
+			    "aed",
+			    "afn",
+			    "..."
+			  ],
+			  "supported_payment_methods": [
+			    "alipay",
+			    "card",
+			    "stripe"
+			  ],
+			  "verification_fields": {
+			    "individual": {
+			      "minimum": [
+			        "external_account",
+			        "legal_entity.address.city",
+			        "legal_entity.address.line1",
+			        "legal_entity.address.postal_code",
+			        "legal_entity.address.state",
+			        "legal_entity.dob.day",
+			        "legal_entity.dob.month",
+			        "legal_entity.dob.year",
+			        "legal_entity.first_name",
+			        "legal_entity.last_name",
+			        "legal_entity.ssn_last_4",
+			        "legal_entity.type",
+			        "tos_acceptance.date",
+			        "tos_acceptance.ip"
+			      ],
+			      "additional": [
+			        "legal_entity.personal_id_number",
+			        "legal_entity.verification.document"
+			      ]
+			    },
+			    "company": {
+			      "minimum": [
+			        "external_account",
+			        "legal_entity.address.city",
+			        "legal_entity.address.line1",
+			        "legal_entity.address.postal_code",
+			        "legal_entity.address.state",
+			        "legal_entity.business_name",
+			        "legal_entity.business_tax_id",
+			        "legal_entity.dob.day",
+			        "legal_entity.dob.month",
+			        "legal_entity.dob.year",
+			        "legal_entity.first_name",
+			        "legal_entity.last_name",
+			        "legal_entity.ssn_last_4",
+			        "legal_entity.type",
+			        "tos_acceptance.date",
+			        "tos_acceptance.ip"
+			      ],
+			      "additional": [
+			        "legal_entity.personal_id_number",
+			        "legal_entity.verification.document"
+			      ]
+			    }
+			  }
+			}
 		}
 	}
 }
@@ -1715,7 +3727,8 @@ Method description
 
 <a name="createBankAccount"/>
 ## Stripe.createBankAccount
-Method description
+When you create a new bank account, you must specify a managed account to create it on.
+If the bank account's owner has no other external account in the bank account's currency, the new bank account will become the default for that currency. However, if the owner already has a bank account for that currency, the new account will only become the default if the default_for_currency parameter is set to true.
 
 | Field             | Type       | Description
 |-------------------|------------|----------
@@ -1729,11 +3742,8 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"accountId": "...",
-	"source": "...",
-	"externalAccount": "...",
-	"defaultForCurrency": "...",
-	"metadata": "..."
+	"accountId": "acct_1032D82eZvKYlo2C",
+	"externalAccount": "btok_9I15a1JTOQZSQf",
 }
 ```
 #### Response example
@@ -1742,7 +3752,23 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "id": "ba_18zR3H2eZvKYlo2CzLiGrogK",
+			  "object": "bank_account",
+			  "account": "acct_1032D82eZvKYlo2C",
+			  "account_holder_name": "Jane Austen",
+			  "account_holder_type": "individual",
+			  "bank_name": "STRIPE TEST BANK",
+			  "country": "US",
+			  "currency": "usd",
+			  "default_for_currency": false,
+			  "fingerprint": "1JWtPxqbdX5Gamtc",
+			  "last4": "6789",
+			  "metadata": {
+			  },
+			  "routing_number": "110000000",
+			  "status": "new"
+			}
 		}
 	}
 }
@@ -1750,7 +3776,7 @@ Method description
 
 <a name="getBankAccount"/>
 ## Stripe.getBankAccount
-Method description
+By default, you can see the 10 most recent bank accounts stored on a managed account directly on the object, but you can also retrieve details about a specific bank account stored on the Stripe account.
 
 | Field        | Type       | Description
 |--------------|------------|----------
@@ -1761,8 +3787,8 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"accountId": "...",
-	"bankAccountId": "..."
+	"accountId": "acct_1032D82eZvKYlo2C",
+	"bankAccountId": "ba_18zR3H2eZvKYlo2CzLiGrogK"
 }
 ```
 #### Response example
@@ -1771,7 +3797,23 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "id": "ba_18zR3H2eZvKYlo2CzLiGrogK",
+			  "object": "bank_account",
+			  "account": "acct_1032D82eZvKYlo2C",
+			  "account_holder_name": "Jane Austen",
+			  "account_holder_type": "individual",
+			  "bank_name": "STRIPE TEST BANK",
+			  "country": "US",
+			  "currency": "usd",
+			  "default_for_currency": false,
+			  "fingerprint": "1JWtPxqbdX5Gamtc",
+			  "last4": "6789",
+			  "metadata": {
+			  },
+			  "routing_number": "110000000",
+			  "status": "new"
+			}
 		}
 	}
 }
@@ -1779,7 +3821,7 @@ Method description
 
 <a name="updateBankAccount"/>
 ## Stripe.updateBankAccount
-Method description
+Updates the metadata of a bank account belonging to a managed account, and optionally sets it as the default for its currency. Other bank account details are not editable by design.
 
 | Field        | Type       | Description
 |--------------|------------|----------
@@ -1791,9 +3833,9 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"accountId": "...",
-	"bankAccountId": "...",
-	"metadata": "..."
+	"accountId": "acct_1032D82eZvKYlo2C",
+	"bankAccountId": "ba_18zR3H2eZvKYlo2CzLiGrogK"
+	"metadata": "{\"order_id\": \"6735\"}"
 }
 ```
 #### Response example
@@ -1802,7 +3844,24 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "ba_18zR3H2eZvKYlo2CzLiGrogK",
+			  "object": "bank_account",
+			  "account": "acct_1032D82eZvKYlo2C",
+			  "account_holder_name": "Jane Austen",
+			  "account_holder_type": "individual",
+			  "bank_name": "STRIPE TEST BANK",
+			  "country": "US",
+			  "currency": "usd",
+			  "default_for_currency": false,
+			  "fingerprint": "1JWtPxqbdX5Gamtc",
+			  "last4": "6789",
+			  "metadata": {
+			    "order_id": "6735"
+			  },
+			  "routing_number": "110000000",
+			  "status": "new"
+			}
 		}
 	}
 }
@@ -1810,7 +3869,7 @@ Method description
 
 <a name="deleteBankAccount"/>
 ## Stripe.deleteBankAccount
-Method description
+You can delete destination bank accounts from a managed account. If a bank account is the default external account for its currency, it can only be deleted if it is the only external account for that currency, and the currency is not the Stripe account's default currency. Otherwise, you must set another external account to be the default for the currency before deleting it.
 
 | Field        | Type       | Description
 |--------------|------------|----------
@@ -1821,8 +3880,8 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"accountId": "...",
-	"bankAccountId": "..."
+	"accountId": "acct_1032D82eZvKYlo2C",
+	"bankAccountId": "ba_18zR3I2eZvKYlo2CsZ5WyBcI"
 }
 ```
 #### Response example
@@ -1831,7 +3890,10 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "deleted": true,
+			  "id": "ba_18zR3I2eZvKYlo2CsZ5WyBcI"
+			}
 		}
 	}
 }
@@ -1839,7 +3901,7 @@ Method description
 
 <a name="getBankAccountList"/>
 ## Stripe.getBankAccountList
-Method description
+You can see a list of the bank accounts belonging to a managed account. Note that the 10 most recent external accounts are always available by default on the corresponding Stripe object. If you need more than those 10, you can use this API method and the limit and starting_after parameters to page through additional bank accounts.
 
 | Field        | Type       | Description
 |--------------|------------|----------
@@ -1852,10 +3914,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"accountId": "...",
-	"endingBefore": "...",
-	"limit": "...",
-	"startingAfter": "..."
+	"accountId": "sk_test_BQokikJOvBiI2HlWgH4olfQ2",
 }
 ```
 #### Response example
@@ -1864,7 +3923,32 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "object": "list",
+			  "url": "/v1/accounts/acct_1032D82eZvKYlo2C/external_accounts",
+			  "has_more": false,
+			  "data": [
+			    {
+			      "id": "ba_18zR3I2eZvKYlo2CsZ5WyBcI",
+			      "object": "bank_account",
+			      "account": "acct_1032D82eZvKYlo2C",
+			      "account_holder_name": "Jane Austen",
+			      "account_holder_type": "individual",
+			      "bank_name": "STRIPE TEST BANK",
+			      "country": "US",
+			      "currency": "usd",
+			      "default_for_currency": false,
+			      "fingerprint": "1JWtPxqbdX5Gamtc",
+			      "last4": "6789",
+			      "metadata": {
+			      },
+			      "routing_number": "110000000",
+			      "status": "new"
+			    },
+			    {...},
+			    {...}
+			  ]
+			}
 		}
 	}
 }
@@ -1872,7 +3956,7 @@ Method description
 
 <a name="createCard"/>
 ## Stripe.createCard
-Method description
+If the account has no default destination card, then the new card will become the default. However, if the owner already has a default then it will not change. To change the default, you should set default_for_currency to true when creating a card for a managed account.
 
 | Field             | Type       | Description
 |-------------------|------------|----------
@@ -1886,11 +3970,8 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"accountId": "...",
-	"source": "...",
-	"externalAccount": "...",
-	"defaultForCurrency": "...",
-	"metadata": "..."
+	"accountId": "acct_1032D82eZvKYlo2C",
+	"externalAccount": "tok_189fTS2eZvKYlo2CcYJIOGkr",
 }
 ```
 #### Response example
@@ -1899,7 +3980,31 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "id": "card_18zR2T2eZvKYlo2Cn58EZoyn",
+			  "object": "card",
+			  "address_city": null,
+			  "address_country": null,
+			  "address_line1": null,
+			  "address_line1_check": null,
+			  "address_line2": null,
+			  "address_state": null,
+			  "address_zip": "226001",
+			  "address_zip_check": "unchecked",
+			  "brand": "Visa",
+			  "country": "US",
+			  "cvc_check": "unchecked",
+			  "dynamic_last4": null,
+			  "exp_month": 12,
+			  "exp_year": 2019,
+			  "funding": "credit",
+			  "last4": "4242",
+			  "metadata": {
+			  },
+			  "name": null,
+			  "tokenization_method": null,
+			  "account": "acct_1032D82eZvKYlo2C"
+			}
 		}
 	}
 }
@@ -1918,8 +4023,8 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"accountId": "...",
-	"cardId": "..."
+	"accountId": "acct_1032D82eZvKYlo2C",
+	"cardId": "card_18zR2T2eZvKYlo2Cn58EZoyn"
 }
 ```
 #### Response example
@@ -1928,7 +4033,31 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "card_18zR2T2eZvKYlo2Cn58EZoyn",
+			  "object": "card",
+			  "address_city": null,
+			  "address_country": null,
+			  "address_line1": null,
+			  "address_line1_check": null,
+			  "address_line2": null,
+			  "address_state": null,
+			  "address_zip": "226001",
+			  "address_zip_check": "unchecked",
+			  "brand": "Visa",
+			  "country": "US",
+			  "cvc_check": "unchecked",
+			  "dynamic_last4": null,
+			  "exp_month": 12,
+			  "exp_year": 2019,
+			  "funding": "credit",
+			  "last4": "4242",
+			  "metadata": {
+			  },
+			  "name": null,
+			  "tokenization_method": null,
+			  "account": "acct_1032D82eZvKYlo2C"
+			}
 		}
 	}
 }
@@ -1936,7 +4065,8 @@ Method description
 
 <a name="updateCard"/>
 ## Stripe.updateCard
-Method description
+If you need to update only some card details, like the billing address or expiration date, you can do so without having to re-enter the full card details. Stripe also works directly with card networks so that your customers can continue using your service without interruption.
+When you update a card, Stripe will automatically validate the card.
 
 | Field             | Type       | Description
 |-------------------|------------|----------
@@ -1958,19 +4088,9 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"accountId": "...",
-	"cardId": "...",
-	"addressCity": "...",
-	"addressCountry": "...",
-	"addressLine1": "...",
-	"addressLine2": "...",
-	"addressState": "...",
-	"addressZip": "...",
-	"defaultForCurrency": "...",
-	"expMonth": "...",
-	"expYear": "...",
-	"metadata": "...",
-	"name": "..."
+	"accountId": "acct_1032D82eZvKYlo2C",
+	"cardId": "card_18zR2T2eZvKYlo2Cn58EZoyn",
+	"name": "Sophia Moore"
 }
 ```
 #### Response example
@@ -1979,7 +4099,31 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "card_18zR2T2eZvKYlo2Cn58EZoyn",
+			  "object": "card",
+			  "address_city": null,
+			  "address_country": null,
+			  "address_line1": null,
+			  "address_line1_check": null,
+			  "address_line2": null,
+			  "address_state": null,
+			  "address_zip": "226001",
+			  "address_zip_check": "unchecked",
+			  "brand": "Visa",
+			  "country": "US",
+			  "cvc_check": "unchecked",
+			  "dynamic_last4": null,
+			  "exp_month": 12,
+			  "exp_year": 2019,
+			  "funding": "credit",
+			  "last4": "4242",
+			  "metadata": {
+			  },
+			  "name": "Sophia Moore",
+			  "tokenization_method": null,
+			  "account": "acct_1032D82eZvKYlo2C"
+			}
 		}
 	}
 }
@@ -1987,7 +4131,7 @@ Method description
 
 <a name="deleteCard"/>
 ## Stripe.deleteCard
-Method description
+If a card's default_for_currency property is true, it can only be deleted if it is the only external account for its currency, and the currency is not the Stripe account's default currency. Otherwise, before deleting the card, you must set another external account to be the default for the currency.
 
 | Field    | Type       | Description
 |----------|------------|----------
@@ -1998,8 +4142,8 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"accountId": "...",
-	"cardId": "..."
+	"accountId": "acct_1032D82eZvKYlo2C",
+	"cardId": "card_18zR2T2eZvKYlo2Cn58EZoyn"
 }
 ```
 #### Response example
@@ -2008,7 +4152,10 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "deleted": true,
+			  "id": "card_18zR2T2eZvKYlo2Cn58EZoyn"
+			}
 		}
 	}
 }
@@ -2016,7 +4163,7 @@ Method description
 
 <a name="getCardList"/>
 ## Stripe.getCardList
-Method description
+You can see a list of the cards belonging to a managed account. Note that the 10 most recent external accounts are available on the account object. If you need more than those 10, you can use this API method and the limit and starting_after parameters to page through additional cards.
 
 | Field        | Type       | Description
 |--------------|------------|----------
@@ -2029,10 +4176,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"accountId": "...",
-	"endingBefore": "...",
-	"limit": "...",
-	"startingAfter": "..."
+	"accountId": "acct_1032D82eZvKYlo2C",
 }
 ```
 #### Response example
@@ -2041,7 +4185,40 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "object": "list",
+			  "url": "/v1/accounts/acct_1032D82eZvKYlo2C/external_accounts",
+			  "has_more": false,
+			  "data": [
+			    {
+			      "id": "card_18zR2T2eZvKYlo2Cn58EZoyn",
+			      "object": "card",
+			      "address_city": null,
+			      "address_country": null,
+			      "address_line1": null,
+			      "address_line1_check": null,
+			      "address_line2": null,
+			      "address_state": null,
+			      "address_zip": "226001",
+			      "address_zip_check": "unchecked",
+			      "brand": "Visa",
+			      "country": "US",
+			      "cvc_check": "unchecked",
+			      "dynamic_last4": null,
+			      "exp_month": 12,
+			      "exp_year": 2019,
+			      "funding": "credit",
+			      "last4": "4242",
+			      "metadata": {
+			      },
+			      "name": null,
+			      "tokenization_method": null,
+			      "account": "acct_1032D82eZvKYlo2C"
+			    },
+			    {...},
+			    {...}
+			  ]
+			}
 		}
 	}
 }
@@ -2065,7 +4242,7 @@ Method description
 ```json
 {	"apiKey": "...",
 	"amount": "...",
-	"currency": "...",
+	"currency": "usd",
 	"email": "...",
 	"description": "...",
 	"metadata": "...",
@@ -2138,7 +4315,7 @@ Method description
 
 <a name="createOrder"/>
 ## Stripe.createOrder
-Method description
+Creates a new order object.
 
 | Field   | Type       | Description
 |---------|------------|----------
@@ -2154,13 +4331,9 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"currency": "...",
-	"coupon": "...",
-	"customer": "...",
-	"email": "...",
-	"items": "...",
-	"metadata": "...",
-	"shipping": "..."
+	"currency": "usd",
+	"email": "anthony.anderson@example.com",
+	"items": "[{\"type\": \"sku\", \"parent\": \"sku_9BtKAR1ZXD42en\"}]",
 }
 ```
 #### Response example
@@ -2169,7 +4342,125 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "or_18tVaP2eZvKYlo2CP5mgybEM",
+			  "object": "order",
+			  "amount": 3084,
+			  "amount_returned": 3084,
+			  "application": null,
+			  "application_fee": null,
+			  "charge": "ch_18z3WS2eZvKYlo2ChBcCbkN5",
+			  "created": 1473829529,
+			  "currency": "usd",
+			  "customer": null,
+			  "email": "jenny@example.com",
+			  "items": [
+			    {
+			      "object": "order_item",
+			      "amount": 3084,
+			      "currency": "usd",
+			      "description": "T-shirt",
+			      "parent": "sku_98dMiVopxu0m3r",
+			      "quantity": 2,
+			      "type": "sku"
+			    },
+			    {
+			      "object": "order_item",
+			      "amount": 0,
+			      "currency": "usd",
+			      "description": "Taxes (included)",
+			      "parent": null,
+			      "quantity": null,
+			      "type": "tax"
+			    },
+			    {
+			      "object": "order_item",
+			      "amount": 0,
+			      "currency": "usd",
+			      "description": "Free shipping",
+			      "parent": "ship_free-shipping",
+			      "quantity": null,
+			      "type": "shipping"
+			    }
+			  ],
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "returns": {
+			    "object": "list",
+			    "data": [
+			      {
+			        "id": "orret_18z4Ju2eZvKYlo2CqDgoOMW5",
+			        "object": "order_return",
+			        "amount": 3084,
+			        "created": 1475154686,
+			        "currency": "usd",
+			        "items": [
+			          {
+			            "object": "order_item",
+			            "amount": 3084,
+			            "currency": "usd",
+			            "description": "T-shirt",
+			            "parent": "sku_98dMiVopxu0m3r",
+			            "quantity": 2,
+			            "type": "sku"
+			          },
+			          {
+			            "object": "order_item",
+			            "amount": 0,
+			            "currency": "usd",
+			            "description": "Taxes (included)",
+			            "parent": null,
+			            "quantity": null,
+			            "type": "tax"
+			          },
+			          {
+			            "object": "order_item",
+			            "amount": 0,
+			            "currency": "usd",
+			            "description": "Free shipping",
+			            "parent": "ship_free-shipping",
+			            "quantity": null,
+			            "type": "shipping"
+			          }
+			        ],
+			        "livemode": false,
+			        "order": "or_18tVaP2eZvKYlo2CP5mgybEM",
+			        "refund": "re_18z4Ju2eZvKYlo2CGOBWgZtx"
+			      }
+			    ],
+			    "has_more": false,
+			    "total_count": 1,
+			    "url": "/v1/order_returns?order=or_18tVaP2eZvKYlo2CP5mgybEM"
+			  },
+			  "selected_shipping_method": "ship_free-shipping",
+			  "shipping": {
+			    "address": {
+			      "city": "Anytown",
+			      "country": "US",
+			      "line1": "1234 Main Street",
+			      "line2": null,
+			      "postal_code": "123456",
+			      "state": null
+			    },
+			    "carrier": null,
+			    "name": "Jenny Rosen",
+			    "phone": null,
+			    "tracking_number": null
+			  },
+			  "shipping_methods": [
+			    {
+			      "id": "ship_free-shipping",
+			      "amount": 0,
+			      "currency": "usd",
+			      "delivery_estimate": null,
+			      "description": "Free shipping"
+			    }
+			  ],
+			  "status": "canceled",
+			  "status_transitions": null,
+			  "updated": 1475154686
+			}
 		}
 	}
 }
@@ -2177,7 +4468,7 @@ Method description
 
 <a name="getOrder"/>
 ## Stripe.getOrder
-Method description
+Retrieves the details of an existing order. Supply the unique order ID from either an order creation request or the order list, and Stripe will return the corresponding order information.
 
 | Field  | Type       | Description
 |--------|------------|----------
@@ -2187,7 +4478,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"orderId": "..."
+	"orderId": "or_18tVaP2eZvKYlo2CP5mgybEM"
 }
 ```
 #### Response example
@@ -2196,7 +4487,125 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "or_18tVaP2eZvKYlo2CP5mgybEM",
+			  "object": "order",
+			  "amount": 3084,
+			  "amount_returned": 3084,
+			  "application": null,
+			  "application_fee": null,
+			  "charge": "ch_18z3WS2eZvKYlo2ChBcCbkN5",
+			  "created": 1473829529,
+			  "currency": "usd",
+			  "customer": null,
+			  "email": "jenny@example.com",
+			  "items": [
+			    {
+			      "object": "order_item",
+			      "amount": 3084,
+			      "currency": "usd",
+			      "description": "T-shirt",
+			      "parent": "sku_98dMiVopxu0m3r",
+			      "quantity": 2,
+			      "type": "sku"
+			    },
+			    {
+			      "object": "order_item",
+			      "amount": 0,
+			      "currency": "usd",
+			      "description": "Taxes (included)",
+			      "parent": null,
+			      "quantity": null,
+			      "type": "tax"
+			    },
+			    {
+			      "object": "order_item",
+			      "amount": 0,
+			      "currency": "usd",
+			      "description": "Free shipping",
+			      "parent": "ship_free-shipping",
+			      "quantity": null,
+			      "type": "shipping"
+			    }
+			  ],
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "returns": {
+			    "object": "list",
+			    "data": [
+			      {
+			        "id": "orret_18z4Ju2eZvKYlo2CqDgoOMW5",
+			        "object": "order_return",
+			        "amount": 3084,
+			        "created": 1475154686,
+			        "currency": "usd",
+			        "items": [
+			          {
+			            "object": "order_item",
+			            "amount": 3084,
+			            "currency": "usd",
+			            "description": "T-shirt",
+			            "parent": "sku_98dMiVopxu0m3r",
+			            "quantity": 2,
+			            "type": "sku"
+			          },
+			          {
+			            "object": "order_item",
+			            "amount": 0,
+			            "currency": "usd",
+			            "description": "Taxes (included)",
+			            "parent": null,
+			            "quantity": null,
+			            "type": "tax"
+			          },
+			          {
+			            "object": "order_item",
+			            "amount": 0,
+			            "currency": "usd",
+			            "description": "Free shipping",
+			            "parent": "ship_free-shipping",
+			            "quantity": null,
+			            "type": "shipping"
+			          }
+			        ],
+			        "livemode": false,
+			        "order": "or_18tVaP2eZvKYlo2CP5mgybEM",
+			        "refund": "re_18z4Ju2eZvKYlo2CGOBWgZtx"
+			      }
+			    ],
+			    "has_more": false,
+			    "total_count": 1,
+			    "url": "/v1/order_returns?order=or_18tVaP2eZvKYlo2CP5mgybEM"
+			  },
+			  "selected_shipping_method": "ship_free-shipping",
+			  "shipping": {
+			    "address": {
+			      "city": "Anytown",
+			      "country": "US",
+			      "line1": "1234 Main Street",
+			      "line2": null,
+			      "postal_code": "123456",
+			      "state": null
+			    },
+			    "carrier": null,
+			    "name": "Jenny Rosen",
+			    "phone": null,
+			    "tracking_number": null
+			  },
+			  "shipping_methods": [
+			    {
+			      "id": "ship_free-shipping",
+			      "amount": 0,
+			      "currency": "usd",
+			      "delivery_estimate": null,
+			      "description": "Free shipping"
+			    }
+			  ],
+			  "status": "canceled",
+			  "status_transitions": null,
+			  "updated": 1475154686
+			}
 		}
 	}
 }
@@ -2204,7 +4613,7 @@ Method description
 
 <a name="updateOrder"/>
 ## Stripe.updateOrder
-Method description
+Updates the specific order by setting the values of the parameters passed. Any parameters not provided will be left unchanged. This request accepts only the metadata, and status as arguments.
 
 | Field   | Type       | Description
 |---------|------------|----------
@@ -2218,11 +4627,8 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"orderId": "...",
-	"coupon": "...",
+	"orderId": "or_18tVaP2eZvKYlo2CP5mgybEM",
 	"metadata": "...",
-	"shipping": "...",
-	"status": "..."
 }
 ```
 #### Response example
@@ -2231,7 +4637,126 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "or_18tVaP2eZvKYlo2CP5mgybEM",
+			  "object": "order",
+			  "amount": 3084,
+			  "amount_returned": 3084,
+			  "application": null,
+			  "application_fee": null,
+			  "charge": "ch_18z3WS2eZvKYlo2ChBcCbkN5",
+			  "created": 1473829529,
+			  "currency": "usd",
+			  "customer": null,
+			  "email": "jenny@example.com",
+			  "items": [
+			    {
+			      "object": "order_item",
+			      "amount": 3084,
+			      "currency": "usd",
+			      "description": "T-shirt",
+			      "parent": "sku_98dMiVopxu0m3r",
+			      "quantity": 2,
+			      "type": "sku"
+			    },
+			    {
+			      "object": "order_item",
+			      "amount": 0,
+			      "currency": "usd",
+			      "description": "Taxes (included)",
+			      "parent": null,
+			      "quantity": null,
+			      "type": "tax"
+			    },
+			    {
+			      "object": "order_item",
+			      "amount": 0,
+			      "currency": "usd",
+			      "description": "Free shipping",
+			      "parent": "ship_free-shipping",
+			      "quantity": null,
+			      "type": "shipping"
+			    }
+			  ],
+			  "livemode": false,
+			  "metadata": {
+			    "order_id": "6735"
+			  },
+			  "returns": {
+			    "object": "list",
+			    "data": [
+			      {
+			        "id": "orret_18z4Ju2eZvKYlo2CqDgoOMW5",
+			        "object": "order_return",
+			        "amount": 3084,
+			        "created": 1475154686,
+			        "currency": "usd",
+			        "items": [
+			          {
+			            "object": "order_item",
+			            "amount": 3084,
+			            "currency": "usd",
+			            "description": "T-shirt",
+			            "parent": "sku_98dMiVopxu0m3r",
+			            "quantity": 2,
+			            "type": "sku"
+			          },
+			          {
+			            "object": "order_item",
+			            "amount": 0,
+			            "currency": "usd",
+			            "description": "Taxes (included)",
+			            "parent": null,
+			            "quantity": null,
+			            "type": "tax"
+			          },
+			          {
+			            "object": "order_item",
+			            "amount": 0,
+			            "currency": "usd",
+			            "description": "Free shipping",
+			            "parent": "ship_free-shipping",
+			            "quantity": null,
+			            "type": "shipping"
+			          }
+			        ],
+			        "livemode": false,
+			        "order": "or_18tVaP2eZvKYlo2CP5mgybEM",
+			        "refund": "re_18z4Ju2eZvKYlo2CGOBWgZtx"
+			      }
+			    ],
+			    "has_more": false,
+			    "total_count": 1,
+			    "url": "/v1/order_returns?order=or_18tVaP2eZvKYlo2CP5mgybEM"
+			  },
+			  "selected_shipping_method": "ship_free-shipping",
+			  "shipping": {
+			    "address": {
+			      "city": "Anytown",
+			      "country": "US",
+			      "line1": "1234 Main Street",
+			      "line2": null,
+			      "postal_code": "123456",
+			      "state": null
+			    },
+			    "carrier": null,
+			    "name": "Jenny Rosen",
+			    "phone": null,
+			    "tracking_number": null
+			  },
+			  "shipping_methods": [
+			    {
+			      "id": "ship_free-shipping",
+			      "amount": 0,
+			      "currency": "usd",
+			      "delivery_estimate": null,
+			      "description": "Free shipping"
+			    }
+			  ],
+			  "status": "canceled",
+			  "status_transitions": null,
+			  "updated": 1475154686
+			}
 		}
 	}
 }
@@ -2239,7 +4764,7 @@ Method description
 
 <a name="payOrder"/>
 ## Stripe.payOrder
-Method description
+Pay an order by providing a source to create a payment.
 
 | Field   | Type       | Description
 |---------|------------|----------
@@ -2253,11 +4778,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"orderId": "...",
-	"customer": "...",
-	"source": "...",
-	"metadata": "...",
-	"email": "..."
+	"orderId": "tok_189fTS2eZvKYlo2CcYJIOGkr",
 }
 ```
 #### Response example
@@ -2266,7 +4787,125 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "id": "or_18tVaP2eZvKYlo2CP5mgybEM",
+			  "object": "order",
+			  "amount": 3084,
+			  "amount_returned": 3084,
+			  "application": null,
+			  "application_fee": null,
+			  "charge": "ch_18zRBY2eZvKYlo2C2g0wvnvx",
+			  "created": 1473829529,
+			  "currency": "usd",
+			  "customer": null,
+			  "email": "jenny@example.com",
+			  "items": [
+			    {
+			      "object": "order_item",
+			      "amount": 3084,
+			      "currency": "usd",
+			      "description": "T-shirt",
+			      "parent": "sku_98dMiVopxu0m3r",
+			      "quantity": 2,
+			      "type": "sku"
+			    },
+			    {
+			      "object": "order_item",
+			      "amount": 0,
+			      "currency": "usd",
+			      "description": "Taxes (included)",
+			      "parent": null,
+			      "quantity": null,
+			      "type": "tax"
+			    },
+			    {
+			      "object": "order_item",
+			      "amount": 0,
+			      "currency": "usd",
+			      "description": "Free shipping",
+			      "parent": "ship_free-shipping",
+			      "quantity": null,
+			      "type": "shipping"
+			    }
+			  ],
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "returns": {
+			    "object": "list",
+			    "data": [
+			      {
+			        "id": "orret_18z4Ju2eZvKYlo2CqDgoOMW5",
+			        "object": "order_return",
+			        "amount": 3084,
+			        "created": 1475154686,
+			        "currency": "usd",
+			        "items": [
+			          {
+			            "object": "order_item",
+			            "amount": 3084,
+			            "currency": "usd",
+			            "description": "T-shirt",
+			            "parent": "sku_98dMiVopxu0m3r",
+			            "quantity": 2,
+			            "type": "sku"
+			          },
+			          {
+			            "object": "order_item",
+			            "amount": 0,
+			            "currency": "usd",
+			            "description": "Taxes (included)",
+			            "parent": null,
+			            "quantity": null,
+			            "type": "tax"
+			          },
+			          {
+			            "object": "order_item",
+			            "amount": 0,
+			            "currency": "usd",
+			            "description": "Free shipping",
+			            "parent": "ship_free-shipping",
+			            "quantity": null,
+			            "type": "shipping"
+			          }
+			        ],
+			        "livemode": false,
+			        "order": "or_18tVaP2eZvKYlo2CP5mgybEM",
+			        "refund": "re_18z4Ju2eZvKYlo2CGOBWgZtx"
+			      }
+			    ],
+			    "has_more": false,
+			    "total_count": 1,
+			    "url": "/v1/order_returns?order=or_18tVaP2eZvKYlo2CP5mgybEM"
+			  },
+			  "selected_shipping_method": "ship_free-shipping",
+			  "shipping": {
+			    "address": {
+			      "city": "Anytown",
+			      "country": "US",
+			      "line1": "1234 Main Street",
+			      "line2": null,
+			      "postal_code": "123456",
+			      "state": null
+			    },
+			    "carrier": null,
+			    "name": "Jenny Rosen",
+			    "phone": null,
+			    "tracking_number": null
+			  },
+			  "shipping_methods": [
+			    {
+			      "id": "ship_free-shipping",
+			      "amount": 0,
+			      "currency": "usd",
+			      "delivery_estimate": null,
+			      "description": "Free shipping"
+			    }
+			  ],
+			  "status": "paid",
+			  "status_transitions": null,
+			  "updated": 1475154686
+			}
 		}
 	}
 }
@@ -2274,7 +4913,7 @@ Method description
 
 <a name="getOrderList"/>
 ## Stripe.getOrderList
-Method description
+Returns a list of your orders. The orders are returned sorted by creation date, with the most recently created orders appearing first.
 
 | Field            | Type       | Description
 |------------------|------------|----------
@@ -2289,12 +4928,6 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"created": "...",
-	"customer": "...",
-	"ids": "...",
-	"status": "...",
-	"statusTransitions": "...",
-	"upstreamIds": "..."
 }
 ```
 #### Response example
@@ -2303,7 +4936,134 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "object": "list",
+			  "url": "/v1/orders",
+			  "has_more": false,
+			  "data": [
+			    {
+			      "id": "or_18tVaP2eZvKYlo2CP5mgybEM",
+			      "object": "order",
+			      "amount": 3084,
+			      "amount_returned": 3084,
+			      "application": null,
+			      "application_fee": null,
+			      "charge": "ch_18z3WS2eZvKYlo2ChBcCbkN5",
+			      "created": 1473829529,
+			      "currency": "usd",
+			      "customer": null,
+			      "email": "jenny@example.com",
+			      "items": [
+			        {
+			          "object": "order_item",
+			          "amount": 3084,
+			          "currency": "usd",
+			          "description": "T-shirt",
+			          "parent": "sku_98dMiVopxu0m3r",
+			          "quantity": 2,
+			          "type": "sku"
+			        },
+			        {
+			          "object": "order_item",
+			          "amount": 0,
+			          "currency": "usd",
+			          "description": "Taxes (included)",
+			          "parent": null,
+			          "quantity": null,
+			          "type": "tax"
+			        },
+			        {
+			          "object": "order_item",
+			          "amount": 0,
+			          "currency": "usd",
+			          "description": "Free shipping",
+			          "parent": "ship_free-shipping",
+			          "quantity": null,
+			          "type": "shipping"
+			        }
+			      ],
+			      "livemode": false,
+			      "metadata": {
+			      },
+			      "returns": {
+			        "object": "list",
+			        "data": [
+			          {
+			            "id": "orret_18z4Ju2eZvKYlo2CqDgoOMW5",
+			            "object": "order_return",
+			            "amount": 3084,
+			            "created": 1475154686,
+			            "currency": "usd",
+			            "items": [
+			              {
+			                "object": "order_item",
+			                "amount": 3084,
+			                "currency": "usd",
+			                "description": "T-shirt",
+			                "parent": "sku_98dMiVopxu0m3r",
+			                "quantity": 2,
+			                "type": "sku"
+			              },
+			              {
+			                "object": "order_item",
+			                "amount": 0,
+			                "currency": "usd",
+			                "description": "Taxes (included)",
+			                "parent": null,
+			                "quantity": null,
+			                "type": "tax"
+			              },
+			              {
+			                "object": "order_item",
+			                "amount": 0,
+			                "currency": "usd",
+			                "description": "Free shipping",
+			                "parent": "ship_free-shipping",
+			                "quantity": null,
+			                "type": "shipping"
+			              }
+			            ],
+			            "livemode": false,
+			            "order": "or_18tVaP2eZvKYlo2CP5mgybEM",
+			            "refund": "re_18z4Ju2eZvKYlo2CGOBWgZtx"
+			          }
+			        ],
+			        "has_more": false,
+			        "total_count": 1,
+			        "url": "/v1/order_returns?order=or_18tVaP2eZvKYlo2CP5mgybEM"
+			      },
+			      "selected_shipping_method": "ship_free-shipping",
+			      "shipping": {
+			        "address": {
+			          "city": "Anytown",
+			          "country": "US",
+			          "line1": "1234 Main Street",
+			          "line2": null,
+			          "postal_code": "123456",
+			          "state": null
+			        },
+			        "carrier": null,
+			        "name": "Jenny Rosen",
+			        "phone": null,
+			        "tracking_number": null
+			      },
+			      "shipping_methods": [
+			        {
+			          "id": "ship_free-shipping",
+			          "amount": 0,
+			          "currency": "usd",
+			          "delivery_estimate": null,
+			          "description": "Free shipping"
+			        }
+			      ],
+			      "status": "canceled",
+			      "status_transitions": null,
+			      "updated": 1475154686
+			    },
+			    {...},
+			    {...}
+			  ]
+			}
 		}
 	}
 }
@@ -2311,7 +5071,7 @@ Method description
 
 <a name="returnOrder"/>
 ## Stripe.returnOrder
-Method description
+Return all or part of an order. The order must have a status of paid or fulfilled before it can be returned. Once all items have been returned, the order will become canceled or returned depending on which status the order started in.
 
 | Field  | Type       | Description
 |--------|------------|----------
@@ -2323,7 +5083,7 @@ Method description
 ```json
 {	"apiKey": "...",
 	"orderId": "...",
-	"items": "..."
+	"items": [{"type": "sku", "parent": "sku_9BtKAR1ZXD42en"}]
 }
 ```
 #### Response example
@@ -2332,7 +5092,45 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "orret_18z4Ju2eZvKYlo2CqDgoOMW5",
+			  "object": "order_return",
+			  "amount": 3084,
+			  "created": 1475154686,
+			  "currency": "usd",
+			  "items": [
+			    {
+			      "object": "order_item",
+			      "amount": 3084,
+			      "currency": "usd",
+			      "description": "T-shirt",
+			      "parent": "sku_98dMiVopxu0m3r",
+			      "quantity": 2,
+			      "type": "sku"
+			    },
+			    {
+			      "object": "order_item",
+			      "amount": 0,
+			      "currency": "usd",
+			      "description": "Taxes (included)",
+			      "parent": null,
+			      "quantity": null,
+			      "type": "tax"
+			    },
+			    {
+			      "object": "order_item",
+			      "amount": 0,
+			      "currency": "usd",
+			      "description": "Free shipping",
+			      "parent": "ship_free-shipping",
+			      "quantity": null,
+			      "type": "shipping"
+			    }
+			  ],
+			  "livemode": false,
+			  "order": "or_18tVaP2eZvKYlo2CP5mgybEM",
+			  "refund": "re_18z4Ju2eZvKYlo2CGOBWgZtx"
+			}
 		}
 	}
 }
@@ -2340,7 +5138,7 @@ Method description
 
 <a name="getOrderReturn"/>
 ## Stripe.getOrderReturn
-Method description
+Returns a list of your order returns. The returns are returned sorted by creation date, with the most recently created return appearing first.
 
 | Field  | Type       | Description
 |--------|------------|----------
@@ -2350,7 +5148,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"orderId": "..."
+	"orderId": "orret_18z4Ju2eZvKYlo2CqDgoOMW5"
 }
 ```
 #### Response example
@@ -2367,19 +5165,16 @@ Method description
 
 <a name="getOrderReturnList"/>
 ## Stripe.getOrderReturnList
-Method description
+Returns a list of your order returns. The returns are returned sorted by creation date, with the most recently created return appearing first.
 
 | Field  | Type       | Description
 |--------|------------|----------
 | apiKey | credentials| The api key obtained from Stripe.
 | created| String     | A filter on the list based on the object created field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with the following options:
-| order  | String     | The order to retrieve returns for.
 
 #### Request example
 ```json
 {	"apiKey": "...",
-	"created": "...",
-	"order": "..."
 }
 ```
 #### Response example
@@ -2388,7 +5183,40 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "object": "list",
+			  "url": "/v1/order_returns",
+			  "has_more": false,
+			  "data": [
+			    {
+			      "id": "orret_18z4Ju2eZvKYlo2CqDgoOMW5",
+			      "object": "sku",
+			      "active": true,
+			      "attributes": {
+			        "color": "Cyan",
+			        "gender": "Unisex",
+			        "size": "Medium"
+			      },
+			      "created": 1473829395,
+			      "currency": "usd",
+			      "image": null,
+			      "inventory": {
+			        "quantity": 500,
+			        "type": "finite",
+			        "value": null
+			      },
+			      "livemode": false,
+			      "metadata": {
+			      },
+			      "package_dimensions": null,
+			      "price": 1500,
+			      "product": "prod_9I00GcePCVmLik",
+			      "updated": 1473829395
+			    },
+			    {...},
+			    {...}
+			  ]
+			}
 		}
 	}
 }
@@ -2396,7 +5224,7 @@ Method description
 
 <a name="createProduct"/>
 ## Stripe.createProduct
-Method description
+Creates a new product object.
 
 | Field            | Type       | Description
 |------------------|------------|----------
@@ -2416,12 +5244,11 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"name": "...",
-	"active": "...",
-	"attributes": "...",
+	"name": "T-shirt",
+	"attributes": ["size", "gender"],
 	"caption": "...",
 	"deactivateOn": "...",
-	"description": "...",
+	"description": "Comfortable cotton t-shirt",
 	"images": "...",
 	"metadata": "...",
 	"packageDimensions": "...",
@@ -2435,7 +5262,32 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "id": "prod_9I00GcePCVmLik",
+			  "object": "product",
+			  "active": true,
+			  "attributes": [],
+			  "caption": null,
+			  "created": 1475238070,
+			  "deactivate_on": [],
+			  "description": "Test",
+			  "images": [],
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "name": "test",
+			  "package_dimensions": null,
+			  "shippable": true,
+			  "skus": {
+			    "object": "list",
+			    "data": [],
+			    "has_more": false,
+			    "total_count": 0,
+			    "url": "/v1/skus?product=prod_9I00GcePCVmLik\u0026active=true"
+			  },
+			  "updated": 1475238070,
+			  "url": null
+			}
 		}
 	}
 }
@@ -2453,7 +5305,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"productId": "..."
+	"productId": "prod_9I00GcePCVmLik"
 }
 ```
 #### Response example
@@ -2462,7 +5314,32 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "prod_9I00GcePCVmLik",
+			  "object": "product",
+			  "active": true,
+			  "attributes": [],
+			  "caption": null,
+			  "created": 1475238070,
+			  "deactivate_on": [ ],
+			  "description": "Test",
+			  "images": [],
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "name": "test",
+			  "package_dimensions": null,
+			  "shippable": true,
+			  "skus": {
+			    "object": "list",
+			    "data": [],
+			    "has_more": false,
+			    "total_count": 0,
+			    "url": "/v1/skus?product=prod_9I00GcePCVmLik\u0026active=true"
+			  },
+			  "updated": 1475238070,
+			  "url": null
+			}
 		}
 	}
 }
@@ -2491,18 +5368,8 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"productId": "...",
-	"name": "...",
-	"active": "...",
-	"attributes": "...",
-	"caption": "...",
-	"deactivateOn": "...",
-	"description": "...",
-	"images": "...",
-	"metadata": "...",
-	"packageDimensions": "...",
-	"shippable": "...",
-	"url": "..."
+	"productId": "pr_18zQ0o2eZvKYlo2CxWcZi2sj",
+	"name": "Test",
 }
 ```
 #### Response example
@@ -2511,15 +5378,39 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "prod_9I00GcePCVmLik",
+			  "object": "product",
+			  "active": true,
+			  "attributes": [],
+			  "caption": null,
+			  "created": 1475238070,
+			  "deactivate_on": [ ],
+			  "description": "Test",
+			  "images": [],
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "name": "test",
+			  "package_dimensions": null,
+			  "shippable": true,
+			  "skus": {
+			    "object": "list",
+			    "data": [],
+			    "has_more": false,
+			    "total_count": 0,
+			    "url": "/v1/skus?product=prod_9I00GcePCVmLik\u0026active=true"
+			  },
+			  "updated": 1475238070,
+			  "url": null
+			}
 		}
 	}
 }
-```
 
 <a name="getProductList"/>
 ## Stripe.getProductList
-Method description
+Returns a list of your products. The products are returned sorted by creation date, with the most recently created products appearing first.
 
 | Field    | Type       | Description
 |----------|------------|----------
@@ -2531,9 +5422,6 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"ids": "...",
-	"shippable": "...",
-	"url": "..."
 }
 ```
 #### Response example
@@ -2542,7 +5430,41 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "object": "list",
+			  "url": "/v1/products",
+			  "has_more": false,
+			  "data": [
+			    {
+			      "id": "prod_9I00GcePCVmLik",
+			      "object": "product",
+			      "active": true,
+			      "attributes": [],
+			      "caption": null,
+			      "created": 1475238070,
+			      "deactivate_on": [],
+			      "description": "Test",
+			      "images": [ ],
+			      "livemode": false,
+			      "metadata": {
+			      },
+			      "name": "test",
+			      "package_dimensions": null,
+			      "shippable": true,
+			      "skus": {
+			        "object": "list",
+			        "data": [],
+			        "has_more": false,
+			        "total_count": 0,
+			        "url": "/v1/skus?product=prod_9I00GcePCVmLik\u0026active=true"
+			      },
+			      "updated": 1475238070,
+			      "url": null
+			    },
+			    {...},
+			    {...}
+			  ]
+			}
 		}
 	}
 }
@@ -2560,7 +5482,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"productId": "..."
+	"productId": "prod_9I00GcePCVmLik"
 }
 ```
 #### Response example
@@ -2569,7 +5491,10 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "deleted": true,
+			  "id": "pr_18zQ0o2eZvKYlo2CxWcZi2sj"
+			}
 		}
 	}
 }
@@ -2595,15 +5520,11 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"currency": "...",
-	"inventory": "...",
-	"price": 0,
-	"product": "...",
-	"active": "...",
-	"attributes": "...",
-	"image": "...",
-	"metadata": "...",
-	"packageDimensions": "..."
+	"currency": "usd",
+	"inventory": {"type": "finite", "quantity": 500},
+	"price": 1500,
+	"product": "pr_18zQ0o2eZvKYlo2CxWcZi2sj",
+	"attributes": {"size": "Medium", "gender": "Unisex"},
 }
 ```
 #### Response example
@@ -2612,7 +5533,31 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "sku_9BtKAR1ZXD42en",
+			  "object": "sku",
+			  "active": true,
+			  "attributes": {
+			    "color": "Cyan",
+			    "gender": "Unisex",
+			    "size": "Medium"
+			  },
+			  "created": 1473829395,
+			  "currency": "usd",
+			  "image": null,
+			  "inventory": {
+			    "quantity": 500,
+			    "type": "finite",
+			    "value": null
+			  },
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "package_dimensions": null,
+			  "price": 1500,
+			  "product": "prod_9I00GcePCVmLik",
+			  "updated": 1473829395
+			}
 		}
 	}
 }
@@ -2630,7 +5575,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"skuId": "..."
+	"skuId": "sku_9BtKAR1ZXD42en"
 }
 ```
 #### Response example
@@ -2639,7 +5584,31 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "sku_9BtKAR1ZXD42en",
+			  "object": "sku",
+			  "active": true,
+			  "attributes": {
+			    "color": "Cyan",
+			    "gender": "Unisex",
+			    "size": "Medium"
+			  },
+			  "created": 1473829395,
+			  "currency": "usd",
+			  "image": null,
+			  "inventory": {
+			    "quantity": 500,
+			    "type": "finite",
+			    "value": null
+			  },
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "package_dimensions": null,
+			  "price": 1500,
+			  "product": "prod_9I00GcePCVmLik",
+			  "updated": 1473829395
+			}
 		}
 	}
 }
@@ -2666,16 +5635,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"skuId": "...",
-	"currency": "...",
-	"inventory": "...",
-	"price": "...",
-	"product": "...",
-	"active": "...",
-	"attributes": "...",
-	"image": "...",
-	"metadata": "...",
-	"packageDimensions": "..."
+	"skuId": "sk_18tVYF2eZvKYlo2CbiWi3yjT",
 }
 ```
 #### Response example
@@ -2684,7 +5644,32 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "id": "sku_9BtKAR1ZXD42en",
+			  "object": "sku",
+			  "active": true,
+			  "attributes": {
+			    "color": "Cyan",
+			    "gender": "Unisex",
+			    "size": "Medium"
+			  },
+			  "created": 1473829395,
+			  "currency": "usd",
+			  "image": null,
+			  "inventory": {
+			    "quantity": 500,
+			    "type": "finite",
+			    "value": null
+			  },
+			  "livemode": false,
+			  "metadata": {
+			    "order_id": "6735"
+			  },
+			  "package_dimensions": null,
+			  "price": 1500,
+			  "product": "prod_9I00GcePCVmLik",
+			  "updated": 1473829395
+			}
 		}
 	}
 }
@@ -2692,7 +5677,7 @@ Method description
 
 <a name="getSKUList"/>
 ## Stripe.getSKUList
-Method description
+Returns a list of your SKUs. The SKUs are returned sorted by creation date, with the most recently created SKUs appearing first.
 
 | Field     | Type       | Description
 |-----------|------------|----------
@@ -2704,9 +5689,6 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"attributes": "...",
-	"ids": "...",
-	"productId": "..."
 }
 ```
 #### Response example
@@ -2715,7 +5697,40 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "object": "list",
+			  "url": "/v1/skus",
+			  "has_more": false,
+			  "data": [
+			    {
+			      "id": "sk_18tVYF2eZvKYlo2CbiWi3yjT",
+			      "object": "sku",
+			      "active": true,
+			      "attributes": {
+			        "color": "Cyan",
+			        "gender": "Unisex",
+			        "size": "Medium"
+			      },
+			      "created": 1473829395,
+			      "currency": "usd",
+			      "image": null,
+			      "inventory": {
+			        "quantity": 500,
+			        "type": "finite",
+			        "value": null
+			      },
+			      "livemode": false,
+			      "metadata": {
+			      },
+			      "package_dimensions": null,
+			      "price": 1500,
+			      "product": "prod_9I00GcePCVmLik",
+			      "updated": 1473829395
+			    },
+			    {...},
+			    {...}
+			  ]
+			}
 		}
 	}
 }
@@ -2733,7 +5748,7 @@ Method description
 #### Request example
 ```json
 {	"apiKey": "...",
-	"skuId": "..."
+	"skuId": "sku_9BtKAR1ZXD42en"
 }
 ```
 #### Response example
@@ -2742,7 +5757,10 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to":{
+			  "deleted": true,
+			  "id": "sku_9BtKAR1ZXD42en"
+			}
 		}
 	}
 }
@@ -2771,7 +5789,7 @@ Method description
 	"couponId": "...",
 	"duration": "...",
 	"amountOff": "...",
-	"currency": "...",
+	"currency": "usd",
 	"durationInMonths": "...",
 	"maxRedemptions": "...",
 	"metadata": "...",
@@ -3206,7 +6224,7 @@ Method description
 ```json
 {	"apiKey": "...",
 	"amount": 0,
-	"currency": "...",
+	"currency": "usd",
 	"customer": "...",
 	"description": "...",
 	"discountable": "...",
@@ -3365,7 +6383,7 @@ Method description
 {	"apiKey": "...",
 	"planId": "...",
 	"amount": "...",
-	"currency": "...",
+	"currency": "usd",
 	"interval": "...",
 	"name": "...",
 	"intervalCount": "...",
