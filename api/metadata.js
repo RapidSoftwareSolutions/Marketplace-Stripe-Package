@@ -3852,11 +3852,6 @@ module.exports.do = function(req, res){
                     name: "apiKey",
                     type: "credentials",
                     info: "The api key obtained from Stripe.",
-                },
-                {
-                    name: "planId",
-                    type: "String",
-                    info: "The identifier of the plan to be deleted."
                 }
             ],
             'callbacks':[

@@ -1,11 +1,13 @@
 # Stripe Package
 This blocks allows you to translates a sting of text from one language to another
 * Domain: stripe.com
-* Credentials: secretKey, pubKey
+* Credentials: apiKey.
 
 ## How to get credentials: 
-0. Item one 
-1. Item two
+0. Sign in [stripe dashboard](https://dashboard.stripe.com/dashboard). 
+1. Go to [your account settings](https://dashboard.stripe.com/account).
+2. Choose [*API Keys* folder](https://dashboard.stripe.com/account/apikeys).
+3. Copy and save your *Secret Key*.
 
 ## TOC: 
 * [getAccountBalance](#getAccountBalance)
@@ -130,7 +132,8 @@ Retrieves the current account balance, based on the authentication that was used
 
 #### Request example
 ```json
-{	"apiKey": "..."
+{	
+	"apiKey": "..."
 }
 ```
 #### Response example
@@ -212,7 +215,8 @@ Returns a list of transactions that have contributed to the Stripe account balan
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"currency": "usd",
 	"startingAfter": "...",
 	"limit": 3,
@@ -287,7 +291,8 @@ To charge a credit card, you create a charge object. If your API key is in test 
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"amount": 2000,
 	"currency": "usd",
 	"source": "tok_189fTS2eZvKYlo2CcYJIOGkr",
@@ -390,7 +395,8 @@ Creates a new customer object.
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"source": "tok_189fTS2eZvKYlo2CcYJIOGkr",
 	"description": "Customer for andrew.martinez@example.com",
 }
@@ -475,7 +481,8 @@ Retrieves the balance transaction with the given ID.
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"id": "txn_18tiU12eZvKYlo2CetxoRTDG"
 }
 ```
@@ -533,7 +540,8 @@ Retrieves the details of a charge that has previously been created. Supply the u
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"chargeId": "ch_18zQ402eZvKYlo2CvQYLBOJ4"
 }
 ```
@@ -629,7 +637,8 @@ This request accepts only the `description`, `metadata`, `receipt_email`, `fraud
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"description": "Charge for andrew.martinez@example.com",
 }
 ```
@@ -724,7 +733,8 @@ Uncaptured payments expire exactly seven days after they are created. If they ar
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"chargeId": "sk_test_BQokikJOvBiI2HlWgH4olfQ2",
 }
 ```
@@ -830,7 +840,79 @@ Returns a list of charges you’ve previously created. The charges are returned 
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "object": "list",
+			  "url": "/v1/charges",
+			  "has_more": false,
+			  "data": [
+			    {
+			      "id": "ch_1904tu2eZvKYlo2C6CJe9Ina",
+			      "object": "charge",
+			      "amount": 999,
+			      "amount_refunded": 0,
+			      "application_fee": null,
+			      "balance_transaction": "txn_18tiU12eZvKYlo2CetxoRTDG",
+			      "captured": true,
+			      "created": 1475395246,
+			      "currency": "usd",
+			      "customer": "cus_97QRFcUnI0a31P",
+			      "description": null,
+			      "destination": null,
+			      "dispute": null,
+			      "failure_code": null,
+			      "failure_message": null,
+			      "fraud_details": {
+			      },
+			      "invoice": "in_1903xi2eZvKYlo2CpcZ4ix6n",
+			      "livemode": false,
+			      "metadata": {
+			      },
+			      "order": null,
+			      "paid": true,
+			      "receipt_email": null,
+			      "receipt_number": null,
+			      "refunded": false,
+			      "refunds": {
+			        "object": "list",
+			        "data": [ ],
+			        "has_more": false,
+			        "total_count": 0,
+			        "url": "/v1/charges/ch_1904tu2eZvKYlo2C6CJe9Ina/refunds"
+			      },
+			      "shipping": null,
+			      "source": {
+			        "id": "card_18pBYv2eZvKYlo2CbcTNGZN4",
+			        "object": "card",
+			        "address_city": null,
+			        "address_country": null,
+			        "address_line1": null,
+			        "address_line1_check": null,
+			        "address_line2": null,
+			        "address_state": null,
+			        "address_zip": null,
+			        "address_zip_check": null,
+			        "brand": "Visa",
+			        "country": "US",
+			        "customer": "cus_97QRFcUnI0a31P",
+			        "cvc_check": null,
+			        "dynamic_last4": null,
+			        "exp_month": 12,
+			        "exp_year": 2017,
+			        "funding": "credit",
+			        "last4": "4242",
+			        "metadata": {
+			        },
+			        "name": null,
+			        "tokenization_method": null
+			      },
+			      "source_transfer": null,
+			      "statement_descriptor": null,
+			      "status": "succeeded"
+			    },
+			    {...},
+			    {...}
+			  ]
+			}
 		}
 	}
 }
@@ -941,7 +1023,8 @@ This request accepts mostly the same arguments as the customer creation call.
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"customerId": "cus_9I04eaA61hXf5W",
 	"description": "Test",
 }
@@ -1016,8 +1099,6 @@ This request accepts mostly the same arguments as the customer creation call.
 <a name="getBalanceTransaction"/>
 Retrieves the balance transaction with the given ID.
 
-Method description
-
 | Field | Type       | Description
 |-------|------------|----------
 | apiKey| credentials| The api key obtained from Stripe.
@@ -1025,7 +1106,8 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"id": "txn_18tiU12eZvKYlo2CetxoRTDG"
 }
 ```
@@ -1081,7 +1163,8 @@ Permanently deletes a customer. It cannot be undone. Also immediately cancels an
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"customerId": "cus_9I04eaA61hXf5W"
 }
 ```
@@ -1102,7 +1185,7 @@ Permanently deletes a customer. It cannot be undone. Also immediately cancels an
 
 <a name="getCustomerList"/>
 ## Stripe.getCustomerList
-Method description
+Returns a list of your customers. The customers are returned sorted by creation date, with the most recent customers appearing first.
 
 | Field | Type       | Description
 |-------|------------|----------
@@ -1192,7 +1275,7 @@ Method description
 
 <a name="getDispute"/>
 ## Stripe.getDispute
-Method description
+Retrieves the dispute with the given ID.
 
 | Field    | Type       | Description
 |----------|------------|----------
@@ -1201,7 +1284,8 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"disputeId": "dp_17Vv962eZvKYlo2CU7XhGGzB"
 }
 ```
@@ -1310,7 +1394,8 @@ When you get a dispute, contacting your customer is always the best first step. 
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"disputeId": "dp_17Vv962eZvKYlo2CU7XhGGzB",
 	"evidence": "{
       \"customer_name\": "Sophia Moore",
@@ -1414,7 +1499,8 @@ When you get a dispute, contacting your customer is always the best first step. 
 
 <a name="closeDispute"/>
 ## Stripe.closeDispute
-Method description
+Closing the dispute for a charge indicates that you do not have any evidence to submit and are essentially ‘dismissing’ the dispute, acknowledging it as lost
+The status of the dispute will change from needs_response to lost. Closing a dispute is irreversible.
 
 | Field    | Type       | Description
 |----------|------------|----------
@@ -1423,7 +1509,8 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"disputeId": "dp_17Vv962eZvKYlo2CU7XhGGzB"
 }
 ```
@@ -1521,7 +1608,7 @@ Method description
 
 <a name="getDisputes"/>
 ## Stripe.getDisputes
-Method description
+Returns a list of your disputes.
 
 | Field | Type       | Description
 |-------|------------|----------
@@ -1635,7 +1722,7 @@ Method description
 
 <a name="getEvent"/>
 ## Stripe.getEvent
-Method description
+Retrieves the details of an event. Supply the unique identifier of the event, which you might have received in a webhook.
 
 | Field  | Type       | Description
 |--------|------------|----------
@@ -1644,7 +1731,8 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"eventId": "evt_18zQ4e2eZvKYlo2Cd9eGkwal"
 }
 ```
@@ -1699,7 +1787,7 @@ Method description
 
 <a name="getEventList"/>
 ## Stripe.getEventList
-Method description
+List events, going back up to 30 days.
 
 | Field | Type       | Description
 |-------|------------|----------
@@ -1772,7 +1860,7 @@ Method description
 
 <a name="createFileUpload"/>
 ## Stripe.createFileUpload
-Method description
+To upload a file to Stripe, you’ll need to send a request of type multipart/form-data. The request should contain the file you would like to upload, as well as the parameters for creating a file.
 
 | Field  | Type       | Description
 |--------|------------|----------
@@ -1782,7 +1870,8 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"file": "...",
 	"purpose": "..."
 }
@@ -1825,7 +1914,8 @@ Once entirely refunded, a charge can't be refunded again. This method will throw
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"chargeId": "ch_18zQ402eZvKYlo2CvQYLBOJ4",
 }
 ```
@@ -1865,7 +1955,8 @@ Retrieves the details of an existing refund.
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"refundId": "re_18zP2v2eZvKYlo2Ct9PUKMPw"
 }
 ```
@@ -1907,7 +1998,8 @@ This request only accepts metadata as an argument.
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"refundId": "re_18zP2v2eZvKYlo2Ct9PUKMPw",
 	"metadata": "..."
 }
@@ -1999,7 +2091,8 @@ Creates a single use token that wraps the details of a credit card. This token c
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"cardNumber": "4242424242424242",
 	"cardExpirationMonth": 12,
 	"cardExpirationYear": 2017,
@@ -2066,7 +2159,8 @@ Creates a single use token that wraps the details of a bank account. This token 
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"bankAccountCountry": "US",
 	"bankAccountCurrency": "usd",
 	"bankAccountAccountHolderName": "Anthony Anderson",
@@ -2119,7 +2213,8 @@ Creates a single use token that wraps the details of personally identifiable inf
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"personalIdNumber": "000000000"
 }
 ```
@@ -2154,7 +2249,8 @@ Retrieves the token with the given ID.
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"tokenId": "tok_189fTS2eZvKYlo2CcYJIOGkr"
 }
 ```
@@ -2221,7 +2317,8 @@ If you are creating a manual transfer or a special case transfer on a Stripe acc
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"amount": 400,
 	"currency": "usd",
 	"destination": "acct_1032D82eZvKYlo2C",
@@ -2297,7 +2394,8 @@ Retrieves the details of an existing transfer. Supply the unique transfer ID fro
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"transferId": "tr_18yKar2eZvKYlo2CoN8TUvb6"
 }
 ```
@@ -2372,7 +2470,8 @@ This request accepts only the description and metadata as arguments.
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"transferId": "...",
 	"description": "...",
 	"metadata": "..."
@@ -2384,7 +2483,55 @@ This request accepts only the description and metadata as arguments.
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "tr_18yKar2eZvKYlo2CoN8TUvb6",
+			  "object": "transfer",
+			  "amount": 1,
+			  "amount_reversed": 0,
+			  "application_fee": null,
+			  "balance_transaction": "txn_18tiU12eZvKYlo2CetxoRTDG",
+			  "bank_account": {
+			    "id": "ba_18yKal2eZvKYlo2CeAIrKO9G",
+			    "object": "bank_account",
+			    "account_holder_name": null,
+			    "account_holder_type": null,
+			    "bank_name": "STRIPE TEST BANK",
+			    "country": "US",
+			    "currency": "usd",
+			    "fingerprint": "1JWtPxqbdX5Gamtc",
+			    "last4": "6789",
+			    "routing_number": "110000000",
+			    "status": "new"
+			  },
+			  "created": 1474978913,
+			  "currency": "usd",
+			  "date": 1474978913,
+			  "description": "Transfer to test@example.com",
+			  "destination": "ba_18yKal2eZvKYlo2CeAIrKO9G",
+			  "failure_code": null,
+			  "failure_message": null,
+			  "livemode": false,
+			  "metadata": {
+			    "foo": "bar"
+			  },
+			  "method": "standard",
+			  "recipient": "rp_18yKaq2eZvKYlo2CJq5scG7j",
+			  "reversals": {
+			    "object": "list",
+			    "data": [
+
+			    ],
+			    "has_more": false,
+			    "total_count": 0,
+			    "url": "/v1/transfers/tr_18yKar2eZvKYlo2CoN8TUvb6/reversals"
+			  },
+			  "reversed": false,
+			  "source_transaction": null,
+			  "source_type": "card",
+			  "statement_descriptor": null,
+			  "status": "paid",
+			  "type": "bank_account"
+			}
 		}
 	}
 }
@@ -2392,7 +2539,7 @@ This request accepts only the description and metadata as arguments.
 
 <a name="getTransferList"/>
 ## Stripe.getTransferList
-Method description
+Returns a list of existing transfers sent to third-party bank accounts or that Stripe has sent you. The transfers are returned in sorted order, with the most recently created transfers appearing first.
 
 | Field          | Type       | Description
 |----------------|------------|----------
@@ -2403,7 +2550,8 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 }
 ```
 #### Response example
@@ -2486,7 +2634,8 @@ Method By default, you can see the 10 most recent reversals stored directly on t
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"id": "trr_18wHEl2eZvKYlo2CIIzWDBVe",
 	"transferId": "tr_18yKar2eZvKYlo2CoN8TUvb6"
 }
@@ -2527,7 +2676,8 @@ Updates the specified reversal by setting the values of the parameters passed. A
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"id": "trr_18wHEl2eZvKYlo2CIIzWDBVe",
 	"transferId": "tr_18wHEj2eZvKYlo2CmoWPui9Y",
 	"metadata": { \"order_id\": \"6735\" },
@@ -2539,7 +2689,18 @@ Updates the specified reversal by setting the values of the parameters passed. A
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "trr_18wHEl2eZvKYlo2CIIzWDBVe",
+			  "object": "transfer_reversal",
+			  "amount": 5000,
+			  "balance_transaction": "txn_18tiU12eZvKYlo2CetxoRTDG",
+			  "created": 1474489355,
+			  "currency": "usd",
+			  "metadata": {
+			    "key": "value"
+			  },
+			  "transfer": "tr_18wHEj2eZvKYlo2CmoWPui9Y"
+			}
 		}
 	}
 }
@@ -2556,7 +2717,8 @@ You can see a list of the reversals belonging to a specific transfer. Note that 
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"transferId": "tr_18yKar2eZvKYlo2CoN8TUvb6"
 }
 ```
@@ -2604,7 +2766,8 @@ With Connect, you can create Stripe accounts for your users. To do this, you'll 
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"country": "US",
 	"email": "bob@example.com'",
 	"managed": "true"
@@ -2725,7 +2888,8 @@ Retrieves the details of the account.
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"accountId": "acct_1032D82eZvKYlo2C"
 }
 ```
@@ -2859,7 +3023,8 @@ You may only update accounts that you manage.
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"accountId": "acct_1032D82eZvKYlo2C",
 	"supportPhone": "555-867-5309",
 }
@@ -2977,7 +3142,8 @@ If you are looking to close your own account, use the data tab in your account s
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"accountId": "acct_1032D82eZvKYlo2C"
 }
 ```
@@ -3008,7 +3174,8 @@ Managed accounts created using test-mode keys can be rejected at any time. Manag
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"accountId": "acct_1032D82eZvKYlo2C",
 	"reason": "fraud"
 }
@@ -3117,7 +3284,8 @@ Returns a list of accounts connected to your platform via Connect. If you’re n
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"endingBefore": "...",
 	"limit": 0,
 	"startingAfter": "..."
@@ -3247,7 +3415,8 @@ Once entirely refunded, an application fee can't be refunded again. This method 
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"appId": "fee_9EkkFV1uz0mEyZ",
 }
 ```
@@ -3257,7 +3426,18 @@ Once entirely refunded, an application fee can't be refunded again. This method 
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "fr_9IgOA4JPFLwylO",
+			  "object": "fee_refund",
+			  "amount": 100,
+			  "balance_transaction": null,
+			  "created": 1475395716,
+			  "currency": "usd",
+			  "fee": "fee_9EkkFV1uz0mEyZ",
+			  "metadata": {
+			  },
+			  "refunded": true
+			}
 		}
 	}
 }
@@ -3275,7 +3455,8 @@ By default, you can see the 10 most recent refunds stored directly on the applic
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"feeId": "fee_9EkkFV1uz0mEyZ",
 	"refundId": "fr_9I0kzxDiLcgFxX"
 }
@@ -3316,7 +3497,8 @@ This request only accepts metadata as an argument.
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"feeId": "fee_9EkkFV1uz0mEyZ",
 	"refundId": "fr_9I0kzxDiLcgFxX",
 	"metadata": "{ \"order_id\": \"6735\"}"
@@ -3359,7 +3541,8 @@ You can see a list of the refunds belonging to a specific application fee. Note 
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"appId": "fee_9EkkFV1uz0mEyZ",
 }
 ```
@@ -3405,7 +3588,8 @@ Retrieves the details of an application fee that your account has collected. The
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"feeId": "fee_9EkkFV1uz0mEyZ"
 }
 ```
@@ -3538,7 +3722,8 @@ Lists all Country Spec objects available in the API.
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 }
 ```
 #### Response example
@@ -3641,7 +3826,8 @@ Returns a Country Spec for a given Country code.
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"country": "US"
 }
 ```
@@ -3741,7 +3927,8 @@ If the bank account's owner has no other external account in the bank account's 
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"accountId": "acct_1032D82eZvKYlo2C",
 	"externalAccount": "btok_9I15a1JTOQZSQf",
 }
@@ -3786,7 +3973,8 @@ By default, you can see the 10 most recent bank accounts stored on a managed acc
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"accountId": "acct_1032D82eZvKYlo2C",
 	"bankAccountId": "ba_18zR3H2eZvKYlo2CzLiGrogK"
 }
@@ -3832,7 +4020,8 @@ Updates the metadata of a bank account belonging to a managed account, and optio
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"accountId": "acct_1032D82eZvKYlo2C",
 	"bankAccountId": "ba_18zR3H2eZvKYlo2CzLiGrogK"
 	"metadata": "{\"order_id\": \"6735\"}"
@@ -3879,7 +4068,8 @@ You can delete destination bank accounts from a managed account. If a bank accou
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"accountId": "acct_1032D82eZvKYlo2C",
 	"bankAccountId": "ba_18zR3I2eZvKYlo2CsZ5WyBcI"
 }
@@ -3913,7 +4103,8 @@ You can see a list of the bank accounts belonging to a managed account. Note tha
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"accountId": "sk_test_BQokikJOvBiI2HlWgH4olfQ2",
 }
 ```
@@ -3969,7 +4160,8 @@ If the account has no default destination card, then the new card will become th
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"accountId": "acct_1032D82eZvKYlo2C",
 	"externalAccount": "tok_189fTS2eZvKYlo2CcYJIOGkr",
 }
@@ -4012,7 +4204,7 @@ If the account has no default destination card, then the new card will become th
 
 <a name="getCard"/>
 ## Stripe.getCard
-Method description
+You can always see the 10 most recent cards directly on a customer or recipient; this method lets you retrieve details about a specific card stored on the customer or recipient.
 
 | Field    | Type       | Description
 |----------|------------|----------
@@ -4022,7 +4214,8 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"accountId": "acct_1032D82eZvKYlo2C",
 	"cardId": "card_18zR2T2eZvKYlo2Cn58EZoyn"
 }
@@ -4087,7 +4280,8 @@ When you update a card, Stripe will automatically validate the card.
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"accountId": "acct_1032D82eZvKYlo2C",
 	"cardId": "card_18zR2T2eZvKYlo2Cn58EZoyn",
 	"name": "Sophia Moore"
@@ -4141,7 +4335,8 @@ If a card's default_for_currency property is true, it can only be deleted if it 
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"accountId": "acct_1032D82eZvKYlo2C",
 	"cardId": "card_18zR2T2eZvKYlo2Cn58EZoyn"
 }
@@ -4175,7 +4370,8 @@ You can see a list of the cards belonging to a managed account. Note that the 10
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"accountId": "acct_1032D82eZvKYlo2C",
 }
 ```
@@ -4240,7 +4436,8 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"amount": "...",
 	"currency": "usd",
 	"email": "...",
@@ -4272,7 +4469,8 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"receiverId": "..."
 }
 ```
@@ -4330,7 +4528,8 @@ Creates a new order object.
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"currency": "usd",
 	"email": "anthony.anderson@example.com",
 	"items": "[{\"type\": \"sku\", \"parent\": \"sku_9BtKAR1ZXD42en\"}]",
@@ -4477,7 +4676,8 @@ Retrieves the details of an existing order. Supply the unique order ID from eith
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"orderId": "or_18tVaP2eZvKYlo2CP5mgybEM"
 }
 ```
@@ -4626,7 +4826,8 @@ Updates the specific order by setting the values of the parameters passed. Any p
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"orderId": "or_18tVaP2eZvKYlo2CP5mgybEM",
 	"metadata": "...",
 }
@@ -4777,7 +4978,8 @@ Pay an order by providing a source to create a payment.
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"orderId": "tok_189fTS2eZvKYlo2CcYJIOGkr",
 }
 ```
@@ -4927,7 +5129,8 @@ Returns a list of your orders. The orders are returned sorted by creation date, 
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 }
 ```
 #### Response example
@@ -5081,7 +5284,8 @@ Return all or part of an order. The order must have a status of paid or fulfille
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"orderId": "...",
 	"items": [{"type": "sku", "parent": "sku_9BtKAR1ZXD42en"}]
 }
@@ -5147,7 +5351,8 @@ Returns a list of your order returns. The returns are returned sorted by creatio
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"orderId": "orret_18z4Ju2eZvKYlo2CqDgoOMW5"
 }
 ```
@@ -5157,7 +5362,45 @@ Returns a list of your order returns. The returns are returned sorted by creatio
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "orret_18z4Ju2eZvKYlo2CqDgoOMW5",
+			  "object": "order_return",
+			  "amount": 3084,
+			  "created": 1475154686,
+			  "currency": "usd",
+			  "items": [
+			    {
+			      "object": "order_item",
+			      "amount": 3084,
+			      "currency": "usd",
+			      "description": "T-shirt",
+			      "parent": "sku_98dMiVopxu0m3r",
+			      "quantity": 2,
+			      "type": "sku"
+			    },
+			    {
+			      "object": "order_item",
+			      "amount": 0,
+			      "currency": "usd",
+			      "description": "Taxes (included)",
+			      "parent": null,
+			      "quantity": null,
+			      "type": "tax"
+			    },
+			    {
+			      "object": "order_item",
+			      "amount": 0,
+			      "currency": "usd",
+			      "description": "Free shipping",
+			      "parent": "ship_free-shipping",
+			      "quantity": null,
+			      "type": "shipping"
+			    }
+			  ],
+			  "livemode": false,
+			  "order": "or_18tVaP2eZvKYlo2CP5mgybEM",
+			  "refund": "re_18z4Ju2eZvKYlo2CGOBWgZtx"
+			}
 		}
 	}
 }
@@ -5174,7 +5417,8 @@ Returns a list of your order returns. The returns are returned sorted by creatio
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 }
 ```
 #### Response example
@@ -5243,7 +5487,8 @@ Creates a new product object.
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"name": "T-shirt",
 	"attributes": ["size", "gender"],
 	"caption": "...",
@@ -5295,7 +5540,7 @@ Creates a new product object.
 
 <a name="getProduct"/>
 ## Stripe.getProduct
-Method description
+Store representations of products you sell in product objects, used in conjunction with SKUs. Products may be physical goods, to be shipped, or digital.
 
 | Field    | Type       | Description
 |----------|------------|----------
@@ -5304,7 +5549,8 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"productId": "prod_9I00GcePCVmLik"
 }
 ```
@@ -5347,7 +5593,8 @@ Method description
 
 <a name="updateProduct"/>
 ## Stripe.updateProduct
-Method description
+Updates the specific product by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+Note that a product's attributes are not editable. Instead, you would need to deactivate the existing product and create a new one with the new attribute values.
 
 | Field            | Type       | Description
 |------------------|------------|----------
@@ -5367,7 +5614,8 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"productId": "pr_18zQ0o2eZvKYlo2CxWcZi2sj",
 	"name": "Test",
 }
@@ -5421,7 +5669,8 @@ Returns a list of your products. The products are returned sorted by creation da
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 }
 ```
 #### Response example
@@ -5472,7 +5721,7 @@ Returns a list of your products. The products are returned sorted by creation da
 
 <a name="deleteProduct"/>
 ## Stripe.deleteProduct
-Method description
+Delete a product. Deleting a product is only possible if it has no SKUs associated with it.
 
 | Field    | Type       | Description
 |----------|------------|----------
@@ -5481,7 +5730,8 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"productId": "prod_9I00GcePCVmLik"
 }
 ```
@@ -5502,7 +5752,7 @@ Method description
 
 <a name="createSKU"/>
 ## Stripe.createSKU
-Method description
+Creates a new SKU associated with a product.
 
 | Field            | Type       | Description
 |------------------|------------|----------
@@ -5519,7 +5769,8 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"currency": "usd",
 	"inventory": {"type": "finite", "quantity": 500},
 	"price": 1500,
@@ -5565,7 +5816,7 @@ Method description
 
 <a name="getSKU"/>
 ## Stripe.getSKU
-Method description
+Retrieves the details of an existing SKU. Supply the unique SKU identifier from either a SKU creation request or from the product, and Stripe will return the corresponding SKU information.
 
 | Field | Type       | Description
 |-------|------------|----------
@@ -5574,7 +5825,8 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"skuId": "sku_9BtKAR1ZXD42en"
 }
 ```
@@ -5616,7 +5868,8 @@ Method description
 
 <a name="updateSKU"/>
 ## Stripe.updateSKU
-Method description
+Updates the specific SKU by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+Note that a SKU's attributes are not editable. Instead, you would need to deactivate the existing SKU and create a new one with the new attribute values.
 
 | Field            | Type       | Description
 |------------------|------------|----------
@@ -5634,7 +5887,8 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"skuId": "sk_18tVYF2eZvKYlo2CbiWi3yjT",
 }
 ```
@@ -5688,7 +5942,8 @@ Returns a list of your SKUs. The SKUs are returned sorted by creation date, with
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 }
 ```
 #### Response example
@@ -5738,7 +5993,7 @@ Returns a list of your SKUs. The SKUs are returned sorted by creation date, with
 
 <a name="deleteSKU"/>
 ## Stripe.deleteSKU
-Method description
+Delete a SKU. Deleting a SKU is only possible until it has been used in an order.
 
 | Field | Type       | Description
 |-------|------------|----------
@@ -5747,7 +6002,8 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"skuId": "sku_9BtKAR1ZXD42en"
 }
 ```
@@ -5768,7 +6024,8 @@ Method description
 
 <a name="createCoupon"/>
 ## Stripe.createCoupon
-Method description
+You can create coupons easily via the coupon management page of the Stripe dashboard. Coupon creation is also accessible via the API if you need to create coupons on the fly.
+A coupon has either a percent_off or an amount_off and currency. If you set an amount_off, that amount will be subtracted from any invoice’s subtotal. For example, an invoice with a subtotal of $10 will have a final total of $0 if a coupon with an amount_off of 2000 is applied to it and an invoice with a subtotal of $30 will have a final total of $10 if a coupon with an amount_off of 2000 is applied to it.
 
 | Field           | Type       | Description
 |-----------------|------------|----------
@@ -5785,16 +6042,13 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"couponId": "...",
-	"duration": "...",
-	"amountOff": "...",
+{	
+	"apiKey": "...",
+	"couponId": "plana-5000-yearly-30-off",
+	"duration": "repeating",
 	"currency": "usd",
-	"durationInMonths": "...",
-	"maxRedemptions": "...",
-	"metadata": "...",
-	"percentOff": "...",
-	"redeemBy": "..."
+	"durationInMonths": "3",
+	"percentOff": "20",
 }
 ```
 #### Response example
@@ -5803,7 +6057,23 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "plana-5000-yearly-30-off",
+			  "object": "coupon",
+			  "amount_off": 1572,
+			  "created": 1475026549,
+			  "currency": "usd",
+			  "duration": "forever",
+			  "duration_in_months": null,
+			  "livemode": false,
+			  "max_redemptions": null,
+			  "metadata": {
+			  },
+			  "percent_off": null,
+			  "redeem_by": null,
+			  "times_redeemed": 0,
+			  "valid": true
+			}
 		}
 	}
 }
@@ -5811,7 +6081,7 @@ Method description
 
 <a name="getCoupon"/>
 ## Stripe.getCoupon
-Method description
+Retrieves the coupon with the given ID.
 
 | Field   | Type       | Description
 |---------|------------|----------
@@ -5820,8 +6090,9 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"couponId": "..."
+{	
+	"apiKey": "...",
+	"couponId": "plana-5000-yearly-30-off"
 }
 ```
 #### Response example
@@ -5830,7 +6101,23 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "plana-5000-yearly-30-off",
+			  "object": "coupon",
+			  "amount_off": 1572,
+			  "created": 1475026549,
+			  "currency": "usd",
+			  "duration": "forever",
+			  "duration_in_months": null,
+			  "livemode": false,
+			  "max_redemptions": null,
+			  "metadata": {
+			  },
+			  "percent_off": null,
+			  "redeem_by": null,
+			  "times_redeemed": 0,
+			  "valid": true
+			}
 		}
 	}
 }
@@ -5838,7 +6125,7 @@ Method description
 
 <a name="updateCoupon"/>
 ## Stripe.updateCoupon
-Method description
+Updates the metadata of a coupon. Other coupon details (currency, duration, amount_off) are, by design, not editable.
 
 | Field   | Type       | Description
 |---------|------------|----------
@@ -5848,8 +6135,9 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"couponId": "...",
+{	
+	"apiKey": "...",
+	"couponId": "plana-5000-yearly-30-off",
 	"metadata": "..."
 }
 ```
@@ -5859,7 +6147,24 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "plana-5000-yearly-30-off",
+			  "object": "coupon",
+			  "amount_off": 1572,
+			  "created": 1475026549,
+			  "currency": "usd",
+			  "duration": "forever",
+			  "duration_in_months": null,
+			  "livemode": false,
+			  "max_redemptions": null,
+			  "metadata": {
+			    "order_id": "6735"
+			  },
+			  "percent_off": null,
+			  "redeem_by": null,
+			  "times_redeemed": 0,
+			  "valid": true
+			}
 		}
 	}
 }
@@ -5867,7 +6172,8 @@ Method description
 
 <a name="deleteCoupon"/>
 ## Stripe.deleteCoupon
-Method description
+You can delete coupons via the coupon management page of the Stripe dashboard. However, deleting a coupon does not affect any customers who have already applied the coupon; it means that new customers can’t redeem the coupon. You can also delete coupons via the API.
+
 
 | Field   | Type       | Description
 |---------|------------|----------
@@ -5876,8 +6182,9 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"couponId": "..."
+{	
+	"apiKey": "...",
+	"couponId": "plana-5000-yearly-30-off"
 }
 ```
 #### Response example
@@ -5886,7 +6193,10 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "deleted": true,
+			  "id": "plana-5000-yearly-30-off"
+			}
 		}
 	}
 }
@@ -5894,7 +6204,7 @@ Method description
 
 <a name="getCouponList"/>
 ## Stripe.getCouponList
-Method description
+Returns a list of your coupons.
 
 | Field | Type       | Description
 |-------|------------|----------
@@ -5902,7 +6212,8 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "..."
+{	
+	"apiKey": "..."
 }
 ```
 #### Response example
@@ -5911,7 +6222,32 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "object": "list",
+			  "url": "/v1/coupons",
+			  "has_more": false,
+			  "data": [
+			    {
+			      "id": "plana-5000-yearly-30-off",
+			      "object": "coupon",
+			      "amount_off": 1572,
+			      "created": 1475026549,
+			      "currency": "usd",
+			      "duration": "forever",
+			      "duration_in_months": null,
+			      "livemode": false,
+			      "max_redemptions": null,
+			      "metadata": {
+			      },
+			      "percent_off": null,
+			      "redeem_by": null,
+			      "times_redeemed": 0,
+			      "valid": true
+			    },
+			    {...},
+			    {...}
+			  ]
+			}
 		}
 	}
 }
@@ -5919,7 +6255,7 @@ Method description
 
 <a name="deleteCustomerDiscount"/>
 ## Stripe.deleteCustomerDiscount
-Method description
+Removes the currently applied discount on a customer.
 
 | Field     | Type       | Description
 |-----------|------------|----------
@@ -5928,8 +6264,9 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"customerId": "..."
+{	
+	"apiKey": "...",
+	"customerId": "cus_9I1yraWQEUlyFj"
 }
 ```
 #### Response example
@@ -5938,7 +6275,10 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "deleted": true,
+			  "id": "di_14Rjd02eZvKYlo2Cl8SvGHtJ"
+			}
 		}
 	}
 }
@@ -5946,7 +6286,7 @@ Method description
 
 <a name="deleteSubscriptionDiscount"/>
 ## Stripe.deleteSubscriptionDiscount
-Method description
+Removes the currently applied discount on a subscription.
 
 | Field         | Type       | Description
 |---------------|------------|----------
@@ -5955,8 +6295,9 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"subscriptionId": "..."
+{	
+	"apiKey": "...",
+	"subscriptionId": "sub_9I1lOo21wR8yCe"
 }
 ```
 #### Response example
@@ -5965,7 +6306,10 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "deleted": true,
+			  "id": "di_14Rjd02eZvKYlo2Cl8SvGHtJ"
+			}
 		}
 	}
 }
@@ -5973,7 +6317,8 @@ Method description
 
 <a name="createInvoice"/>
 ## Stripe.createInvoice
-Method description
+If you need to invoice your customer outside the regular billing cycle, you can create an invoice that pulls in all pending invoice items, including prorations. The customer’s billing cycle and regular subscription won’t be affected.
+Once you create the invoice, it’ll be picked up and paid automatically, though you can choose to pay it right away.
 
 | Field              | Type       | Description
 |--------------------|------------|----------
@@ -5988,14 +6333,9 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"customer": "...",
-	"applicationFee": "...",
-	"description": "...",
-	"metadata": "...",
-	"statementDescriptor": "...",
-	"subscription": "...",
-	"taxPercent": "..."
+{	
+	"apiKey": "...",
+	"customer": "cus_9I1yraWQEUlyFj",
 }
 ```
 #### Response example
@@ -6004,7 +6344,80 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "in_18zRtZ2eZvKYlo2Cj0FPqd80",
+			  "object": "invoice",
+			  "amount_due": 999,
+			  "application_fee": null,
+			  "attempt_count": 0,
+			  "attempted": false,
+			  "charge": null,
+			  "closed": false,
+			  "currency": "usd",
+			  "customer": "cus_9I1yraWQEUlyFj",
+			  "date": 1475245309,
+			  "description": null,
+			  "discount": null,
+			  "ending_balance": null,
+			  "forgiven": false,
+			  "lines": {
+			    "data": [
+			      {
+			        "id": "ii_18yKaN2eZvKYlo2Co22dhawI",
+			        "object": "line_item",
+			        "amount": 999,
+			        "currency": "usd",
+			        "description": "Unused time on Foo after 27 Sep 2016",
+			        "discountable": false,
+			        "livemode": false,
+			        "metadata": {
+			        },
+			        "period": {
+			          "start": 1474978883,
+			          "end": 1474978883
+			        },
+			        "plan": {
+			          "id": "16598foo1474978869",
+			          "object": "plan",
+			          "amount": 100,
+			          "created": 1474978873,
+			          "currency": "usd",
+			          "interval": "week",
+			          "interval_count": 1,
+			          "livemode": false,
+			          "metadata": {
+			          },
+			          "name": "Foo",
+			          "statement_descriptor": null,
+			          "trial_period_days": null
+			        },
+			        "proration": true,
+			        "quantity": 1,
+			        "subscription": "sub_9GsKNJuNtntFFH",
+			        "type": "invoiceitem"
+			      }
+			    ],
+			    "total_count": 1,
+			    "object": "list",
+			    "url": "/v1/invoices/in_18zRtZ2eZvKYlo2Cj0FPqd80/lines"
+			  },
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "next_payment_attempt": 1475248909,
+			  "paid": false,
+			  "period_end": 1475245268,
+			  "period_start": 1472653268,
+			  "receipt_number": null,
+			  "starting_balance": 0,
+			  "statement_descriptor": null,
+			  "subscription": "sub_8vBAxymotaxUiw",
+			  "subtotal": 999,
+			  "tax": null,
+			  "tax_percent": null,
+			  "total": 999,
+			  "webhooks_delivered_at": 1475245329
+			}
 		}
 	}
 }
@@ -6012,7 +6425,7 @@ Method description
 
 <a name="getInvoice"/>
 ## Stripe.getInvoice
-Method description
+Retrieves the invoice with the given ID.
 
 | Field    | Type       | Description
 |----------|------------|----------
@@ -6021,8 +6434,9 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"invoiceId": "..."
+{	
+	"apiKey": "...",
+	"invoiceId": "in_18zRtZ2eZvKYlo2Cj0FPqd80"
 }
 ```
 #### Response example
@@ -6031,7 +6445,80 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "in_18zRtZ2eZvKYlo2Cj0FPqd80",
+			  "object": "invoice",
+			  "amount_due": 999,
+			  "application_fee": null,
+			  "attempt_count": 0,
+			  "attempted": false,
+			  "charge": null,
+			  "closed": false,
+			  "currency": "usd",
+			  "customer": "cus_9I1yraWQEUlyFj",
+			  "date": 1475245309,
+			  "description": null,
+			  "discount": null,
+			  "ending_balance": null,
+			  "forgiven": false,
+			  "lines": {
+			    "data": [
+			      {
+			        "id": "sub_9I1lOo21wR8yCe",
+			        "object": "line_item",
+			        "amount": 999,
+			        "currency": "usd",
+			        "description": null,
+			        "discountable": true,
+			        "livemode": true,
+			        "metadata": {
+			        },
+			        "period": {
+			          "start": 1477836560,
+			          "end": 1480514960
+			        },
+			        "plan": {
+			          "id": "diamond-beginner-305",
+			          "object": "plan",
+			          "amount": 999,
+			          "created": 1475244516,
+			          "currency": "usd",
+			          "interval": "month",
+			          "interval_count": 1,
+			          "livemode": false,
+			          "metadata": {
+			          },
+			          "name": "Diamond Beginner",
+			          "statement_descriptor": null,
+			          "trial_period_days": null
+			        },
+			        "proration": false,
+			        "quantity": 1,
+			        "subscription": null,
+			        "type": "subscription"
+			      }
+			    ],
+			    "total_count": 1,
+			    "object": "list",
+			    "url": "/v1/invoices/in_18zRtZ2eZvKYlo2Cj0FPqd80/lines"
+			  },
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "next_payment_attempt": 1475248909,
+			  "paid": false,
+			  "period_end": 1475245268,
+			  "period_start": 1472653268,
+			  "receipt_number": null,
+			  "starting_balance": 0,
+			  "statement_descriptor": null,
+			  "subscription": "sub_8vBAxymotaxUiw",
+			  "subtotal": 999,
+			  "tax": null,
+			  "tax_percent": null,
+			  "total": 999,
+			  "webhooks_delivered_at": 1475245329
+			}
 		}
 	}
 }
@@ -6039,7 +6526,7 @@ Method description
 
 <a name="getInvoiceLineItems"/>
 ## Stripe.getInvoiceLineItems
-Method description
+When retrieving an invoice, you'll get a lines property containing the total count of line items and the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of line items.
 
 | Field                    | Type       | Description
 |--------------------------|------------|----------
@@ -6056,16 +6543,9 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"invoice": "...",
-	"coupon": "...",
-	"customer": "...",
-	"subscription": "...",
-	"subscriptionPlan": "...",
-	"subscriptionProrate": "...",
-	"subscriptionProrationDate": "...",
-	"subscriptionQuantity": "...",
-	"subscriptionTrialEnd": "..."
+{	
+	"apiKey": "...",
+	"invoice": "in_18zRtZ2eZvKYlo2Cj0FPqd80",
 }
 ```
 #### Response example
@@ -6074,7 +6554,49 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "object": "list",
+			  "url": "/v1/invoices/in_18zRtZ2eZvKYlo2Cj0FPqd80/lines",
+			  "has_more": false,
+			  "data": [
+			    {
+			      "id": "ii_18yKaN2eZvKYlo2Co22dhawI",
+			      "object": "line_item",
+			      "amount": -100,
+			      "currency": "usd",
+			      "description": "Unused time on Foo after 27 Sep 2016",
+			      "discountable": false,
+			      "livemode": false,
+			      "metadata": {
+			      },
+			      "period": {
+			        "start": 1474978883,
+			        "end": 1474978883
+			      },
+			      "plan": {
+			        "id": "16598foo1474978869",
+			        "object": "plan",
+			        "amount": 100,
+			        "created": 1474978873,
+			        "currency": "usd",
+			        "interval": "week",
+			        "interval_count": 1,
+			        "livemode": false,
+			        "metadata": {
+			        },
+			        "name": "Foo",
+			        "statement_descriptor": null,
+			        "trial_period_days": null
+			      },
+			      "proration": true,
+			      "quantity": 1,
+			      "subscription": "sub_9GsKNJuNtntFFH",
+			      "type": "invoiceitem"
+			    },
+			    {...},
+			    {...}
+			  ]
+			}
 		}
 	}
 }
@@ -6082,7 +6604,7 @@ Method description
 
 <a name="updateInvoice"/>
 ## Stripe.updateInvoice
-Method description
+Until an invoice is paid, it is marked as open (closed=false). If you'd like to stop Stripe from automatically attempting payment on an invoice or would simply like to close the invoice out as no longer owed by the customer, you can update the closed parameter.
 
 | Field              | Type       | Description
 |--------------------|------------|----------
@@ -6099,16 +6621,10 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"invoiceId": "...",
-	"applicationFee": "...",
-	"description": "...",
-	"metadata": "...",
-	"statementDescriptor": "...",
-	"subscription": "...",
-	"forgiven": "...",
-	"closed": "...",
-	"taxPercent": "..."
+{	
+	"apiKey": "...",
+	"invoiceId": "in_18zRtZ2eZvKYlo2Cj0FPqd80",
+	"closed": "true",
 }
 ```
 #### Response example
@@ -6117,7 +6633,80 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "in_18zRtZ2eZvKYlo2Cj0FPqd80",
+			  "object": "invoice",
+			  "amount_due": 999,
+			  "application_fee": null,
+			  "attempt_count": 0,
+			  "attempted": false,
+			  "charge": null,
+			  "closed": true,
+			  "currency": "usd",
+			  "customer": "cus_9I1yraWQEUlyFj",
+			  "date": 1475245309,
+			  "description": null,
+			  "discount": null,
+			  "ending_balance": null,
+			  "forgiven": false,
+			  "lines": {
+			    "data": [
+			      {
+			        "id": "sub_9I1lOo21wR8yCe",
+			        "object": "line_item",
+			        "amount": 999,
+			        "currency": "usd",
+			        "description": null,
+			        "discountable": true,
+			        "livemode": true,
+			        "metadata": {
+			        },
+			        "period": {
+			          "start": 1477836560,
+			          "end": 1480514960
+			        },
+			        "plan": {
+			          "id": "diamond-beginner-305",
+			          "object": "plan",
+			          "amount": 999,
+			          "created": 1475244516,
+			          "currency": "usd",
+			          "interval": "month",
+			          "interval_count": 1,
+			          "livemode": false,
+			          "metadata": {
+			          },
+			          "name": "Diamond Beginner",
+			          "statement_descriptor": null,
+			          "trial_period_days": null
+			        },
+			        "proration": false,
+			        "quantity": 1,
+			        "subscription": null,
+			        "type": "subscription"
+			      }
+			    ],
+			    "total_count": 1,
+			    "object": "list",
+			    "url": "/v1/invoices/in_18zRtZ2eZvKYlo2Cj0FPqd80/lines"
+			  },
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "next_payment_attempt": 1475248909,
+			  "paid": false,
+			  "period_end": 1475245268,
+			  "period_start": 1472653268,
+			  "receipt_number": null,
+			  "starting_balance": 0,
+			  "statement_descriptor": null,
+			  "subscription": "sub_8vBAxymotaxUiw",
+			  "subtotal": 999,
+			  "tax": null,
+			  "tax_percent": null,
+			  "total": 999,
+			  "webhooks_delivered_at": 1475245329
+			}
 		}
 	}
 }
@@ -6125,7 +6714,7 @@ Method description
 
 <a name="payInvoice"/>
 ## Stripe.payInvoice
-Method description
+Stripe automatically creates and then attempts to pay invoices for customers on subscriptions. We’ll also retry unpaid invoices according to your retry settings. However, if you’d like to attempt to collect payment on an invoice out of the normal retry schedule or for some other reason, you can do so.
 
 | Field    | Type       | Description
 |----------|------------|----------
@@ -6134,8 +6723,9 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"invoiceId": "..."
+{	
+	"apiKey": "...",
+	"invoiceId": "in_18zRtZ2eZvKYlo2Cj0FPqd80"
 }
 ```
 #### Response example
@@ -6144,7 +6734,81 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "in_18zRtZ2eZvKYlo2Cj0FPqd80",
+			  "object": "invoice",
+			  "amount_due": 999,
+			  "application_fee": null,
+			  "attempt_count": 0,
+			  "attempted": true,
+			  "charge": "ch_18zRvN2eZvKYlo2CT5LTwgEC",
+			  "closed": false,
+			  "currency": "usd",
+			  "customer": "cus_9I1yraWQEUlyFj",
+			  "date": 1475245309,
+			  "description": null,
+			  "discount": null,
+			  "ending_balance": null,
+			  "forgiven": false,
+			  "lines": {
+			    "data": [
+			      {
+			        "id": "ii_18yKaN2eZvKYlo2Co22dhawI",
+			        "object": "line_item",
+			        "amount": 999,
+			        "currency": "usd",
+			        "description": "Unused time on Foo after 27 Sep 2016",
+			        "discountable": false,
+			        "livemode": false,
+			        "metadata": {
+			        },
+			        "period": {
+			          "start": 1474978883,
+			          "end": 1474978883
+			        },
+			        "plan": {
+			          "id": "16598foo1474978869",
+			          "object": "plan",
+			          "amount": 100,
+			          "created": 1474978873,
+			          "currency": "usd",
+			          "interval": "week",
+			          "interval_count": 1,
+			          "livemode": false,
+			          "metadata": {
+			          },
+			          "name": "Foo",
+			          "statement_descriptor": null,
+			          "trial_period_days": null
+			        },
+			        "proration": true,
+			        "quantity": 1,
+			        "subscription": "sub_9GsKNJuNtntFFH",
+			        "type": "invoiceitem"
+			      }
+			    ],
+			    "total_count": 1,
+			    "object": "list",
+			    "url": "/v1/invoices/in_18zRtZ2eZvKYlo2Cj0FPqd80/lines"
+			  },
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "next_payment_attempt": 1475248909,
+			  "paid": true,
+			  "period_end": 1475245268,
+			  "period_start": 1472653268,
+			  "receipt_number": null,
+			  "starting_balance": 0,
+			  "statement_descriptor": null,
+			  "subscription": "sub_8vBAxymotaxUiw",
+			  "subtotal": 999,
+			  "tax": null,
+			  "tax_percent": null,
+			  "total": 999,
+			  "webhooks_delivered_at": 1475245329,
+			  "last_payment_attempt": null
+			}
 		}
 	}
 }
@@ -6152,7 +6816,7 @@ Method description
 
 <a name="getInvoiceList"/>
 ## Stripe.getInvoiceList
-Method description
+You can list all invoices, or list the invoices for a specific customer. The invoices are returned sorted by creation date, with the most recently created invoices appearing first.
 
 | Field   | Type       | Description
 |---------|------------|----------
@@ -6161,8 +6825,8 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"customer": "..."
+{	
+	"apiKey": "...",
 }
 ```
 #### Response example
@@ -6171,34 +6835,89 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
-<a name="getInvoiceList"/>
-## Stripe.getInvoiceList
-Method description
-
-| Field   | Type       | Description
-|---------|------------|----------
-| apiKey  | credentials| The api key obtained from Stripe.
-| customer| String     | The identifier of the customer whose invoices to return. If none is provided, all invoices will be returned.
-
-#### Request example
-```json
-{	"apiKey": "...",
-	"customer": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
+			"to": {
+			  "object": "list",
+			  "url": "/v1/invoices",
+			  "has_more": false,
+			  "data": [
+			    {
+			      "id": "in_18zRtZ2eZvKYlo2Cj0FPqd80",
+			      "object": "invoice",
+			      "amount_due": 999,
+			      "application_fee": null,
+			      "attempt_count": 0,
+			      "attempted": false,
+			      "charge": null,
+			      "closed": false,
+			      "currency": "usd",
+			      "customer": "cus_9I1yraWQEUlyFj",
+			      "date": 1475245309,
+			      "description": null,
+			      "discount": null,
+			      "ending_balance": null,
+			      "forgiven": false,
+			      "lines": {
+			        "data": [
+			          {
+			            "id": "sub_9I1lOo21wR8yCe",
+			            "object": "line_item",
+			            "amount": 999,
+			            "currency": "usd",
+			            "description": null,
+			            "discountable": true,
+			            "livemode": true,
+			            "metadata": {
+			            },
+			            "period": {
+			              "start": 1477836560,
+			              "end": 1480514960
+			            },
+			            "plan": {
+			              "id": "diamond-beginner-305",
+			              "object": "plan",
+			              "amount": 999,
+			              "created": 1475244516,
+			              "currency": "usd",
+			              "interval": "month",
+			              "interval_count": 1,
+			              "livemode": false,
+			              "metadata": {
+			              },
+			              "name": "Diamond Beginner",
+			              "statement_descriptor": null,
+			              "trial_period_days": null
+			            },
+			            "proration": false,
+			            "quantity": 1,
+			            "subscription": null,
+			            "type": "subscription"
+			          }
+			        ],
+			        "total_count": 1,
+			        "object": "list",
+			        "url": "/v1/invoices/in_18zRtZ2eZvKYlo2Cj0FPqd80/lines"
+			      },
+			      "livemode": false,
+			      "metadata": {
+			      },
+			      "next_payment_attempt": 1475248909,
+			      "paid": false,
+			      "period_end": 1475245268,
+			      "period_start": 1472653268,
+			      "receipt_number": null,
+			      "starting_balance": 0,
+			      "statement_descriptor": null,
+			      "subscription": "sub_8vBAxymotaxUiw",
+			      "subtotal": 999,
+			      "tax": null,
+			      "tax_percent": null,
+			      "total": 999,
+			      "webhooks_delivered_at": 1475245329
+			    },
+			    {...},
+			    {...}
+			  ]
+			}
 		}
 	}
 }
@@ -6206,7 +6925,7 @@ Method description
 
 <a name="createInvoiceItem"/>
 ## Stripe.createInvoiceItem
-Method description
+Adds an arbitrary charge or credit to the customer’s upcoming invoice.
 
 | Field       | Type       | Description
 |-------------|------------|----------
@@ -6222,15 +6941,12 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"amount": 0,
+{	
+	"apiKey": "...",
+	"amount": 2500,
 	"currency": "usd",
-	"customer": "...",
-	"description": "...",
-	"discountable": "...",
-	"invoice": "...",
-	"metadata": "...",
-	"subscription": "..."
+	"customer": "cus_9I1yraWQEUlyFj",
+	"description": "One-time setup fee",
 }
 ```
 #### Response example
@@ -6239,7 +6955,42 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "ii_18yKaN2eZvKYlo2Co22dhawI",
+			  "object": "invoiceitem",
+			  "amount": 999,
+			  "currency": "usd",
+			  "customer": "cus_9I1yraWQEUlyFj",
+			  "date": 1474978883,
+			  "description": "Unused time on Foo after 27 Sep 2016",
+			  "discountable": false,
+			  "invoice": "in_18yKaO2eZvKYlo2CXEisc1Ih",
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "period": {
+			    "start": 1474978883,
+			    "end": 1475583679
+			  },
+			  "plan": {
+			    "id": "16598foo1474978869",
+			    "object": "plan",
+			    "amount": 100,
+			    "created": 1474978873,
+			    "currency": "usd",
+			    "interval": "week",
+			    "interval_count": 1,
+			    "livemode": false,
+			    "metadata": {
+			    },
+			    "name": "Foo",
+			    "statement_descriptor": null,
+			    "trial_period_days": null
+			  },
+			  "proration": true,
+			  "quantity": 1,
+			  "subscription": "sub_9GsKNJuNtntFFH"
+			}
 		}
 	}
 }
@@ -6247,7 +6998,7 @@ Method description
 
 <a name="getInvoiceItem"/>
 ## Stripe.getInvoiceItem
-Method description
+Retrieves the invoice item with the given ID.
 
 | Field      | Type       | Description
 |------------|------------|----------
@@ -6256,8 +7007,9 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"invoiceitem": "..."
+{	
+	"apiKey": "...",
+	"invoiceitem": "ii_18yKaN2eZvKYlo2Co22dhawI"
 }
 ```
 #### Response example
@@ -6266,7 +7018,42 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "ii_18yKaN2eZvKYlo2Co22dhawI",
+			  "object": "invoiceitem",
+			  "amount": 999,
+			  "currency": "usd",
+			  "customer": "cus_9I1yraWQEUlyFj",
+			  "date": 1474978883,
+			  "description": "Unused time on Foo after 27 Sep 2016",
+			  "discountable": false,
+			  "invoice": "in_18yKaO2eZvKYlo2CXEisc1Ih",
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "period": {
+			    "start": 1474978883,
+			    "end": 1475583679
+			  },
+			  "plan": {
+			    "id": "16598foo1474978869",
+			    "object": "plan",
+			    "amount": 100,
+			    "created": 1474978873,
+			    "currency": "usd",
+			    "interval": "week",
+			    "interval_count": 1,
+			    "livemode": false,
+			    "metadata": {
+			    },
+			    "name": "Foo",
+			    "statement_descriptor": null,
+			    "trial_period_days": null
+			  },
+			  "proration": true,
+			  "quantity": 1,
+			  "subscription": "sub_9GsKNJuNtntFFH"
+			}
 		}
 	}
 }
@@ -6274,7 +7061,7 @@ Method description
 
 <a name="updateInvoiceItem"/>
 ## Stripe.updateInvoiceItem
-Method description
+Updates the amount or description of an invoice item on an upcoming invoice. Updating an invoice item is only possible before the invoice it's attached to is closed.
 
 | Field       | Type       | Description
 |-------------|------------|----------
@@ -6287,12 +7074,11 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"itemId": "...",
-	"amount": 0,
-	"description": "...",
-	"discountable": "...",
-	"metadata": "..."
+{	
+	"apiKey": "...",
+	"itemId": "ii_18yKaN2eZvKYlo2Co22dhawI",
+	"amount": 2500,
+	"description": "One-time setup fee",
 }
 ```
 #### Response example
@@ -6301,7 +7087,42 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "ii_18yKaN2eZvKYlo2Co22dhawI",
+			  "object": "invoiceitem",
+			  "amount": 2500,
+			  "currency": "usd",
+			  "customer": "cus_9I1yraWQEUlyFj",
+			  "date": 1474978883,
+			  "description": "One-time setup fee",
+			  "discountable": false,
+			  "invoice": "in_18yKaO2eZvKYlo2CXEisc1Ih",
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "period": {
+			    "start": 1474978883,
+			    "end": 1475583679
+			  },
+			  "plan": {
+			    "id": "16598foo1474978869",
+			    "object": "plan",
+			    "amount": 100,
+			    "created": 1474978873,
+			    "currency": "usd",
+			    "interval": "week",
+			    "interval_count": 1,
+			    "livemode": false,
+			    "metadata": {
+			    },
+			    "name": "Foo",
+			    "statement_descriptor": null,
+			    "trial_period_days": null
+			  },
+			  "proration": true,
+			  "quantity": 1,
+			  "subscription": "sub_9GsKNJuNtntFFH"
+			}
 		}
 	}
 }
@@ -6309,7 +7130,7 @@ Method description
 
 <a name="deleteInvoiceItem"/>
 ## Stripe.deleteInvoiceItem
-Method description
+Removes an invoice item from the upcoming invoice. Removing an invoice item is only possible before the invoice it’s attached to is closed.
 
 | Field      | Type       | Description
 |------------|------------|----------
@@ -6318,8 +7139,9 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"invoiceitem": "..."
+{	
+	"apiKey": "...",
+	"invoiceitem": "ii_18yKaN2eZvKYlo2Co22dhawI"
 }
 ```
 #### Response example
@@ -6328,7 +7150,10 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "deleted": true,
+			  "id": "ii_18yKaN2eZvKYlo2Co22dhawI"
+			}
 		}
 	}
 }
@@ -6336,7 +7161,7 @@ Method description
 
 <a name="getInvoiceItemsList"/>
 ## Stripe.getInvoiceItemsList
-Method description
+Returns a list of your invoice items. Invoice items are returned sorted by creation date, with the most recently created invoice items appearing first.
 
 | Field   | Type       | Description
 |---------|------------|----------
@@ -6345,8 +7170,8 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"customer": "..."
+{	
+	"apiKey": "...",
 }
 ```
 #### Response example
@@ -6355,7 +7180,51 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "object": "list",
+			  "url": "/v1/invoiceitems",
+			  "has_more": false,
+			  "data": [
+			    {
+			      "id": "ii_18yKaN2eZvKYlo2Co22dhawI",
+			      "object": "invoiceitem",
+			      "amount": -100,
+			      "currency": "usd",
+			      "customer": "cus_9I1yraWQEUlyFj",
+			      "date": 1474978883,
+			      "description": "Unused time on Foo after 27 Sep 2016",
+			      "discountable": false,
+			      "invoice": "in_18yKaO2eZvKYlo2CXEisc1Ih",
+			      "livemode": false,
+			      "metadata": {
+			      },
+			      "period": {
+			        "start": 1474978883,
+			        "end": 1475583679
+			      },
+			      "plan": {
+			        "id": "16598foo1474978869",
+			        "object": "plan",
+			        "amount": 100,
+			        "created": 1474978873,
+			        "currency": "usd",
+			        "interval": "week",
+			        "interval_count": 1,
+			        "livemode": false,
+			        "metadata": {
+			        },
+			        "name": "Foo",
+			        "statement_descriptor": null,
+			        "trial_period_days": null
+			      },
+			      "proration": true,
+			      "quantity": 1,
+			      "subscription": "sub_9GsKNJuNtntFFH"
+			    },
+			    {...},
+			    {...}
+			  ]
+			}
 		}
 	}
 }
@@ -6363,13 +7232,13 @@ Method description
 
 <a name="createPlan"/>
 ## Stripe.createPlan
-Method description
+You can create plans easily via the plan management page of the Stripe dashboard. Plan creation is also accessible via the API if you need to create plans on the fly.
 
 | Field              | Type       | Description
 |--------------------|------------|----------
 | apiKey             | credentials| The api key obtained from Stripe.
 | planId             | String     | Unique string of your choice that will be used to identify this plan when subscribing a customer. This could be an identifier like “gold” or a primary key from your own database.
-| amount             | String     | A positive integer in cents (or 0 for a free plan) representing how much to charge (on a recurring basis).
+| amount             | Number     | A positive integer in cents (or 0 for a free plan) representing how much to charge (on a recurring basis).
 | currency           | String     | 3-letter ISO code for currency.
 | interval           | String     | Specifies billing frequency. Either day, week, month or year.
 | name               | String     | Name of the plan, to be displayed on invoices and in the web interface.
@@ -6380,16 +7249,13 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"planId": "...",
-	"amount": "...",
+{	
+	"apiKey": "...",
+	"planId": "gold-extended",
+	"amount": 5000,
 	"currency": "usd",
-	"interval": "...",
-	"name": "...",
-	"intervalCount": "...",
-	"metadata": "...",
-	"statementDescriptor": "...",
-	"trialPeriodDays": "..."
+	"interval": "month",
+	"name": "Gold extended",
 }
 ```
 #### Response example
@@ -6398,7 +7264,21 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "gold-extended",
+			  "object": "plan",
+			  "amount": 5000,
+			  "created": 1475206866,
+			  "currency": "usd",
+			  "interval": "month",
+			  "interval_count": 1,
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "name": "Gold extended",
+			  "statement_descriptor": null,
+			  "trial_period_days": null
+			}
 		}
 	}
 }
@@ -6406,7 +7286,7 @@ Method description
 
 <a name="getPlan"/>
 ## Stripe.getPlan
-Method description
+Retrieves the plan with the given ID.
 
 | Field | Type       | Description
 |-------|------------|----------
@@ -6415,7 +7295,8 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
+{	
+	"apiKey": "...",
 	"planId": "..."
 }
 ```
@@ -6425,7 +7306,21 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "ivory-starter-327",
+			  "object": "plan",
+			  "amount": 999,
+			  "created": 1475206866,
+			  "currency": "usd",
+			  "interval": "month",
+			  "interval_count": 1,
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "name": "Ivory Starter",
+			  "statement_descriptor": null,
+			  "trial_period_days": null
+			}
 		}
 	}
 }
@@ -6433,7 +7328,7 @@ Method description
 
 <a name="updatePlan"/>
 ## Stripe.updatePlan
-Method description
+Updates the name of a plan. Other plan details (price, interval, etc.) are, by design, not editable.
 
 | Field              | Type       | Description
 |--------------------|------------|----------
@@ -6445,11 +7340,10 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"planId": "...",
-	"name": "...",
-	"metadata": "...",
-	"statementDescriptor": "..."
+{	
+	"apiKey": "...",
+	"planId": "ivory-starter-327",
+	"name": "Bronze complete",
 }
 ```
 #### Response example
@@ -6458,7 +7352,21 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "ivory-starter-327",
+			  "object": "plan",
+			  "amount": 999,
+			  "created": 1475206866,
+			  "currency": "usd",
+			  "interval": "month",
+			  "interval_count": 1,
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "name": "Bronze complete",
+			  "statement_descriptor": null,
+			  "trial_period_days": null
+			}
 		}
 	}
 }
@@ -6466,7 +7374,7 @@ Method description
 
 <a name="deletePlan"/>
 ## Stripe.deletePlan
-Method description
+You can delete plans via the plan management page of the Stripe dashboard. However, deleting a plan does not affect any current subscribers to the plan; it merely means that new subscribers can’t be added to that plan. You can also delete plans via the API.
 
 | Field | Type       | Description
 |-------|------------|----------
@@ -6475,8 +7383,9 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"planId": "..."
+{	
+	"apiKey": "...",
+	"planId": "ivory-starter-327"
 }
 ```
 #### Response example
@@ -6485,7 +7394,10 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "deleted": true,
+			  "id": "ivory-starter-327"
+			}
 		}
 	}
 }
@@ -6493,17 +7405,16 @@ Method description
 
 <a name="getPlanList"/>
 ## Stripe.getPlanList
-Method description
+Returns a list of your plans.
 
 | Field | Type       | Description
 |-------|------------|----------
 | apiKey| credentials| The api key obtained from Stripe.
-| planId| String     | The identifier of the plan to be deleted.
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"planId": "..."
+{	
+	"apiKey": "...",
 }
 ```
 #### Response example
@@ -6512,7 +7423,30 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "object": "list",
+			  "url": "/v1/plans",
+			  "has_more": false,
+			  "data": [
+			    {
+			      "id": "ivory-starter-327",
+			      "object": "plan",
+			      "amount": 999,
+			      "created": 1475206866,
+			      "currency": "usd",
+			      "interval": "month",
+			      "interval_count": 1,
+			      "livemode": false,
+			      "metadata": {
+			      },
+			      "name": "Ivory Starter",
+			      "statement_descriptor": null,
+			      "trial_period_days": null
+			    },
+			    {...},
+			    {...}
+			  ]
+			}
 		}
 	}
 }
@@ -6520,7 +7454,7 @@ Method description
 
 <a name="createSubscription"/>
 ## Stripe.createSubscription
-Method description
+Creates a new subscription on an existing customer.
 
 | Field                | Type       | Description
 |----------------------|------------|----------
@@ -6537,16 +7471,10 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"applicationFeePercent": "...",
-	"coupon": "...",
-	"customer": "...",
-	"plan": "...",
-	"source": "...",
-	"quantity": 0,
-	"metadata": "...",
-	"taxPercent": "...",
-	"trialEnd": "..."
+{	
+	"apiKey": "...",
+	"customer": "cus_9HvesRZb9hIG69",
+	"plan": "ivory-starter-327",
 }
 ```
 #### Response example
@@ -6555,7 +7483,43 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "sub_9HrdaoU42BIBGY",
+			  "object": "subscription",
+			  "application_fee_percent": null,
+			  "cancel_at_period_end": false,
+			  "canceled_at": null,
+			  "created": 1475206899,
+			  "current_period_end": 1477798899,
+			  "current_period_start": 1475206899,
+			  "customer": "cus_9HvesRZb9hIG69",
+			  "discount": null,
+			  "ended_at": null,
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "plan": {
+			    "id": "ivory-starter-327",
+			    "object": "plan",
+			    "amount": 999,
+			    "created": 1475206866,
+			    "currency": "usd",
+			    "interval": "month",
+			    "interval_count": 1,
+			    "livemode": false,
+			    "metadata": {
+			    },
+			    "name": "Ivory Starter",
+			    "statement_descriptor": null,
+			    "trial_period_days": null
+			  },
+			  "quantity": 1,
+			  "start": 1475206899,
+			  "status": "active",
+			  "tax_percent": null,
+			  "trial_end": null,
+			  "trial_start": null
+			}
 		}
 	}
 }
@@ -6563,7 +7527,7 @@ Method description
 
 <a name="getSubscription"/>
 ## Stripe.getSubscription
-Method description
+Retrieves the subscription with the given ID.
 
 | Field         | Type       | Description
 |---------------|------------|----------
@@ -6572,8 +7536,9 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"subscriptionId": "..."
+{	
+	"apiKey": "...",
+	"subscriptionId": "sub_9HrdaoU42BIBGY"
 }
 ```
 #### Response example
@@ -6582,7 +7547,43 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "sub_9HrdaoU42BIBGY",
+			  "object": "subscription",
+			  "application_fee_percent": null,
+			  "cancel_at_period_end": false,
+			  "canceled_at": null,
+			  "created": 1475206899,
+			  "current_period_end": 1477798899,
+			  "current_period_start": 1475206899,
+			  "customer": "cus_9HrcdqQVqG9h0O",
+			  "discount": null,
+			  "ended_at": null,
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "plan": {
+			    "id": "ivory-starter-327",
+			    "object": "plan",
+			    "amount": 999,
+			    "created": 1475206866,
+			    "currency": "usd",
+			    "interval": "month",
+			    "interval_count": 1,
+			    "livemode": false,
+			    "metadata": {
+			    },
+			    "name": "Ivory Starter",
+			    "statement_descriptor": null,
+			    "trial_period_days": null
+			  },
+			  "quantity": 1,
+			  "start": 1475206899,
+			  "status": "active",
+			  "tax_percent": null,
+			  "trial_end": null,
+			  "trial_start": null
+			}
 		}
 	}
 }
@@ -6590,7 +7591,7 @@ Method description
 
 <a name="updateSubscription"/>
 ## Stripe.updateSubscription
-Method description
+Updates an existing subscription to match the specified parameters. When changing plans or quantities, we will optionally prorate the price we charge next month to make up for any price changes. To preview how the proration will be calculated, use the upcoming invoice endpoint.
 
 | Field                | Type       | Description
 |----------------------|------------|----------
@@ -6608,17 +7609,10 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"subscriptionId": "...",
-	"applicationFeePercent": "...",
-	"coupon": "...",
-	"customer": "...",
-	"plan": "...",
-	"source": "...",
-	"quantity": 0,
-	"metadata": "...",
-	"taxPercent": "...",
-	"trialEnd": "..."
+{	
+	"apiKey": "...",
+	"subscriptionId": "sub_9HrdaoU42BIBGY",
+	"plan": "ivory-starter-327",
 }
 ```
 #### Response example
@@ -6627,7 +7621,43 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "sub_9HrdaoU42BIBGY",
+			  "object": "subscription",
+			  "application_fee_percent": null,
+			  "cancel_at_period_end": false,
+			  "canceled_at": null,
+			  "created": 1475206899,
+			  "current_period_end": 1477798899,
+			  "current_period_start": 1475206899,
+			  "customer": "cus_9HvesRZb9hIG69",
+			  "discount": null,
+			  "ended_at": null,
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "plan": {
+			    "id": "ivory-starter-327",
+			    "object": "plan",
+			    "amount": 999,
+			    "created": 1475206866,
+			    "currency": "usd",
+			    "interval": "month",
+			    "interval_count": 1,
+			    "livemode": false,
+			    "metadata": {
+			    },
+			    "name": "Ivory Starter",
+			    "statement_descriptor": null,
+			    "trial_period_days": null
+			  },
+			  "quantity": 1,
+			  "start": 1475206899,
+			  "status": "active",
+			  "tax_percent": null,
+			  "trial_end": null,
+			  "trial_start": null
+			}
 		}
 	}
 }
@@ -6635,7 +7665,8 @@ Method description
 
 <a name="cancelSubscription"/>
 ## Stripe.cancelSubscription
-Method description
+Cancels a customer’s subscription. If you set the at_period_end parameter to true, the subscription will remain active until the end of the period, at which point it will be canceled and not renewed. By default, the subscription is terminated immediately. In either case, the customer will not be charged again for the subscription. Note, however, that any pending invoice items that you’ve created will still be charged for at the end of the period unless manually deleted. If you’ve set the subscription to cancel at period end, any pending prorations will also be left in place and collected at the end of the period, but if the subscription is set to cancel immediately, pending prorations will be removed.
+By default, all unpaid invoices for the customer will be closed upon subscription cancellation. We do this in order to prevent unexpected payment retries once the customer has canceled a subscription. However, you can reopen the invoices manually after subscription cancellation to have us proceed with automatic retries, or you could even re-attempt payment yourself on all unpaid invoices before allowing the customer to cancel the subscription at all.
 
 | Field         | Type       | Description
 |---------------|------------|----------
@@ -6645,9 +7676,9 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"subscriptionId": "...",
-	"atPeriodEnd": "..."
+{	
+	"apiKey": "...",
+	"subscriptionId": "sub_9HrdaoU42BIBGY",
 }
 ```
 #### Response example
@@ -6656,7 +7687,43 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": {
+			  "id": "sub_9HrdaoU42BIBGY",
+			  "object": "subscription",
+			  "application_fee_percent": null,
+			  "cancel_at_period_end": false,
+			  "canceled_at": null,
+			  "created": 1475206899,
+			  "current_period_end": 1477798899,
+			  "current_period_start": 1475206899,
+			  "customer": "cus_9HvesRZb9hIG69",
+			  "discount": null,
+			  "ended_at": null,
+			  "livemode": false,
+			  "metadata": {
+			  },
+			  "plan": {
+			    "id": "ivory-starter-327",
+			    "object": "plan",
+			    "amount": 999,
+			    "created": 1475206866,
+			    "currency": "usd",
+			    "interval": "month",
+			    "interval_count": 1,
+			    "livemode": false,
+			    "metadata": {
+			    },
+			    "name": "Ivory Starter",
+			    "statement_descriptor": null,
+			    "trial_period_days": null
+			  },
+			  "quantity": 1,
+			  "start": 1475206899,
+			  "status": "canceled",
+			  "tax_percent": null,
+			  "trial_end": null,
+			  "trial_start": null
+			}
 		}
 	}
 }
@@ -6664,7 +7731,7 @@ Method description
 
 <a name="getSubscriptionList"/>
 ## Stripe.getSubscriptionList
-Method description
+By default, returns a list of subscriptions that have not been canceled. In order to list canceled subscriptions, specify status=canceled.
 
 | Field         | Type       | Description
 |---------------|------------|----------
@@ -6676,11 +7743,8 @@ Method description
 
 #### Request example
 ```json
-{	"apiKey": "...",
-	"subscriptionId": "...",
-	"customer": "...",
-	"plan": "...",
-	"status": "..."
+{	
+	"apiKey": "...",
 }
 ```
 #### Response example
@@ -6689,7 +7753,52 @@ Method description
 	"callback":"success",
 	"contextWrites":{
 		"#":{
-			"to":"..."
+			"to": 
+			  "object": "list",
+			  "url": "/v1/subscriptions",
+			  "has_more": false,
+			  "data": [
+			    {
+			      "id": "sub_9HrdaoU42BIBGY",
+			      "object": "subscription",
+			      "application_fee_percent": null,
+			      "cancel_at_period_end": false,
+			      "canceled_at": null,
+			      "created": 1475206899,
+			      "current_period_end": 1477798899,
+			      "current_period_start": 1475206899,
+			      "customer": "cus_9HrcdqQVqG9h0O",
+			      "discount": null,
+			      "ended_at": null,
+			      "livemode": false,
+			      "metadata": {
+			      },
+			      "plan": {
+			        "id": "ivory-starter-327",
+			        "object": "plan",
+			        "amount": 999,
+			        "created": 1475206866,
+			        "currency": "usd",
+			        "interval": "month",
+			        "interval_count": 1,
+			        "livemode": false,
+			        "metadata": {
+			        },
+			        "name": "Ivory Starter",
+			        "statement_descriptor": null,
+			        "trial_period_days": null
+			      },
+			      "quantity": 1,
+			      "start": 1475206899,
+			      "status": "active",
+			      "tax_percent": null,
+			      "trial_end": null,
+			      "trial_start": null
+			    },
+			    {...},
+			    {...}
+			  ]
+			}
 		}
 	}
 }
