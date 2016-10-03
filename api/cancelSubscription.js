@@ -6,34 +6,34 @@ const initStripe  = require('stripe');
 
 module.exports = (req, res) => {
 
-	req.body.args = _.clearArgs(req.body.args);
+    req.body.args = _.clearArgs(req.body.args);
 
-	let { 
-		apiKey,
-		subscriptionId,
-		atPeriodEnd,
-	 	to="to" 
-	 } = req.body.args;
+    let { 
+        apiKey,
+        subscriptionId,
+        atPeriodEnd,
+         to="to" 
+     } = req.body.args;
 
-	let r  = {
+    let r  = {
         callback     : "",
         contextWrites: {}
     };
 
-	if(!apiKey || !subscriptionId) {
-		_.echoBadEnd(r, to, res);
-		return;
-	}
+    if(!apiKey || !subscriptionId) {
+        _.echoBadEnd(r, to, res);
+        return;
+    }
 
-	let stripe = initStripe(apiKey);
+    let stripe = initStripe(apiKey);
 
-	let options = _.clearArgs({
-		at_period_end: atPeriodEnd
-	})
+    let options = _.clearArgs({
+        at_period_end: atPeriodEnd
+    })
 
-	stripe.subscriptions.del(subscriptionId, options, function(err, result) {
-		if(!err) {
-    		r.contextWrites[to] = JSON.stringify(result);
+    stripe.subscriptions.del(subscriptionId, options, function(err, result) {
+        if(!err) {
+            r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 
         } else {
             r.contextWrites[to] = JSON.stringify(err);
@@ -41,5 +41,5 @@ module.exports = (req, res) => {
         }
 
         res.status(200).send(r);
-	});	
+    });    
 }

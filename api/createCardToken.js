@@ -6,47 +6,47 @@ const initStripe  = require('stripe');
 
 module.exports = (req, res) => {
 
-	req.body.args = _.clearArgs(req.body.args);
+    req.body.args = _.clearArgs(req.body.args);
 
-	let { 
-		apiKey, 
-		cardNumber,
-		cardExpirationMonth,
-		cardExpirationYear,
-		cardCvc,
-		to="to" } = req.body.args;
+    let { 
+        apiKey, 
+        cardNumber,
+        cardExpirationMonth,
+        cardExpirationYear,
+        cardCvc,
+        to="to" } = req.body.args;
 
-	let r  = {
+    let r  = {
         callback     : "",
         contextWrites: {}
     };
 
-	if(!apiKey) {
-		_.echoBadEnd(r, to, res);
-		return;
-	}
+    if(!apiKey) {
+        _.echoBadEnd(r, to, res);
+        return;
+    }
 
-	let stripe = initStripe(apiKey);
+    let stripe = initStripe(apiKey);
 
-	let options = _.clearArgs({
-		card: {
-			"number": cardNumber,
-		    "exp_month": cardExpirationMonth,
-		    "exp_year": cardExpirationYear,
-		    "cvc": cardCvc
-		}
-	});
+    let options = _.clearArgs({
+        card: {
+            "number": cardNumber,
+            "exp_month": cardExpirationMonth,
+            "exp_year": cardExpirationYear,
+            "cvc": cardCvc
+        }
+    });
 
-	stripe.tokens.create(options, function(err, result) {
-		if(!err) {
-    		r.contextWrites[to] = JSON.stringify(result);
+    stripe.tokens.create(options, function(err, result) {
+        if(!err) {
+            r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 
         } else {
-        	console.log(err);
+            console.log(err);
             r.contextWrites[to] = JSON.stringify(err);
             r.callback = 'error';
         }
 
         res.status(200).send(r);
-	});	
+    });    
 }

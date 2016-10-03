@@ -6,27 +6,27 @@ const initStripe  = require('stripe');
 
 
 module.exports = (req, res) => {
-	let { 
-		apiKey,
-		orderId,
-	 	to="to" 
-	 } = req.body.args;
+    let { 
+        apiKey,
+        orderId,
+         to="to" 
+     } = req.body.args;
 
-	let r  = {
+    let r  = {
         callback     : "",
         contextWrites: {}
     };
 
-	if(!apiKey || !orderId) {
-		_.echoBadEnd(r, to, res);
-		return;
-	}
+    if(!apiKey || !orderId) {
+        _.echoBadEnd(r, to, res);
+        return;
+    }
 
-	let stripe = initStripe(apiKey);
+    let stripe = initStripe(apiKey);
 
-	stripe.orderReturns.retrieve(orderId, function(err, result) {
-		if(!err) {
-    		r.contextWrites[to] = JSON.stringify(result);
+    stripe.orderReturns.retrieve(orderId, function(err, result) {
+        if(!err) {
+            r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 
         } else {
             r.contextWrites[to] = JSON.stringify(err);
@@ -34,5 +34,5 @@ module.exports = (req, res) => {
         }
 
         res.status(200).send(r);
-	});	
+    });    
 }

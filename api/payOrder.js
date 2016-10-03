@@ -7,50 +7,50 @@ const initStripe  = require('stripe');
 
 module.exports = (req, res) => {
 
-	req.body.args = _.clearArgs(req.body.args);
+    req.body.args = _.clearArgs(req.body.args);
 
-	let { 
-		apiKey,
-		orderId,
-		customer,
-		source,
-		email,
-		metadata,
-	 	to="to" 
-	 } = req.body.args;
+    let { 
+        apiKey,
+        orderId,
+        customer,
+        source,
+        email,
+        metadata,
+         to="to" 
+     } = req.body.args;
 
-	let r  = {
+    let r  = {
         callback     : "",
         contextWrites: {}
     };
 
-	if(!apiKey || !(customer || source) || !orderId) {
-		_.echoBadEnd(r, to, res);
-		return;
-	}
+    if(!apiKey || !(customer || source) || !orderId) {
+        _.echoBadEnd(r, to, res);
+        return;
+    }
 
-	let stripe = initStripe(apiKey);
+    let stripe = initStripe(apiKey);
 
-	try {
-		if(metadata) metadata = JSON.parse(metadata);
-	} catch(e) {
-		r.contextWrites[to] = 'Invalid JSON value.';
+    try {
+        if(metadata) metadata = JSON.parse(metadata);
+    } catch(e) {
+        r.contextWrites[to] = 'Invalid JSON value.';
         r.callback = 'error';
 
         res.status(200).send(r);
         return;
-	}	
+    }    
 
-	let options = _.clearArgs({
-		customer,
-		source,
-		email,
-		metadata
-	});
+    let options = _.clearArgs({
+        customer,
+        source,
+        email,
+        metadata
+    });
 
-	stripe.orders.pay(orderId, options, function(err, result) {
-		if(!err) {
-    		r.contextWrites[to] = JSON.stringify(result);
+    stripe.orders.pay(orderId, options, function(err, result) {
+        if(!err) {
+            r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 
         } else {
             r.contextWrites[to] = JSON.stringify(err);
@@ -58,5 +58,5 @@ module.exports = (req, res) => {
         }
 
         res.status(200).send(r);
-	});	
+    });    
 }

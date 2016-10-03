@@ -7,37 +7,37 @@ const initStripe  = require('stripe');
 
 module.exports = (req, res) => {
 
-	req.body.args = _.clearArgs(req.body.args);
+    req.body.args = _.clearArgs(req.body.args);
 
-	let { 
-		apiKey,
-		endingBefore,
-		startingAfter,
-		limit,
-	 	to="to" 
-	 } = req.body.args;
+    let { 
+        apiKey,
+        endingBefore,
+        startingAfter,
+        limit,
+         to="to" 
+     } = req.body.args;
 
-	let r  = {
+    let r  = {
         callback     : "",
         contextWrites: {}
     };
 
-	if(!apiKey) {
-		_.echoBadEnd(r, to, res);
-		return;
-	}
+    if(!apiKey) {
+        _.echoBadEnd(r, to, res);
+        return;
+    }
 
-	let stripe = initStripe(apiKey);
+    let stripe = initStripe(apiKey);
 
-	let options = _.clearArgs({
-		ending_before: endingBefore,
-		limit: limit,
-		starting_after: startingAfter
-	})
+    let options = _.clearArgs({
+        ending_before: endingBefore,
+        limit: limit,
+        starting_after: startingAfter
+    })
 
-	stripe.countrySpecs.list(options, function(err, result) {
-		if(!err) {
-    		r.contextWrites[to] = JSON.stringify(result);
+    stripe.countrySpecs.list(options, function(err, result) {
+        if(!err) {
+            r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 
         } else {
             r.contextWrites[to] = JSON.stringify(err);
@@ -45,5 +45,5 @@ module.exports = (req, res) => {
         }
 
         res.status(200).send(r);
-	});	
+    });    
 }

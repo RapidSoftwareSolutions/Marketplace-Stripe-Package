@@ -6,45 +6,45 @@ const initStripe  = require('stripe');
 
 module.exports = (req, res) => {
 
-	req.body.args = _.clearArgs(req.body.args);
+    req.body.args = _.clearArgs(req.body.args);
 
-	let { apiKey, refundId, metadata, to="to" } = req.body.args;
+    let { apiKey, refundId, metadata, to="to" } = req.body.args;
 
-	let r  = {
+    let r  = {
         callback     : "",
         contextWrites: {}
     };
 
-	if(!apiKey || !refundId) {
-		_.echoBadEnd(r, to, res);
-		return;
-	}
+    if(!apiKey || !refundId) {
+        _.echoBadEnd(r, to, res);
+        return;
+    }
 
-	if(metadata)
-	try {
-		metadata = JSON.parse(metadata)
-	} catch(e) {
-		r.contextWrites[to] = 'Invalid JSON value.';
+    if(metadata)
+    try {
+        metadata = JSON.parse(metadata)
+    } catch(e) {
+        r.contextWrites[to] = 'Invalid JSON value.';
         r.callback = 'error';
 
         res.status(200).send(r);
         return;
-	}
+    }
 
-	let stripe = initStripe(apiKey);
+    let stripe = initStripe(apiKey);
 
-	stripe.refunds.update(refundId, {
-		metadata
-	}, function(err, result) {
-		if(!err) {
-    		r.contextWrites[to] = JSON.stringify(result);
+    stripe.refunds.update(refundId, {
+        metadata
+    }, function(err, result) {
+        if(!err) {
+            r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 
         } else {
-        	console.log(err);
+            console.log(err);
             r.contextWrites[to] = JSON.stringify(err);
             r.callback = 'error';
         }
 
         res.status(200).send(r);
-	});	
+    });    
 }
