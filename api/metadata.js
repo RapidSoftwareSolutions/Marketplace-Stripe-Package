@@ -8,7 +8,7 @@ module.exports.do = function(req, res){
         'accounts': {
             'domain': 'stripe.com',
             'credentials': [
-                'secretKey'
+                'apiKey'
             ]
         },
         'blocks': [{
