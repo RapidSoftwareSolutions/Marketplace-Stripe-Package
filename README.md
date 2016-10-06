@@ -1096,62 +1096,6 @@ This request accepts mostly the same arguments as the customer creation call.
 }
 ```
 
-<a name="getBalanceTransaction"/>
-Retrieves the balance transaction with the given ID.
-
-| Field | Type       | Description
-|-------|------------|----------
-| apiKey| credentials| The api key obtained from Stripe.
-| id    | credentials| The ID of the desired balance transaction (as found on any API object that affects the balance, e.g. a charge or transfer).
-
-#### Request example
-```json
-{	
-	"apiKey": "...",
-	"id": "txn_18tiU12eZvKYlo2CetxoRTDG"
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to": {
-			  "id": "txn_18tiU12eZvKYlo2CetxoRTDG",
-			  "object": "balance_transaction",
-			  "amount": 5001,
-			  "available_on": 1474416000,
-			  "created": 1473879105,
-			  "currency": "usd",
-			  "description": "User: 813. Events: 1267. Total Tickets: 1.",
-			  "fee": 175,
-			  "fee_details": [
-			    {
-			      "amount": 175,
-			      "application": null,
-			      "currency": "usd",
-			      "description": "Stripe processing fees",
-			      "type": "stripe_fee"
-			    }
-			  ],
-			  "net": 4826,
-			  "source": "ch_18tiU12eZvKYlo2CliINmYLR",
-			  "sourced_transfers": {
-			    "object": "list",
-			    "data": [],
-			    "has_more": false,
-			    "total_count": 0,
-			    "url": "/v1/transfers?source_transaction=ch_18tiU12eZvKYlo2CliINmYLR"
-			  },
-			  "status": "pending",
-			  "type": "charge"
-			}
-		}
-	}
-}
-```
-
 <a name="deleteCustomer"/>
 ## Stripe.deleteCustomer
 Permanently deletes a customer. It cannot be undone. Also immediately cancels any active subscriptions on the customer.
