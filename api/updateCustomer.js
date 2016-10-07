@@ -22,7 +22,7 @@ module.exports = (req, res) => {
         plan,
         taxPercent,
         trialEnd,
-         to="to" 
+        to="to" 
      } = req.body.args;
 
     let r  = {
@@ -68,8 +68,7 @@ module.exports = (req, res) => {
             r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 
         } else {
-            console.log(err);
-            r.contextWrites[to] = JSON.stringify(err);
+            r.contextWrites[to] = err.raw.message
             r.callback = 'error';
         }
 

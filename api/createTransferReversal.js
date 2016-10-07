@@ -52,7 +52,7 @@ module.exports = (req, res) => {
             r.callback = 'success'; 
         } else {
             console.log(err);
-            r.contextWrites[to] = JSON.stringify(err);
+            r.contextWrites[to] = err.raw.message;
             r.callback = 'error';
         }
 

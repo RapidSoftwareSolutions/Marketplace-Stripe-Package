@@ -36,7 +36,7 @@ module.exports = (req, res) => {
             r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 
         } else {
-            r.contextWrites[to] = JSON.stringify(err);
+            r.contextWrites[to] = err.raw.message
             r.callback = 'error';
         }
 
