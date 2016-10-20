@@ -2,10 +2,12 @@
 
 const _           = require('../lib/functions')
 const fs          = require('fs');
-const http        = require('http');
 const mime        = require('mime');
 const initStripe  = require('stripe');
-
+const request     = {
+    'http' : require('http'),
+    'https': require('https')
+}
 
 module.exports = (req, res) => {
 
@@ -33,8 +35,18 @@ module.exports = (req, res) => {
     let dest       = file.substring(file.lastIndexOf('.') + 1),
         name       = Math.random().toString(36).substring(7) + '_rapid.' + dest,
         fileStream = fs.createWriteStream(`/tmp/${name}`);
+
+    let protocol   = file.split('://')[0];
     
-    http.get(file, function(response) {
+    if(!/http|https/.test(protocol)) {
+        r.contextWrites[to] = 'Bad file url.';
+        r.callback = 'error';
+
+        res.status(200).send(r);
+        return;
+    }
+
+    request[protocol].get(file, function(response) {
         response.pipe(fileStream);
 
         response.on('error', function() {
@@ -42,10 +54,10 @@ module.exports = (req, res) => {
             r.callback = 'error';
 
             res.status(200).send(r);
+            return;
         });
 
         response.on('end', function() {
-            console.log(fs.readFileSync(`/tmp/${name}`));
             stripe.fileUploads.create({
                 purpose: purpose,
                 file: {
@@ -62,7 +74,7 @@ module.exports = (req, res) => {
                     r.callback = 'error';
                 }
 
-                //fs.unlink(name, () => {});
+                fs.unlink(name, () => {});
 
                 res.status(200).send(r);
             });    
