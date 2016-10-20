@@ -83,6 +83,11 @@ module.exports.do = function(req, res){
                     info: "A positive integer in the smallest currency unit (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a 0-decimal currency) representing how much to charge the card. The minimum amount is $0.50 US or equivalent in charge currency.",
                 },
                 {
+                    name: "applicationFee",
+                    type: "String",
+                    info: "A fee in cents that will be applied to the charge and transferred to the application owner's Stripe account. To use an application fee, the request must be made on behalf of another account, using the Stripe-Account header, an OAuth key, or the destination parameter. For more information, see the application fees documentation.",
+                },
+                {
                     name: "currency",
                     type: "String",
                     info: "3-letter ISO code for currency.",
