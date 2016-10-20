@@ -12,6 +12,7 @@ module.exports = (req, res) => {
         apiKey,
         amount,
         currency,
+        applicationFee,
         capture,
         description,
         metadata,
@@ -19,7 +20,7 @@ module.exports = (req, res) => {
         customer,
         source,
         statementDescriptor,
-         to="to" 
+        to="to" 
      } = req.body.args;
 
     let r  = {
@@ -54,7 +55,8 @@ module.exports = (req, res) => {
         receipt_email: receiptEmail,
         customer: customer,
         source: source,
-        statement_descriptor: statementDescriptor
+        statement_descriptor: statementDescriptor,
+        application_fee: applicationFee
     };
 
     options = _.clearArgs(options);
