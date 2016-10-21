@@ -50,7 +50,7 @@ module.exports = (req, res) => {
     let options = {
         amount: amount,
         currency: currency,
-        capture: capture == 'false' ? false : true,
+        capture: capture,
         description: description,
         metadata: metadata,
         receipt_email: receiptEmail,
