@@ -62,7 +62,7 @@ module.exports = (req, res) => {
         name: name
     });
 
-    stripe.accounts.updateExternalAccount(accountId, cardId, options, function(err, result) {
+    stripe.accounts.updateCard(accountId, cardId, options, function(err, result) {
         if(!err) {
             r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 
