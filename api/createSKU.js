@@ -34,6 +34,7 @@ module.exports = (req, res) => {
     }
 
     try {
+        inventory = JSON.parse(inventory);
         if(metadata) metadata = JSON.parse(metadata);
         if(attributes) attributes = JSON.parse(attributes);
         if(packageDimensions) packageDimensions = JSON.parse(packageDimensions);
