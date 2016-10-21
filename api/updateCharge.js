@@ -45,7 +45,7 @@ module.exports = (req, res) => {
 
     let options = {
         description: description,
-        fraudDetails: fraudDetails,
+        fraud_details: fraudDetails,
         metadata: metadata,
         receipt_email: receiptEmail,
         shipping: shipping
