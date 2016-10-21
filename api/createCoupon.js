@@ -47,7 +47,7 @@ module.exports = (req, res) => {
     let stripe = initStripe(apiKey);
 
     let options = {
-        coupon_id: couponId,
+        id: couponId,
         duration: duration,
         amount_off: amountOff,
         currency: currency,
