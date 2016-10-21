@@ -20,6 +20,7 @@ module.exports = (req, res) => {
         customer,
         source,
         statementDescriptor,
+        fraudDetails,
         to="to" 
      } = req.body.args;
 
@@ -56,7 +57,8 @@ module.exports = (req, res) => {
         customer: customer,
         source: source,
         statement_descriptor: statementDescriptor,
-        application_fee: applicationFee
+        application_fee: applicationFee,
+        fraud_details: fraudDetails
     };
 
     options = _.clearArgs(options);
