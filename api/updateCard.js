@@ -23,7 +23,7 @@ module.exports = (req, res) => {
         expYear,
         metadata,
         name,
-         to="to" 
+        to="to" 
      } = req.body.args;
 
     let r  = {
@@ -62,7 +62,7 @@ module.exports = (req, res) => {
         name: name
     });
 
-    stripe.accounts.updateCard(accountId, cardId, options, function(err, result) {
+    stripe.customers.updateCard(accountId, cardId, options, function(err, result) {
         if(!err) {
             r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 
