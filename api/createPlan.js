@@ -47,7 +47,7 @@ module.exports = (req, res) => {
     }
 
     let options = _.clearArgs({
-        plan_id: planId,
+        id: planId,
         amount,
         currency,
         interval,
