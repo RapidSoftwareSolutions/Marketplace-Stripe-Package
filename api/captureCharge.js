@@ -12,6 +12,7 @@ module.exports = (req, res) => {
         apiKey, 
         chargeId,
         amount,
+        capture,
         applicationFee,
         receiptEmail,
         statementDescriptor,
@@ -33,7 +34,8 @@ module.exports = (req, res) => {
         amount: amount,
         application_fee: applicationFee,
         receipt_email: receiptEmail,
-        statement_descriptor: statementDescriptor
+        statement_descriptor: statementDescriptor,
+        capture: capture
     }
 
     stripe.charges.capture(chargeId, options, function(err, result) {
