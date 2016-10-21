@@ -12,16 +12,15 @@ module.exports = (req, res) => {
     let { 
         apiKey,
         invoiceId,
-        closed,
-        forgiven,
-        customer,
         applicationFee,
         description,
         metadata,
         statementDescriptor,
-        taxPercent,
         subscription,
-         to="to"
+        forgiven,
+        closed,
+        taxPercent,
+        to="to"
      } = req.body.args;
 
     let r  = {
@@ -48,15 +47,14 @@ module.exports = (req, res) => {
     }
 
     let options = _.clearArgs({
-        closed,
-        forgiven,
-        customer,
         application_fee: applicationFee,
         description,
         metadata,
-        statement_descriptor: statementDescriptor,
+        statementDescriptor: statement_descriptor,
         subscription,
-        tax_percent: taxPercent
+        forgiven,
+        closed,
+        tax_percent: taxPercent,
     });
 
     stripe.invoices.update(invoiceId, options, function(err, result) {
