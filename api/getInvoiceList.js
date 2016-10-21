@@ -11,11 +11,7 @@ module.exports = (req, res) => {
 
     let { 
         apiKey,
-        orderId,
         customer,
-        source,
-        email,
-        metadata,
         to="to" 
      } = req.body.args;
 
@@ -24,31 +20,18 @@ module.exports = (req, res) => {
         contextWrites: {}
     };
 
-    if(!apiKey || !(customer || source) || !orderId) {
+    if(!apiKey) {
         _.echoBadEnd(r, to, res);
         return;
     }
 
     let stripe = initStripe(apiKey);
 
-    try {
-        if(metadata) metadata = JSON.parse(metadata);
-    } catch(e) {
-        r.contextWrites[to] = 'Invalid JSON value.';
-        r.callback = 'error';
-
-        res.status(200).send(r);
-        return;
-    }    
-
     let options = _.clearArgs({
         customer,
-        source,
-        email,
-        metadata
-    });
+    })
 
-    stripe.orders.pay(orderId, options, function(err, result) {
+    stripe.invoices.list(options, function(err, result) {
         if(!err) {
             r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 
