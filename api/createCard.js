@@ -11,7 +11,7 @@ module.exports = (req, res) => {
 
     let { 
         apiKey,
-        accountId,
+        customerId,
         source,
         externalAccount,
         defaultForCurrency,
@@ -24,7 +24,7 @@ module.exports = (req, res) => {
         contextWrites: {}
     };
 
-    if(!apiKey || !(source || externalAccount) || !accountId) {
+    if(!apiKey || !(source || externalAccount) || !customerId) {
         _.echoBadEnd(r, to, res);
         return;
     }
@@ -50,7 +50,7 @@ module.exports = (req, res) => {
     
     options.defaultForCurrency;
     
-    stripe.customers.createSource(accountId, options, function(err, result) {
+    stripe.customers.createSource(customerId, options, function(err, result) {
         if(!err) {
             r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 

@@ -4096,7 +4096,7 @@ If the account has no default destination card, then the new card will become th
 | Field             | Type       | Description
 |-------------------|------------|----------
 | apiKey            | credentials| The api key obtained from Stripe.
-| accountId         | String     | The account ID obtained from Stripe.
+| customerId         | String     | The customer ID obtained from Stripe.
 | source            | String     | When adding a bank account to a customer, the parameter name is source. When adding to an account, the parameter name is external_account. The value can either be a token, like the ones returned by Stripe.js, or a dictionary containing a user’s bank account details (with the options shown below).
 | externalAccount   | String     | When adding a bank account to a customer, the parameter name is source. When adding to an account, the parameter name is external_account. The value can either be a token, like the ones returned by Stripe.js, or a dictionary containing a user’s bank account details (with the options shown below).
 | defaultForCurrency| String     | If you set this to true (or if this is the first bank account being added in this currency) this bank account will become the default bank account for its currency.
@@ -4106,7 +4106,7 @@ If the account has no default destination card, then the new card will become th
 ```json
 {	
 	"apiKey": "...",
-	"accountId": "acct_1032D82eZvKYlo2C",
+	"customerId": "...",
 	"externalAccount": "tok_189fTS2eZvKYlo2CcYJIOGkr",
 }
 ```
