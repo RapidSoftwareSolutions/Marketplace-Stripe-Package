@@ -10,7 +10,7 @@ module.exports = (req, res) => {
 
     let { 
         apiKey,
-        accountId,
+        customerId,
         cardId,
          to="to" 
      } = req.body.args;
@@ -20,14 +20,14 @@ module.exports = (req, res) => {
         contextWrites: {}
     };
 
-    if(!apiKey || !accountId || !cardId) {
+    if(!apiKey || !customerId || !cardId) {
         _.echoBadEnd(r, to, res);
         return;
     }
 
     let stripe = initStripe(apiKey);
 
-    stripe.accounts.deleteExternalAccount(accountId, cardId, function(err, result) {
+    stripe.customers.deleteCard(customerId, cardId, function(err, result) {
         if(!err) {
             r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 

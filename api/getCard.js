@@ -9,7 +9,7 @@ module.exports = (req, res) => {
 
     let { 
         apiKey,
-        accountId,
+        customerId,
         cardId,
          to="to" 
      } = req.body.args;
@@ -19,14 +19,14 @@ module.exports = (req, res) => {
         contextWrites: {}
     };
 
-    if(!apiKey || !accountId || !cardId) {
+    if(!apiKey || !customerId || !cardId) {
         _.echoBadEnd(r, to, res);
         return;
     }
 
     return request(
         {
-              url: `https://api.stripe.com/v1/accounts/${accountId}/external_accounts/${cardId}`,
+              url: `https://api.stripe.com/v1/customers/${customerId}/sources/${cardId}`,
               headers: {
                 'Authorization': 'Bearer ' + apiKey
               }

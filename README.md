@@ -4153,14 +4153,14 @@ You can always see the 10 most recent cards directly on a customer or recipient;
 | Field    | Type       | Description
 |----------|------------|----------
 | apiKey   | credentials| The api key obtained from Stripe.
-| accountId| String     | The account ID obtained from Stripe.
+| customerId| String     | The account ID obtained from Stripe.
 | cardId   | String     | The card ID obtained from Stripe.
 
 #### Request example
 ```json
 {	
 	"apiKey": "...",
-	"accountId": "acct_1032D82eZvKYlo2C",
+	"customerId": "...",
 	"cardId": "card_18zR2T2eZvKYlo2Cn58EZoyn"
 }
 ```
@@ -4274,14 +4274,14 @@ If a card's default_for_currency property is true, it can only be deleted if it 
 | Field    | Type       | Description
 |----------|------------|----------
 | apiKey   | credentials| The api key obtained from Stripe.
-| accountId| String     | The account ID obtained from Stripe.
+| customerId| String     | The customer ID obtained from Stripe.
 | cardId   | String     | The card ID obtained from Stripe.
 
 #### Request example
 ```json
 {	
 	"apiKey": "...",
-	"accountId": "acct_1032D82eZvKYlo2C",
+	"customerId": "...",
 	"cardId": "card_18zR2T2eZvKYlo2Cn58EZoyn"
 }
 ```
@@ -4307,7 +4307,7 @@ You can see a list of the cards belonging to a managed account. Note that the 10
 | Field        | Type       | Description
 |--------------|------------|----------
 | apiKey       | credentials| The api key obtained from Stripe.
-| accountId    | String     | The account ID obtained from Stripe.
+| customerId    | String     | The customer ID obtained from Stripe.
 | endingBefore | String     | A cursor for use in pagination. ending_before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_bar, your subsequent call can include ending_before=obj_bar in order to fetch the previous page of the list.
 | limit        | String     | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
 | startingAfter| String     | A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list.
@@ -4316,7 +4316,7 @@ You can see a list of the cards belonging to a managed account. Note that the 10
 ```json
 {	
 	"apiKey": "...",
-	"accountId": "acct_1032D82eZvKYlo2C",
+	"customerId": "...",
 }
 ```
 #### Response example

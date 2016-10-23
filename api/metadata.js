@@ -2018,9 +2018,9 @@ module.exports.do = function(req, res){
                     info: "The api key obtained from Stripe.",
                 },
                 {
-                    name: "accountId",
+                    name: "customerId",
                     type: "String",
-                    info: "The account ID obtained from Stripe.",
+                    info: "The customer ID obtained from Stripe.",
                 },
                 {
                     name: "cardId",
@@ -2131,9 +2131,9 @@ module.exports.do = function(req, res){
                     info: "The api key obtained from Stripe.",
                 },
                 {
-                    name: "accountId",
+                    name: "customerId",
                     type: "String",
-                    info: "The account ID obtained from Stripe.",
+                    info: "The customer ID obtained from Stripe.",
                 },
                 {
                     name: "cardId",
