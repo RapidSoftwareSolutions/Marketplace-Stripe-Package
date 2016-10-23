@@ -50,7 +50,7 @@ module.exports = (req, res) => {
     
     options.defaultForCurrency;
     
-    stripe.accounts.createExternalAccount(accountId, options, function(err, result) {
+    stripe.customers.createSource(accountId, options, function(err, result) {
         if(!err) {
             r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 
