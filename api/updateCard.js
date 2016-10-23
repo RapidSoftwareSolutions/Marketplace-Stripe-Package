@@ -10,7 +10,7 @@ module.exports = (req, res) => {
 
     let { 
         apiKey,
-        accountId,
+        customerId,
         cardId,
         addressCity,
         addressCountry,
@@ -31,7 +31,7 @@ module.exports = (req, res) => {
         contextWrites: {}
     };
 
-    if(!apiKey || !accountId || !cardId) {
+    if(!apiKey || !customerId || !cardId) {
         _.echoBadEnd(r, to, res);
         return;
     }
@@ -62,7 +62,7 @@ module.exports = (req, res) => {
         name: name
     });
 
-    stripe.customers.updateCard(accountId, cardId, options, function(err, result) {
+    stripe.customers.updateCard(customerId, cardId, options, function(err, result) {
         if(!err) {
             r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 

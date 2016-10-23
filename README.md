@@ -4208,7 +4208,7 @@ When you update a card, Stripe will automatically validate the card.
 | Field             | Type       | Description
 |-------------------|------------|----------
 | apiKey            | credentials| The api key obtained from Stripe.
-| accountId         | String     | The account ID obtained from Stripe.
+| customerId        | String     | The customer ID obtained from Stripe.
 | cardId            | String     | The card ID obtained from Stripe.
 | addressCity       | String     | City.
 | addressCountry    | String     | Country.
