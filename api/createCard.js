@@ -47,8 +47,9 @@ module.exports = (req, res) => {
 
     if(externalAccount) options.external_account = externalAccount;
     else                options.source           = source;
-
-
+    
+    options.defaultForCurrency;
+    
     stripe.accounts.createExternalAccount(accountId, options, function(err, result) {
         if(!err) {
             r.contextWrites[to] = JSON.stringify(result);
