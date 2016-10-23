@@ -10,7 +10,7 @@ module.exports = (req, res) => {
 
     let { 
         apiKey,
-        accountId,
+        customerId,
         endingBefore,
         limit,
         startingAfter,
@@ -22,7 +22,7 @@ module.exports = (req, res) => {
         contextWrites: {}
     };
 
-    if(!apiKey || !accountId) {
+    if(!apiKey || !customerId) {
         _.echoBadEnd(r, to, res);
         return;
     }
@@ -36,7 +36,7 @@ module.exports = (req, res) => {
         limit: limit,
     });
 
-    stripe.accounts.listExternalAccounts(accountId, function(err, result) {
+    stripe.customers.listCards(customerId, function(err, result) {
         if(!err) {
             r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 
