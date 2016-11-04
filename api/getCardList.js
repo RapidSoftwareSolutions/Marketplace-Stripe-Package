@@ -23,7 +23,7 @@ module.exports = (req, res) => {
     };
 
     if(!apiKey || !customerId) {
-        _.echoBadEnd(r, to, res);
+        _.echoBadEnd(r, to, res, 'apiKey, customerId');
         return;
     }
 

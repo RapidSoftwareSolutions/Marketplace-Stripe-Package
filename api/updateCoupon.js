@@ -13,7 +13,7 @@ module.exports = (req, res) => {
         apiKey,
         couponId,
         metadata, 
-         to="to" 
+        to="to" 
      } = req.body.args;
 
     let r  = {
@@ -21,8 +21,8 @@ module.exports = (req, res) => {
         contextWrites: {}
     };
 
-    if(!apiKey) {
-        _.echoBadEnd(r, to, res);
+    if(!apiKey || !couponId) {
+        _.echoBadEnd(r, to, res, 'apiKey, couponId');
         return;
     }
 

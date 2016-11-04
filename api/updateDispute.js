@@ -23,7 +23,7 @@ module.exports = (req, res) => {
     };
 
     if(!apiKey || !disputeId) {
-        _.echoBadEnd(r, to, res);
+        _.echoBadEnd(r, to, res, 'apiKey, disputeId');
         return;
     }
 

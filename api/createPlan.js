@@ -29,7 +29,7 @@ module.exports = (req, res) => {
     };
 
     if(!apiKey || !planId || !amount || !currency || !interval || !name) {
-        _.echoBadEnd(r, to, res);
+        _.echoBadEnd(r, to, res, 'apiKey, planId, amount, currency, interval, name');
         return;
     }
 

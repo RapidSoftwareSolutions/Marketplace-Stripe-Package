@@ -25,7 +25,7 @@ module.exports = (req, res) => {
     };
 
     if(!apiKey || !(source || externalAccount) || !customerId) {
-        _.echoBadEnd(r, to, res);
+        _.echoBadEnd(r, to, res, 'apiKey, (source or externalAccount), customerId');
         return;
     }
 

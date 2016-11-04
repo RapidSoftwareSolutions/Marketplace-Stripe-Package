@@ -32,7 +32,7 @@ module.exports = (req, res) => {
     };
 
     if(!apiKey || !productId) {
-        _.echoBadEnd(r, to, res);
+        _.echoBadEnd(r, to, res, 'apiKey, productId');
         return;
     }
 

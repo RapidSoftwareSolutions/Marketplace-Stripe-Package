@@ -30,7 +30,7 @@ module.exports = (req, res) => {
     };
 
     if(!apiKey || !source) {
-        _.echoBadEnd(r, to, res);
+        _.echoBadEnd(r, to, res, 'apiKey, source');
         return;
     }
 

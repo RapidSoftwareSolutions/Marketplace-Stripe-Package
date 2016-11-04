@@ -21,7 +21,7 @@ module.exports = (req, res) => {
     };
 
     if(!apiKey || !country) {
-        _.echoBadEnd(r, to, res);
+        _.echoBadEnd(r, to, res, 'apiKey, country');
         return;
     }
 

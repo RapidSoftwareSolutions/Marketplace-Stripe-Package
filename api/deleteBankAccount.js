@@ -22,7 +22,7 @@ module.exports = (req, res) => {
     };
 
     if(!apiKey || ! accountId || !bankAccountId) {
-        _.echoBadEnd(r, to, res);
+        _.echoBadEnd(r, to, res, 'apiKey, accountId, bankAccountId');
         return;
     }
 

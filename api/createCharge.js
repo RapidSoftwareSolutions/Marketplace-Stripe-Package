@@ -30,7 +30,7 @@ module.exports = (req, res) => {
     };
 
     if(!apiKey || !amount || !currency) {
-        _.echoBadEnd(r, to, res);
+        _.echoBadEnd(r, to, res, 'apiKey, amount, currency');
         return;
     }
 

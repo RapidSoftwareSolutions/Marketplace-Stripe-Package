@@ -28,7 +28,7 @@ module.exports = (req, res) => {
     };
 
     if(!apiKey || !customer || !plan) {
-        _.echoBadEnd(r, to, res);
+        _.echoBadEnd(r, to, res, 'apiKey, customer, plan');
         return;
     }
 

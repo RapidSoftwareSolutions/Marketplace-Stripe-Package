@@ -12,7 +12,7 @@ module.exports = (req, res) => {
         apiKey,
         subscriptionId,
         atPeriodEnd,
-         to="to" 
+        to="to" 
      } = req.body.args;
 
     let r  = {
@@ -21,7 +21,7 @@ module.exports = (req, res) => {
     };
 
     if(!apiKey || !subscriptionId) {
-        _.echoBadEnd(r, to, res);
+        _.echoBadEnd(r, to, res, 'apiKey, subscriptionId');
         return;
     }
 

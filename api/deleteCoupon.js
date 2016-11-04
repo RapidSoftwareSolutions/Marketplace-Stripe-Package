@@ -21,7 +21,7 @@ module.exports = (req, res) => {
     };
 
     if(!apiKey || !couponId) {
-        _.echoBadEnd(r, to, res);
+        _.echoBadEnd(r, to, res, 'apiKey, couponId');
         return;
     }
 

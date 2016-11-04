@@ -19,7 +19,7 @@ module.exports = (req, res) => {
     };
 
     if(!apiKey || !skuId) {
-        _.echoBadEnd(r, to, res);
+        _.echoBadEnd(r, to, res, 'apiKey, skuId');
         return;
     }
 

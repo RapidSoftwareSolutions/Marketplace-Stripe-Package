@@ -23,7 +23,7 @@ module.exports = (req, res) => {
     };
 
     if(!apiKey || !email) {
-        _.echoBadEnd(r, to, res);
+        _.echoBadEnd(r, to, res, 'apiKey, email');
         return;
     }
 

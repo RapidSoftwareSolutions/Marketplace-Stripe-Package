@@ -13,7 +13,7 @@ module.exports = (req, res) => {
         apiKey,
         accountId,
         bankAccountId,
-         to="to" 
+        to="to" 
      } = req.body.args;
 
     let r  = {
@@ -22,7 +22,7 @@ module.exports = (req, res) => {
     };
 
     if(!apiKey || ! accountId || !bankAccountId) {
-        _.echoBadEnd(r, to, res);
+        _.echoBadEnd(r, to, res, 'apiKey, accountId, bankAccountId');
         return;
     }
 

@@ -32,7 +32,7 @@ module.exports = (req, res) => {
     };
 
     if(!apiKey || !customerId || !cardId) {
-        _.echoBadEnd(r, to, res);
+        _.echoBadEnd(r, to, res, 'apiKey, customerId, cardId');
         return;
     }
 

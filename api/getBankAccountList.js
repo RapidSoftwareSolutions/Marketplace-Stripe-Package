@@ -15,7 +15,7 @@ module.exports = (req, res) => {
         endingBefore,
         startingAfter,
         limit,
-         to="to" 
+        to="to" 
      } = req.body.args;
 
     let r  = {
@@ -24,7 +24,7 @@ module.exports = (req, res) => {
     };
 
     if(!apiKey || !accountId) {
-        _.echoBadEnd(r, to, res);
+        _.echoBadEnd(r, to, res, 'apiKey, accountId');
         return;
     }
 

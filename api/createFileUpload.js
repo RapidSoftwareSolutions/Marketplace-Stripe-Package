@@ -26,7 +26,7 @@ module.exports = (req, res) => {
     };
 
     if(!apiKey || !purpose || !file) {
-        _.echoBadEnd(r, to, res);
+        _.echoBadEnd(r, to, res, 'apiKey, purpose, file');
         return;
     }
 

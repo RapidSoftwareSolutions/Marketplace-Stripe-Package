@@ -20,7 +20,7 @@ module.exports = (req, res) => {
     };
 
     if(!apiKey || !transferId) {
-        _.echoBadEnd(r, to, res);
+        _.echoBadEnd(r, to, res, 'apiKey, transferId');
         return;
     }
 
