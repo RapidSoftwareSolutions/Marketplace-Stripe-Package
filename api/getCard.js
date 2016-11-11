@@ -24,22 +24,21 @@ module.exports = (req, res) => {
         return;
     }
 
-    return request(
-        {
-              url: `https://api.stripe.com/v1/customers/${customerId}/sources/${cardId}`,
-              headers: {
-                'Authorization': 'Bearer ' + apiKey
-              }
-          }, (err, response, body) => {
-              if (!err && response.statusCode == 200) {
-                  r.contextWrites[to] = JSON.stringify(body);
+    return request({
+        url: `https://api.stripe.com/v1/customers/${customerId}/sources/${cardId}`,
+        headers: {
+            'Authorization': 'Bearer ' + apiKey
+        }
+    }, (err, response, body) => {
+            if (!err && response.statusCode == 200) {
+                r.contextWrites[to] = JSON.parse(body);
                 r.callback = 'success';
             } else {
-                r.contextWrites[to] = JSON.stringify(err || body);
+                r.contextWrites[to] = JSON.parse(err || body);
                 r.callback = 'error';
             }
 
             res.status(200).send(r);
-          }
+        }
     );
 }
