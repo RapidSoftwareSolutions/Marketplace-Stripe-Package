@@ -31,7 +31,7 @@ module.exports = (req, res) => {
 
     stripe.events.list({
         type: type || '*',
-        endingBefore: ending_before,
+        endingBefore: endingBefore,
         limit: limit,
         startingAfter: starting_after,
     }, function(err, result) {
