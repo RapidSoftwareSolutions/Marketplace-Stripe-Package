@@ -29,7 +29,7 @@ module.exports = (req, res) => {
 
     stripe.transfers.retrieveReversal(transferId, id, function(err, result) {
         if(!err) {
-            r.contextWrites[to] = JSON.stringify(result);
+            r.contextWrites[to] = result;
             r.callback = 'success'; 
         } else {
             console.log(err);

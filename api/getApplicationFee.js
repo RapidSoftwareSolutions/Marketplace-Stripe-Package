@@ -30,7 +30,7 @@ module.exports = (req, res) => {
     stripe.applicationFees.retrieve(feeId, function(err, result) {
         console.log(err);
         if(!err) {
-            r.contextWrites[to] = JSON.stringify(result);
+            r.contextWrites[to] = result;
             r.callback = 'success'; 
         } else {
             r.contextWrites[to] = err.raw.message;

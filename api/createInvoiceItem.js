@@ -59,7 +59,7 @@ module.exports = (req, res) => {
 
     stripe.invoiceItems.create(options, function(err, result) {
         if(!err) {
-            r.contextWrites[to] = JSON.stringify(result);
+            r.contextWrites[to] = result;
             r.callback = 'success'; 
         } else {
             r.contextWrites[to] = err.raw.message;
