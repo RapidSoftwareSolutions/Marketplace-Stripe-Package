@@ -18,7 +18,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
             ],
@@ -39,7 +39,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
@@ -84,13 +84,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "amount",
                     type: "String",
-                    info: "Required: A positive integer in the smallest currency unit (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a 0-decimal currency) representing how much to charge the card. The minimum amount is $0.50 US or equivalent in charge currency.",
+                    info: "A positive integer in the smallest currency unit (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a 0-decimal currency) representing how much to charge the card. The minimum amount is $0.50 US or equivalent in charge currency.",
                     required: true
                 },
                 {
@@ -102,7 +102,7 @@ module.exports.do = function(req, res){
                 {
                     name: "currency",
                     type: "String",
-                    info: "Required: 3-letter ISO code for currency.",
+                    info: "3-letter ISO code for currency.",
                     required: true
                 },
                 {
@@ -160,13 +160,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "source",
                     type: "String",
-                    info: "Required: The source can either be a token, like the ones returned by our Stripe.js, or a dictionary containing a user’s credit card details (with the options shown below).child arguments",
+                    info: "The source can either be a token, like the ones returned by our Stripe.js, or a dictionary containing a user’s credit card details (with the options shown below).child arguments",
                     required: true
                 },
                 {
@@ -241,13 +241,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "id",
                     type: "credentials",
-                    info: "Required: The ID of the desired balance transaction (as found on any API object that affects the balance, e.g. a charge or transfer).",
+                    info: "The ID of the desired balance transaction (as found on any API object that affects the balance, e.g. a charge or transfer).",
                     required: true
                 },
             ],
@@ -268,13 +268,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "chargeId",
                     type: "String",
-                    info: "Required: The identifier of the charge to be retrieved.",
+                    info: "The identifier of the charge to be retrieved.",
                     required: true
                 },
             ],
@@ -295,13 +295,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "chargeId",
                     type: "String",
-                    info: "Required: Id of a charge.",
+                    info: "Id of a charge.",
                     required: true
                 },
                 {
@@ -350,13 +350,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "chargeId",
                     type: "String",
-                    info: "Required: Id of a charge.",
+                    info: "Id of a charge.",
                     required: true
                 },
                 {
@@ -401,7 +401,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
@@ -457,13 +457,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "customerId",
                     type: "String",
-                    info: "Required: The identifier of the customer to be retrieved.",
+                    info: "The identifier of the customer to be retrieved.",
                     required: true
                 }
             ],
@@ -484,13 +484,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "customerId",
                     type: "String",
-                    info: "Required: If of customer to update.",
+                    info: "If of customer to update.",
                     required: true
                 },
                 {
@@ -571,13 +571,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "customerId",
                     type: "String",
-                    info: "Required: If of customer to update.",
+                    info: "If of customer to update.",
                     required: true
                 }
             ],
@@ -598,7 +598,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
@@ -636,13 +636,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "disputeId",
                     type: "String",
-                    info: "Required: ID of dispute to retrieve.",
+                    info: "ID of dispute to retrieve.",
                     required: true
                 }
             ],
@@ -663,13 +663,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "disputeId",
                     type: "String",
-                    info: "Required: ID of dispute to retrieve.",
+                    info: "ID of dispute to retrieve.",
                     required: true
                 },
                 {
@@ -702,13 +702,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "disputeId",
                     type: "String",
-                    info: "Required: ID of dispute to retrieve.",
+                    info: "ID of dispute to retrieve.",
                     required: true
                 }
             ],
@@ -729,7 +729,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
@@ -767,13 +767,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "eventId",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 }
             ],
@@ -794,7 +794,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
@@ -838,19 +838,19 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "file",
                     type: "File",
-                    info: "Required: A file to upload.",
+                    info: "A file to upload.",
                     required: true
                 },
                 {
                     name: "purpose",
                     type: "String",
-                    info: "Required: The purpoe of the uploaded file. Possible values are `business_logo`, `dispute_evidence`, `identity_document`, `incorporation_article`, `incorporation_document`, `payment_provider_transfer`, `product_feed`.",
+                    info: "The purpoe of the uploaded file. Possible values are `business_logo`, `dispute_evidence`, `identity_document`, `incorporation_article`, `incorporation_document`, `payment_provider_transfer`, `product_feed`.",
                     required: true
                 }
             ],
@@ -871,13 +871,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "id",
                     type: "String",
-                    info: "Required: The identifier of the file upload to be retrieved.",
+                    info: "The identifier of the file upload to be retrieved.",
                     required: true
                 }
             ],
@@ -898,13 +898,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "file",
                     type: "String",
-                    info: "Required: A file to upload.",
+                    info: "A file to upload.",
                     required: true
                 },
                 {
@@ -947,13 +947,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "chargeId",
                     type: "String",
-                    info: "Required: The identifier of the charge to refund.",
+                    info: "The identifier of the charge to refund.",
                     required: true
                 },
                 {
@@ -1004,13 +1004,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "refundId",
                     type: "String",
-                    info: "Required: ID of refund to retrieve.",
+                    info: "ID of refund to retrieve.",
                     required: true
                 }
             ],
@@ -1031,13 +1031,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "refundId",
                     type: "String",
-                    info: "Required: ID of refund to retrieve.",
+                    info: "ID of refund to retrieve.",
                     required: true
                 },
                 {
@@ -1064,7 +1064,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
@@ -1102,31 +1102,31 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "cardNumber",
                     type: "String",
-                    info: "Required: Number of card",
+                    info: "Number of card",
                     required: true
                 },
                 {
                     name: "cardExpirationMonth",
                     type: "Number",
-                    info: "Required: Expiration month of card",
+                    info: "Expiration month of card",
                     required: true
                 },
                 {
                     name: "cardExpirationYear",
                     type: "Number",
-                    info: "Required: Expiration year of card",
+                    info: "Expiration year of card",
                     required: true
                 },
                 {
                     name: "cardCvc",
                     type: "String",
-                    info: "Required: CVC code of card",
+                    info: "CVC code of card",
                     required: true
                 }
             ],
@@ -1147,43 +1147,43 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "bankAccountCountry",
                     type: "String",
-                    info: "Required: The bank account country",
+                    info: "The bank account country",
                     required: true
                 },
                 {
                     name: "bankAccountCurrency",
                     type: "String",
-                    info: "Required: The bank account currency",
+                    info: "The bank account currency",
                     required: true
                 },
                 {
                     name: "bankAccountAccountHolderName",
                     type: "String",
-                    info: "Required: The bank account holder name",
+                    info: "The bank account holder name",
                     required: true
                 },
                 {
                     name: "bankAccountAccountHolderType",
                     type: "String",
-                    info: "Required: The bank account holder type",
+                    info: "The bank account holder type",
                     required: true
                 },
                 {
                     name: "bankAccountRoutingNumber",
                     type: "String",
-                    info: "Required: The bank account routing number",
+                    info: "The bank account routing number",
                     required: true
                 },
                 {
                     name: "bankAccountNumber",
                     type: "String",
-                    info: "Required: The bank account number",
+                    info: "The bank account number",
                     required: true
                 },
             ],
@@ -1204,13 +1204,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "personalIdNumber",
                     type: "String",
-                    info: "Required: The bank account country",
+                    info: "The bank account country",
                     required: true
                 },
             ],
@@ -1231,13 +1231,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "tokenId",
                     type: "String",
-                    info: "Required: The ID of the desired token.",
+                    info: "The ID of the desired token.",
                     required: true
                 },
             ],
@@ -1258,25 +1258,25 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "amount",
                     type: "Number",
-                    info: "Required: A positive integer in cents representing how much to transfer.",
+                    info: "A positive integer in cents representing how much to transfer.",
                     required: true
                 },
                 {
                     name: "currency",
                     type: "String",
-                    info: "Required: 3-letter ISO code for currency",
+                    info: "3-letter ISO code for currency",
                     required: true
                 },
                 {
                     name: "destination",
                     type: "String",
-                    info: "Required: The id of a bank account or a card to send the transfer to, or the string `default_for_currency` to use the default external account for the specified currency. ",
+                    info: "The id of a bank account or a card to send the transfer to, or the string `default_for_currency` to use the default external account for the specified currency. ",
                     required: true
                 },
                 {
@@ -1321,13 +1321,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "transferId",
                     type: "String",
-                    info: "Required: The identifier of the transfer to be retrieved.",
+                    info: "The identifier of the transfer to be retrieved.",
                     required: true
                 },
             ],
@@ -1348,13 +1348,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "transferId",
                     type: "String",
-                    info: "Required: Id of transfer to update.",
+                    info: "Id of transfer to update.",
                     required: true
                 },
                 {
@@ -1387,7 +1387,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
@@ -1426,13 +1426,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "transferId",
                     type: "credentials",
-                    info: "Required: The identifier of the transfer to be reversed.",
+                    info: "The identifier of the transfer to be reversed.",
                     required: true
                 },
                 {
@@ -1471,19 +1471,19 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "id",
                     type: "String",
-                    info: "Required: ID of reversal to retrieve.",
+                    info: "ID of reversal to retrieve.",
                     required: true
                 },
                 {
                     name: "transferId",
                     type: "String",
-                    info: "Required: ID of the transfer reversed.",
+                    info: "ID of the transfer reversed.",
                     required: true
                 }
             ],
@@ -1504,19 +1504,19 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "id",
                     type: "String",
-                    info: "Required: ID of reversal to retrieve.",
+                    info: "ID of reversal to retrieve.",
                     required: true
                 },
                 {
                     name: "transferId",
                     type: "String",
-                    info: "Required: ID of the transfer reversed.",
+                    info: "ID of the transfer reversed.",
                     required: true
                 },
                 {
@@ -1549,13 +1549,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "transferId",
                     type: "String",
-                    info: "Required: The ID of the transfer whose reversals will be retrieved.",
+                    info: "The ID of the transfer whose reversals will be retrieved.",
                     required: true
                 },
             ],
@@ -1576,7 +1576,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
@@ -1588,7 +1588,7 @@ module.exports.do = function(req, res){
                 {
                     name: "email",
                     type: "String",
-                    info: "Required: The email address of the account holder. For standalone accounts, Stripe will email your user with instructions for how to set up their account. For managed accounts, this is only to make the account easier to identify to you: Stripe will never directly reach out to your users.",
+                    info: "The email address of the account holder. For standalone accounts, Stripe will email your user with instructions for how to set up their account. For managed accounts, this is only to make the account easier to identify to you: Stripe will never directly reach out to your users.",
                     required: true
                 },
                 {
@@ -1615,13 +1615,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "accountId",
                     type: "String",
-                    info: "Required: Id of account to retrive"
+                    info: "Id of account to retrive"
                 },
             ],
             'callbacks':[
@@ -1641,13 +1641,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "accountId",
                     type: "String",
-                    info: "Required: Id of account to update"
+                    info: "Id of account to update"
                 },
                 {
                     name: "businessLogo",
@@ -1757,13 +1757,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "accountId",
                     type: "String",
-                    info: "Required: Id of account to delete"
+                    info: "Id of account to delete"
                 },
             ],
             'callbacks':[
@@ -1783,18 +1783,18 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "accountId",
                     type: "String",
-                    info: "Required: Id of account to reject"
+                    info: "Id of account to reject"
                 },
                 {
                     name: "reason",
                     type: "String",
-                    info: "Required: The reason for rejecting the account. May be one of `fraud`, `terms_of_service`, or `other`."
+                    info: "The reason for rejecting the account. May be one of `fraud`, `terms_of_service`, or `other`."
                 },
             ],
             'callbacks':[
@@ -1814,7 +1814,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
@@ -1850,13 +1850,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "appId",
                     type: "String",
-                    info: "Required: The identifier of the application fee to be refunded.",
+                    info: "The identifier of the application fee to be refunded.",
                     required: true
                 },
                 {
@@ -1887,19 +1887,19 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "feeId",
                     type: "String",
-                    info: "Required: ID of the application fee refunded.",
+                    info: "ID of the application fee refunded.",
                     required: true
                 },
                  {
                     name: "refundId",
                     type: "String",
-                    info: "Required: ID of refund to retrieve.",
+                    info: "ID of refund to retrieve.",
                     required: true
                 },
             ],
@@ -1920,19 +1920,19 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "feeId",
                     type: "String",
-                    info: "Required: ID of the application fee refunded.",
+                    info: "ID of the application fee refunded.",
                     required: true
                 },
                 {
                     name: "refundId",
                     type: "String",
-                    info: "Required: ID of refund to retrieve.",
+                    info: "ID of refund to retrieve.",
                     required: true
                 },
                 {
@@ -1959,13 +1959,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "appId",
                     type: "String",
-                    info: "Required: The ID of the application fee whose refunds will be retrieved.",
+                    info: "The ID of the application fee whose refunds will be retrieved.",
                     required: true
                 },
                 {
@@ -2001,13 +2001,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "feeId",
                     type: "String",
-                    info: "Required: The identifier of the fee to be retrieved.",
+                    info: "The identifier of the fee to be retrieved.",
                     required: true
                 },
             ],
@@ -2072,7 +2072,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
@@ -2110,13 +2110,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "country",
                     type: "String",
-                    info: "Required: An ISO country code. Available country codes can be listed with the List Country Specs endpoint.",
+                    info: "An ISO country code. Available country codes can be listed with the List Country Specs endpoint.",
                     required: true
                 },
             ],
@@ -2137,7 +2137,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
@@ -2189,19 +2189,19 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "accountId",
                     type: "String",
-                    info: "Required: The account ID obtained from Stripe.",
+                    info: "The account ID obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "bankAccountId",
                     type: "String",
-                    info: "Required: The bank account ID obtained from Stripe.",
+                    info: "The bank account ID obtained from Stripe.",
                     required: true
                 },
 
@@ -2223,19 +2223,19 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "accountId",
                     type: "String",
-                    info: "Required: The account ID obtained from Stripe.",
+                    info: "The account ID obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "bankAccountId",
                     type: "String",
-                    info: "Required: The ID of the bank account to be updated.",
+                    info: "The ID of the bank account to be updated.",
                     required: true
                 },
                 {
@@ -2262,19 +2262,19 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "accountId",
                     type: "String",
-                    info: "Required: The account ID obtained from Stripe.",
+                    info: "The account ID obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "bankAccountId",
                     type: "String",
-                    info: "Required: The bank account ID obtained from Stripe.",
+                    info: "The bank account ID obtained from Stripe.",
                     required: true
                 },
 
@@ -2296,7 +2296,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
@@ -2340,7 +2340,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
@@ -2391,19 +2391,19 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "customerId",
                     type: "String",
-                    info: "Required: The customer ID obtained from Stripe.",
+                    info: "The customer ID obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "cardId",
                     type: "String",
-                    info: "Required: The card ID obtained from Stripe.",
+                    info: "The card ID obtained from Stripe.",
                     required: true
                 },
             ],
@@ -2424,19 +2424,19 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "customerId",
                     type: "String",
-                    info: "Required: The customer ID obtained from Stripe.",
+                    info: "The customer ID obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "cardId",
                     type: "String",
-                    info: "Required: The card ID obtained from Stripe.",
+                    info: "The card ID obtained from Stripe.",
                     required: true
                 },
                 {
@@ -2523,19 +2523,19 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "customerId",
                     type: "String",
-                    info: "Required: The customer ID obtained from Stripe.",
+                    info: "The customer ID obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "cardId",
                     type: "String",
-                    info: "Required: The card ID obtained from Stripe.",
+                    info: "The card ID obtained from Stripe.",
                     required: true
                 },
             ],
@@ -2556,13 +2556,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "accountId",
                     type: "String",
-                    info: "Required: The account ID obtained from Stripe.",
+                    info: "The account ID obtained from Stripe.",
                     required: true
                 },
                 {
@@ -2600,25 +2600,25 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "amount",
                     type: "String",
-                    info: "Required: The account ID obtained from Stripe.",
+                    info: "The account ID obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "currency",
                     type: "String",
-                    info: "Required: Only USD currently supported",
+                    info: "Only USD currently supported",
                     required: true
                 },
                 {
                     name: "email",
                     type: "String",
-                    info: "Required: Email of the customerId"
+                    info: "Email of the customerId"
                 },
                 {
                     name: "description",
@@ -2656,13 +2656,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "receiverId",
                     type: "String",
-                    info: "Required: Id of receiver to retrive.",
+                    info: "Id of receiver to retrive.",
                     required: true
                 }
             ],
@@ -2683,7 +2683,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
             ],
@@ -2704,13 +2704,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "currency",
                     type: "String",
-                    info: "Required: 3-letter ISO code representing the currency in which the order should be made. Stripe will validate that all entries in items match the currency specified here.",
+                    info: "3-letter ISO code representing the currency in which the order should be made. Stripe will validate that all entries in items match the currency specified here.",
                     required: true
                 },
                 {
@@ -2767,13 +2767,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "orderId",
                     type: "String",
-                    info: "Required: Id of receiver to retrive.",
+                    info: "Id of receiver to retrive.",
                     required: true
                 }
             ],
@@ -2794,13 +2794,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "orderId",
                     type: "String",
-                    info: "Required: Id of order to update.",
+                    info: "Id of order to update.",
                     required: true
                 },
                 {
@@ -2845,13 +2845,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "orderId",
                     type: "String",
-                    info: "Required: The ID of an order to pay.",
+                    info: "The ID of an order to pay.",
                     required: true
                 },
                 {
@@ -2895,7 +2895,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
@@ -2952,13 +2952,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "orderId",
                     type: "String",
-                    info: "Required: Order id."
+                    info: "Order id."
                 },
                 {
                     name: "items",
@@ -2983,13 +2983,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "orderId",
                     type: "String",
-                    info: "Required: The identifier of the order return to be retrieved."
+                    info: "The identifier of the order return to be retrieved."
                 },
             ],
             'callbacks':[
@@ -3009,7 +3009,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
@@ -3042,7 +3042,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
@@ -3054,7 +3054,7 @@ module.exports.do = function(req, res){
                 {
                     name: "name",
                     type: "String",
-                    info: "Required: The product’s name, meant to be displayable to the customer.",
+                    info: "The product’s name, meant to be displayable to the customer.",
                     required: true
                 },
                 {
@@ -3135,13 +3135,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "productId",
                     type: "String",
-                    info: "Required: The identifier of the product to be retrieved.",
+                    info: "The identifier of the product to be retrieved.",
                     required: true
                 },
             ],
@@ -3162,13 +3162,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "productId",
                     type: "String",
-                    info: "Required: The id of product to update.",
+                    info: "The id of product to update.",
                     required: true
                 },
                 {
@@ -3255,7 +3255,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
@@ -3295,13 +3295,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "productId",
                     type: "String",
-                    info: "Required: The ID of the product to delete.",
+                    info: "The ID of the product to delete.",
                     required: true
                 },
             ],
@@ -3322,7 +3322,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
@@ -3334,25 +3334,25 @@ module.exports.do = function(req, res){
                 {
                     name: "currency",
                     type: "String",
-                    info: "Required: 3-letter ISO code for currency.",
+                    info: "3-letter ISO code for currency.",
                     required: true
                 },
                 {
                     name: "inventory",
                     type: "JSON",
-                    info: "Required: Description of the SKU’s inventory. Example: {\"type\": \"finite\", \"quantity\": 500, \"value\": \"in_stock\"}",
+                    info: "Description of the SKU’s inventory. Example: {\"type\": \"finite\", \"quantity\": 500, \"value\": \"in_stock\"}",
                     required: true
                 },
                 {
                     name: "price",
                     type: "Number",
-                    info: "Required: The cost of the item as a nonnegative integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a 0-decimal currency).",
+                    info: "The cost of the item as a nonnegative integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a 0-decimal currency).",
                     required: true
                 },
                 {
                     name: "product",
                     type: "String",
-                    info: "Required: The ID of the product this SKU is associated with.",
+                    info: "The ID of the product this SKU is associated with.",
                     required: true
                 },
                 {
@@ -3403,13 +3403,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "skuId",
                     type: "String",
-                    info: "Required: The identifier of the SKU to be retrieved.",
+                    info: "The identifier of the SKU to be retrieved.",
                     required: true
                 },
             ],
@@ -3430,13 +3430,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "skuId",
                     type: "String",
-                    info: "Required: The identifier of the SKU to be updated.",
+                    info: "The identifier of the SKU to be updated.",
                     required: true
                 },
                 {
@@ -3511,7 +3511,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
@@ -3552,13 +3552,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "skuId",
                     type: "String",
-                    info: "Required: The identifier of the SKU to be deleted.",
+                    info: "The identifier of the SKU to be deleted.",
                     required: true
                 },
             ],
@@ -3579,7 +3579,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
@@ -3591,7 +3591,7 @@ module.exports.do = function(req, res){
                 {
                     name: "duration",
                     type: "String",
-                    info: "Required: Specifies how long the discount will be in effect. Can be `forever`, `once`, or `repeating`.",
+                    info: "Specifies how long the discount will be in effect. Can be `forever`, `once`, or `repeating`.",
                     required: true
                 },
                 {
@@ -3655,13 +3655,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "couponId",
                     type: "String",
-                    info: "Required: Unique string of your choice that will be used to identify this coupon when applying it to a customer. This is often a specific code you’ll give to your customer to use when signing up (e.g. FALL25OFF). If you don’t want to specify a particular code, you can leave the ID blank and we’ll generate a random code for you.",
+                    info: "Unique string of your choice that will be used to identify this coupon when applying it to a customer. This is often a specific code you’ll give to your customer to use when signing up (e.g. FALL25OFF). If you don’t want to specify a particular code, you can leave the ID blank and we’ll generate a random code for you.",
                     required: true
                 },
             ],
@@ -3682,13 +3682,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "couponId",
                     type: "String",
-                    info: "Required: Unique string of your choice that will be used to identify this coupon when applying it to a customer. This is often a specific code you’ll give to your customer to use when signing up (e.g. FALL25OFF). If you don’t want to specify a particular code, you can leave the ID blank and we’ll generate a random code for you.",
+                    info: "Unique string of your choice that will be used to identify this coupon when applying it to a customer. This is often a specific code you’ll give to your customer to use when signing up (e.g. FALL25OFF). If you don’t want to specify a particular code, you can leave the ID blank and we’ll generate a random code for you.",
                     required: true
                 },
                 {
@@ -3715,13 +3715,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "couponId",
                     type: "String",
-                    info: "Required: Unique string of your choice that will be used to identify this coupon when applying it to a customer. This is often a specific code you’ll give to your customer to use when signing up (e.g. FALL25OFF). If you don’t want to specify a particular code, you can leave the ID blank and we’ll generate a random code for you.",
+                    info: "Unique string of your choice that will be used to identify this coupon when applying it to a customer. This is often a specific code you’ll give to your customer to use when signing up (e.g. FALL25OFF). If you don’t want to specify a particular code, you can leave the ID blank and we’ll generate a random code for you.",
                     required: true
                 },
             ],
@@ -3742,7 +3742,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
             ],
@@ -3763,13 +3763,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "customerId",
                     type: "String",
-                    info: "Required: Id of customer to delete."
+                    info: "Id of customer to delete."
                 },
             ],
             'callbacks':[
@@ -3789,13 +3789,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "subscriptionId",
                     type: "String",
-                    info: "Required: Id of subscribtion to delete."
+                    info: "Id of subscribtion to delete."
                 },
             ],
             'callbacks':[
@@ -3815,13 +3815,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "customer",
                     type: "String",
-                    info: "Required: Customer Id"
+                    info: "Customer Id"
                 },
                 {
                     name: "applicationFee",
@@ -3873,13 +3873,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "invoiceId",
                     type: "String",
-                    info: "Required: Invoice id."
+                    info: "Invoice id."
                 },
             ],
             'callbacks':[
@@ -3899,13 +3899,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "invoice",
                     type: "String",
-                    info: "Required: Invoice id."
+                    info: "Invoice id."
                 },
                 {
                     name: "coupon",
@@ -3966,13 +3966,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "invoiceId",
                     type: "String",
-                    info: "Required: Invoice id."
+                    info: "Invoice id."
                 },
                 {
                     name: "applicationFee",
@@ -4035,13 +4035,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "invoiceId",
                     type: "String",
-                    info: "Required: Invoice id."
+                    info: "Invoice id."
                 },
             ],
             'callbacks':[
@@ -4061,7 +4061,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
@@ -4087,25 +4087,25 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "amount",
                     type: "Number",
-                    info: "Required: The integer amount in cents of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer’s account, pass a negative amount.",
+                    info: "The integer amount in cents of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer’s account, pass a negative amount.",
                     required: true
                 },
                 {
                     name: "currency",
                     type: "String",
-                    info: "Required: 3-letter ISO code for currency.",
+                    info: "3-letter ISO code for currency.",
                     required: true
                 },
                 {
                     name: "customer",
                     type: "String",
-                    info: "Required: The ID of the customer who will be billed when this invoice item is billed.",
+                    info: "The ID of the customer who will be billed when this invoice item is billed.",
                     required: true
                 },
                 {
@@ -4154,13 +4154,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "invoiceitem",
                     type: "String",
-                    info: "Required: The ID of the desired invoice item."
+                    info: "The ID of the desired invoice item."
                 }
             ],
             'callbacks':[
@@ -4180,19 +4180,19 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "itemId",
                     type: "String",
-                    info: "Required: Required: Item id.",
+                    info: "Item id.",
                     required: true
                 },
                 {
                     name: "amount",
                     type: "Number",
-                    info: "Required: The integer amount in cents of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer's account, pass a negative amount."
+                    info: "The integer amount in cents of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer's account, pass a negative amount."
                 },
                 {
                     name: "description",
@@ -4227,13 +4227,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "invoiceitem",
                     type: "String",
-                    info: "Required: The ID of the desired invoice item."
+                    info: "The ID of the desired invoice item."
                 }
             ],
             'callbacks':[
@@ -4253,7 +4253,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
@@ -4279,33 +4279,33 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "planId",
                     type: "String",
-                    info: "Required: Unique string of your choice that will be used to identify this plan when subscribing a customer. This could be an identifier like “gold” or a primary key from your own database."
+                    info: "Unique string of your choice that will be used to identify this plan when subscribing a customer. This could be an identifier like “gold” or a primary key from your own database."
                 },
                 {
                     name: "amount",
                     type: "String",
-                    info: "Required: A positive integer in cents (or 0 for a free plan) representing how much to charge (on a recurring basis)."
+                    info: "A positive integer in cents (or 0 for a free plan) representing how much to charge (on a recurring basis)."
                 },
                 {
                     name: "currency",
                     type: "String",
-                    info: "Required: 3-letter ISO code for currency."
+                    info: "3-letter ISO code for currency."
                 },
                 {
                     name: "interval",
                     type: "String",
-                    info: "Required: Specifies billing frequency. Either day, week, month or year."
+                    info: "Specifies billing frequency. Either day, week, month or year."
                 },
                 {
                     name: "name",
                     type: "String",
-                    info: "Required: Name of the plan, to be displayed on invoices and in the web interface."
+                    info: "Name of the plan, to be displayed on invoices and in the web interface."
                 },
                 {
                     name: "intervalCount",
@@ -4345,13 +4345,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "planId",
                     type: "String",
-                    info: "Required: The ID of the desired plan."
+                    info: "The ID of the desired plan."
                 }
             ],
             'callbacks':[
@@ -4371,13 +4371,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "planId",
                     type: "String",
-                    info: "Required: The identifier of the plan to be updated."
+                    info: "The identifier of the plan to be updated."
                 },
                 {
                     name: "name",
@@ -4412,13 +4412,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "planId",
                     type: "String",
-                    info: "Required: The identifier of the plan to be deleted."
+                    info: "The identifier of the plan to be deleted."
                 }
             ],
             'callbacks':[
@@ -4438,7 +4438,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 }
             ],
@@ -4459,7 +4459,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
@@ -4475,12 +4475,12 @@ module.exports.do = function(req, res){
                 {
                     name: "customer",
                     type: "String",
-                    info: "Required: The identifier of the customer to subscribe."
+                    info: "The identifier of the customer to subscribe."
                 },
                 {
                     name: "plan",
                     type: "String",
-                    info: "Required: The identifier of the plan to subscribe the customer to."
+                    info: "The identifier of the plan to subscribe the customer to."
                 },
                 {
                     name: "source",
@@ -4525,13 +4525,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "subscriptionId",
                     type: "String",
-                    info: "Required: ID of subscription to retrieve."
+                    info: "ID of subscription to retrieve."
                 }
             ],
             'callbacks':[
@@ -4551,13 +4551,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "subscriptionId",
                     type: "String",
-                    info: "Required: ID of subscription to updated."
+                    info: "ID of subscription to updated."
                 },
                 {
                     name: "applicationFeePercent",
@@ -4622,13 +4622,13 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
                     name: "subscriptionId",
                     type: "String",
-                    info: "Required: ID of subscription to retrieve."
+                    info: "ID of subscription to retrieve."
                 },
                 {
                     name: "atPeriodEnd",
@@ -4653,7 +4653,7 @@ module.exports.do = function(req, res){
                 {
                     name: "apiKey",
                     type: "credentials",
-                    info: "Required: The api key obtained from Stripe.",
+                    info: "The api key obtained from Stripe.",
                     required: true
                 },
                 {
