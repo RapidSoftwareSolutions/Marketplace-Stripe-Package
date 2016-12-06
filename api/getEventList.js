@@ -31,9 +31,9 @@ module.exports = (req, res) => {
 
     stripe.events.list({
         type: type || '*',
-        endingBefore: endingBefore,
+        ending_before: endingBefore,
         limit: limit,
-        startingAfter: starting_after,
+        starting_after: startingAfter,
     }, function(err, result) {
         if(!err) {
             r.contextWrites[to] = JSON.stringify(result);
