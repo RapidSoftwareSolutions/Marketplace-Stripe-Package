@@ -15,7 +15,7 @@ module.exports = (req, res) => {
         endingBefore,
         limit,
         startingAfter,
-         to="to" 
+        to="to" 
      } = req.body.args;
 
     let r  = {

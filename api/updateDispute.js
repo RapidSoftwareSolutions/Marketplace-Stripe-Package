@@ -28,8 +28,8 @@ module.exports = (req, res) => {
     }
 
     try {
-        if(metadata) metadata = JSON.parse(metadata);
-        if(evidence) evidence = JSON.parse(evidence);
+        if(metadata && typeof metadata == 'string') metadata = JSON.parse(metadata);
+        if(evidence && typeof evidence == 'string') evidence = JSON.parse(evidence);
     } catch(e) {
         r.contextWrites[to] = 'Invalid JSON value.';
         r.callback = 'error';

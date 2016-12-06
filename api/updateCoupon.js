@@ -26,7 +26,7 @@ module.exports = (req, res) => {
         return;
     }
 
-    if(metadata)
+    if(metadata && typeof metadata == 'string')
     try {
         metadata = JSON.parse(metadata);
     } catch(e) {

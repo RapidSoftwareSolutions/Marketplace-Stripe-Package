@@ -10,6 +10,10 @@ module.exports = (req, res) => {
 
     let { 
         apiKey,
+        endingBefore,
+        limit,
+        startingAfter,
+        purpose,
         to="to",
     } = req.body.args;
 
@@ -25,7 +29,12 @@ module.exports = (req, res) => {
 
     let stripe = initStripe(apiKey);
 
-    stripe.fileUploads.list({}, function(err, result) {
+    stripe.fileUploads.list({
+        purpose: purpose,
+        endingBefore: ending_before,
+        limit: limit,
+        startingAfter: starting_after,
+    }, function(err, result) {
         if(!err) {
             r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 

@@ -34,9 +34,9 @@ module.exports = (req, res) => {
     let stripe = initStripe(apiKey);
 
     try {
-        if(shipping) shipping = JSON.parse(shipping);
-        if(metadata) metadata = JSON.parse(metadata);
-        if(items) items = JSON.parse(items);
+        if(shipping && typeof shipping == 'string') shipping = JSON.parse(shipping);
+        if(metadata && typeof metadata == 'string') metadata = JSON.parse(metadata);
+        if(items && typeof items == 'string') items = JSON.parse(items);
     } catch(e) {
         r.contextWrites[to] = 'Invalid JSON value.';
         r.callback = 'error';

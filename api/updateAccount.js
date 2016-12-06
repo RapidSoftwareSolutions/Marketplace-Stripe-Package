@@ -30,7 +30,7 @@ module.exports = (req, res) => {
         supportUrl, 
         tosAcceptance, 
         transferSchedule, 
-         to="to" 
+        to="to" 
      } = req.body.args;
 
     let r  = {
@@ -44,8 +44,8 @@ module.exports = (req, res) => {
     }
 
     try {
-        if(metadata) metadata = JSON.parse(metadata)
-        if(tosAcceptance) tosAcceptance = JSON.parse(tosAcceptance)
+        if(metadata && typeof metadata == 'string') metadata = JSON.parse(metadata)
+        if(tosAcceptance && typeof tosAcceptance == 'string') tosAcceptance = JSON.parse(tosAcceptance)
     } catch(e) {
         r.contextWrites[to] = 'Invalid JSON value.';
         r.callback = 'error';

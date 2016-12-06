@@ -32,9 +32,9 @@ module.exports = (req, res) => {
     }
 
     try {
-        if(metadata) metadata = JSON.parse(metadata);
-        if(attributes) attributes = JSON.parse(attributes);
-        if(packageDimensions) packageDimensions = JSON.parse(packageDimensions);
+        if(metadata && typeof metadata == 'string') metadata = JSON.parse(metadata);
+        if(attributes && typeof attributes == 'string') attributes = JSON.parse(attributes);
+        if(packageDimensions && typeof packageDimensions == 'string') packageDimensions = JSON.parse(packageDimensions);
     } catch(e) {
         r.contextWrites[to] = 'Invalid JSON value.';
         r.callback = 'error';

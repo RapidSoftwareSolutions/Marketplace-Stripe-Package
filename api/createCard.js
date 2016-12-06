@@ -33,7 +33,7 @@ module.exports = (req, res) => {
 
     let options = {};
 
-    if(metadata)
+    if(metadata && typeof metadata == 'string')
     try {
         metadata = JSON.parse(metadata);
         options.metadata = metadata;

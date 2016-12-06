@@ -29,7 +29,7 @@ module.exports = (req, res) => {
     let stripe = initStripe(apiKey);
 
     try {
-        if(items) items = JSON.parse(items);
+        if(items && typeof items == 'string') items = JSON.parse(items);
     } catch(e) {
         r.contextWrites[to] = 'Invalid JSON value.';
         r.callback = 'error';

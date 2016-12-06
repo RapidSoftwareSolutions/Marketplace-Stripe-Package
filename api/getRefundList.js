@@ -10,7 +10,10 @@ module.exports = (req, res) => {
 
     let { 
         apiKey, 
-        to="to",
+        endingBefore,
+        limit,
+        startingAfter,
+        to="to"
     } = req.body.args;
 
     let r  = {
@@ -25,7 +28,11 @@ module.exports = (req, res) => {
 
     let stripe = initStripe(apiKey);
 
-    stripe.refunds.list({}, function(err, result) {
+    stripe.refunds.list({
+        ending_before: endingBefore,
+        limit: limit,
+        starting_after: startingAfter
+    }, function(err, result) {
         if(!err) {
             r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 

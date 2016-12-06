@@ -11,6 +11,9 @@ module.exports = (req, res) => {
     let { 
         apiKey, 
         type,
+        endingBefore,
+        limit,
+        startingAfter,
         to="to",
     } = req.body.args;
 
@@ -26,7 +29,12 @@ module.exports = (req, res) => {
 
     let stripe = initStripe(apiKey);
 
-    stripe.events.list({type: type || '*'}, function(err, result) {
+    stripe.events.list({
+        type: type || '*',
+        endingBefore: ending_before,
+        limit: limit,
+        startingAfter: starting_after,
+    }, function(err, result) {
         if(!err) {
             r.contextWrites[to] = JSON.stringify(result);
             r.callback = 'success'; 

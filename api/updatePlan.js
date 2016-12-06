@@ -30,7 +30,7 @@ module.exports = (req, res) => {
 
     let stripe = initStripe(apiKey);
 
-    if(metadata)
+    if(metadata && typeof metadata == 'string')
     try {
         metadata = JSON.parse(metadata);
     } catch(e) {

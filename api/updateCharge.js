@@ -30,9 +30,9 @@ module.exports = (req, res) => {
     }
 
     try {
-        if(metadata) metadata = JSON.parse(metadata);
-        if(fraudDetails) fraudDetails = JSON.parse(fraudDetails);
-        if(shipping) shipping = JSON.parse(shipping);
+        if(metadata && typeof metadata == 'string') metadata = JSON.parse(metadata);
+        if(fraudDetails && typeof fraudDetails == 'string') fraudDetails = JSON.parse(fraudDetails);
+        if(shipping && typeof shipping == 'string') shipping = JSON.parse(shipping);
     } catch(e) {
         r.contextWrites[to] = 'Invalid JSON value.';
         r.callback = 'error';

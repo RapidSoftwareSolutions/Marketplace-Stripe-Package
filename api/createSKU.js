@@ -11,6 +11,7 @@ module.exports = (req, res) => {
 
     let { 
         apiKey,
+        id,
         currency,
         inventory,
         price,
@@ -34,10 +35,10 @@ module.exports = (req, res) => {
     }
 
     try {
-        inventory = JSON.parse(inventory);
-        if(metadata) metadata = JSON.parse(metadata);
-        if(attributes) attributes = JSON.parse(attributes);
-        if(packageDimensions) packageDimensions = JSON.parse(packageDimensions);
+        if(typeof inventory == 'string') inventory = JSON.parse(inventory);
+        if(metadata && typeof metadata == 'string') metadata = JSON.parse(metadata);
+        if(attributes && typeof attributes == 'string') attributes = JSON.parse(attributes);
+        if(packageDimensions && typeof packageDimensions == 'string') packageDimensions = JSON.parse(packageDimensions);
     } catch(e) {
         r.contextWrites[to] = 'Invalid JSON value.';
         r.callback = 'error';
@@ -49,6 +50,7 @@ module.exports = (req, res) => {
     let stripe = initStripe(apiKey);
 
     let options = {
+        id,
         currency,
         inventory,
         price,

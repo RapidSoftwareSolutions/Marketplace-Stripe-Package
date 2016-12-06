@@ -11,6 +11,7 @@ module.exports = (req, res) => {
 
     let { 
         apiKey,
+        id,
         name,
         active,
         attributes, 
@@ -36,10 +37,10 @@ module.exports = (req, res) => {
     }
 
     try {
-        if(deactivateOn) deactivateOn = JSON.parse(deactivateOn);
-        if(attributes) attributes = JSON.parse(attributes);
-        if(images) images = JSON.parse(images);
-        if(metadata) metadata = JSON.parse(metadata);
+        if(deactivateOn && typeof deactivateOn == 'string') deactivateOn = JSON.parse(deactivateOn);
+        if(attributes && typeof attributes == 'string') attributes = JSON.parse(attributes);
+        if(images && typeof images == 'string') images = JSON.parse(images);
+        if(metadata && typeof metadata == 'string') metadata = JSON.parse(metadata);
     } catch(e) {
         console.log(e);
         r.contextWrites[to] = 'Invalid JSON value.';
@@ -52,6 +53,7 @@ module.exports = (req, res) => {
     let stripe = initStripe(apiKey);
 
     let options = _.clearArgs({
+        id,
         name,
         active,
         attributes, 

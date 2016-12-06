@@ -34,8 +34,8 @@ module.exports = (req, res) => {
     }
 
     try {
-        if(metadata) metadata = JSON.parse(metadata);
-        if(source) source = JSON.parse(source);
+        if(metadata && typeof metadata == 'string') metadata = JSON.parse(metadata);
+        if(source && typeof source == 'string') source = JSON.parse(source);
     } catch(e) {
         r.contextWrites[to] = 'Invalid JSON value.';
         r.callback = 'error';
