@@ -32,8 +32,8 @@ module.exports = (req, res) => {
 
     let stripe = initStripe(apiKey);
 
-    let dest       = file.substring(file.lastIndexOf('.') + 1),
-        name       = Math.random().toString(36).substring(7) + '_rapid.' + dest,
+    //let dest       = file.substring(file.lastIndexOf('.') + 1);
+    let name       = Math.random().toString(36).substring(7) + '_rapid.jpg',
         fileStream = fs.createWriteStream(`/tmp/${name}`);
 
     let protocol   = file.split('://')[0];
