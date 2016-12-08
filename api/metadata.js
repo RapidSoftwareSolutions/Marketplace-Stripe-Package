@@ -5,6 +5,7 @@ module.exports.do = function(req, res){
         "description": "This blocks allows you to translates a sting of text from one language to another",
         'image': 'http://seeklogo.com/images/S/stripe-logo-4039DEE4FE-seeklogo.com.png',
         'repo': 'https://github.com/RapidSoftwareSolutions/marketplace-stripe-package',
+        "keywords": ["API", "buy", "buying", "ecommerce", "finance", "pay", "payment", "payments", "shop", "shopping", "smb"],
         'accounts': {
             'domain': 'stripe.com',
             'credentials': [
