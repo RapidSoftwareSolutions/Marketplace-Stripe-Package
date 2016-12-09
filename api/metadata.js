@@ -320,17 +320,20 @@ module.exports.do = function(req, res){
                 {
                     name: "fraudDetails",
                     type: "JSON",
-                    info: "A set of key/value pairs you can attach to a charge giving information about its riskiness. If you believe a charge is fraudulent, include a user_report key with a value of fraudulent. If you believe a charge is safe, include a user_report key with a value of safe. Note that you must refund a charge before setting the user_report to fraudulent. Stripe will use the information you send to improve our fraud detection algorithms."
+                    info: "A set of key/value pairs you can attach to a charge giving information about its riskiness. If you believe a charge is fraudulent, include a user_report key with a value of fraudulent. If you believe a charge is safe, include a user_report key with a value of safe. Note that you must refund a charge before setting the user_report to fraudulent. Stripe will use the information you send to improve our fraud detection algorithms.",
+					required: false
                 },
                 {
                     name: "metadata",
                     type: "JSON",
-                    info: "A set of key/value pairs that you can attach to a charge object. It can be useful for storing additional information about the charge in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save."
+                    info: "A set of key/value pairs that you can attach to a charge object. It can be useful for storing additional information about the charge in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.",
+					required: false
                 },
                 {
                     name: "shipping",
                     type: "String",
-                    info: "Shipping information for the charge. Helps prevent fraud on charges for physical goods."
+                    info: "Shipping information for the charge. Helps prevent fraud on charges for physical goods.",
+					required: false
                 },
 
             ],
@@ -438,7 +441,8 @@ module.exports.do = function(req, res){
                 {
                     name: "startingAfter",
                     type: "String",
-                    info: "A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list."
+                    info: "A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list.",
+					required: false
                 }
             ],
             'callbacks':[
@@ -617,7 +621,8 @@ module.exports.do = function(req, res){
                 {
                     name: "startingAfter",
                     type: "String",
-                    info: "A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list."
+                    info: "A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list.",
+					required: false
                 }
             ],
             'callbacks':[
@@ -748,7 +753,8 @@ module.exports.do = function(req, res){
                 {
                     name: "startingAfter",
                     type: "String",
-                    info: "A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list."
+                    info: "A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list.",
+					required: false
                 }
             ],
             'callbacks':[
@@ -819,7 +825,8 @@ module.exports.do = function(req, res){
                 {
                     name: "startingAfter",
                     type: "String",
-                    info: "A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list."
+                    info: "A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list.",
+					required: false
                 }
             ],
             'callbacks':[
@@ -911,7 +918,8 @@ module.exports.do = function(req, res){
                 {
                     name: "purpose",
                     type: "String",
-                    info: "The file purpose to filter queries by. If none is provided, files will not be filtered by purpose."
+                    info: "The file purpose to filter queries by. If none is provided, files will not be filtered by purpose.",
+					required: false
                 },
                 {
                     name: "endingBefore",
@@ -928,7 +936,8 @@ module.exports.do = function(req, res){
                 {
                     name: "startingAfter",
                     type: "String",
-                    info: "A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list."
+                    info: "A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list.",
+					required: false
                 }
             ],
             'callbacks':[
@@ -1083,7 +1092,8 @@ module.exports.do = function(req, res){
                 {
                     name: "startingAfter",
                     type: "String",
-                    info: "A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list."
+                    info: "A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list.",
+					required: false
                 }
             ],
             'callbacks':[
@@ -1622,7 +1632,8 @@ module.exports.do = function(req, res){
                 {
                     name: "accountId",
                     type: "String",
-                    info: "Id of account to retrive"
+                    info: "Id of account to retrive",
+					required: false
                 },
             ],
             'callbacks':[
@@ -1648,97 +1659,116 @@ module.exports.do = function(req, res){
                 {
                     name: "accountId",
                     type: "String",
-                    info: "Id of account to update"
+                    info: "Id of account to update",
+					required: false
                 },
                 {
                     name: "businessLogo",
                     type: "String",
-                    info: "Bussines logo"
+                    info: "Bussines logo",
+					required: false
                 },
                 {
                     name: "businessName",
                     type: "String",
-                    info: "The publicly sharable name for this account."
+                    info: "The publicly sharable name for this account.",
+					required: false
                 },
                 {
                     name: "businessPrimaryColor",
                     type: "String",
-                    info: "A CSS hex color value representing the primary branding color for this account"
+                    info: "A CSS hex color value representing the primary branding color for this account",
+					required: false
                 },
                 {
                     name: "businessUrl",
                     type: "String",
-                    info: "The URL that best shows the service or product provided for this account"
+                    info: "The URL that best shows the service or product provided for this account",
+					required: false
                 },
                 {
                     name: "debitNegativeBalances",
                     type: "String", // Boolean
-                    info: "A boolean for whether or not Stripe should try to reclaim negative balances from the account holder’s bank account."
+                    info: "A boolean for whether or not Stripe should try to reclaim negative balances from the account holder’s bank account.",
+					required: false
                 },
                 {
                     name: "declineChargeOn",
                     type: "String",
-                    info: "Account-level settings to automatically decline certain types of charges regardless of the bank’s decision."
+                    info: "Account-level settings to automatically decline certain types of charges regardless of the bank’s decision.",
+					required: false
                 },
                 {
                     name: "defaultCurrency",
                     type: "String",
-                    info: "Three-letter ISO currency code representing the default currency for the account."
+                    info: "Three-letter ISO currency code representing the default currency for the account.",
+					required: false
                 },
                 {
                     name: "email",
                     type: "String",
-                    info: "Email address of the account holder. For standalone accounts, this is used to email them asking them to claim their Stripe account. For managed accounts, this is only to make the account easier to identify to you: Stripe will not email the account holder."
+                    info: "Email address of the account holder. For standalone accounts, this is used to email them asking them to claim their Stripe account. For managed accounts, this is only to make the account easier to identify to you: Stripe will not email the account holder.",
+					required: false
                 },
                 {
                     name: "externalAccount",
                     type: "String",
-                    info: "A card or bank account to attach to the account. You can provide either a token, like the ones returned by Stripe.js, or a dictionary as documented in the external_account parameter for either card or bank account creation. "
+                    info: "A card or bank account to attach to the account. You can provide either a token, like the ones returned by Stripe.js, or a dictionary as documented in the external_account parameter for either card or bank account creation. ",
+					required: false
                 },
                 {
                     name: "legalEntity",
                     type: "String",
-                    info: "Information about the account holder; varies by account country and account status."
+                    info: "Information about the account holder; varies by account country and account status.",
+					required: false
                 },
                 {
                     name: "metadata",
                     type: "JSON",
-                    info: "A set of key/value pairs that you can attach to an account object. It can be useful for storing additional information about the account in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving."
+                    info: "A set of key/value pairs that you can attach to an account object. It can be useful for storing additional information about the account in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.",
+					required: false
                 },
                 {
                     name: "productDescription",
                     type: "String",
-                    info: "Internal-only description of the product being sold or service being provided by this account. It’s used by Stripe for risk and underwriting purposes."
+                    info: "Internal-only description of the product being sold or service being provided by this account. It’s used by Stripe for risk and underwriting purposes.",
+					required: false
                 },
                 {
                     name: "statementDescriptor",
                     type: "String",
-                    info: "The text that will appear on credit card statements by default if a charge is being made directly on the account."
+                    info: "The text that will appear on credit card statements by default if a charge is being made directly on the account.",
+					required: false
                 },
                 {
                     name: "supportEmail",
                     type: "String",
-                    info: "A publicly shareable email address that can be reached for support for this account"
+                    info: "A publicly shareable email address that can be reached for support for this account",
+					required: false
                 },
                 {
                     name: "supportPhone",
                     type: "String",
-                    info: "A publicly shareable phone number that can be reached for support for this account"
+                    info: "A publicly shareable phone number that can be reached for support for this account",
+					required: false
                 },
                 {
                     name: "supportUrl",
                     type: "String",
-                    info: "A publicly shareable URL that can be reached for support for this account"
+                    info: "A publicly shareable URL that can be reached for support for this account",
+					required: false
                 },
                 {
                     name: "tosAcceptance",
                     type: "JSON",
-                    info: "Details on who accepted the Stripe terms of service, and when they accepted it"
+                    info: "Details on who accepted the Stripe terms of service, and when they accepted it",
+					required: false
                 },
                 {
                     name: "transferSchedule",
                     type: "JSON",
-                    info: "Details on when this account will make funds from charges available, and when they will be paid out to the account holder’s bank account."
+                    info: "Details on when this account will make funds from charges available, and when they will be paid out to the account holder’s bank account.",
+					required: false
                 },
             ],
             'callbacks':[
@@ -1764,7 +1794,8 @@ module.exports.do = function(req, res){
                 {
                     name: "accountId",
                     type: "String",
-                    info: "Id of account to delete"
+                    info: "Id of account to delete",
+					required: false
                 },
             ],
             'callbacks':[
@@ -1790,12 +1821,14 @@ module.exports.do = function(req, res){
                 {
                     name: "accountId",
                     type: "String",
-                    info: "Id of account to reject"
+                    info: "Id of account to reject",
+					required: false
                 },
                 {
                     name: "reason",
                     type: "String",
-                    info: "The reason for rejecting the account. May be one of `fraud`, `terms_of_service`, or `other`."
+                    info: "The reason for rejecting the account. May be one of `fraud`, `terms_of_service`, or `other`.",
+					required: false
                 },
             ],
             'callbacks':[
@@ -1821,17 +1854,20 @@ module.exports.do = function(req, res){
                 {
                     name: "endingBefore",
                     type: "String",
-                    info: "A cursor for use in pagination. ending_before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_bar, your subsequent call can include ending_before=obj_bar in order to fetch the previous page of the list."
+                    info: "A cursor for use in pagination. ending_before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_bar, your subsequent call can include ending_before=obj_bar in order to fetch the previous page of the list.",
+					required: false
                 },
                 {
                     name: "limit",
                     type: "Number",
-                    info: "A limit on the number of objects to be returned. Limit can range between 1 and 100 items."
+                    info: "A limit on the number of objects to be returned. Limit can range between 1 and 100 items.",
+					required: false
                 },
                 {
                     name: "startingAfter",
                     type: "String",
-                    info: "A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list."
+                    info: "A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list.",
+					required: false
                 },
             ],
             'callbacks':[
@@ -1863,12 +1899,14 @@ module.exports.do = function(req, res){
                 {
                     name: "amount",
                     type: "Number",
-                    info: "A positive integer in cents representing how much of this fee to refund. Can only refund up to the unrefunded amount remaining of the fee."
+                    info: "A positive integer in cents representing how much of this fee to refund. Can only refund up to the unrefunded amount remaining of the fee.",
+					required: false
                 },
                 {
                     name: "metadata",
                     type: "JSON",
-                    info: "A set of key/value pairs that you can attach to a refund object. It can be useful for storing additional information about the refund in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save."
+                    info: "A set of key/value pairs that you can attach to a refund object. It can be useful for storing additional information about the refund in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.",
+					required: false
                 },
             ],
             'callbacks':[
@@ -1972,17 +2010,20 @@ module.exports.do = function(req, res){
                 {
                     name: "endingBefore",
                     type: "String",
-                    info: "A cursor for use in pagination. ending_before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_bar, your subsequent call can include ending_before=obj_bar in order to fetch the previous page of the list."
+                    info: "A cursor for use in pagination. ending_before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_bar, your subsequent call can include ending_before=obj_bar in order to fetch the previous page of the list.",
+					required: false
                 },
                 {
                     name: "limit",
                     type: "Number",
-                    info: "A limit on the number of objects to be returned. Limit can range between 1 and 100 items."
+                    info: "A limit on the number of objects to be returned. Limit can range between 1 and 100 items.",
+					required: false
                 },
                 {
                     name: "startingAfter",
                     type: "String",
-                    info: "A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list."
+                    info: "A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list.",
+					required: false
                 },
             ],
             'callbacks':[
@@ -2053,7 +2094,8 @@ module.exports.do = function(req, res){
                 {
                     name: "startingAfter",
                     type: "String",
-                    info: "A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list."
+                    info: "A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list.",
+					required: false
                 }
             ],
             'callbacks':[
@@ -2091,7 +2133,8 @@ module.exports.do = function(req, res){
                 {
                     name: "startingAfter",
                     type: "String",
-                    info: "A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list."
+                    info: "A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list.",
+					required: false
                 }
             ],
             'callbacks':[
@@ -2321,7 +2364,8 @@ module.exports.do = function(req, res){
                 {
                     name: "startingAfter",
                     type: "String",
-                    info: "A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list."
+                    info: "A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list.",
+					required: false
                 }
             ],
             'callbacks':[
@@ -2581,7 +2625,8 @@ module.exports.do = function(req, res){
                 {
                     name: "startingAfter",
                     type: "String",
-                    info: "A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list."
+                    info: "A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list.",
+					required: false
                 }
             ],
             'callbacks':[
@@ -2619,7 +2664,8 @@ module.exports.do = function(req, res){
                 {
                     name: "email",
                     type: "String",
-                    info: "Email of the customerId"
+                    info: "Email of the customerId",
+					required: false
                 },
                 {
                     name: "description",
@@ -2864,7 +2910,8 @@ module.exports.do = function(req, res){
                 {
                     name: "source",
                     type: "String",
-                    info: "A payment source to be charged, such as a credit card. If you also pass a customer ID, the source must be the ID of a source belonging to the customer. Otherwise, if you do not pass a customer ID, the source you provide must either be a token, like the ones returned by Stripe.js, or a object containing a user's credit card details, with the options described below. Although not all information is required, the extra info helps prevent fraud."
+                    info: "A payment source to be charged, such as a credit card. If you also pass a customer ID, the source must be the ID of a source belonging to the customer. Otherwise, if you do not pass a customer ID, the source you provide must either be a token, like the ones returned by Stripe.js, or a object containing a user's credit card details, with the options described below. Although not all information is required, the extra info helps prevent fraud.",
+					required: false
                 },
                 {
                     name: "metadata",
@@ -2959,12 +3006,14 @@ module.exports.do = function(req, res){
                 {
                     name: "orderId",
                     type: "String",
-                    info: "Order id."
+                    info: "Order id.",
+					required: false
                 },
                 {
                     name: "items",
                     type: "JSON",
-                    info: "List of items to return."
+                    info: "List of items to return.",
+					required: false
                 },
             ],
             'callbacks':[
@@ -2990,7 +3039,8 @@ module.exports.do = function(req, res){
                 {
                     name: "orderId",
                     type: "String",
-                    info: "The identifier of the order return to be retrieved."
+                    info: "The identifier of the order return to be retrieved.",
+					required: false
                 },
             ],
             'callbacks':[
@@ -3016,7 +3066,8 @@ module.exports.do = function(req, res){
                 {
                     name: "created",
                     type: "String",
-                    info: "A filter on the list based on the object created field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with the following options:"
+                    info: "A filter on the list based on the object created field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with the following options:",
+					required: false
                 },
                 {
                     name: "order",
@@ -3770,7 +3821,8 @@ module.exports.do = function(req, res){
                 {
                     name: "customerId",
                     type: "String",
-                    info: "Id of customer to delete."
+                    info: "Id of customer to delete.",
+					required: false
                 },
             ],
             'callbacks':[
@@ -3796,7 +3848,8 @@ module.exports.do = function(req, res){
                 {
                     name: "subscriptionId",
                     type: "String",
-                    info: "Id of subscribtion to delete."
+                    info: "Id of subscribtion to delete.",
+					required: false
                 },
             ],
             'callbacks':[
@@ -3822,12 +3875,14 @@ module.exports.do = function(req, res){
                 {
                     name: "customer",
                     type: "String",
-                    info: "Customer Id"
+                    info: "Customer Id",
+					required: false
                 },
                 {
                     name: "applicationFee",
                     type: "String",
-                    info: "A fee in cents that will be applied to the invoice and transferred to the application owner’s Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. "
+                    info: "A fee in cents that will be applied to the invoice and transferred to the application owner’s Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. ",
+					required: false
                 },
                 {
                     name: "description",
@@ -3844,17 +3899,20 @@ module.exports.do = function(req, res){
                 {
                     name: "statementDescriptor",
                     type: "String",
-                    info: "Extra information about a charge for the customer’s credit card statement."
+                    info: "Extra information about a charge for the customer’s credit card statement.",
+					required: false
                 },
                 {
                     name: "subscription",
                     type: "String",
-                    info: "The ID of the subscription to invoice. If not set, the created invoice will include all pending invoice items for the customer. If set, the created invoice will exclude pending invoice items that pertain to other subscriptions."
+                    info: "The ID of the subscription to invoice. If not set, the created invoice will include all pending invoice items for the customer. If set, the created invoice will exclude pending invoice items that pertain to other subscriptions.",
+					required: false
                 },
                 {
                     name: "taxPercent",
                     type: "String",
-                    info: "The percent tax rate applied to the invoice, represented as a decimal number."
+                    info: "The percent tax rate applied to the invoice, represented as a decimal number.",
+					required: false
                 },
             ],
             'callbacks':[
@@ -3880,7 +3938,8 @@ module.exports.do = function(req, res){
                 {
                     name: "invoiceId",
                     type: "String",
-                    info: "Invoice id."
+                    info: "Invoice id.",
+					required: false
                 },
             ],
             'callbacks':[
@@ -3906,47 +3965,56 @@ module.exports.do = function(req, res){
                 {
                     name: "invoice",
                     type: "String",
-                    info: "Invoice id."
+                    info: "Invoice id.",
+					required: false
                 },
                 {
                     name: "coupon",
                     type: "String",
-                    info: "Counpon id."
+                    info: "Counpon id.",
+					required: false
                 },
                 {
                     name: "customer",
                     type: "String",
-                    info: "In the case of upcoming invoices, the customer of the upcoming invoice is required. In other cases it is ignored."
+                    info: "In the case of upcoming invoices, the customer of the upcoming invoice is required. In other cases it is ignored.",
+					required: false
                 },
                 {
                     name: "subscription",
                     type: "String",
-                    info: "In the case of upcoming invoices, the subscription of the upcoming invoice is optional. In other cases it is ignored."
+                    info: "In the case of upcoming invoices, the subscription of the upcoming invoice is optional. In other cases it is ignored.",
+					required: false
                 },
                 {
                     name: "subscriptionPlan",
                     type: "String",
-                    info: "Subscription Plan"
+                    info: "Subscription Plan",
+					required: false
                 },
                 {
                     name: "subscriptionProrate",
                     type: "String",
-                    info: "Subscription Prorate"
+                    info: "Subscription Prorate",
+					required: false
                 },
                 {
                     name: "subscriptionProrationDate",
                     type: "String",
-                    info: "Subscription Proration Date"
+                    info: "Subscription Proration Date",
+					required: false
                 },
                 {
                     name: "subscriptionQuantity",
                     type: "String",
-                    info: "Subscription Quantity"
+                    info: "Subscription Quantity",
+					required: false
                 },
                 {
                     name: "subscriptionTrialEnd",
                     type: "String",
-                    info: "Subscription Trial End"
+                    info: "Subscription Trial End",
+					required: false
                 },
 
             ],
@@ -3973,12 +4041,14 @@ module.exports.do = function(req, res){
                 {
                     name: "invoiceId",
                     type: "String",
-                    info: "Invoice id."
+                    info: "Invoice id.",
+					required: false
                 },
                 {
                     name: "applicationFee",
                     type: "String",
-                    info: "A fee in cents that will be applied to the invoice and transferred to the application owner’s Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. "
+                    info: "A fee in cents that will be applied to the invoice and transferred to the application owner’s Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. ",
+					required: false
                 },
                 {
                     name: "description",
@@ -3996,27 +4066,32 @@ module.exports.do = function(req, res){
                 {
                     name: "statementDescriptor",
                     type: "String",
-                    info: "Extra information about a charge for the customer’s credit card statement."
+                    info: "Extra information about a charge for the customer’s credit card statement.",
+					required: false
                 },
                 {
                     name: "subscription",
                     type: "String",
-                    info: "The ID of the subscription to invoice. If not set, the created invoice will include all pending invoice items for the customer. If set, the created invoice will exclude pending invoice items that pertain to other subscriptions."
+                    info: "The ID of the subscription to invoice. If not set, the created invoice will include all pending invoice items for the customer. If set, the created invoice will exclude pending invoice items that pertain to other subscriptions.",
+					required: false
                 },
                 {
                     name: "forgiven",
                     type: "String",
-                    info: "Boolean representing whether an invoice is forgiven or not. To forgive an invoice, pass true. Forgiving an invoice instructs us to update the subscription status as if the invoice were successfully paid. Once an invoice has been forgiven, it cannot be unforgiven or reopened."
+                    info: "Boolean representing whether an invoice is forgiven or not. To forgive an invoice, pass true. Forgiving an invoice instructs us to update the subscription status as if the invoice were successfully paid. Once an invoice has been forgiven, it cannot be unforgiven or reopened.",
+					required: false
                 },
                 {
                     name: "closed",
                     type: "String",
-                    info: "Boolean representing whether an invoice is closed or not. To close an invoice, pass true."
+                    info: "Boolean representing whether an invoice is closed or not. To close an invoice, pass true.",
+					required: false
                 },
                 {
                     name: "taxPercent",
                     type: "String",
-                    info: "The percent tax rate applied to the invoice, represented as a decimal number."
+                    info: "The percent tax rate applied to the invoice, represented as a decimal number.",
+					required: false
                 },
             ],
             'callbacks':[
@@ -4042,7 +4117,8 @@ module.exports.do = function(req, res){
                 {
                     name: "invoiceId",
                     type: "String",
-                    info: "Invoice id."
+                    info: "Invoice id.",
+					required: false
                 },
             ],
             'callbacks':[
@@ -4068,7 +4144,8 @@ module.exports.do = function(req, res){
                 {
                     name: "customer",
                     type: "String",
-                    info: "The identifier of the customer whose invoices to return. If none is provided, all invoices will be returned."
+                    info: "The identifier of the customer whose invoices to return. If none is provided, all invoices will be returned.",
+					required: false
                 }
             ],
             'callbacks':[
@@ -4130,12 +4207,14 @@ module.exports.do = function(req, res){
                 {
                     name: "metadata",
                     type: "JSON",
-                    info: "A set of key/value pairs that you can attach to an invoice item object. It can be useful for storing additional information about the invoice item in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving."
+                    info: "A set of key/value pairs that you can attach to an invoice item object. It can be useful for storing additional information about the invoice item in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.",
+					required: false
                 },
                 {
                     name: "subscription",
                     type: "String",
-                    info: "The ID of a subscription to add this invoice item to. When left blank, the invoice item will be be added to the next upcoming scheduled invoice. When set, scheduled invoices for subscriptions other than the specified subscription will ignore the invoice item. Use this when you want to express that an invoice item has been accrued within the context of a particular subscription."
+                    info: "The ID of a subscription to add this invoice item to. When left blank, the invoice item will be be added to the next upcoming scheduled invoice. When set, scheduled invoices for subscriptions other than the specified subscription will ignore the invoice item. Use this when you want to express that an invoice item has been accrued within the context of a particular subscription.",
+					required: false
                 }
             ],
             'callbacks':[
@@ -4161,7 +4240,8 @@ module.exports.do = function(req, res){
                 {
                     name: "invoiceitem",
                     type: "String",
-                    info: "The ID of the desired invoice item."
+                    info: "The ID of the desired invoice item.",
+					required: false
                 }
             ],
             'callbacks':[
@@ -4193,22 +4273,26 @@ module.exports.do = function(req, res){
                 {
                     name: "amount",
                     type: "Number",
-                    info: "The integer amount in cents of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer's account, pass a negative amount."
+                    info: "The integer amount in cents of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer's account, pass a negative amount.",
+					required: false
                 },
                 {
                     name: "description",
                     type: "String",
-                    info: "An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving."
+                    info: "An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.",
+					required: false
                 },
                 {
                     name: "discountable",
                     type: "String",
-                    info: "Controls whether discounts apply to this invoice item. Defaults to false for prorations or negative invoice items, and true for all other invoice items. Cannot be set to true for prorations."
+                    info: "Controls whether discounts apply to this invoice item. Defaults to false for prorations or negative invoice items, and true for all other invoice items. Cannot be set to true for prorations.",
+					required: false
                 },
                 {
                     name: "metadata",
                     type: "JSON",
-                    info: "A set of key/value pairs that you can attach to an invoice item object. It can be useful for storing additional information about the invoice item in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save."
+                    info: "A set of key/value pairs that you can attach to an invoice item object. It can be useful for storing additional information about the invoice item in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.",
+					required: false
                 }
             ],
             'callbacks':[
@@ -4234,7 +4318,8 @@ module.exports.do = function(req, res){
                 {
                     name: "invoiceitem",
                     type: "String",
-                    info: "The ID of the desired invoice item."
+                    info: "The ID of the desired invoice item.",
+					required: false
                 }
             ],
             'callbacks':[
@@ -4260,7 +4345,8 @@ module.exports.do = function(req, res){
                 {
                     name: "customer",
                     type: "String",
-                    info: "The identifier of the customer whose invoice items to return. If none is provided, all invoice items will be returned."
+                    info: "The identifier of the customer whose invoice items to return. If none is provided, all invoice items will be returned.",
+					required: false
                 }
             ],
             'callbacks':[
@@ -4286,37 +4372,44 @@ module.exports.do = function(req, res){
                 {
                     name: "planId",
                     type: "String",
-                    info: "Unique string of your choice that will be used to identify this plan when subscribing a customer. This could be an identifier like “gold” or a primary key from your own database."
+                    info: "Unique string of your choice that will be used to identify this plan when subscribing a customer. This could be an identifier like “gold” or a primary key from your own database.",
+					required: false
                 },
                 {
                     name: "amount",
                     type: "String",
-                    info: "A positive integer in cents (or 0 for a free plan) representing how much to charge (on a recurring basis)."
+                    info: "A positive integer in cents (or 0 for a free plan) representing how much to charge (on a recurring basis).",
+					required: false
                 },
                 {
                     name: "currency",
                     type: "String",
-                    info: "3-letter ISO code for currency."
+                    info: "3-letter ISO code for currency.",
+					required: false
                 },
                 {
                     name: "interval",
                     type: "String",
-                    info: "Specifies billing frequency. Either day, week, month or year."
+                    info: "Specifies billing frequency. Either day, week, month or year.",
+					required: false
                 },
                 {
                     name: "name",
                     type: "String",
-                    info: "Name of the plan, to be displayed on invoices and in the web interface."
+                    info: "Name of the plan, to be displayed on invoices and in the web interface.",
+					required: false
                 },
                 {
                     name: "intervalCount",
                     type: "String",
-                    info: "The number of intervals between each subscription billing. For example, interval=month and interval_count=3 bills every 3 months. Maximum of one year interval allowed (1 year, 12 months, or 52 weeks)."
+                    info: "The number of intervals between each subscription billing. For example, interval=month and interval_count=3 bills every 3 months. Maximum of one year interval allowed (1 year, 12 months, or 52 weeks).",
+					required: false
                 },
                 {
                    name: "metadata",
                     type: "JSON",
-                    info: "A set of key/value pairs that you can attach to a plan object. It can be useful for storing additional information about the plan in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving."
+                    info: "A set of key/value pairs that you can attach to a plan object. It can be useful for storing additional information about the plan in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.",
+					required: false
                 },
                 {
                     name: "statementDescriptor",
@@ -4326,7 +4419,8 @@ module.exports.do = function(req, res){
                 {
                     name: "trialPeriodDays",
                     type: "String",
-                    info: "Specifies a trial period in (an integer number of) days. If you include a trial period, the customer won’t be billed for the first time until the trial period ends. If the customer cancels before the trial period is over, she’ll never be billed at all."
+                    info: "Specifies a trial period in (an integer number of) days. If you include a trial period, the customer won’t be billed for the first time until the trial period ends. If the customer cancels before the trial period is over, she’ll never be billed at all.",
+					required: false
                 }
             ],
             'callbacks':[
@@ -4352,7 +4446,8 @@ module.exports.do = function(req, res){
                 {
                     name: "planId",
                     type: "String",
-                    info: "The ID of the desired plan."
+                    info: "The ID of the desired plan.",
+					required: false
                 }
             ],
             'callbacks':[
@@ -4378,17 +4473,20 @@ module.exports.do = function(req, res){
                 {
                     name: "planId",
                     type: "String",
-                    info: "The identifier of the plan to be updated."
+                    info: "The identifier of the plan to be updated.",
+					required: false
                 },
                 {
                     name: "name",
                     type: "String",
-                    info: "Name of the plan, to be displayed on invoices and in the web interface."
+                    info: "Name of the plan, to be displayed on invoices and in the web interface.",
+					required: false
                 },
                 {
                    name: "metadata",
                     type: "JSON",
-                    info: "A set of key/value pairs that you can attach to a plan object. It can be useful for storing additional information about the plan in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving."
+                    info: "A set of key/value pairs that you can attach to a plan object. It can be useful for storing additional information about the plan in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.",
+					required: false
                 },
                 {
                     name: "statementDescriptor",
@@ -4419,7 +4517,8 @@ module.exports.do = function(req, res){
                 {
                     name: "planId",
                     type: "String",
-                    info: "The identifier of the plan to be deleted."
+                    info: "The identifier of the plan to be deleted.",
+					required: false
                 }
             ],
             'callbacks':[
@@ -4466,47 +4565,56 @@ module.exports.do = function(req, res){
                 {
                     name: "applicationFeePercent",
                     type: "String",
-                    info: "A positive decimal (with at most four decimal places) between 1 and 100. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner’s Stripe account. The request must be made with an OAuth key in order to set an application fee percentage."
+                    info: "A positive decimal (with at most four decimal places) between 1 and 100. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner’s Stripe account. The request must be made with an OAuth key in order to set an application fee percentage.",
+					required: false
                 },
                 {
                     name: "coupon",
                     type: "String",
-                    info: "The code of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription."
+                    info: "The code of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription.",
+					required: false
                 },
                 {
                     name: "customer",
                     type: "String",
-                    info: "The identifier of the customer to subscribe."
+                    info: "The identifier of the customer to subscribe.",
+					required: false
                 },
                 {
                     name: "plan",
                     type: "String",
-                    info: "The identifier of the plan to subscribe the customer to."
+                    info: "The identifier of the plan to subscribe the customer to.",
+					required: false
                 },
                 {
                     name: "source",
                     type: "JSON",
-                    info: "The source can either be a token, like the ones returned by our Stripe.js, or a object containing a user's credit card details (with the options shown below). You must provide a source if the customer does not already have a valid source attached, and you are subscribing the customer for a plan that is not free. Passing source will create a new source object, make it the customer default source, and delete the old customer default if one exists. If you want to add an additional source to use with subscriptions, instead use the card creation API to add the card and then the customer update API to set it as the default. Whenever you attach a card to a customer, Stripe will automatically validate the card."
+                    info: "The source can either be a token, like the ones returned by our Stripe.js, or a object containing a user's credit card details (with the options shown below). You must provide a source if the customer does not already have a valid source attached, and you are subscribing the customer for a plan that is not free. Passing source will create a new source object, make it the customer default source, and delete the old customer default if one exists. If you want to add an additional source to use with subscriptions, instead use the card creation API to add the card and then the customer update API to set it as the default. Whenever you attach a card to a customer, Stripe will automatically validate the card.",
+					required: false
                 },
                 {
                     name: "quantity",
                     type: "Number",
-                    info: "The quantity you'd like to apply to the subscription you're creating. For example, if your plan is $10/user/month, and your customer has 5 users, you could pass 5 as the quantity to have the customer charged $50 (5 x $10) monthly. If you update a subscription but don't change the plan ID (e.g. changing only the trial_end), the subscription will inherit the old subscription's quantity attribute unless you pass a new quantity parameter. If you update a subscription and change the plan ID, the new subscription will not inherit the quantity attribute and will default to 1 unless you pass a quantity parameter."
+                    info: "The quantity you'd like to apply to the subscription you're creating. For example, if your plan is $10/user/month, and your customer has 5 users, you could pass 5 as the quantity to have the customer charged $50 (5 x $10) monthly. If you update a subscription but don't change the plan ID (e.g. changing only the trial_end), the subscription will inherit the old subscription's quantity attribute unless you pass a new quantity parameter. If you update a subscription and change the plan ID, the new subscription will not inherit the quantity attribute and will default to 1 unless you pass a quantity parameter.",
+					required: false
                 },
                 {
                     name: "metadata",
                     type: "JSON",
-                    info: "A set of key/value pairs that you can attach to a subscription object. It can be useful for storing additional information about the subscription in a structured format."
+                    info: "A set of key/value pairs that you can attach to a subscription object. It can be useful for storing additional information about the subscription in a structured format.",
+					required: false
                 },
                 {
                     name: "taxPercent",
                     type: "String",
-                    info: "A positive decimal (with at most four decimal places) between 1 and 100. This represents the percentage of the subscription invoice subtotal that will be calculated and added as tax to the final amount each billing period. For example, a plan which charges $10/month with a tax_percent of 20.0 will charge $12 per invoice."
+                    info: "A positive decimal (with at most four decimal places) between 1 and 100. This represents the percentage of the subscription invoice subtotal that will be calculated and added as tax to the final amount each billing period. For example, a plan which charges $10/month with a tax_percent of 20.0 will charge $12 per invoice.",
+					required: false
                 },
                 {
                     name: "trialEnd",
                     type: "String",
-                    info: "Unix timestamp representing the end of the trial period the customer will get before being charged for the first time. If set, trial_end will override the default trial period of the plan the customer is being subscribed to. The special value now can be provided to end the customer's trial immediately."
+                    info: "Unix timestamp representing the end of the trial period the customer will get before being charged for the first time. If set, trial_end will override the default trial period of the plan the customer is being subscribed to. The special value now can be provided to end the customer's trial immediately.",
+					required: false
                 }
             ],
             'callbacks':[
@@ -4532,7 +4640,8 @@ module.exports.do = function(req, res){
                 {
                     name: "subscriptionId",
                     type: "String",
-                    info: "ID of subscription to retrieve."
+                    info: "ID of subscription to retrieve.",
+					required: false
                 }
             ],
             'callbacks':[
@@ -4558,52 +4667,62 @@ module.exports.do = function(req, res){
                 {
                     name: "subscriptionId",
                     type: "String",
-                    info: "ID of subscription to updated."
+                    info: "ID of subscription to updated.",
+					required: false
                 },
                 {
                     name: "applicationFeePercent",
                     type: "String",
-                    info: "A positive decimal (with at most four decimal places) between 1 and 100. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner’s Stripe account. The request must be made with an OAuth key in order to set an application fee percentage."
+                    info: "A positive decimal (with at most four decimal places) between 1 and 100. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner’s Stripe account. The request must be made with an OAuth key in order to set an application fee percentage.",
+					required: false
                 },
                 {
                     name: "coupon",
                     type: "String",
-                    info: "The code of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription."
+                    info: "The code of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription.",
+					required: false
                 },
                 {
                     name: "customer",
                     type: "String",
-                    info: "The identifier of the customer to subscribe."
+                    info: "The identifier of the customer to subscribe.",
+					required: false
                 },
                 {
                     name: "plan",
                     type: "String",
-                    info: "The identifier of the plan to subscribe the customer to."
+                    info: "The identifier of the plan to subscribe the customer to.",
+					required: false
                 },
                 {
                     name: "source",
                     type: "JSON",
-                    info: "The source can either be a token, like the ones returned by our Stripe.js, or a object containing a user's credit card details (with the options shown below). You must provide a source if the customer does not already have a valid source attached, and you are subscribing the customer for a plan that is not free. Passing source will create a new source object, make it the customer default source, and delete the old customer default if one exists. If you want to add an additional source to use with subscriptions, instead use the card creation API to add the card and then the customer update API to set it as the default. Whenever you attach a card to a customer, Stripe will automatically validate the card."
+                    info: "The source can either be a token, like the ones returned by our Stripe.js, or a object containing a user's credit card details (with the options shown below). You must provide a source if the customer does not already have a valid source attached, and you are subscribing the customer for a plan that is not free. Passing source will create a new source object, make it the customer default source, and delete the old customer default if one exists. If you want to add an additional source to use with subscriptions, instead use the card creation API to add the card and then the customer update API to set it as the default. Whenever you attach a card to a customer, Stripe will automatically validate the card.",
+					required: false
                 },
                 {
                     name: "quantity",
                     type: "Number",
-                    info: "The quantity you'd like to apply to the subscription you're creating. For example, if your plan is $10/user/month, and your customer has 5 users, you could pass 5 as the quantity to have the customer charged $50 (5 x $10) monthly. If you update a subscription but don't change the plan ID (e.g. changing only the trial_end), the subscription will inherit the old subscription's quantity attribute unless you pass a new quantity parameter. If you update a subscription and change the plan ID, the new subscription will not inherit the quantity attribute and will default to 1 unless you pass a quantity parameter."
+                    info: "The quantity you'd like to apply to the subscription you're creating. For example, if your plan is $10/user/month, and your customer has 5 users, you could pass 5 as the quantity to have the customer charged $50 (5 x $10) monthly. If you update a subscription but don't change the plan ID (e.g. changing only the trial_end), the subscription will inherit the old subscription's quantity attribute unless you pass a new quantity parameter. If you update a subscription and change the plan ID, the new subscription will not inherit the quantity attribute and will default to 1 unless you pass a quantity parameter.",
+					required: false
                 },
                 {
                     name: "metadata",
                     type: "JSON",
-                    info: "A set of key/value pairs that you can attach to a subscription object. It can be useful for storing additional information about the subscription in a structured format."
+                    info: "A set of key/value pairs that you can attach to a subscription object. It can be useful for storing additional information about the subscription in a structured format.",
+					required: false
                 },
                 {
                     name: "taxPercent",
                     type: "String",
-                    info: "A positive decimal (with at most four decimal places) between 1 and 100. This represents the percentage of the subscription invoice subtotal that will be calculated and added as tax to the final amount each billing period. For example, a plan which charges $10/month with a tax_percent of 20.0 will charge $12 per invoice."
+                    info: "A positive decimal (with at most four decimal places) between 1 and 100. This represents the percentage of the subscription invoice subtotal that will be calculated and added as tax to the final amount each billing period. For example, a plan which charges $10/month with a tax_percent of 20.0 will charge $12 per invoice.",
+					required: false
                 },
                 {
                     name: "trialEnd",
                     type: "String",
-                    info: "Unix timestamp representing the end of the trial period the customer will get before being charged for the first time. If set, trial_end will override the default trial period of the plan the customer is being subscribed to. The special value now can be provided to end the customer's trial immediately."
+                    info: "Unix timestamp representing the end of the trial period the customer will get before being charged for the first time. If set, trial_end will override the default trial period of the plan the customer is being subscribed to. The special value now can be provided to end the customer's trial immediately.",
+					required: false
                 }
             ],
             'callbacks':[
@@ -4629,12 +4748,14 @@ module.exports.do = function(req, res){
                 {
                     name: "subscriptionId",
                     type: "String",
-                    info: "ID of subscription to retrieve."
+                    info: "ID of subscription to retrieve.",
+					required: false
                 },
                 {
                     name: "atPeriodEnd",
                     type: "String",
-                    info: "A flag that if set to true will delay the cancellation of the subscription until the end of the current period."
+                    info: "A flag that if set to true will delay the cancellation of the subscription until the end of the current period.",
+					required: false
                 },
             ],
             'callbacks':[
@@ -4660,22 +4781,26 @@ module.exports.do = function(req, res){
                 {
                     name: "subscriptionId",
                     type: "String",
-                    info: "ID of subscription to retrieve."
+                    info: "ID of subscription to retrieve.",
+					required: false
                 },
                 {
                     name: "customer",
                     type: "String",
-                    info: "The ID of the customer whose subscriptions will be retrieved"
+                    info: "The ID of the customer whose subscriptions will be retrieved",
+					required: false
                 },
                 {
                     name: "plan",
                     type: "String",
-                    info: "The ID of the plan whose subscriptions will be retrieved"
+                    info: "The ID of the plan whose subscriptions will be retrieved",
+					required: false
                 },
                 {
                     name: "status",
                     type: "String",
-                    info: "The status of the subscriptions to retrieve. One of: trialing, active, past_due, unpaid, canceled, or all. Passing in a value of canceled will return all canceled subscriptions, including those belonging to deleted customers. Passing in a value of all will return subscriptions of all statuses."
+                    info: "The status of the subscriptions to retrieve. One of: trialing, active, past_due, unpaid, canceled, or all. Passing in a value of canceled will return all canceled subscriptions, including those belonging to deleted customers. Passing in a value of all will return subscriptions of all statuses.",
+					required: false
                 },
             ],
             'callbacks':[
