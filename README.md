@@ -1,3 +1,5 @@
+[![](https://scdn.rapidapi.com/RapidAPI_banner.png)](https://rapidapi.com/package/Stripe/functions?utm_source=RapidAPIGitHub_StripeFunctions&utm_medium=button&utm_content=RapidAPI_GitHub)
+
 # Stripe Package
 This blocks allows you to translates a sting of text from one language to another
 * Domain: stripe.com
