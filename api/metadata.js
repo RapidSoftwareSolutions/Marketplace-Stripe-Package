@@ -1291,12 +1291,6 @@ module.exports.do = function(req, res){
                     required: true
                 },
                 {
-                    name: "description",
-                    type: "String",
-                    info: "An arbitrary string which you can attach to a transfer object. It is displayed when in the web interface alongside the transfer.",
-                    required: false
-                },
-                {
                     name: "sourceTransaction",
                     type: "String",
                     info: "You can use this parameter to transfer funds from a charge (or other transaction) before they are added to your available balance. A pending balance will transfer immediately but the funds will not become available until the original charge becomes available.",
