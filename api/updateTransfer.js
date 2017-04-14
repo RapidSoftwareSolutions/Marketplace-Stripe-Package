@@ -37,6 +37,10 @@ module.exports = (req, res) => {
         res.status(200).send(r);
         return;
     }
+    
+    let options = _.clearArgs({
+        metadata: metadata
+    });
 
     stripe.transfers.update(transferId, options, function(err, result) {
         if(!err) {
