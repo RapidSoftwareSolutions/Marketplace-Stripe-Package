@@ -15,8 +15,7 @@ module.exports = (req, res) => {
         destination,
         description,
         sourceTransaction,
-        statementDescriptor,
-        sourceType, 
+        metadata, 
         to="to" 
     } = req.body.args;
 
@@ -31,15 +30,25 @@ module.exports = (req, res) => {
     }
 
     let stripe = initStripe(apiKey);
+    
+    if(metadata && typeof metadata == 'string')
+    try {
+        metadata = JSON.parse(metadata)
+    } catch(e) {
+        r.contextWrites[to] = 'Invalid JSON value.';
+        r.callback = 'error';
 
+        res.status(200).send(r);
+        return;
+    }
+    
     let options = _.clearArgs({
         amount: amount,
         currency: currency,
         destination: destination,
         description: description,
         source_transaction: sourceTransaction,
-        statement_descriptor: statementDescriptor,
-        source_type: sourceType
+        metadata: metadata
     });
 
     stripe.transfers.create(options, function(err, result) {
