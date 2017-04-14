@@ -1297,15 +1297,9 @@ module.exports.do = function(req, res){
                     required: false
                 },
                 {
-                    name: "statementDescriptor",
-                    type: "String",
-                    info: "A string to be displayed on the recipient's bank or card statement. This may be at most 22 characters. Attempting to use a statement_descriptor longer than 22 characters will return an error. Note: Most banks will truncate this information and/or display it inconsistently. Some may not display it at all.",
-                    required: false
-                },
-                {
-                    name: "sourceType",
-                    type: "String",
-                    info: "Valid options are: alipay_account, bank_account, bitcoin_receiver, and card.",
+                    name: "metadata",
+                    type: "JSON",
+                    info: "A set of key/value pairs that you can attach to a transfer object. It can be useful for storing additional information about the transfer in a structured format.",
                     required: false
                 },
             ],
