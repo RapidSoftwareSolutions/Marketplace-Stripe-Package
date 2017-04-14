@@ -13,7 +13,6 @@ module.exports = (req, res) => {
         amount,
         currency,
         destination,
-        description,
         sourceTransaction,
         metadata, 
         to="to" 
@@ -46,7 +45,6 @@ module.exports = (req, res) => {
         amount: amount,
         currency: currency,
         destination: destination,
-        description: description,
         source_transaction: sourceTransaction,
         metadata: metadata
     });
