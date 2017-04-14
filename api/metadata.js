@@ -1357,12 +1357,6 @@ module.exports.do = function(req, res){
                     required: true
                 },
                 {
-                    name: "description",
-                    type: "String",
-                    info: "An arbitrary string which you can attach to a transfer object. It is displayed when in the web interface alongside the transfer. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.",
-                    required: false
-                },
-                {
                     name: "metadata",
                     type: "JSON",
                     info: "A set of key/value pairs that you can attach to a transfer object. It can be useful for storing additional information about the transfer in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.",
