@@ -9,8 +9,7 @@ module.exports = (req, res) => {
     req.body.args = _.clearArgs(req.body.args);
 
     let { 
-        apiKey, 
-        description,
+        apiKey,
         metadata, 
         transferId,
         to="to" 
@@ -38,10 +37,6 @@ module.exports = (req, res) => {
         res.status(200).send(r);
         return;
     }
-
-    let options = _.clearArgs({
-        description: description
-    });
 
     stripe.transfers.update(transferId, options, function(err, result) {
         if(!err) {
