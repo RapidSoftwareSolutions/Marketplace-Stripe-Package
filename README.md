@@ -395,7 +395,6 @@ Updates the specified transfer by setting the values of the parameters passed. A
 |------------|------------|----------
 | apiKey     | credentials| Required: The api key obtained from Stripe.
 | transferId | String     | Required: Id of transfer to update.
-| description| String     | An arbitrary string which you can attach to a transfer object. It is displayed when in the web interface alongside the transfer. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
 | metadata   | JSON       | A set of key/value pairs that you can attach to a transfer object. It can be useful for storing additional information about the transfer in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.
 
 `metadata` example:
