@@ -378,8 +378,7 @@ To send funds from your Stripe account to a third-party recipient or to your own
 | currency           | String     | Required: 3-letter ISO code for currency
 | destination        | String     | Required: The id of a bank account or a card to send the transfer to, or the string `default_for_currency` to use the default external account for the specified currency. 
 | sourceTransaction  | String     | You can use this parameter to transfer funds from a charge (or other transaction) before they are added to your available balance. A pending balance will transfer immediately but the funds will not become available until the original charge becomes available.
-| statementDescriptor| String     | A string to be displayed on the recipient's bank or card statement. This may be at most 22 characters. Attempting to use a statement_descriptor longer than 22 characters will return an error. Note: Most banks will truncate this information and/or display it inconsistently. Some may not display it at all.
-| sourceType         | String     | Valid options are: alipay_account, bank_account, bitcoin_receiver, and card.
+| metadata         | JSON     | A set of key/value pairs that you can attach to a transfer object. It can be useful for storing additional information about the transfer in a structured format.
 
 ## Stripe.getTransfer
 Retrieves the details of an existing transfer. Supply the unique transfer ID from either a transfer creation request or the transfer list, and Stripe will return the corresponding transfer information.
