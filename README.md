@@ -6,7 +6,7 @@ This blocks allows you to translates a sting of text from one language to anothe
 * Credentials: apiKey.
 
 ## How to get credentials: 
-0. Sign in [stripe dashboard](https://dashboard.stripe.com/dashboard). 
+0. Sign up or log in to [stripe dashboard](https://dashboard.stripe.com/dashboard). 
 1. Go to [your account settings](https://dashboard.stripe.com/account).
 2. Choose [*API Keys* folder](https://dashboard.stripe.com/account/apikeys).
 3. Copy and save your *Secret Key*.
