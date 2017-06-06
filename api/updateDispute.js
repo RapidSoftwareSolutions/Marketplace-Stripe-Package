@@ -27,15 +27,22 @@ module.exports = (req, res) => {
         return;
     }
 
-    try {
-        if(metadata && typeof metadata == 'string') metadata = JSON.parse(metadata);
-        if(evidence && typeof evidence == 'string') evidence = JSON.parse(evidence);
-    } catch(e) {
-        r.contextWrites[to] = 'Invalid JSON value.';
-        r.callback = 'error';
+    if(metadata && typeof metadata == 'string') {
+        try {
+            metadata = JSON.parse(metadata)
+        } catch(e) {
+            r.contextWrites[to] = 'Invalid JSON value.';
+            r.callback = 'error';
 
-        res.status(200).send(r);
-        return;
+            res.status(200).send(r);
+            return;
+        }
+    } else if(metadata && typeof metadata == 'object'){
+        let metadataArr = {};
+        for (var i in metadata) {
+            metadataArr[metadata[i]['keyName']] = metadata[i]['value'];
+        }
+        metadata = metadataArr;
     }
 
     let stripe = initStripe(apiKey);

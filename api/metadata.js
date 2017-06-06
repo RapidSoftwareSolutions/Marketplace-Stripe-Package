@@ -63,7 +63,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "type",
-                    type: "String",
+                    type: "Select",
+                    options:["charge","refund","adjustment","application_fee","application_fee_refund","transfer","transfer_failure"],
                     info: "Only returns transactions of the given type. One of: `charge`, `refund`, `adjustment`, `application_fee`, `application_fee_refund`, `transfer`, or `transfer_failure`",
                     required: false
                 },
@@ -202,9 +203,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to a customer object. It can be useful for storing additional information about the customer in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
                 {
                     name: "plan",
@@ -325,9 +340,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to a charge object. It can be useful for storing additional information about the charge in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.",
-					required: false
+					required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
                 {
                     name: "shipping",
@@ -536,9 +565,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to a customer object. It can be useful for storing additional information about the customer in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
                 {
                     name: "plan",
@@ -686,9 +729,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to a dispute object. It can be useful for storing additional information about the dispute in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 }
             ],
             'callbacks':[
@@ -857,7 +914,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "purpose",
-                    type: "String",
+                    type: "Select",
+                    options: ["business_logo","dispute_evidence","identity_document","incorporation_article","incorporation_document","payment_provider_transfer","product_feed"],
                     info: "The purpoe of the uploaded file. Possible values are `business_logo`, `dispute_evidence`, `identity_document`, `incorporation_article`, `incorporation_document`, `payment_provider_transfer`, `product_feed`.",
                     required: true
                 }
@@ -974,9 +1032,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to a refund object. It can be useful for storing additional information about the refund in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
                 {
                     name: "reason",
@@ -1052,9 +1124,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to a refund object. It can be useful for storing additional information about the refund in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
             ],
             'callbacks':[
@@ -1298,9 +1384,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to a transfer object. It can be useful for storing additional information about the transfer in a structured format.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
             ],
             'callbacks':[
@@ -1358,9 +1458,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to a transfer object. It can be useful for storing additional information about the transfer in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
             ],
             'callbacks':[
@@ -1397,7 +1511,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "status",
-                    type: "String",
+                    type: "Select",
+                    options: ["pending","paid","failed","in_transit","canceled"],
                     info: "Only return transfers that have the given status: `pending`, `paid`, `failed`, `in_transit`, or `canceled`.",
                     required: false
                 }
@@ -1436,9 +1551,23 @@ module.exports.do = function(req, res){
                 },
                 {
                    name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to a reversal object. It can be useful for storing additional information about the reversal in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
                 {
                     name: "refundApplicationFee",
@@ -1514,9 +1643,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to a reversal object. It can be useful for storing additional information about the reversal in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
                 {
                     name: "description",
@@ -1706,9 +1849,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to an account object. It can be useful for storing additional information about the account in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.",
-					required: false
+					required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
                 {
                     name: "productDescription",
@@ -1808,7 +1965,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "reason",
-                    type: "String",
+                    type: "Select",
+                    options: ["fraud","terms_of_service","other"],
                     info: "The reason for rejecting the account. May be one of `fraud`, `terms_of_service`, or `other`.",
 					required: false
                 },
@@ -1886,9 +2044,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to a refund object. It can be useful for storing additional information about the refund in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.",
-					required: false
+					required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
             ],
             'callbacks':[
@@ -1958,9 +2130,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to an application fee refund object. It can be useful for storing additional information about the refund in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
             ],
             'callbacks':[
@@ -2192,9 +2378,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to an external account object. It can be useful for storing additional information about the external account in a structured format.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
 
             ],
@@ -2266,9 +2466,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to an external account object. It can be useful for storing additional information about the external account in a structured format.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
             ],
             'callbacks':[
@@ -2396,9 +2610,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to an external account object. It can be useful for storing additional information about the external account in a structured format.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
             ],
             'callbacks':[
@@ -2522,9 +2750,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to a customer object. It can be useful for storing additional information about the customer in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
                 {
                     name: "name",
@@ -2657,9 +2899,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to an order object. It can be useful for storing additional information about the order in a structured format.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
                 {
                     name: "refundMispayments",
@@ -2768,9 +3024,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to an order object. It can be useful for storing additional information about the order in a structured format.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
                 {
                     name: "shipping",
@@ -2840,9 +3110,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to an order object. It can be useful for storing additional information about the order in a structured format.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
                 {
                     name: "shipping",
@@ -2852,7 +3136,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "status",
-                    type: "credentials",
+                    type: "Select",
+                    options: ["created","paid","canceled","fulfilled","returned"],
                     info: "Current order status. One of `created`, `paid`, `canceled`, `fulfilled`, or `returned`.",
                     required: false
                 },
@@ -2897,9 +3182,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to an order object. It can be useful for storing additional information about the order in a structured format.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
                 {
                     name: "email",
@@ -2948,7 +3247,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "status",
-                    type: "String",
+                    type: "Select",
+                    options: ["created","paid","fulfilled","refunded"],
                     info: "Only return orders that have the given status. One of `created`, `paid`, `fulfilled`, or `refunded`.",
                     required: false
                 },
@@ -3099,9 +3399,14 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "attributes",
-                    type: "JSON",
+                    type: "List",
                     info: 'A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g. `["color", "size"]`).',
                     required: false,
+                    "structure": {
+                        "name": "attribute",
+                        "type": "String",
+                        "info": "Attribute"
+                    }
                 },
                 {
                     name: "caption",
@@ -3111,9 +3416,14 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "deactivateOn",
-                    type: "JSON",
+                    type: "List",
                     info: "An array of Connect application names or identifiers that should not be able to order the SKUs for this product.",
-                    required: false
+                    required: false,
+                    "structure": {
+                        "name": "appName",
+                        "type": "String",
+                        "info": "Application name or identifiers that should not be able to order the SKUs for this product."
+                    }
                 },
                 {
                     name: "description",
@@ -3123,15 +3433,34 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "images",
-                    type: "JSON",
+                    type: "List",
                     info: "A list of up to 8 URLs of images for this product, meant to be displayable to the customer.",
-                    required: false
+                    required: false,
+                    "structure": {
+                        "name": "imgUrl",
+                        "type": "String",
+                        "info": "Image for this product."
+                    }
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to a product object. It can be useful for storing additional information about the product in a structured format.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
                 {
                     name: "packageDimensions",
@@ -3219,9 +3548,14 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "attributes",
-                    type: "JSON",
+                    type: "List",
                     info: 'A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g. `["color", "size"]`).',
                     required: false,
+                    "structure": {
+                        "name": "attribute",
+                        "type": "String",
+                        "info": "Attribute"
+                    }
                 },
                 {
                     name: "caption",
@@ -3231,9 +3565,14 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "deactivateOn",
-                    type: "JSON",
+                    type: "List",
                     info: "An array of Connect application names or identifiers that should not be able to order the SKUs for this product.",
-                    required: false
+                    required: false,
+                    "structure": {
+                        "name": "appName",
+                        "type": "String",
+                        "info": "Application name or identifiers that should not be able to order the SKUs for this product."
+                    }
                 },
                 {
                     name: "description",
@@ -3243,15 +3582,34 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "images",
-                    type: "JSON",
+                    type: "List",
                     info: "A list of up to 8 URLs of images for this product, meant to be displayable to the customer.",
-                    required: false
+                    required: false,
+                    "structure": {
+                        "name": "imgUrl",
+                        "type": "String",
+                        "info": "Image for this product."
+                    }
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to a product object. It can be useful for storing additional information about the product in a structured format.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
                 {
                     name: "packageDimensions",
@@ -3397,9 +3755,14 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "attributes",
-                    type: "JSON",
+                    type: "List",
                     info: 'A dictionary of attributes and values for the attributes defined by the product. If, for example, a product’s attributes are ["size", "gender"], a valid SKU has the following dictionary of attributes: {"size": "Medium", "gender": "Unisex"}.',
                     required: false,
+                    "structure": {
+                        "name": "attribute",
+                        "type": "String",
+                        "info": "Attribute"
+                    }
                 },
                 {
                     name: "image",
@@ -3409,9 +3772,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to a SKU object. It can be useful for storing additional information about the SKU in a structured format.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
                 {
                     name: "packageDimensions",
@@ -3505,9 +3882,14 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "attributes",
-                    type: "JSON",
+                    type: "List",
                     info: 'A dictionary of attributes and values for the attributes defined by the product. If, for example, a product’s attributes are ["size", "gender"], a valid SKU has the following dictionary of attributes: {"size": "Medium", "gender": "Unisex"}.',
                     required: false,
+                    "structure": {
+                        "name": "attribute",
+                        "type": "String",
+                        "info": "Attribute"
+                    }
                 },
                 {
                     name: "image",
@@ -3517,9 +3899,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to a SKU object. It can be useful for storing additional information about the SKU in a structured format.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
                 {
                     name: "packageDimensions",
@@ -3550,9 +3946,14 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "attributes",
-                    type: "String",
+                    type: "List",
                     info: "",
-                    required: false
+                    required: false,
+                    "structure": {
+                        "name": "attribute",
+                        "type": "String",
+                        "info": "Attribute"
+                    }
                 },
                 {
                     name: "ids",
@@ -3654,9 +4055,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to a coupon object. It can be useful for storing additional information about the coupon in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
                 {
                     name: "percentOff",
@@ -3727,9 +4142,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to a coupon object. It can be useful for storing additional information about the coupon in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
             ],
             'callbacks':[
@@ -3874,9 +4303,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to a customer object. It can be useful for storing additional information about the customer in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
                 {
                     name: "statementDescriptor",
@@ -4041,9 +4484,23 @@ module.exports.do = function(req, res){
                 },
                 {
                    name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to a customer object. It can be useful for storing additional information about the customer in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.",
-                    required: false
+                    required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
                 {
                     name: "statementDescriptor",
@@ -4188,9 +4645,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to an invoice item object. It can be useful for storing additional information about the invoice item in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.",
-					required: false
+					required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
                 {
                     name: "subscription",
@@ -4272,9 +4743,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to an invoice item object. It can be useful for storing additional information about the invoice item in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.",
-					required: false
+					required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 }
             ],
             'callbacks':[
@@ -4389,9 +4874,23 @@ module.exports.do = function(req, res){
                 },
                 {
                    name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to a plan object. It can be useful for storing additional information about the plan in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.",
-					required: false
+					required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
                 {
                     name: "statementDescriptor",
@@ -4466,9 +4965,23 @@ module.exports.do = function(req, res){
                 },
                 {
                    name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to a plan object. It can be useful for storing additional information about the plan in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.",
-					required: false
+					required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
                 {
                     name: "statementDescriptor",
@@ -4582,9 +5095,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to a subscription object. It can be useful for storing additional information about the subscription in a structured format.",
-					required: false
+					required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
                 {
                     name: "taxPercent",
@@ -4690,9 +5217,23 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "metadata",
-                    type: "JSON",
+                    type: "Array",
                     info: "A set of key/value pairs that you can attach to a subscription object. It can be useful for storing additional information about the subscription in a structured format.",
-					required: false
+					required: false,
+                    "structure": [
+                        {
+                            "name": "keyName",
+                            "type": "String",
+                            "info": "Custom key",
+                            "required": true
+                        },
+                        {
+                            "name": "value",
+                            "type": "String",
+                            "info": "Value",
+                            "required": true
+                        }
+                    ]
                 },
                 {
                     name: "taxPercent",
@@ -4780,7 +5321,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "status",
-                    type: "String",
+                    type: "Select",
+                    options: ["trialing","active","past_due","unpaid","canceled","all"],
                     info: "The status of the subscriptions to retrieve. One of: trialing, active, past_due, unpaid, canceled, or all. Passing in a value of canceled will return all canceled subscriptions, including those belonging to deleted customers. Passing in a value of all will return subscriptions of all statuses.",
 					required: false
                 },

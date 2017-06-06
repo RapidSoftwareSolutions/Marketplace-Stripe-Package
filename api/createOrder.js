@@ -35,7 +35,6 @@ module.exports = (req, res) => {
 
     try {
         if(shipping && typeof shipping == 'string') shipping = JSON.parse(shipping);
-        if(metadata && typeof metadata == 'string') metadata = JSON.parse(metadata);
         if(items && typeof items == 'string') items = JSON.parse(items);
     } catch(e) {
         r.contextWrites[to] = 'Invalid JSON value.';
@@ -43,7 +42,25 @@ module.exports = (req, res) => {
 
         res.status(200).send(r);
         return;
-    }    
+    }
+
+    if(metadata && typeof metadata == 'string') {
+        try {
+            metadata = JSON.parse(metadata)
+        } catch(e) {
+            r.contextWrites[to] = 'Invalid JSON value.';
+            r.callback = 'error';
+
+            res.status(200).send(r);
+            return;
+        }
+    } else if(metadata && typeof metadata == 'object'){
+        let metadataArr = {};
+        for (var i in metadata) {
+            metadataArr[metadata[i]['keyName']] = metadata[i]['value'];
+        }
+        metadata = metadataArr;
+    }
 
     let options = _.clearArgs({
         currency: currency,

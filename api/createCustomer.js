@@ -34,15 +34,24 @@ module.exports = (req, res) => {
         return;
     }
 
-    if(metadata && typeof metadata == 'string')
-    try {
-        metadata = JSON.parse(metadata)
-    } catch(e) {
-        r.contextWrites[to] = 'Invalid JSON value.';
-        r.callback = 'error';
 
-        res.status(200).send(r);
-        return;
+
+    if(metadata && typeof metadata == 'string') {
+        try {
+            metadata = JSON.parse(metadata)
+        } catch(e) {
+            r.contextWrites[to] = 'Invalid JSON value.';
+            r.callback = 'error';
+
+            res.status(200).send(r);
+            return;
+        }
+    } else if(metadata && typeof metadata == 'object'){
+        let metadataArr = {};
+        for (var i in metadata) {
+            metadataArr[metadata[i]['keyName']] = metadata[i]['value'];
+        }
+        metadata = metadataArr;
     }
 
     let stripe = initStripe(apiKey);
@@ -58,14 +67,14 @@ module.exports = (req, res) => {
         plan,
         taxPercent,
         trialEnd
-    };    
+    };
 
     options = _.clearArgs(options);
 
     stripe.customers.create(options, function(err, result) {
         if(!err) {
             r.contextWrites[to] = result;
-            r.callback = 'success'; 
+            r.callback = 'success';
         } else {
             console.log(err);
             r.contextWrites[to] = err.raw.message;
@@ -73,5 +82,5 @@ module.exports = (req, res) => {
         }
 
         res.status(200).send(r);
-    });    
+    });
 }
