@@ -11,6 +11,16 @@ This blocks allows you to translates a sting of text from one language to anothe
 2. Choose [*API Keys* folder](https://dashboard.stripe.com/account/apikeys).
 3. Copy and save your *Secret Key*.
 
+
+## Custom datatypes:
+ |Datatype|Description|Example
+ |--------|-----------|----------
+ |Datepicker|String which includes date and time|```2016-05-28 00:00:00```
+ |Map|String which includes latitude and longitude coma separated|```50.37, 26.56```
+ |List|Simple array|```["123", "sample"]```
+ |Select|String with predefined values|```sample```
+ |Array|Array of objects|```[{"Second name":"123","Age":"12","Photo":"sdf","Draft":"sdfsdf"},{"name":"adi","Second name":"bla","Age":"4","Photo":"asfserwe","Draft":"sdfsdf"}] ```
+
 ## Stripe.getAccountBalance
 Retrieves the current account balance, based on the authentication that was used to make the request.
 
@@ -27,7 +37,7 @@ Returns a list of transactions that have contributed to the Stripe account balan
 | currency     | String     | 3-letter ISO code for currency.
 | startingAfter| String     | A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
 | limit        | Number     | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-| type         | String     | Only returns transactions of the given type. One of: `charge`, `refund`, `adjustment`, `application_fee`, `application_fee_refund`, `transfer`, or `transfer_failure`
+| type         | Select     | Only returns transactions of the given type. One of: `charge`, `refund`, `adjustment`, `application_fee`, `application_fee_refund`, `transfer`, or `transfer_failure`
 
 ## Stripe.createCharge
 To charge a credit card, you create a charge object. If your API key is in test mode, the supplied payment source (e.g., card or Bitcoin receiver) won't actually be charged, though everything else will occur as if in live mode. (Stripe assumes that the charge would have completed successfully).
@@ -57,7 +67,7 @@ Creates a new customer object.
 | coupon        | String     | If you provide a coupon code, the customer will have a discount applied on all recurring charges. Charges you create through the API will not have the discount.
 | description   | String     | An arbitrary string that you can attach to a customer object. It is displayed alongside the customer in the dashboard. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
 | email         | String     | Customer’s email address. It’s displayed alongside the customer in your dashboard and can be useful for searching and tracking. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
-| metadata      | JSON       | A set of key/value pairs that you can attach to a customer object. It can be useful for storing additional information about the customer in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
+| metadata      | Array       | A set of key/value pairs that you can attach to a customer object. It can be useful for storing additional information about the customer in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
 | plan          | String     | The identifier of the plan to subscribe the customer to. If provided, the returned customer object will have a list of subscriptions that the customer is currently subscribed to. If you subscribe a customer to a plan without a free trial, the customer must have a valid card as well.
 | taxPercent    | String     | A positive decimal (with at most four decimal places) between 1 and 100. This represents the percentage of the subscription invoice subtotal that will be calculated and added as tax to the final amount each billing period. For example, a plan which charges $10/month with a tax_percent of 20.0 will charge $12 per invoice. Can only be used if a plan is provided.
 | trialEnd      | String     | Unix timestamp representing the end of the trial period the customer will get before being charged. If set, trial_end will override the default trial period of the plan the customer is being subscribed to. The special value now can be provided to end the customer’s trial immediately. Only applies when the plan parameter is also provided.
@@ -96,7 +106,7 @@ Updates the specified charge by setting the values of the parameters passed. Any
 | description | String     | An arbitrary string which you can attach to a charge object. It is displayed when in the web interface alongside the charge. Note that if you use Stripe to send automatic email receipts to your customers, your receipt emails will include the description of the charge(s) that they are describing.
 | receiptEmail| String     | The email address to send this charge's receipt to. The receipt will not be sent until the charge is paid. If this charge is for a customer, the email address specified here will override the customer's email address. Receipts will not be sent for test mode charges. If `receipt_email` is specified for a charge in live mode, a receipt will be sent regardless of your email settings.
 | fraudDetails| JSON       | JSON Object. A set of key/value pairs you can attach to a charge giving information about its riskiness. If you believe a charge is fraudulent, include a user_report key with a value of fraudulent. If you believe a charge is safe, include a user_report key with a value of safe. Note that you must refund a charge before setting the user_report to fraudulent. Stripe will use the information you send to improve our fraud detection algorithms.
-| metadata    | JSON       | A set of key/value pairs that you can attach to a charge object. It can be useful for storing additional information about the charge in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.
+| metadata    | Array       | A set of key/value pairs that you can attach to a charge object. It can be useful for storing additional information about the charge in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.
 | shipping    | String     | Shipping information for the charge. Helps prevent fraud on charges for physical goods.
 
 `metadata` example:
@@ -160,7 +170,7 @@ Updates the specified customer by setting the values of the parameters passed.
 | coupon        | String     | If you provide a coupon code, the customer will have a discount applied on all recurring charges. Charges you create through the API will not have the discount.
 | description   | String     | An arbitrary string that you can attach to a customer object. It is displayed alongside the customer in the dashboard. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
 | email         | String     | Customer’s email address. It’s displayed alongside the customer in your dashboard and can be useful for searching and tracking. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
-| metadata      | JSON       | A set of key/value pairs that you can attach to a customer object. It can be useful for storing additional information about the customer in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
+| metadata      | Array       | A set of key/value pairs that you can attach to a customer object. It can be useful for storing additional information about the customer in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
 | plan          | String     | The identifier of the plan to subscribe the customer to. If provided, the returned customer object will have a list of subscriptions that the customer is currently subscribed to. If you subscribe a customer to a plan without a free trial, the customer must have a valid card as well.
 | taxPercent    | String     | A positive decimal (with at most four decimal places) between 1 and 100. This represents the percentage of the subscription invoice subtotal that will be calculated and added as tax to the final amount each billing period. For example, a plan which charges $10/month with a tax_percent of 20.0 will charge $12 per invoice. Can only be used if a plan is provided.
 | trialEnd      | String     | Unix timestamp representing the end of the trial period the customer will get before being charged. If set, trial_end will override the default trial period of the plan the customer is being subscribed to. The special value now can be provided to end the customer’s trial immediately. Only applies when the plan parameter is also provided.
@@ -207,7 +217,7 @@ When you get a dispute, contacting your customer is always the best first step. 
 | apiKey    | credentials| Required: The api key obtained from Stripe.
 | disputeId | String     | Required: ID of dispute to retrieve.
 | evidence  | JSON       | JSON Object. Evidence to upload to respond to a dispute. Updating any field in the hash will submit all fields in the hash for review.
-| metadata  | JSON       | A set of key/value pairs that you can attach to a dispute object. It can be useful for storing additional information about the dispute in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
+| metadata  | Array       | A set of key/value pairs that you can attach to a dispute object. It can be useful for storing additional information about the dispute in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
 
 `metadata` example:
 
@@ -258,7 +268,7 @@ List events, going back up to 30 days.
 | Field        | Type       | Description
 |--------------|------------|----------
 | apiKey       | credentials| Required: The api key obtained from Stripe.
-| type         | String     | A string containing a specific event name, or group of events using * as a wildcard. The list will be filtered to include only events with a matching event property.
+| type         | Select     | A string containing a specific event name, or group of events using * as a wildcard. The list will be filtered to include only events with a matching event property.
 | endingBefore | String     | A cursor for use in pagination. ending_before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_bar, your subsequent call can include ending_before=obj_bar in order to fetch the previous page of the list.
 | limit        | String     | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
 | startingAfter| String     | A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list.
@@ -270,7 +280,7 @@ Upload a file to Stripe
 |-----------|------------|----------
 | apiKey    | credentials| Required: The api key obtained from Stripe.
 | file      | File       | Required: A file to upload.
-| purpose   | String     | Required: The purpoe of the uploaded file. Possible values are `business_logo`, `dispute_evidence`, `identity_document`, `incorporation_article`, `incorporation_document`, `payment_provider_transfer`, `product_feed`.
+| purpose   | Select     | Required: The purpoe of the uploaded file. Possible values are `business_logo`, `dispute_evidence`, `identity_document`, `incorporation_article`, `incorporation_document`, `payment_provider_transfer`, `product_feed`.
 
 ## Stripe.createRefund
 Creates a refund.
@@ -280,8 +290,8 @@ Creates a refund.
 | apiKey              | credentials| Required: The api key obtained from Stripe.
 | chargeId            | String     | Required: The identifier of the charge to refund.
 | amount              | String     | A positive integer in cents representing how much of this charge to refund. Can only refund up to the unrefunded amount remaining of the charge.
-| metadata            | JSON       | A set of key/value pairs that you can attach to a refund object. It can be useful for storing additional information about the refund in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.
-| reason              | String     | String indicating the reason for the refund. If set, possible values are duplicate, fraudulent, and requested_by_customer. Specifying fraudulent as the reason when you believe the charge to be fraudulent will help us improve our fraud detection algorithms.
+| metadata            | Array       | A set of key/value pairs that you can attach to a refund object. It can be useful for storing additional information about the refund in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.
+| reason              | Select     | String indicating the reason for the refund. If set, possible values are duplicate, fraudulent, and requested_by_customer. Specifying fraudulent as the reason when you believe the charge to be fraudulent will help us improve our fraud detection algorithms.
 | refundApplicationFee| String     | Boolean indicating whether the application fee should be refunded when refunding this charge. If a full charge refund is given, the full application fee will be refunded. Else, the application fee will be refunded with an amount proportional to the amount of the charge refunded. An application fee can only be refunded by the application that created the charge.
 | reverseTransfer     | String     | Boolean indicating whether the transfer should be reversed when refunding this charge. The transfer will be reversed for the same amount being refunded (either the entire or partial amount). A transfer can only be reversed by the application that created the charge.
 
@@ -308,7 +318,7 @@ Updates the specified refund by setting the values of the parameters passed. Any
 |-----------|------------|----------
 | apiKey    | credentials| Required: The api key obtained from Stripe.
 | refundId  | String     | Required: ID of refund to retrieve.
-| metadata  | JSON       | A set of key/value pairs that you can attach to a refund object. It can be useful for storing additional information about the refund in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.
+| metadata  | Array       | A set of key/value pairs that you can attach to a refund object. It can be useful for storing additional information about the refund in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.
 
 `metadata` example:
 
@@ -378,7 +388,7 @@ To send funds from your Stripe account to a third-party recipient or to your own
 | currency           | String     | Required: 3-letter ISO code for currency
 | destination        | String     | Required: The id of a bank account or a card to send the transfer to, or the string `default_for_currency` to use the default external account for the specified currency. 
 | sourceTransaction  | String     | You can use this parameter to transfer funds from a charge (or other transaction) before they are added to your available balance. A pending balance will transfer immediately but the funds will not become available until the original charge becomes available.
-| metadata         | JSON     | A set of key/value pairs that you can attach to a transfer object. It can be useful for storing additional information about the transfer in a structured format.
+| metadata         | Array     | A set of key/value pairs that you can attach to a transfer object. It can be useful for storing additional information about the transfer in a structured format.
 
 ## Stripe.getTransfer
 Retrieves the details of an existing transfer. Supply the unique transfer ID from either a transfer creation request or the transfer list, and Stripe will return the corresponding transfer information.
@@ -395,7 +405,7 @@ Updates the specified transfer by setting the values of the parameters passed. A
 |------------|------------|----------
 | apiKey     | credentials| Required: The api key obtained from Stripe.
 | transferId | String     | Required: Id of transfer to update.
-| metadata   | JSON       | A set of key/value pairs that you can attach to a transfer object. It can be useful for storing additional information about the transfer in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.
+| metadata   | Array       | A set of key/value pairs that you can attach to a transfer object. It can be useful for storing additional information about the transfer in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.
 
 `metadata` example:
 
@@ -413,7 +423,7 @@ Returns a list of existing transfers sent to third-party bank accounts or that S
 | apiKey         | credentials| Required: The api key obtained from Stripe.
 | destination    | String     | Only return transfers for the destination specified by this account ID.
 | recipientstatus| String     | Only return transfers for the recipient specified by this recipient ID.
-| status         | String     | Only return transfers that have the given status: `pending`, `paid`, `failed`, `in_transit`, or `canceled`.
+| status         | Select     | Only return transfers that have the given status: `pending`, `paid`, `failed`, `in_transit`, or `canceled`.
 
 ## Stripe.createTransferReversal
 When you create a new reversal, you must specify a transfer to create it on.
@@ -423,7 +433,7 @@ When you create a new reversal, you must specify a transfer to create it on.
 | apiKey              | credentials| Required: The api key obtained from Stripe.
 | transferId          | credentials| Required: The identifier of the transfer to be reversed.
 | description         | String     | An arbitrary string which you can attach to a reversal object. It is displayed alongside the reversal in the dashboard. This will be unset if you POST an empty value.
-| metadata            | JSON       | A set of key/value pairs that you can attach to a reversal object. It can be useful for storing additional information about the reversal in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.
+| metadata            | Array       | A set of key/value pairs that you can attach to a reversal object. It can be useful for storing additional information about the reversal in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.
 | refundApplicationFee| String     | Boolean indicating whether the application fee should be refunded when reversing this transfer. If a full transfer reversal is given, the full application fee will be refunded. Otherwise, the application fee will be refunded with an amount proportional to the amount of the transfer reversed.
 
 `metadata` example:
@@ -451,7 +461,7 @@ Updates the specified reversal by setting the values of the parameters passed. A
 | apiKey     | credentials| Required: The api key obtained from Stripe.
 | id         | String     | Required: ID of reversal to retrieve.
 | transferId | String     | Required: ID of the transfer reversed.
-| metadata   | JSON       | A set of key/value pairs that you can attach to a reversal object. It can be useful for storing additional information about the reversal in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.
+| metadata   | Array       | A set of key/value pairs that you can attach to a reversal object. It can be useful for storing additional information about the reversal in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.
 | description| String     | An arbitrary string which you can attach to a reversal object. It is displayed when in the web interface alongside the reversal. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
 
 `metadata` example:
@@ -505,7 +515,7 @@ Updates an account by setting the values of the parameters passed. Any parameter
 | email                | String     | Email address of the account holder. For standalone accounts, this is used to email them asking them to claim their Stripe account. For managed accounts, this is only to make the account easier to identify to you: Stripe will not email the account holder.
 | externalAccount      | String     | A card or bank account to attach to the account. You can provide either a token, like the ones returned by Stripe.js, or a dictionary as documented in the external_account parameter for either card or bank account creation. 
 | legalEntity          | String     | Information about the account holder; varies by account country and account status.
-| metadata             | JSON       | A set of key/value pairs that you can attach to an account object. It can be useful for storing additional information about the account in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
+| metadata             | Array       | A set of key/value pairs that you can attach to an account object. It can be useful for storing additional information about the account in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
 | productDescription   | String     | Internal-only description of the product being sold or service being provided by this account. It’s used by Stripe for risk and underwriting purposes.
 | statementDescriptor  | String     | The text that will appear on credit card statements by default if a charge is being made directly on the account.
 | supportEmail         | String     | A publicly shareable email address that can be reached for support for this account
@@ -553,7 +563,7 @@ Managed accounts created using test-mode keys can be rejected at any time. Manag
 |-----------|------------|----------
 | apiKey    | credentials| Required: The api key obtained from Stripe.
 | accountId | String     | Required: Id of account to reject
-| reason    | String     | Required: The reason for rejecting the account. May be one of `fraud`, `terms_of_service`, or `other`.
+| reason    | Select     | Required: The reason for rejecting the account. May be one of `fraud`, `terms_of_service`, or `other`.
 
 ## Stripe.getAccountList
 Returns a list of accounts connected to your platform via Connect. If you’re not a platform, the list will be empty.
@@ -573,7 +583,7 @@ Refunds an application fee that has previously been collected but not yet refund
 | apiKey    | credentials| Required: The api key obtained from Stripe.
 | appId     | String     | Required: The identifier of the application fee to be refunded.
 | amount    | Number     | A positive integer in cents representing how much of this fee to refund. Can only refund up to the unrefunded amount remaining of the fee.
-| metadata  | JSON       | A set of key/value pairs that you can attach to a refund object. It can be useful for storing additional information about the refund in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.
+| metadata  | Array       | A set of key/value pairs that you can attach to a refund object. It can be useful for storing additional information about the refund in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.
 
 `metadata` example:
 ```JSON
@@ -600,7 +610,7 @@ Updates the specified application fee refund by setting the values of the parame
 | apiKey    | credentials| Required: The api key obtained from Stripe.
 | feeId     | String     | Required: ID of the application fee refunded.
 | refundId  | String     | Required: ID of refund to retrieve.
-| metadata  | JSON       | A set of key/value pairs that you can attach to an application fee refund object. It can be useful for storing additional information about the refund in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.
+| metadata  | Array       | A set of key/value pairs that you can attach to an application fee refund object. It can be useful for storing additional information about the refund in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.
 
 `metadata` example:
 ```JSON
@@ -667,7 +677,7 @@ When you create a new bank account, you must specify a Customer to create it on.
 | source            | String     | When adding a bank account to a customer, the parameter name is source. When adding to an account, the parameter name is external_account. The value can either be a token, like the ones returned by Stripe.js, or a dictionary containing a user’s bank account details (with the options shown below).
 | externalAccount   | String     | When adding a bank account to a customer, the parameter name is source. When adding to an account, the parameter name is external_account. The value can either be a token, like the ones returned by Stripe.js, or a dictionary containing a user’s bank account details (with the options shown below).
 | defaultForCurrency| String     | If you set this to true (or if this is the first bank account being added in this currency) this bank account will become the default bank account for its currency.
-| metadata          | JSON       | A set of key/value pairs that you can attach to an external account object. It can be useful for storing additional information about the external account in a structured format.
+| metadata          | Array       | A set of key/value pairs that you can attach to an external account object. It can be useful for storing additional information about the external account in a structured format.
 
 `metadata` example:
 ```JSON
@@ -694,7 +704,7 @@ Updates the metadata, account_holder_name, and account_holder_type of a bank acc
 | apiKey           | credentials| Required: The api key obtained from Stripe.
 | accountId        | String     | Required: The account ID obtained from Stripe.
 | bankAccountId    | String     | Required: The ID of the bank account to be updated.
-| metadata         | JSON       | A set of key/value pairs that you can attach to an external account object. It can be useful for storing additional information about the external account in a structured format.
+| metadata         | Array       | A set of key/value pairs that you can attach to an external account object. It can be useful for storing additional information about the external account in a structured format.
 
 `metadata` example:
 ```JSON
@@ -733,7 +743,7 @@ When you create a new credit card, you must specify a customer or recipient to c
 | source            | String     | When adding a bank account to a customer, the parameter name is source. When adding to an account, the parameter name is external_account. The value can either be a token, like the ones returned by Stripe.js, or a dictionary containing a user’s bank account details (with the options shown below).
 | externalAccount   | String     | When adding a bank account to a customer, the parameter name is source. When adding to an account, the parameter name is external_account. The value can either be a token, like the ones returned by Stripe.js, or a dictionary containing a user’s bank account details (with the options shown below).
 | defaultForCurrency| String     | If you set this to true (or if this is the first bank account being added in this currency) this bank account will become the default bank account for its currency.
-| metadata          | JSON       | A set of key/value pairs that you can attach to an external account object. It can be useful for storing additional information about the external account in a structured format.
+| metadata          | Array       | A set of key/value pairs that you can attach to an external account object. It can be useful for storing additional information about the external account in a structured format.
 
 `metadata` example:
 ```JSON
@@ -768,7 +778,7 @@ If you need to update only some card details, like the billing address or expira
 | defaultForCurrency| String     | Only applicable on accounts (not customers or recipients). If set to true, this card will become the default external account for its currency..
 | expMonth          | String     | Month.
 | expYear           | String     | Year.
-| metadata          | JSON       | A set of key/value pairs that you can attach to a customer object. It can be useful for storing additional information about the customer in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
+| metadata          | Array       | A set of key/value pairs that you can attach to a customer object. It can be useful for storing additional information about the customer in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
 | name              | String     | Name.
 
 `metadata` example:
@@ -808,7 +818,7 @@ Creates a bitcoin reciver
 | currency         | String     | Required: Only USD currently supported
 | email            | String     | Required: Email of the customerId
 | description      | String     | The receiver’s description.
-| metadata         | JSON       | A set of key/value pairs that you can attach to an order object. It can be useful for storing additional information about the order in a structured format.
+| metadata         | Array       | A set of key/value pairs that you can attach to an order object. It can be useful for storing additional information about the order in a structured format.
 | refundMispayments| String     | Refund Mispayments
 
 `metadata` example:
@@ -844,7 +854,7 @@ Creates a new order object.
 | customer  | String     | The ID of an existing customer to use for this order. If provided, the customer email and shipping address will be used to create the order. Subsequently, the customer will also be charged to pay the order. If email or shipping are also provided, they will override the values retrieved from the customer object.
 | email     | String     | The email address of the customer placing the order.
 | items     | JSON       | JSON Array of Objects. List of items constituting the order.
-| metadata  | JSON       | A set of key/value pairs that you can attach to an order object. It can be useful for storing additional information about the order in a structured format.
+| metadata  | Array       | A set of key/value pairs that you can attach to an order object. It can be useful for storing additional information about the order in a structured format.
 | shipping  | JSON       | JSON Object. Shipping address for the order. Required if any of the SKUs are for products that have shippable set to true.
 
 `metadata` example:
@@ -915,9 +925,9 @@ Updates the specific order by setting the values of the parameters passed. Any p
 | apiKey    | credentials| Required: The api key obtained from Stripe.
 | orderId   | String     | Required: Id of order to update.
 | coupon    | String     | A coupon code that represents a discount to be applied to this order. Must be one-time duration and in same currency as the order.
-| metadata  | JSON       | A set of key/value pairs that you can attach to an order object. It can be useful for storing additional information about the order in a structured format.
+| metadata  | Array       | A set of key/value pairs that you can attach to an order object. It can be useful for storing additional information about the order in a structured format.
 | shipping  | JSON       | JSON Object. Shipping address for the order. Required if any of the SKUs are for products that have shippable set to true.
-| status    | credentials| Current order status. One of `created`, `paid`, `canceled`, `fulfilled`, or `returned`.
+| status    | Select| Current order status. One of `created`, `paid`, `canceled`, `fulfilled`, or `returned`.
 
 `metadata` example:
 ```JSON
@@ -942,7 +952,7 @@ Pay an order by providing a `source` to create a payment.
 | orderId   | String     | Required: The ID of an order to pay.
 | customer  | String     | The ID of an existing customer that will be charged in this request.
 | source    | String     | A payment source to be charged, such as a credit card. If you also pass a customer ID, the source must be the ID of a source belonging to the customer. Otherwise, if you do not pass a customer ID, the source you provide must either be a token, like the ones returned by Stripe.js, or a object containing a user's credit card details, with the options described below. Although not all information is required, the extra info helps prevent fraud.
-| metadata  | JSON       | A set of key/value pairs that you can attach to an order object. It can be useful for storing additional information about the order in a structured format.
+| metadata  | Array       | A set of key/value pairs that you can attach to an order object. It can be useful for storing additional information about the order in a structured format.
 | email     | String     | The email address of the customer placing the order. If a customer is specified, that customer's email address will be used.
 
 `metadata` example:
@@ -961,7 +971,7 @@ Returns a list of your orders. The orders are returned sorted by creation date, 
 | created          | String     | A filter on the list based on the object created field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with the following options:
 | customer         | String     | Only return orders for the given customer.
 | ids              | String     | Only return orders with the given IDs.
-| status           | String     | Only return orders that have the given status. One of `created`, `paid`, `fulfilled`, or `refunded`.
+| status           | Select     | Only return orders that have the given status. One of `created`, `paid`, `fulfilled`, or `refunded`.
 | statusTransitions| String     | Filter orders based on when they were paid, fulfilled, canceled, or returned.
 | upstreamIds      | String     | Only return orders with the given upstream order IDs.
 
@@ -1008,12 +1018,12 @@ Creates a new product object.
 | id               | String     | The identifier for the product. Must be unique. If not provided, an identifier will be randomly generated.
 | name             | String     | Required: The product’s name, meant to be displayable to the customer.
 | active           | String     | Whether or not the product is currently available for purchase. Defaults to `true`.
-| attributes       | JSON       | JSON Array. A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g. `["color", "size"]`).
+| attributes       | List       | JSON Array. A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g. `["color", "size"]`).
 | caption          | String     | A short one-line description of the product, meant to be displayable to the customer.
-| deactivateOn     | JSON       | JSON Array. An array of Connect application names or identifiers that should not be able to order the SKUs for this product.
+| deactivateOn     | List       | JSON Array. An array of Connect application names or identifiers that should not be able to order the SKUs for this product.
 | description      | String     | The product’s description, meant to be displayable to the customer.
-| images           | JSON       | JSON Array. A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
-| metadata         | JSON       | JSON Object. A set of key/value pairs that you can attach to a product object. It can be useful for storing additional information about the product in a structured format.
+| images           | List       | JSON Array. A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
+| metadata         | Array       | JSON Object. A set of key/value pairs that you can attach to a product object. It can be useful for storing additional information about the product in a structured format.
 | packageDimensions| String     | The dimensions of this product for shipping purposes. A SKU associated with this product can override this value by having its own package_dimensions.
 | shippable        | String     | Whether this product is shipped (i.e. physical goods). Defaults to true.
 | url              | String     | A URL of a publicly-accessible webpage for this product.
@@ -1057,12 +1067,12 @@ Updates the specific product by setting the values of the parameters passed. Any
 | productId        | String     | Required: The id of product to update.
 | name             | String     | The product’s name, meant to be displayable to the customer.
 | active           | String     | Whether or not the product is currently available for purchase. Defaults to `true`.
-| attributes       | JSON       | JSON Array. A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g. `["color", "size"]`).
+| attributes       | List       | JSON Array. A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g. `["color", "size"]`).
 | caption          | String     | A short one-line description of the product, meant to be displayable to the customer.
-| deactivateOn     | JSON       | JSON Array. An array of Connect application names or identifiers that should not be able to order the SKUs for this product.
+| deactivateOn     | List       | JSON Array. An array of Connect application names or identifiers that should not be able to order the SKUs for this product.
 | description      | String     | The product’s description, meant to be displayable to the customer.
-| images           | JSON       | JSON Array. A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
-| metadata         | JSON       | A set of key/value pairs that you can attach to a product object. It can be useful for storing additional information about the product in a structured format.
+| images           | List       | JSON Array. A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
+| metadata         | Array       | A set of key/value pairs that you can attach to a product object. It can be useful for storing additional information about the product in a structured format.
 | packageDimensions| String     | The dimensions of this product for shipping purposes. A SKU associated with this product can override this value by having its own package_dimensions.
 | shippable        | String     | Whether this product is shipped (i.e. physical goods). Defaults to true.
 | url              | String     | A URL of a publicly-accessible webpage for this product.
@@ -1118,9 +1128,9 @@ Creates a new SKU associated with a product.
 | price            | Number     | Required: The cost of the item as a nonnegative integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a 0-decimal currency).
 | product          | String     | Required: The ID of the product this SKU is associated with.
 | active           | String     | Whether or not the SKU is available for purchase. Default to true.
-| attributes       | JSON       | A dictionary of attributes and values for the attributes defined by the product. If, for example, a product’s attributes are `["size", "gender"]`, a valid SKU has the following dictionary of attributes: `{"size": "Medium", "gender": "Unisex"}`.
+| attributes       | List       | A dictionary of attributes and values for the attributes defined by the product. If, for example, a product’s attributes are `["size", "gender"]`, a valid SKU has the following dictionary of attributes: `{"size": "Medium", "gender": "Unisex"}`.
 | image            | String     | The URL of an image for this SKU, meant to be displayable to the customer.
-| metadata         | JSON       | A set of key/value pairs that you can attach to a SKU object. It can be useful for storing additional information about the SKU in a structured format.
+| metadata         | Array       | A set of key/value pairs that you can attach to a SKU object. It can be useful for storing additional information about the SKU in a structured format.
 | packageDimensions| JSON       | JSON Object. The dimensions of this SKU for shipping purposes.
 
 `packageDimensions`:
@@ -1153,9 +1163,9 @@ Updates the specific SKU by setting the values of the parameters passed. Any par
 | price            | String     | The cost of the item as a nonnegative integer in the smallest currency unit (that is, 100 cents to charge $1.00, or 100 to charge ¥100, Japanese Yen being a 0-decimal currency).
 | product          | String     | The ID of the product this SKU is associated with.
 | active           | String     | Whether or not the SKU is available for purchase. Default to true.
-| attributes       | JSON       | A dictionary of attributes and values for the attributes defined by the product. If, for example, a product’s attributes are ["size", "gender"], a valid SKU has the following dictionary of attributes: {"size": "Medium", "gender": "Unisex"}.
+| attributes       | List       | A dictionary of attributes and values for the attributes defined by the product. If, for example, a product’s attributes are ["size", "gender"], a valid SKU has the following dictionary of attributes: {"size": "Medium", "gender": "Unisex"}.
 | image            | String     | The URL of an image for this SKU, meant to be displayable to the customer.
-| metadata         | JSON       | A set of key/value pairs that you can attach to a SKU object. It can be useful for storing additional information about the SKU in a structured format.
+| metadata         | Array       | A set of key/value pairs that you can attach to a SKU object. It can be useful for storing additional information about the SKU in a structured format.
 | packageDimensions| JSON       | The dimensions of this SKU for shipping purposes.
 
 ## Stripe.getSKUList
@@ -1164,7 +1174,7 @@ Returns a list of your SKUs. The SKUs are returned sorted by creation date, with
 | Field     | Type       | Description
 |-----------|------------|----------
 | apiKey    | credentials| Required: The api key obtained from Stripe.
-| attributes| String     | 
+| attributes| List     |
 | ids       | String     | Only return SKUs with the given IDs.
 | productId | String     | The ID of the product whose SKUs will be retrieved.
 
@@ -1188,7 +1198,7 @@ You can create coupons easily via the coupon management page of the Stripe dashb
 | currency        | String     | Currency of the amount_off parameter (required if amount_off is passed)
 | durationInMonths| String     | Required only if duration is repeating, in which case it must be a positive integer that specifies the number of months the discount will be in effect.
 | maxRedemptions  | String     | A positive integer specifying the number of times the coupon can be redeemed before it’s no longer valid. For example, you might have a 50% off coupon that the first 20 readers of your blog can use.
-| metadata        | JSON       | A set of key/value pairs that you can attach to a coupon object. It can be useful for storing additional information about the coupon in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
+| metadata        | Array       | A set of key/value pairs that you can attach to a coupon object. It can be useful for storing additional information about the coupon in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
 | percentOff      | String     | A positive integer between 1 and 100 that represents the discount the coupon will apply (required if amount_off is not passed)
 | redeemBy        | String     | Unix timestamp specifying the last time at which the coupon can be redeemed. After the redeem_by date, the coupon can no longer be applied to new customers.
 
@@ -1214,7 +1224,7 @@ Updates the metadata of a coupon. Other coupon details (currency, duration, amou
 |-----------|------------|----------
 | apiKey    | credentials| Required: The api key obtained from Stripe.
 | couponId  | String     | Required: Unique string of your choice that will be used to identify this coupon when applying it to a customer. This is often a specific code you’ll give to your customer to use when signing up (e.g. FALL25OFF). If you don’t want to specify a particular code, you can leave the ID blank and we’ll generate a random code for you.
-| metadata  | JSON       | A set of key/value pairs that you can attach to a coupon object. It can be useful for storing additional information about the coupon in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
+| metadata  | Array       | A set of key/value pairs that you can attach to a coupon object. It can be useful for storing additional information about the coupon in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
 
 `metadata` example:
 ```JSON
@@ -1263,7 +1273,7 @@ If you need to invoice your customer outside the regular billing cycle, you can 
 | customer           | String     | Required: Customer Id
 | applicationFee     | String     | A fee in cents that will be applied to the invoice and transferred to the application owner’s Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. 
 | description        | String     | An arbitrary string which you can attach to a charge object. It is displayed when in the web interface alongside the charge. Note that if you use Stripe to send automatic email receipts to your customers, your receipt emails will include the description of the charge(s) that they are describing.
-| metadata           | JSON       | A set of key/value pairs that you can attach to a customer object. It can be useful for storing additional information about the customer in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
+| metadata           | Array       | A set of key/value pairs that you can attach to a customer object. It can be useful for storing additional information about the customer in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
 | statementDescriptor| String     | Extra information about a charge for the customer’s credit card statement.
 | subscription       | String     | The ID of the subscription to invoice. If not set, the created invoice will include all pending invoice items for the customer. If set, the created invoice will exclude pending invoice items that pertain to other subscriptions.
 | taxPercent         | String     | The percent tax rate applied to the invoice, represented as a decimal number.
@@ -1308,7 +1318,7 @@ Until an invoice is paid, it is marked as open (closed=false). If you'd like to 
 | invoiceId          | String     | Required: Invoice id.
 | applicationFee     | String     | A fee in cents that will be applied to the invoice and transferred to the application owner’s Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. 
 | description        | String     | An arbitrary string which you can attach to a charge object. It is displayed when in the web interface alongside the charge. Note that if you use Stripe to send automatic email receipts to your customers, your receipt emails will include the description of the charge(s) that they are describing.
-| metadata           | JSON       | A set of key/value pairs that you can attach to a customer object. It can be useful for storing additional information about the customer in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
+| metadata           | Array       | A set of key/value pairs that you can attach to a customer object. It can be useful for storing additional information about the customer in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
 | statementDescriptor| String     | Extra information about a charge for the customer’s credit card statement.
 | subscription       | String     | The ID of the subscription to invoice. If not set, the created invoice will include all pending invoice items for the customer. If set, the created invoice will exclude pending invoice items that pertain to other subscriptions.
 | forgiven           | String     | Boolean representing whether an invoice is forgiven or not. To forgive an invoice, pass true. Forgiving an invoice instructs us to update the subscription status as if the invoice were successfully paid. Once an invoice has been forgiven, it cannot be unforgiven or reopened.
@@ -1350,7 +1360,7 @@ Adds an arbitrary charge or credit to the customer’s upcoming invoice.
 | description | String     | An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
 | discountable| String     | Controls whether discounts apply to this invoice item. Defaults to false for prorations or negative invoice items, and true for all other invoice items.
 | invoice     | String     | The ID of an existing invoice to add this invoice item to. When left blank, the invoice item will be added to the next upcoming scheduled invoice. Use this when adding invoice items in response to an invoice.created webhook. You cannot add an invoice item to an invoice that has already been paid, attempted or closed.
-| metadata    | JSON       | A set of key/value pairs that you can attach to an invoice item object. It can be useful for storing additional information about the invoice item in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
+| metadata    | Array       | A set of key/value pairs that you can attach to an invoice item object. It can be useful for storing additional information about the invoice item in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
 | subscription| String     | The ID of a subscription to add this invoice item to. When left blank, the invoice item will be be added to the next upcoming scheduled invoice. When set, scheduled invoices for subscriptions other than the specified subscription will ignore the invoice item. Use this when you want to express that an invoice item has been accrued within the context of a particular subscription.
 
 `metadata` example:
@@ -1378,7 +1388,7 @@ Updates the amount or description of an invoice item on an upcoming invoice. Upd
 | amount      | Number     | Required: The integer amount in cents of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer's account, pass a negative amount.
 | description | String     | An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
 | discountable| String     | Controls whether discounts apply to this invoice item. Defaults to false for prorations or negative invoice items, and true for all other invoice items. Cannot be set to true for prorations.
-| metadata    | JSON       | A set of key/value pairs that you can attach to an invoice item object. It can be useful for storing additional information about the invoice item in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.
+| metadata    | Array       | A set of key/value pairs that you can attach to an invoice item object. It can be useful for storing additional information about the invoice item in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.
 
 `metadata` example:
 ```JSON
@@ -1415,7 +1425,7 @@ Returns a list of your invoice items. Invoice items are returned sorted by creat
 | interval           | String     | Required: Specifies billing frequency. Either day, week, month or year.
 | name               | String     | Required: Name of the plan, to be displayed on invoices and in the web interface.
 | intervalCount      | String     | The number of intervals between each subscription billing. For example, interval=month and interval_count=3 bills every 3 months. Maximum of one year interval allowed (1 year, 12 months, or 52 weeks).
-| metadata           | JSON       | A set of key/value pairs that you can attach to a plan object. It can be useful for storing additional information about the plan in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
+| metadata           | Array       | A set of key/value pairs that you can attach to a plan object. It can be useful for storing additional information about the plan in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
 | statementDescriptor| String     | An arbitrary string to be displayed on your customer’s credit card statement. This may be up to 22 characters. As an example, if your website is RunClub and the item you’re charging for is your Silver Plan, you may want to specify a statement_descriptor of RunClub Silver Plan. The statement description may not include <>"' characters, and will appear on your customer’s statement in capital letters. Non-ASCII characters are automatically stripped. While most banks display this information consistently, some may display it incorrectly or not at all.
 | trialPeriodDays    | String     | Specifies a trial period in (an integer number of) days. If you include a trial period, the customer won’t be billed for the first time until the trial period ends. If the customer cancels before the trial period is over, she’ll never be billed at all.
 
@@ -1442,7 +1452,7 @@ Updates the name of a plan. Other plan details (price, interval, etc.) are, by d
 | apiKey             | credentials| Required: The api key obtained from Stripe.
 | planId             | String     | Required: The identifier of the plan to be updated.
 | name               | String     | Name of the plan, to be displayed on invoices and in the web interface.
-| metadata           | JSON       | A set of key/value pairs that you can attach to a plan object. It can be useful for storing additional information about the plan in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
+| metadata           | Array       | A set of key/value pairs that you can attach to a plan object. It can be useful for storing additional information about the plan in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
 | statementDescriptor| String     | An arbitrary string to be displayed on your customer’s credit card statement. This may be up to 22 characters. As an example, if your website is RunClub and the item you’re charging for is your Silver Plan, you may want to specify a statement_descriptor of RunClub Silver Plan. The statement description may not include <>"' characters, and will appear on your customer’s statement in capital letters. Non-ASCII characters are automatically stripped. While most banks display this information consistently, some may display it incorrectly or not at all.
 
 `metadata` example:
@@ -1479,7 +1489,7 @@ Creates a new subscription on an existing customer.
 | plan                 | String     | Required: The identifier of the plan to subscribe the customer to.
 | source               | JSON       | JSON Object. The source can either be a token, like the ones returned by our Stripe.js, or a object containing a user's credit card details (with the options shown below). You must provide a source if the customer does not already have a valid source attached, and you are subscribing the customer for a plan that is not free. Passing source will create a new source object, make it the customer default source, and delete the old customer default if one exists. If you want to add an additional source to use with subscriptions, instead use the card creation API to add the card and then the customer update API to set it as the default. Whenever you attach a card to a customer, Stripe will automatically validate the card.
 | quantity             | Number     | The quantity you'd like to apply to the subscription you're creating. For example, if your plan is $10/user/month, and your customer has 5 users, you could pass 5 as the quantity to have the customer charged $50 (5 x $10) monthly. If you update a subscription but don't change the plan ID (e.g. changing only the trial_end), the subscription will inherit the old subscription's quantity attribute unless you pass a new quantity parameter. If you update a subscription and change the plan ID, the new subscription will not inherit the quantity attribute and will default to 1 unless you pass a quantity parameter.
-| metadata             | JSON       | A set of key/value pairs that you can attach to a subscription object. It can be useful for storing additional information about the subscription in a structured format.
+| metadata             | Array       | A set of key/value pairs that you can attach to a subscription object. It can be useful for storing additional information about the subscription in a structured format.
 | taxPercent           | String     | A positive decimal (with at most four decimal places) between 1 and 100. This represents the percentage of the subscription invoice subtotal that will be calculated and added as tax to the final amount each billing period. For example, a plan which charges $10/month with a tax_percent of 20.0 will charge $12 per invoice.
 | trialEnd             | String     | Unix timestamp representing the end of the trial period the customer will get before being charged for the first time. If set, trial_end will override the default trial period of the plan the customer is being subscribed to. The special value now can be provided to end the customer's trial immediately.
 
@@ -1511,7 +1521,7 @@ Updates an existing subscription to match the specified parameters. When changin
 | plan                 | String     | The identifier of the plan to subscribe the customer to.
 | source               | JSON       | The source can either be a token, like the ones returned by our Stripe.js, or a object containing a user's credit card details (with the options shown below). You must provide a source if the customer does not already have a valid source attached, and you are subscribing the customer for a plan that is not free. Passing source will create a new source object, make it the customer default source, and delete the old customer default if one exists. If you want to add an additional source to use with subscriptions, instead use the card creation API to add the card and then the customer update API to set it as the default. Whenever you attach a card to a customer, Stripe will automatically validate the card.
 | quantity             | Number     | The quantity you'd like to apply to the subscription you're creating. For example, if your plan is $10/user/month, and your customer has 5 users, you could pass 5 as the quantity to have the customer charged $50 (5 x $10) monthly. If you update a subscription but don't change the plan ID (e.g. changing only the trial_end), the subscription will inherit the old subscription's quantity attribute unless you pass a new quantity parameter. If you update a subscription and change the plan ID, the new subscription will not inherit the quantity attribute and will default to 1 unless you pass a quantity parameter.
-| metadata             | JSON       | A set of key/value pairs that you can attach to a subscription object. It can be useful for storing additional information about the subscription in a structured format.
+| metadata             | Array       | A set of key/value pairs that you can attach to a subscription object. It can be useful for storing additional information about the subscription in a structured format.
 | taxPercent           | String     | A positive decimal (with at most four decimal places) between 1 and 100. This represents the percentage of the subscription invoice subtotal that will be calculated and added as tax to the final amount each billing period. For example, a plan which charges $10/month with a tax_percent of 20.0 will charge $12 per invoice.
 | trialEnd             | String     | Unix timestamp representing the end of the trial period the customer will get before being charged for the first time. If set, trial_end will override the default trial period of the plan the customer is being subscribed to. The special value now can be provided to end the customer's trial immediately.
 
@@ -1541,5 +1551,5 @@ By default, returns a list of subscriptions that have not been canceled. In orde
 | subscriptionId| String     | ID of subscription to retrieve.
 | customer      | String     | The ID of the customer whose subscriptions will be retrieved
 | plan          | String     | The ID of the plan whose subscriptions will be retrieved
-| status        | String     | The status of the subscriptions to retrieve. One of: trialing, active, past_due, unpaid, canceled, or all. Passing in a value of canceled will return all canceled subscriptions, including those belonging to deleted customers. Passing in a value of all will return subscriptions of all statuses.
+| status        | Select     | The status of the subscriptions to retrieve. One of: trialing, active, past_due, unpaid, canceled, or all. Passing in a value of canceled will return all canceled subscriptions, including those belonging to deleted customers. Passing in a value of all will return subscriptions of all statuses.
 
