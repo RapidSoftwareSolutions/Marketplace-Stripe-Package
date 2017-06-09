@@ -26,7 +26,7 @@ module.exports = (req, res) => {
          to="to" 
      } = req.body.args;
 
-    source =  JSON.parse(req.body.args.source);
+
 
     let r  = {
         callback     : "",
@@ -36,6 +36,10 @@ module.exports = (req, res) => {
     if(!apiKey || !source) {
         _.echoBadEnd(r, to, res, 'apiKey, source');
         return;
+    }
+
+    if(typeof source !== 'object'){
+        source = JSON.parse(source);
     }
 
     if(metadata!=undefined){
