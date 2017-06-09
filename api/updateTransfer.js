@@ -27,17 +27,20 @@ module.exports = (req, res) => {
 
     let stripe = initStripe(apiKey);
 
-    if(metadata && typeof metadata == 'string') {
-        try {
-            metadata = JSON.parse(metadata)
-        } catch(e) {
-            r.contextWrites[to] = 'Invalid JSON value.';
-            r.callback = 'error';
+    if(metadata!=undefined){
 
-            res.status(200).send(r);
-            return;
+        if(typeof metadata !== 'object'){
+            try {
+                metadata = JSON.parse(metadata)
+            } catch(e) {
+                r.contextWrites[to] = 'Invalid JSON value.';
+                r.callback = 'error';
+
+                res.status(200).send(r);
+                return;
+            }
         }
-    } else if(metadata && typeof metadata == 'object'){
+
         let metadataArr = {};
         for (var i in metadata) {
             metadataArr[metadata[i]['keyName']] = metadata[i]['value'];
