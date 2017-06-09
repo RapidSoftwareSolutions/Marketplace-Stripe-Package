@@ -1,4 +1,4 @@
-'use strict';
+    'use strict';
 
 const _           = require('../lib/functions')
 const request     = require('request');
