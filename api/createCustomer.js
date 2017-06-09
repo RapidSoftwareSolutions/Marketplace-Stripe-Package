@@ -38,19 +38,20 @@ module.exports = (req, res) => {
         return;
     }
 
-    if(typeof metadata !== 'object'){
-        try {
-            metadata = JSON.parse(metadata)
-        } catch(e) {
-            r.contextWrites[to] = 'Invalid JSON value.';
-            r.callback = 'error';
-
-            res.status(200).send(r);
-            return;
-        }
-    }
-
     if(metadata!=undefined){
+
+        if(typeof metadata !== 'object'){
+            try {
+                metadata = JSON.parse(metadata)
+            } catch(e) {
+                r.contextWrites[to] = 'Invalid JSON value.';
+                r.callback = 'error';
+
+                res.status(200).send(r);
+                return;
+            }
+        }
+
         let metadataArr = {};
         for (var i in metadata) {
             metadataArr[metadata[i]['keyName']] = metadata[i]['value'];
