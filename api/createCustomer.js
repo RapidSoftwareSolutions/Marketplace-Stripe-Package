@@ -7,6 +7,8 @@ const initStripe  = require('stripe');
 
 module.exports = (req, res) => {
 
+
+
     req.body.args = _.clearArgs(req.body.args);
 
     let { 
@@ -24,6 +26,8 @@ module.exports = (req, res) => {
          to="to" 
      } = req.body.args;
 
+    source =  JSON.parse(req.body.args.source);
+
     let r  = {
         callback     : "",
         contextWrites: {}
@@ -34,9 +38,7 @@ module.exports = (req, res) => {
         return;
     }
 
-
-
-    if(metadata && typeof metadata == 'string') {
+    if(typeof metadata !== 'object'){
         try {
             metadata = JSON.parse(metadata)
         } catch(e) {
@@ -46,7 +48,9 @@ module.exports = (req, res) => {
             res.status(200).send(r);
             return;
         }
-    } else if(metadata && typeof metadata == 'object'){
+    }
+
+    if(metadata!=undefined){
         let metadataArr = {};
         for (var i in metadata) {
             metadataArr[metadata[i]['keyName']] = metadata[i]['value'];
