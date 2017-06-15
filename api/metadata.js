@@ -1728,11 +1728,12 @@ module.exports.do = function(req, res){
                     required: true
                 },
                 {
-                    name: "managed",
-                    type: "String",
-                    info: "Whether you'd like to create a managed or standalone account. Managed accounts have extra parameters available to them, and require that you, the platform, handle all communication with the account holder. Standalone accounts are normal Stripe accounts: Stripe will email the account holder to setup a username and password, and handle all account management directly with them.",
-                    required: false
-                },
+                    name: "type",
+                    type: "Select",
+                    options: ["Standard","Custom"],
+                    info: "Whether you'd like to create a Custom or Standard account. Custom accounts have extra parameters available to them, and require that you, the platform, handle all communication with the account holder. Standard accounts are normal Stripe accounts.",
+                    required: true
+                }
             ],
             'callbacks':[
                 {

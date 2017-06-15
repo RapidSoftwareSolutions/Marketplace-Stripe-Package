@@ -13,7 +13,7 @@ module.exports = (req, res) => {
         apiKey,
         country,
         email,
-        managed,
+        type,
          to="to" 
      } = req.body.args;
 
@@ -22,8 +22,8 @@ module.exports = (req, res) => {
         contextWrites: {}
     };
 
-    if(!apiKey || !email) {
-        _.echoBadEnd(r, to, res, 'apiKey, email');
+    if(!apiKey || !email || !type) {
+        _.echoBadEnd(r, to, res, 'apiKey, email, type');
         return;
     }
 
@@ -32,7 +32,7 @@ module.exports = (req, res) => {
     let options = _.clearArgs({
         country,
         email,
-        managed: _.bool(managed)
+        type
     });
 
     stripe.accounts.create(options, function(err, result) {
