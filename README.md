@@ -29,6 +29,7 @@ This blocks allows you to translates a sting of text from one language to anothe
  ```
 
  Please use SDK to test this feature.
+ 
  0. Go to [RapidAPI](http://rapidapi.com)
  1. Log in or create an account
  2. Go to [My apps](https://dashboard.rapidapi.com/projects)
