@@ -5,8 +5,8 @@ This blocks allows you to translates a sting of text from one language to anothe
 * Domain: stripe.com
 * Credentials: apiKey.
 
-## How to get credentials: 
-0. Sign up or log in to [stripe dashboard](https://dashboard.stripe.com/dashboard). 
+## How to get credentials:
+0. Sign up or log in to [stripe dashboard](https://dashboard.stripe.com/dashboard).
 1. Go to [your account settings](https://dashboard.stripe.com/account).
 2. Choose [*API Keys* folder](https://dashboard.stripe.com/account/apikeys).
 3. Copy and save your *Secret Key*.
@@ -20,6 +20,24 @@ This blocks allows you to translates a sting of text from one language to anothe
  |List|Simple array|```["123", "sample"]```
  |Select|String with predefined values|```sample```
  |Array|Array of objects|```[{"Second name":"123","Age":"12","Photo":"sdf","Draft":"sdfsdf"},{"name":"adi","Second name":"bla","Age":"4","Photo":"asfserwe","Draft":"sdfsdf"}] ```
+
+ ## Webhook credentials
+
+ You can use our service as url:
+ ```
+ https://webhooks.rapidapi.com/api/message/Intercom/webhookEvent/{projectName}/{projectKey} * see credentials description above
+ ```
+
+ Please use SDK to test this feature.
+ 0. Go to [RapidAPI](http://rapidapi.com)
+ 1. Log in or create an account
+ 2. Go to [My apps](https://dashboard.rapidapi.com/projects)
+ 3. Add new project with projectName to get your project Key
+
+ | Field      | Type       | Description
+ |------------|------------|----------
+ | projectName     | credentials| Your RapidAPI project name
+ | projectKey | credentials     | Your RapidAPI project key
 
 ## Stripe.getAccountBalance
 Retrieves the current account balance, based on the authentication that was used to make the request.
@@ -116,7 +134,7 @@ Updates the specified charge by setting the values of the parameters passed. Any
 	"custom_key": "customValue"
 }
 ```
-`fraudDetails` example: 
+`fraudDetails` example:
 
 ```JSON
 {
@@ -226,13 +244,13 @@ When you get a dispute, contacting your customer is always the best first step. 
 	"custom_key": "customValue"
 }
 ```
-`evidence` example: 
+`evidence` example:
 
 ```JSON
 {
 	"customer_name": "Natalie Martin",
 	"product_description": "Comfortable cotton t-shirt",
-	"shipping_documentation": "file_19NFpA2eZvKYlo2CeIrPEhbu"	
+	"shipping_documentation": "file_19NFpA2eZvKYlo2CeIrPEhbu"
 }
 ```
 
@@ -386,7 +404,7 @@ To send funds from your Stripe account to a third-party recipient or to your own
 | apiKey             | credentials| Required: The api key obtained from Stripe.
 | amount             | Number     | Required: A positive integer in cents representing how much to transfer.
 | currency           | String     | Required: 3-letter ISO code for currency
-| destination        | String     | Required: The id of a bank account or a card to send the transfer to, or the string `default_for_currency` to use the default external account for the specified currency. 
+| destination        | String     | Required: The id of a bank account or a card to send the transfer to, or the string `default_for_currency` to use the default external account for the specified currency.
 | sourceTransaction  | String     | You can use this parameter to transfer funds from a charge (or other transaction) before they are added to your available balance. A pending balance will transfer immediately but the funds will not become available until the original charge becomes available.
 | metadata         | Array     | A set of key/value pairs that you can attach to a transfer object. It can be useful for storing additional information about the transfer in a structured format.
 
@@ -513,7 +531,7 @@ Updates an account by setting the values of the parameters passed. Any parameter
 | declineChargeOn      | String     | Account-level settings to automatically decline certain types of charges regardless of the bank’s decision.
 | defaultCurrency      | String     | Three-letter ISO currency code representing the default currency for the account.
 | email                | String     | Email address of the account holder. For standalone accounts, this is used to email them asking them to claim their Stripe account. For managed accounts, this is only to make the account easier to identify to you: Stripe will not email the account holder.
-| externalAccount      | String     | A card or bank account to attach to the account. You can provide either a token, like the ones returned by Stripe.js, or a dictionary as documented in the external_account parameter for either card or bank account creation. 
+| externalAccount      | String     | A card or bank account to attach to the account. You can provide either a token, like the ones returned by Stripe.js, or a dictionary as documented in the external_account parameter for either card or bank account creation.
 | legalEntity          | String     | Information about the account holder; varies by account country and account status.
 | metadata             | Array       | A set of key/value pairs that you can attach to an account object. It can be useful for storing additional information about the account in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
 | productDescription   | String     | Internal-only description of the product being sold or service being provided by this account. It’s used by Stripe for risk and underwriting purposes.
@@ -531,7 +549,7 @@ Updates an account by setting the values of the parameters passed. Any parameter
 }
 ```
 
-`tosAcceptance` example: 
+`tosAcceptance` example:
 ```JSON
 {
 	"date": "1480941861",
@@ -540,7 +558,7 @@ Updates an account by setting the values of the parameters passed. Any parameter
 }
 ```
 
-`transferSchedule` example: 
+`transferSchedule` example:
 ```JSON
 {
 	"delay_days": 7,
@@ -873,12 +891,12 @@ Creates a new order object.
 		"line1": "1234 Main Street",
 		"city": "San Francisco",
 		"country": "US",
-		"postal_code": 94111	
+		"postal_code": 94111
 	}
 }
 ```
 
-`items` example: 
+`items` example:
 ```JSON
 [{
   	"object": "order_item",
@@ -1271,7 +1289,7 @@ If you need to invoice your customer outside the regular billing cycle, you can 
 |--------------------|------------|----------
 | apiKey             | credentials| Required: The api key obtained from Stripe.
 | customer           | String     | Required: Customer Id
-| applicationFee     | String     | A fee in cents that will be applied to the invoice and transferred to the application owner’s Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. 
+| applicationFee     | String     | A fee in cents that will be applied to the invoice and transferred to the application owner’s Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee.
 | description        | String     | An arbitrary string which you can attach to a charge object. It is displayed when in the web interface alongside the charge. Note that if you use Stripe to send automatic email receipts to your customers, your receipt emails will include the description of the charge(s) that they are describing.
 | metadata           | Array       | A set of key/value pairs that you can attach to a customer object. It can be useful for storing additional information about the customer in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
 | statementDescriptor| String     | Extra information about a charge for the customer’s credit card statement.
@@ -1316,7 +1334,7 @@ Until an invoice is paid, it is marked as open (closed=false). If you'd like to 
 |--------------------|------------|----------
 | apiKey             | credentials| Required: The api key obtained from Stripe.
 | invoiceId          | String     | Required: Invoice id.
-| applicationFee     | String     | A fee in cents that will be applied to the invoice and transferred to the application owner’s Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. 
+| applicationFee     | String     | A fee in cents that will be applied to the invoice and transferred to the application owner’s Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee.
 | description        | String     | An arbitrary string which you can attach to a charge object. It is displayed when in the web interface alongside the charge. Note that if you use Stripe to send automatic email receipts to your customers, your receipt emails will include the description of the charge(s) that they are describing.
 | metadata           | Array       | A set of key/value pairs that you can attach to a customer object. It can be useful for storing additional information about the customer in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
 | statementDescriptor| String     | Extra information about a charge for the customer’s credit card statement.
@@ -1552,4 +1570,3 @@ By default, returns a list of subscriptions that have not been canceled. In orde
 | customer      | String     | The ID of the customer whose subscriptions will be retrieved
 | plan          | String     | The ID of the plan whose subscriptions will be retrieved
 | status        | Select     | The status of the subscriptions to retrieve. One of: trialing, active, past_due, unpaid, canceled, or all. Passing in a value of canceled will return all canceled subscriptions, including those belonging to deleted customers. Passing in a value of all will return subscriptions of all statuses.
-

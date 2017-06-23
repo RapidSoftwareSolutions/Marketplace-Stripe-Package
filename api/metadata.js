@@ -12,6 +12,33 @@ module.exports.do = function(req, res){
                 'apiKey'
             ]
         },
+        "events": [
+   {
+     "name": "webhookEvent",
+     "description": "This method is called every time when webhook event happens",
+     "payload": {
+       "email": "example@test.com",
+       "timestamp": 1498031178,
+       "smtp-id": "<14c5d75ce93.dfd.64b469@ismtpd-555>",
+       "event": "processed",
+       "category": "cat facts",
+       "sg_event_id": "tz2CYKvr4UK37D_V_sc5GQ==",
+       "sg_message_id": "14c5d75ce93.dfd.64b469.filter0001.16648.5515E0B88.0"
+     },
+     "steps": [
+       "Go to account settings",
+       "Set webhookUrl to __WEBHOOK_URL__"
+     ],
+     "args": [
+       {
+         "name": "token",
+         "type": "string",
+         "info": "Token sent on each message",
+         "required": true
+       }
+     ]
+   }
+ ],
         'blocks': [{
             "name":"getAccountBalance",
             "description": "Retrieves the current account balance, based on the authentication that was used to make the request.",
@@ -3669,7 +3696,7 @@ module.exports.do = function(req, res){
                     info: "Only return products with the given url.",
                     required: false
                 },
-                
+
             ],
             'callbacks':[
                 {
@@ -3969,7 +3996,7 @@ module.exports.do = function(req, res){
                     required: false
                 },
 
-                
+
             ],
             'callbacks':[
                 {
