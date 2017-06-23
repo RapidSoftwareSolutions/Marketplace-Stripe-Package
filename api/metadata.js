@@ -17,14 +17,112 @@ module.exports.do = function(req, res){
      "name": "webhookEvent",
      "description": "This method is called every time when webhook event happens",
      "payload": {
-       "email": "example@test.com",
-       "timestamp": 1498031178,
-       "smtp-id": "<14c5d75ce93.dfd.64b469@ismtpd-555>",
-       "event": "processed",
-       "category": "cat facts",
-       "sg_event_id": "tz2CYKvr4UK37D_V_sc5GQ==",
-       "sg_message_id": "14c5d75ce93.dfd.64b469.filter0001.16648.5515E0B88.0"
-     },
+  "created": 1326853478,
+  "livemode": false,
+  "id": "evt_00000000000000",
+  "type": "account.updated",
+  "object": "event",
+  "request": null,
+  "pending_webhooks": 1,
+  "api_version": "2017-06-05",
+  "data": {
+    "object": {
+      "id": "acct_00000000000000",
+      "object": "account",
+      "business_logo": null,
+      "business_name": null,
+      "business_url": null,
+      "charges_enabled": false,
+      "country": "US",
+      "debit_negative_balances": true,
+      "decline_charge_on": {
+        "avs_failure": false,
+        "cvc_failure": true
+      },
+      "default_currency": "usd",
+      "details_submitted": true,
+      "display_name": null,
+      "email": "test@stripe.com",
+      "external_accounts": {
+        "object": "list",
+        "data": [
+        ],
+        "has_more": false,
+        "total_count": 0,
+        "url": "/v1/accounts/acct_1AXoJfAU0Q09Fhn4/external_accounts"
+      },
+      "legal_entity": {
+        "address": {
+          "city": null,
+          "country": "US",
+          "line1": null,
+          "line2": null,
+          "postal_code": null,
+          "state": null
+        },
+        "business_name": null,
+        "business_tax_id_provided": false,
+        "dob": {
+          "day": null,
+          "month": null,
+          "year": null
+        },
+        "first_name": null,
+        "last_name": null,
+        "personal_address": {
+          "city": null,
+          "country": "US",
+          "line1": null,
+          "line2": null,
+          "postal_code": null,
+          "state": null
+        },
+        "personal_id_number_provided": false,
+        "ssn_last_4_provided": false,
+        "type": null,
+        "verification": {
+          "details": null,
+          "details_code": null,
+          "document": null,
+          "status": "unverified"
+        }
+      },
+      "metadata": {
+      },
+      "payout_schedule": {
+        "delay_days": 2,
+        "interval": "daily"
+      },
+      "payout_statement_descriptor": null,
+      "payouts_enabled": false,
+      "product_description": null,
+      "statement_descriptor": "TEST",
+      "support_email": null,
+      "support_phone": null,
+      "timezone": "Etc/UTC",
+      "tos_acceptance": {
+        "date": null,
+        "ip": null,
+        "user_agent": null
+      },
+      "type": "standard",
+      "verification": {
+        "disabled_reason": "fields_needed",
+        "due_by": 1498471551,
+        "fields_needed": [
+          "legal_entity.verification.document"
+        ]
+      }
+    },
+    "previous_attributes": {
+      "verification": {
+        "fields_needed": [
+        ],
+        "due_by": null
+      }
+    }
+  }
+},
      "steps": [
        "Go to account settings",
        "Set webhookUrl to __WEBHOOK_URL__"
