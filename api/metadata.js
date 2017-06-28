@@ -15,7 +15,7 @@ module.exports.do = function(req, res){
         "events": [
    {
      "name": "webhookEvent",
-     "description": "This method is called every time when webhook event happens",
+     "description": "This method is called every time a Stripe webhook event happens",
      "payload": {
   "created": 1326853478,
   "livemode": false,
@@ -124,8 +124,9 @@ module.exports.do = function(req, res){
   }
 },
      "steps": [
-       "Go to account settings",
-       "Set webhookUrl to __WEBHOOK_URL__"
+       "Navigate to https://dashboard.stripe.com/account/webhooks",
+       "Click 'Add endpoint'",
+       "For 'URL to be called' input the following URL: __WEBHOOK_URL__"
      ],
      "args": [
        {
