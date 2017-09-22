@@ -3018,12 +3018,7 @@ module.exports.do = function(req, res){
                     info: "Email of the customerId",
 					required: false
                 },
-                {
-                    name: "description",
-                    type: "String",
-                    info: "The receiver’s description.",
-                    required: false
-                },
+              
                 {
                     name: "metadata",
                     type: "Array",

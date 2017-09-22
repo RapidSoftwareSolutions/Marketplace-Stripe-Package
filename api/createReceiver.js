@@ -8,11 +8,10 @@ module.exports = (req, res) => {
 
     req.body.args = _.clearArgs(req.body.args);
 
-    let { 
-        apiKey, 
+    let {
+        apiKey,
         currency,
         email,
-        description,
         amount,
         metadata,
         refundMispayments,
@@ -54,16 +53,15 @@ module.exports = (req, res) => {
     let options = _.clearArgs({
         amount: amount,
         currency: currency,
-        email: email,
-        description: description,
+        owner: {email: email},
         metadata: metadata,
-        refund_mispayments: refundMispayments
+        refund_mispayments: refundMispayments,
+        type: 'bitcoin'
     });
-
-    stripe.bitcoinReceivers.create(options, function(err, result) {
+    stripe.sources.create(options, function(err, result) {
         if(!err) {
             r.contextWrites[to] = result;
-            r.callback = 'success'; 
+            r.callback = 'success';
         } else {
             console.log(err);
             r.contextWrites[to] = err.raw.message;
@@ -71,5 +69,5 @@ module.exports = (req, res) => {
         }
 
         res.status(200).send(r);
-    });    
+    });
 }

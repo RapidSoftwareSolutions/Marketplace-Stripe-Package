@@ -29,7 +29,7 @@ This blocks allows you to translates a sting of text from one language to anothe
  ```
 
  Please use SDK to test this feature.
- 
+
  0. Go to [RapidAPI](http://rapidapi.com)
  1. Log in or create an account
  2. Go to [My apps](https://dashboard.rapidapi.com/projects)
@@ -836,7 +836,6 @@ Creates a bitcoin reciver
 | amount           | String     | Required: The account ID obtained from Stripe.
 | currency         | String     | Required: Only USD currently supported
 | email            | String     | Required: Email of the customerId
-| description      | String     | The receiver’s description.
 | metadata         | Array       | A set of key/value pairs that you can attach to an order object. It can be useful for storing additional information about the order in a structured format.
 | refundMispayments| String     | Refund Mispayments
 
