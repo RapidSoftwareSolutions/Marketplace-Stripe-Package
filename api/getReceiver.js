@@ -8,8 +8,8 @@ module.exports = (req, res) => {
 
     req.body.args = _.clearArgs(req.body.args);
 
-    let { 
-        apiKey, 
+    let {
+        apiKey,
         receiverId,
         to="to" } = req.body.args;
 
@@ -25,10 +25,10 @@ module.exports = (req, res) => {
 
     let stripe = initStripe(apiKey);
 
-    stripe.bitcoinReceivers.retrieve(receiverId, function(err, result) {
+    stripe.sources.retrieve(receiverId, function(err, result) {
         if(!err) {
             r.contextWrites[to] = result;
-            r.callback = 'success'; 
+            r.callback = 'success';
         } else {
             console.log(err);
             r.contextWrites[to] = err.raw.message;
@@ -36,5 +36,5 @@ module.exports = (req, res) => {
         }
 
         res.status(200).send(r);
-    });    
+    });
 }
