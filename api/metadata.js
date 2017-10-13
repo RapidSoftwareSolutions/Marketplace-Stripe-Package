@@ -2903,9 +2903,9 @@ module.exports.do = function(req, res){
                     required: true
                 },
                 {
-                    name: "accountId",
+                    name: "customerId",
                     type: "String",
-                    info: "The account ID obtained from Stripe.",
+                    info: "The customer ID obtained from Stripe.",
                     required: true
                 },
                 {
