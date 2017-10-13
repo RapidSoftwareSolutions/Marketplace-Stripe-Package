@@ -42,6 +42,15 @@ module.exports = (req, res) => {
         return;
     }
 
+    if(trialEnd!=undefined)
+    {
+        var newTime = new Date(trialEnd).getTime() / 1000;
+        if(!isNaN(newTime))
+        {
+            trialEnd = newTime;
+        }
+    }
+
     if(metadata!=undefined){
 
         if(typeof metadata !== 'object'){

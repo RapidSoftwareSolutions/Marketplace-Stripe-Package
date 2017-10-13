@@ -33,6 +33,15 @@ module.exports = (req, res) => {
         return;
     }
 
+    if(subscriptionTrialEnd!=undefined)
+    {
+        var newTime = new Date(subscriptionTrialEnd).getTime() / 1000;
+        if(!isNaN(newTime))
+        {
+            subscriptionTrialEnd = newTime;
+        }
+    }
+
     let stripe = initStripe(apiKey);
 
     let options = _.clearArgs({

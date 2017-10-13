@@ -60,7 +60,7 @@ module.exports = (req, res) => {
         application_fee: applicationFee,
         description,
         metadata,
-        statementDescriptor: statementDescriptor,
+        statement_descriptor: statementDescriptor,
         subscription,
         forgiven,
         closed,

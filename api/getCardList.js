@@ -10,7 +10,7 @@ module.exports = (req, res) => {
 
     let { 
         apiKey,
-        customerId,
+        accountId,
         endingBefore,
         limit,
         startingAfter,
@@ -23,7 +23,7 @@ module.exports = (req, res) => {
     };
 
     if(!apiKey || !customerId) {
-        _.echoBadEnd(r, to, res, 'apiKey, customerId');
+        _.echoBadEnd(r, to, res, 'apiKey, accountId');
         return;
     }
 
@@ -36,7 +36,7 @@ module.exports = (req, res) => {
         limit: limit,
     });
 
-    stripe.customers.listCards(customerId, function(err, result) {
+    stripe.customers.listCards(accountId, function(err, result) {
         if(!err) {
             r.contextWrites[to] = result;
             r.callback = 'success'; 

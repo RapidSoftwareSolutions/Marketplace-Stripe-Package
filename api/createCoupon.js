@@ -33,6 +33,16 @@ module.exports = (req, res) => {
         return;
     }
 
+    if(redeemBy!=undefined)
+    {
+       var newTime = new Date(redeemBy).getTime() / 1000;
+        if(!isNaN(newTime))
+        {
+            redeemBy = newTime;
+        }
+    }
+
+
     if(metadata!=undefined){
 
         if(typeof metadata !== 'object'){

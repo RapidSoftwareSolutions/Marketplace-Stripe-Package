@@ -190,7 +190,7 @@ module.exports.do = function(req, res){
                 {
                     name: "type",
                     type: "Select",
-                    options:["charge","refund","adjustment","application_fee","application_fee_refund","transfer","transfer_failure"],
+                    options:["payout_failure","stripe_fee","payment","payout","charge","refund","adjustment","application_fee","application_fee_refund","transfer","transfer_failure"],
                     info: "Only returns transactions of the given type. One of: `charge`, `refund`, `adjustment`, `application_fee`, `application_fee_refund`, `transfer`, or `transfer_failure`",
                     required: false
                 },
@@ -235,7 +235,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "capture",
-                    type: "String", // Boolean
+                    type: "Select",
+                    options:["true","false"],
                     info: "Boolean. Whether or not to immediately capture the charge. When false, the charge issues an authorization (or pre-authorization), and will need to be captured later. Uncaptured charges expire in 7 days. For more information, see authorizing charges and settling later.",
                     required: false
                 },
@@ -346,24 +347,6 @@ module.exports.do = function(req, res){
                             "required": true
                         }
                     ]
-                },
-                {
-                    name: "plan",
-                    type: "String",
-                    info: "The identifier of the plan to subscribe the customer to. If provided, the returned customer object will have a list of subscriptions that the customer is currently subscribed to. If you subscribe a customer to a plan without a free trial, the customer must have a valid card as well.",
-                    required: false
-                },
-                {
-                    name: "taxPercent",
-                    type: "String",
-                    info: "A positive decimal (with at most four decimal places) between 1 and 100. This represents the percentage of the subscription invoice subtotal that will be calculated and added as tax to the final amount each billing period. For example, a plan which charges $10/month with a tax_percent of 20.0 will charge $12 per invoice. Can only be used if a plan is provided.",
-                    required: false
-                },
-                {
-                    name: "trialEnd",
-                    type: "String",
-                    info: "Unix timestamp representing the end of the trial period the customer will get before being charged. If set, trial_end will override the default trial period of the plan the customer is being subscribed to. The special value now can be provided to end the customer’s trial immediately. Only applies when the plan parameter is also provided.",
-                    required: false
                 },
             ],
             'callbacks':[
@@ -709,24 +692,6 @@ module.exports.do = function(req, res){
                         }
                     ]
                 },
-                {
-                    name: "plan",
-                    type: "String",
-                    info: "The identifier of the plan to subscribe the customer to. If provided, the returned customer object will have a list of subscriptions that the customer is currently subscribed to. If you subscribe a customer to a plan without a free trial, the customer must have a valid card as well.",
-                    required: false
-                },
-                {
-                    name: "taxPercent",
-                    type: "String",
-                    info: "A positive decimal (with at most four decimal places) between 1 and 100. This represents the percentage of the subscription invoice subtotal that will be calculated and added as tax to the final amount each billing period. For example, a plan which charges $10/month with a tax_percent of 20.0 will charge $12 per invoice. Can only be used if a plan is provided.",
-                    required: false
-                },
-                {
-                    name: "trialEnd",
-                    type: "String",
-                    info: "Unix timestamp representing the end of the trial period the customer will get before being charged. If set, trial_end will override the default trial period of the plan the customer is being subscribed to. The special value now can be provided to end the customer’s trial immediately. Only applies when the plan parameter is also provided.",
-                    required: false
-                },
             ],
             'callbacks':[
                 {
@@ -963,7 +928,7 @@ module.exports.do = function(req, res){
                 {
                     name: "eventId",
                     type: "credentials",
-                    info: "The api key obtained from Stripe.",
+                    info: "The identifier of the event to be retrieved.",
                     required: true
                 }
             ],
@@ -1178,19 +1143,22 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "reason",
-                    type: "String",
+                    type: "Select",
+                    options:["duplicate","fraudulent","requested_by_customer"],
                     info: "String indicating the reason for the refund. If set, possible values are duplicate, fraudulent, and requested_by_customer. Specifying fraudulent as the reason when you believe the charge to be fraudulent will help us improve our fraud detection algorithms.",
                     required: false
                 },
                 {
                     name: "refundApplicationFee",
-                    type: "String",
+                    type: "Select",
+                    options:["true","false"],
                     info: "Boolean indicating whether the application fee should be refunded when refunding this charge. If a full charge refund is given, the full application fee will be refunded. Else, the application fee will be refunded with an amount proportional to the amount of the charge refunded. An application fee can only be refunded by the application that created the charge.",
                     required: false
                 },
                 {
                     name: "reverseTransfer",
-                    type: "String",
+                    type: "Select",
+                    options:["true","false"],
                     info: "Boolean indicating whether the transfer should be reversed when refunding this charge. The transfer will be reversed for the same amount being refunded (either the entire or partial amount). A transfer can only be reversed by the application that created the charge.",
                     required: false
                 },
@@ -1393,7 +1361,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "bankAccountAccountHolderType",
-                    type: "String",
+                    type: "Select",
+                    options:["company","individual"],
                     info: "The bank account holder type",
                     required: true
                 },
@@ -1629,19 +1598,6 @@ module.exports.do = function(req, res){
                     info: "Only return transfers for the destination specified by this account ID.",
                     required: false
                 },
-                {
-                    name: "recipientstatus",
-                    type: "String",
-                    info: "Only return transfers for the recipient specified by this recipient ID.",
-                    required: false
-                },
-                {
-                    name: "status",
-                    type: "Select",
-                    options: ["pending","paid","failed","in_transit","canceled"],
-                    info: "Only return transfers that have the given status: `pending`, `paid`, `failed`, `in_transit`, or `canceled`.",
-                    required: false
-                }
             ],
             'callbacks':[
                 {
@@ -1670,12 +1626,6 @@ module.exports.do = function(req, res){
                     required: true
                 },
                 {
-                    name: "description",
-                    type: "String",
-                    info: "An arbitrary string which you can attach to a reversal object. It is displayed alongside the reversal in the dashboard. This will be unset if you POST an empty value.",
-                    required: false
-                },
-                {
                    name: "metadata",
                     type: "Array",
                     info: "A set of key/value pairs that you can attach to a reversal object. It can be useful for storing additional information about the reversal in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.",
@@ -1697,7 +1647,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "refundApplicationFee",
-                    type: "String",
+                    type: "Select",
+                    options:["true","false"],
                     info: "Boolean indicating whether the application fee should be refunded when reversing this transfer. If a full transfer reversal is given, the full application fee will be refunded. Otherwise, the application fee will be refunded with an amount proportional to the amount of the transfer reversed.",
                     required: false
                 }
@@ -1856,7 +1807,7 @@ module.exports.do = function(req, res){
                 {
                     name: "type",
                     type: "Select",
-                    options: ["Standard","Custom"],
+                    options: ["standard","custom"],
                     info: "Whether you'd like to create a Custom or Standard account. Custom accounts have extra parameters available to them, and require that you, the platform, handle all communication with the account holder. Standard accounts are normal Stripe accounts.",
                     required: true
                 }
@@ -1885,7 +1836,7 @@ module.exports.do = function(req, res){
                     name: "accountId",
                     type: "String",
                     info: "Id of account to retrive",
-					required: false
+					required: true
                 },
             ],
             'callbacks':[
@@ -1912,7 +1863,7 @@ module.exports.do = function(req, res){
                     name: "accountId",
                     type: "String",
                     info: "Id of account to update",
-					required: false
+					required: true
                 },
                 {
                     name: "businessLogo",
@@ -1940,7 +1891,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "debitNegativeBalances",
-                    type: "String", // Boolean
+                    type: "Select", // Boolean
+                    options:["true","false"],
                     info: "A boolean for whether or not Stripe should try to reclaim negative balances from the account holder’s bank account.",
 					required: false
                 },
@@ -2030,12 +1982,6 @@ module.exports.do = function(req, res){
                     info: "Details on who accepted the Stripe terms of service, and when they accepted it",
 					required: false
                 },
-                {
-                    name: "transferSchedule",
-                    type: "JSON",
-                    info: "Details on when this account will make funds from charges available, and when they will be paid out to the account holder’s bank account.",
-					required: false
-                },
             ],
             'callbacks':[
                 {
@@ -2061,7 +2007,7 @@ module.exports.do = function(req, res){
                     name: "accountId",
                     type: "String",
                     info: "Id of account to delete",
-					required: false
+					required: true
                 },
             ],
             'callbacks':[
@@ -2088,14 +2034,14 @@ module.exports.do = function(req, res){
                     name: "accountId",
                     type: "String",
                     info: "Id of account to reject",
-					required: false
+					required: true
                 },
                 {
                     name: "reason",
                     type: "Select",
                     options: ["fraud","terms_of_service","other"],
                     info: "The reason for rejecting the account. May be one of `fraud`, `terms_of_service`, or `other`.",
-					required: false
+					required: true
                 },
             ],
             'callbacks':[
@@ -2670,7 +2616,7 @@ module.exports.do = function(req, res){
                     name: "accountId",
                     type: "String",
                     info: "The account ID obtained from Stripe.",
-                    required: false
+                    required: true
                 },
                 {
                     name: "endingBefore",
@@ -2859,8 +2805,9 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "defaultForCurrency",
-                    type: "String",
-                    info: "Only applicable on accounts (not customers or recipients). If set to true, this card will become the default external account for its currency..",
+                    type: "Select",
+                    options:["true","false"],
+                    info: "Only applicable on accounts (not customers or recipients). If set to true, this card will become the default external account for its currency.",
                     required: false
                 },
                 {
@@ -3016,7 +2963,7 @@ module.exports.do = function(req, res){
                     name: "email",
                     type: "String",
                     info: "Email of the customerId",
-					required: false
+					required: true
                 },
               
                 {
@@ -3411,7 +3358,7 @@ module.exports.do = function(req, res){
                     name: "orderId",
                     type: "String",
                     info: "Order id.",
-					required: false
+					required: true
                 },
                 {
                     name: "items",
@@ -3444,7 +3391,7 @@ module.exports.do = function(req, res){
                     name: "orderId",
                     type: "String",
                     info: "The identifier of the order return to be retrieved.",
-					required: false
+					required: true
                 },
             ],
             'callbacks':[
@@ -3515,7 +3462,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "active",
-                    type: "String",
+                    type: "Select",
+                    options:["true","false"],
                     info: "Whether or not the product is currently available for purchase. Defaults to `true`.",
                     required: false
                 },
@@ -3592,7 +3540,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "shippable",
-                    type: "String",
+                    type: "Select",
+                    options:["true","false"],
                     info: "Whether this product is shipped (i.e. physical goods). Defaults to true.",
                     required: false
                 },
@@ -3664,7 +3613,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "active",
-                    type: "String",
+                    type: "Select",
+                    options:["true","false"],
                     info: "Whether or not the product is currently available for purchase. Defaults to `true`.",
                     required: false
                 },
@@ -3741,7 +3691,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "shippable",
-                    type: "String",
+                    type: "Select",
+                    options:["true","false"],
                     info: "Whether this product is shipped (i.e. physical goods). Defaults to true.",
                     required: false
                 },
@@ -3780,7 +3731,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "shippable",
-                    type: "String",
+                    type: "Select",
+                    options:["true","false"],
                     info: "Only return products that can be shipped (i.e., physical, not digital products).",
                     required: false
                 },
@@ -3871,7 +3823,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "active",
-                    type: "String",
+                    type: "Select",
+                    options:["true","false"],
                     info: "Whether or not the SKU is available for purchase. Default to true.",
                     required: false
                 },
@@ -3998,7 +3951,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "active",
-                    type: "String",
+                    type: "Select",
+                    options:["true","false"],
                     info: "Whether or not the SKU is available for purchase. Default to true.",
                     required: false
                 },
@@ -4147,7 +4101,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "duration",
-                    type: "String",
+                    type: "Select",
+                    options:["forever","once","repeating"],
                     info: "Specifies how long the discount will be in effect. Can be `forever`, `once`, or `repeating`.",
                     required: true
                 },
@@ -4203,7 +4158,7 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "redeemBy",
-                    type: "String",
+                    type: "DatePicker",
                     info: "Unix timestamp specifying the last time at which the coupon can be redeemed. After the redeem_by date, the coupon can no longer be applied to new customers.",
                     required: false
                 },
@@ -4355,7 +4310,7 @@ module.exports.do = function(req, res){
                     name: "customerId",
                     type: "String",
                     info: "Id of customer to delete.",
-					required: false
+					required: true
                 },
             ],
             'callbacks':[
@@ -4382,7 +4337,7 @@ module.exports.do = function(req, res){
                     name: "subscriptionId",
                     type: "String",
                     info: "Id of subscribtion to delete.",
-					required: false
+					required: true
                 },
             ],
             'callbacks':[
@@ -4409,7 +4364,7 @@ module.exports.do = function(req, res){
                     name: "customer",
                     type: "String",
                     info: "Customer Id",
-					required: false
+					required: true
                 },
                 {
                     name: "applicationFee",
@@ -4486,7 +4441,7 @@ module.exports.do = function(req, res){
                     name: "invoiceId",
                     type: "String",
                     info: "Invoice id.",
-					required: false
+					required: true
                 },
             ],
             'callbacks':[
@@ -4513,7 +4468,7 @@ module.exports.do = function(req, res){
                     name: "invoice",
                     type: "String",
                     info: "Invoice id.",
-					required: false
+					required: true
                 },
                 {
                     name: "coupon",
@@ -4541,13 +4496,14 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "subscriptionProrate",
-                    type: "String",
+                    type: "Select",
+                    options:["true","false"],
                     info: "Subscription Prorate",
 					required: false
                 },
                 {
                     name: "subscriptionProrationDate",
-                    type: "String",
+                    type: "DatePicker",
                     info: "Subscription Proration Date",
 					required: false
                 },
@@ -4589,7 +4545,7 @@ module.exports.do = function(req, res){
                     name: "invoiceId",
                     type: "String",
                     info: "Invoice id.",
-					required: false
+					required: true
                 },
                 {
                     name: "applicationFee",
@@ -4631,20 +4587,16 @@ module.exports.do = function(req, res){
 					required: false
                 },
                 {
-                    name: "subscription",
-                    type: "String",
-                    info: "The ID of the subscription to invoice. If not set, the created invoice will include all pending invoice items for the customer. If set, the created invoice will exclude pending invoice items that pertain to other subscriptions.",
-					required: false
-                },
-                {
                     name: "forgiven",
-                    type: "String",
+                    type: "Select",
+                    options:["true","false"],
                     info: "Boolean representing whether an invoice is forgiven or not. To forgive an invoice, pass true. Forgiving an invoice instructs us to update the subscription status as if the invoice were successfully paid. Once an invoice has been forgiven, it cannot be unforgiven or reopened.",
 					required: false
                 },
                 {
                     name: "closed",
-                    type: "String",
+                    type: "Select",
+                    options:["true","false"],
                     info: "Boolean representing whether an invoice is closed or not. To close an invoice, pass true.",
 					required: false
                 },
@@ -4679,7 +4631,7 @@ module.exports.do = function(req, res){
                     name: "invoiceId",
                     type: "String",
                     info: "Invoice id.",
-					required: false
+					required: true
                 },
             ],
             'callbacks':[
@@ -4755,7 +4707,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "discountable",
-                    type: "String",
+                    type: "Select",
+                    options:["true","false"],
                     info: "Controls whether discounts apply to this invoice item. Defaults to false for prorations or negative invoice items, and true for all other invoice items.",
                     required: false
                 },
@@ -4816,7 +4769,7 @@ module.exports.do = function(req, res){
                     name: "invoiceitem",
                     type: "String",
                     info: "The ID of the desired invoice item.",
-					required: false
+					required: true
                 }
             ],
             'callbacks':[
@@ -4859,7 +4812,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "discountable",
-                    type: "String",
+                    type: "Select",
+                    options:["true","false"],
                     info: "Controls whether discounts apply to this invoice item. Defaults to false for prorations or negative invoice items, and true for all other invoice items. Cannot be set to true for prorations.",
 					required: false
                 },
@@ -4908,7 +4862,7 @@ module.exports.do = function(req, res){
                     name: "invoiceitem",
                     type: "String",
                     info: "The ID of the desired invoice item.",
-					required: false
+					required: true
                 }
             ],
             'callbacks':[
@@ -4950,7 +4904,7 @@ module.exports.do = function(req, res){
             ]
         }, {
             "name":"createPlan",
-            "description": "Returns a list of your invoice items. Invoice items are returned sorted by creation date, with the most recently created invoice items appearing first.",
+            "description": "You can create plans easily via the plan management page of the Stripe dashboard. Plan creation is also accessible via the API if you need to create plans on the fly.",
             "args":[
                 {
                     name: "apiKey",
@@ -4978,7 +4932,8 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "interval",
-                    type: "String",
+                    type: "Select",
+                    options:["day","week","month","year"],
                     info: "Specifies billing frequency. Either day, week, month or year.",
 					required: false
                 },
@@ -5050,7 +5005,7 @@ module.exports.do = function(req, res){
                     name: "planId",
                     type: "String",
                     info: "The ID of the desired plan.",
-					required: false
+					required: true
                 }
             ],
             'callbacks':[
@@ -5077,7 +5032,7 @@ module.exports.do = function(req, res){
                     name: "planId",
                     type: "String",
                     info: "The identifier of the plan to be updated.",
-					required: false
+					required: true
                 },
                 {
                     name: "name",
@@ -5135,7 +5090,7 @@ module.exports.do = function(req, res){
                     name: "planId",
                     type: "String",
                     info: "The identifier of the plan to be deleted.",
-					required: false
+					required: true
                 }
             ],
             'callbacks':[
@@ -5195,13 +5150,13 @@ module.exports.do = function(req, res){
                     name: "customer",
                     type: "String",
                     info: "The identifier of the customer to subscribe.",
-					required: false
+					required: true
                 },
                 {
                     name: "plan",
                     type: "String",
                     info: "The identifier of the plan to subscribe the customer to.",
-					required: false
+					required: true
                 },
                 {
                     name: "source",
@@ -5243,7 +5198,7 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "trialEnd",
-                    type: "String",
+                    type: "DatePicker",
                     info: "Unix timestamp representing the end of the trial period the customer will get before being charged for the first time. If set, trial_end will override the default trial period of the plan the customer is being subscribed to. The special value now can be provided to end the customer's trial immediately.",
 					required: false
                 }
@@ -5272,7 +5227,7 @@ module.exports.do = function(req, res){
                     name: "subscriptionId",
                     type: "String",
                     info: "ID of subscription to retrieve.",
-					required: false
+					required: true
                 }
             ],
             'callbacks':[
@@ -5299,7 +5254,7 @@ module.exports.do = function(req, res){
                     name: "subscriptionId",
                     type: "String",
                     info: "ID of subscription to updated.",
-					required: false
+					required: true
                 },
                 {
                     name: "applicationFeePercent",
@@ -5311,12 +5266,6 @@ module.exports.do = function(req, res){
                     name: "coupon",
                     type: "String",
                     info: "The code of the coupon to apply to this subscription. A coupon applied to a subscription will only affect invoices created for that particular subscription.",
-					required: false
-                },
-                {
-                    name: "customer",
-                    type: "String",
-                    info: "The identifier of the customer to subscribe.",
 					required: false
                 },
                 {
@@ -5365,7 +5314,7 @@ module.exports.do = function(req, res){
                 },
                 {
                     name: "trialEnd",
-                    type: "String",
+                    type: "DatePicker",
                     info: "Unix timestamp representing the end of the trial period the customer will get before being charged for the first time. If set, trial_end will override the default trial period of the plan the customer is being subscribed to. The special value now can be provided to end the customer's trial immediately.",
 					required: false
                 }
@@ -5394,11 +5343,12 @@ module.exports.do = function(req, res){
                     name: "subscriptionId",
                     type: "String",
                     info: "ID of subscription to retrieve.",
-					required: false
+					required: true
                 },
                 {
                     name: "atPeriodEnd",
-                    type: "String",
+                    type: "Select",
+                    options:["true","false"],
                     info: "A flag that if set to true will delay the cancellation of the subscription until the end of the current period.",
 					required: false
                 },
@@ -5427,7 +5377,7 @@ module.exports.do = function(req, res){
                     name: "subscriptionId",
                     type: "String",
                     info: "ID of subscription to retrieve.",
-					required: false
+					required: true
                 },
                 {
                     name: "customer",

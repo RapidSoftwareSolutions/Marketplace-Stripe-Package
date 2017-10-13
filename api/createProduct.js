@@ -81,8 +81,8 @@ module.exports = (req, res) => {
         deactivate_on:deactivateOn, 
         description, 
         images, 
-        metadata, 
-        packageDimensions,
+        metadata,
+        package_dimensions:packageDimensions,
         shippable,
         url
     });

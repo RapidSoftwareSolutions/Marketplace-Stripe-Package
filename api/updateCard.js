@@ -69,7 +69,8 @@ module.exports = (req, res) => {
         default_for_currency: defaultForCurrency,
         exp_month: expMonth,
         exp_year: expYear,
-        name: name
+        name: name,
+        metadata: metadata
     });
 
     stripe.customers.updateCard(customerId, cardId, options, function(err, result) {

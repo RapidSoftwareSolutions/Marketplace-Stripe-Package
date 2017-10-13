@@ -52,6 +52,7 @@ module.exports = (req, res) => {
             metadataArr[metadata[i]['keyName']] = metadata[i]['value'];
         }
         metadata = metadataArr;
+        if(metadata) options.metadata = metadata;
     }
 
     if(externalAccount) options.external_account = externalAccount;

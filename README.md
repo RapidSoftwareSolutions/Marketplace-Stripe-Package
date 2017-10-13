@@ -2,7 +2,7 @@
 
 # Stripe Package
 This blocks allows you to translates a sting of text from one language to another
-* Domain: stripe.com
+* Domain: [stripe.com](https://stripe.com/)
 * Credentials: apiKey.
 
 ## How to get credentials:
@@ -65,9 +65,9 @@ To charge a credit card, you create a charge object. If your API key is in test 
 |--------------------|------------|----------
 | apiKey             | credentials| Required: The api key obtained from Stripe.
 | amount             | String     | Required: A positive integer in the smallest currency unit (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a 0-decimal currency) representing how much to charge the card. The minimum amount is $0.50 US or equivalent in charge currency.
-| applicationFee     | String     | A fee in cents that will be applied to the charge and transferred to the application owner's Stripe account. To use an application fee, the request must be made on behalf of another account, using the Stripe-Account header, an OAuth key, or the destination parameter. For more information, see the application fees documentation.
-| currency           | String     | Required: 3-letter ISO code for currency.
-| capture            | String     | Boolean. Whether or not to immediately capture the charge. When false, the charge issues an authorization (or pre-authorization), and will need to be captured later. Uncaptured charges expire in 7 days. For more information, see authorizing charges and settling later.
+| applicationFee     | String     | A fee in cents that will be applied to the charge and transferred to the application owner's Stripe account. To use an application fee, the request must be made on behalf of another account, using the Stripe-Account header, an OAuth key, or the destination parameter. For more information, see the application fees [documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees).
+| currency           | String     | Required: 3-letter ISO code for currency.See more [here](https://stripe.com/docs/currencies).
+| capture            | String     | Boolean. Whether or not to immediately [capture](https://stripe.com/docs/api#capture_charge) the charge. When false, the charge issues an authorization (or pre-authorization), and will need to be captured later. Uncaptured charges expire in 7 days. For more information, see [authorizing charges and settling later](https://stripe.com/docs/charges#auth-and-capture).
 | description        | String     | An arbitrary string which you can attach to a charge object. It is displayed when in the web interface alongside the charge. Note that if you use Stripe to send automatic email receipts to your customers, your receipt emails will include the description of the charge(s) that they are describing.
 | receiptEmail       | String     | The email address to send this charge's receipt to. The receipt will not be sent until the charge is paid. If this charge is for a customer, the email address specified here will override the customer's email address. Receipts will not be sent for test mode charges. If `receipt_email` is specified for a charge in live mode, a receipt will be sent regardless of your email settings.
 | customer           | String     | The ID of an existing customer that will be charged in this request.
@@ -87,9 +87,9 @@ Creates a new customer object.
 | description   | String     | An arbitrary string that you can attach to a customer object. It is displayed alongside the customer in the dashboard. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
 | email         | String     | Customer’s email address. It’s displayed alongside the customer in your dashboard and can be useful for searching and tracking. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
 | metadata      | Array       | A set of key/value pairs that you can attach to a customer object. It can be useful for storing additional information about the customer in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
-| plan          | String     | The identifier of the plan to subscribe the customer to. If provided, the returned customer object will have a list of subscriptions that the customer is currently subscribed to. If you subscribe a customer to a plan without a free trial, the customer must have a valid card as well.
-| taxPercent    | String     | A positive decimal (with at most four decimal places) between 1 and 100. This represents the percentage of the subscription invoice subtotal that will be calculated and added as tax to the final amount each billing period. For example, a plan which charges $10/month with a tax_percent of 20.0 will charge $12 per invoice. Can only be used if a plan is provided.
-| trialEnd      | String     | Unix timestamp representing the end of the trial period the customer will get before being charged. If set, trial_end will override the default trial period of the plan the customer is being subscribed to. The special value now can be provided to end the customer’s trial immediately. Only applies when the plan parameter is also provided.
+| plan          | String     | (Not yet supported!).The identifier of the plan to subscribe the customer to. If provided, the returned customer object will have a list of subscriptions that the customer is currently subscribed to. If you subscribe a customer to a plan without a free trial, the customer must have a valid card as well.
+| taxPercent    | String     | (Not yet supported!).A positive decimal (with at most four decimal places) between 1 and 100. This represents the percentage of the subscription invoice subtotal that will be calculated and added as tax to the final amount each billing period. For example, a plan which charges $10/month with a tax_percent of 20.0 will charge $12 per invoice. Can only be used if a plan is provided.
+| trialEnd      | String     | (Not yet supported!).Unix timestamp representing the end of the trial period the customer will get before being charged. If set, trial_end will override the default trial period of the plan the customer is being subscribed to. The special value now can be provided to end the customer’s trial immediately. Only applies when the plan parameter is also provided.
 
 Metadata example:
 
@@ -190,9 +190,9 @@ Updates the specified customer by setting the values of the parameters passed.
 | description   | String     | An arbitrary string that you can attach to a customer object. It is displayed alongside the customer in the dashboard. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
 | email         | String     | Customer’s email address. It’s displayed alongside the customer in your dashboard and can be useful for searching and tracking. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
 | metadata      | Array       | A set of key/value pairs that you can attach to a customer object. It can be useful for storing additional information about the customer in a structured format. This will be unset if you POST an empty value.This can be unset by updating the value to null and then saving.
-| plan          | String     | The identifier of the plan to subscribe the customer to. If provided, the returned customer object will have a list of subscriptions that the customer is currently subscribed to. If you subscribe a customer to a plan without a free trial, the customer must have a valid card as well.
-| taxPercent    | String     | A positive decimal (with at most four decimal places) between 1 and 100. This represents the percentage of the subscription invoice subtotal that will be calculated and added as tax to the final amount each billing period. For example, a plan which charges $10/month with a tax_percent of 20.0 will charge $12 per invoice. Can only be used if a plan is provided.
-| trialEnd      | String     | Unix timestamp representing the end of the trial period the customer will get before being charged. If set, trial_end will override the default trial period of the plan the customer is being subscribed to. The special value now can be provided to end the customer’s trial immediately. Only applies when the plan parameter is also provided.
+| plan          | String     | (Not yet supported!).The identifier of the plan to subscribe the customer to. If provided, the returned customer object will have a list of subscriptions that the customer is currently subscribed to. If you subscribe a customer to a plan without a free trial, the customer must have a valid card as well.
+| taxPercent    | String     | (Not yet supported!).A positive decimal (with at most four decimal places) between 1 and 100. This represents the percentage of the subscription invoice subtotal that will be calculated and added as tax to the final amount each billing period. For example, a plan which charges $10/month with a tax_percent of 20.0 will charge $12 per invoice. Can only be used if a plan is provided.
+| trialEnd      | String     | (Not yet supported!).Unix timestamp representing the end of the trial period the customer will get before being charged. If set, trial_end will override the default trial period of the plan the customer is being subscribed to. The special value now can be provided to end the customer’s trial immediately. Only applies when the plan parameter is also provided.
 
 `metadata` example:
 
@@ -279,7 +279,7 @@ Retrieves the details of an event. Supply the unique identifier of the event, wh
 | Field     | Type       | Description
 |-----------|------------|----------
 | apiKey    | credentials| Required: The api key obtained from Stripe.
-| eventId   | credentials| Required: The api key obtained from Stripe.
+| eventId   | credentials| Required: The identifier of the event to be retrieved.
 
 ## Stripe.getEventList
 List events, going back up to 30 days.
@@ -441,8 +441,8 @@ Returns a list of existing transfers sent to third-party bank accounts or that S
 |----------------|------------|----------
 | apiKey         | credentials| Required: The api key obtained from Stripe.
 | destination    | String     | Only return transfers for the destination specified by this account ID.
-| recipientstatus| String     | Only return transfers for the recipient specified by this recipient ID.
-| status         | Select     | Only return transfers that have the given status: `pending`, `paid`, `failed`, `in_transit`, or `canceled`.
+| recipientstatus| String     | (Not yet supported!).Only return transfers for the recipient specified by this recipient ID.
+| status         | Select     | (Not yet supported!).Only return transfers that have the given status: `pending`, `paid`, `failed`, `in_transit`, or `canceled`.
 
 ## Stripe.createTransferReversal
 When you create a new reversal, you must specify a transfer to create it on.
@@ -451,7 +451,7 @@ When you create a new reversal, you must specify a transfer to create it on.
 |---------------------|------------|----------
 | apiKey              | credentials| Required: The api key obtained from Stripe.
 | transferId          | credentials| Required: The identifier of the transfer to be reversed.
-| description         | String     | An arbitrary string which you can attach to a reversal object. It is displayed alongside the reversal in the dashboard. This will be unset if you POST an empty value.
+| description         | String     | (Not yet supported!).An arbitrary string which you can attach to a reversal object. It is displayed alongside the reversal in the dashboard. This will be unset if you POST an empty value.
 | metadata            | Array       | A set of key/value pairs that you can attach to a reversal object. It can be useful for storing additional information about the reversal in a structured format. You can unset individual keys if you POST an empty value for that key. You can clear all keys if you POST an empty value for metadata.You can unset an individual key by setting its value to null and then saving. To clear all keys, set metadata to null, then save.
 | refundApplicationFee| String     | Boolean indicating whether the application fee should be refunded when reversing this transfer. If a full transfer reversal is given, the full application fee will be refunded. Otherwise, the application fee will be refunded with an amount proportional to the amount of the transfer reversed.
 
@@ -541,7 +541,7 @@ Updates an account by setting the values of the parameters passed. Any parameter
 | supportPhone         | String     | A publicly shareable phone number that can be reached for support for this account
 | supportUrl           | String     | A publicly shareable URL that can be reached for support for this account
 | tosAcceptance        | JSON       | JSON Object. Details on who accepted the Stripe terms of service, and when they accepted it
-| transferSchedule     | JSON       | JSON Object. Details on when this account will make funds from charges available, and when they will be paid out to the account holder’s bank account.
+| transferSchedule     | JSON       | (Not yet supported!).JSON Object. Details on when this account will make funds from charges available, and when they will be paid out to the account holder’s bank account.
 
 `metadata` example:
 ```JSON
@@ -590,6 +590,7 @@ Returns a list of accounts connected to your platform via Connect. If you’re n
 | Field        | Type       | Description
 |--------------|------------|----------
 | apiKey       | credentials| Required: The api key obtained from Stripe.
+| accountId            | String     | Required: Id of account to get.
 | endingBefore | String     | A cursor for use in pagination. ending_before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_bar, your subsequent call can include ending_before=obj_bar in order to fetch the previous page of the list.
 | limit        | Number     | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
 | startingAfter| String     | A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list.
@@ -747,7 +748,7 @@ You can see a list of the bank accounts belonging to a Customer. Note that the 1
 | Field        | Type       | Description
 |--------------|------------|----------
 | apiKey       | credentials| Required: The api key obtained from Stripe.
-| accountId    | String     | The account ID obtained from Stripe.
+| accountId    | String     | Required: The account ID obtained from Stripe.
 | endingBefore | String     | A cursor for use in pagination. ending_before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_bar, your subsequent call can include ending_before=obj_bar in order to fetch the previous page of the list.
 | limit        | String     | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
 | startingAfter| String     | A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list.
@@ -986,7 +987,7 @@ Returns a list of your orders. The orders are returned sorted by creation date, 
 | Field            | Type       | Description
 |------------------|------------|----------
 | apiKey           | credentials| Required: The api key obtained from Stripe.
-| created          | String     | A filter on the list based on the object created field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with the following options:
+| created          | String     | A filter on the list based on the object created field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with the following options:`gt`-Return values where the created field is after this timestamp;`gte` - Return values where the created field is after or equal to this timestamp;`it` - Return values where the created field is before this timestamp;`ite`-Return values where the created field is before or equal to this timestamp.
 | customer         | String     | Only return orders for the given customer.
 | ids              | String     | Only return orders with the given IDs.
 | status           | Select     | Only return orders that have the given status. One of `created`, `paid`, `fulfilled`, or `refunded`.
@@ -1024,7 +1025,7 @@ Returns a list of your order returns. The returns are returned sorted by creatio
 | Field     | Type       | Description
 |-----------|------------|----------
 | apiKey    | credentials| Required: The api key obtained from Stripe.
-| created   | String     | A filter on the list based on the object created field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with the following options:
+| created   | String     | A filter on the list based on the object created field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with the following options:`gt`-Return values where the created field is after this timestamp;`gte` - Return values where the created field is after or equal to this timestamp;`it` - Return values where the created field is before this timestamp;`ite`-Return values where the created field is before or equal to this timestamp.
 | order     | String     | The order to retrieve returns for.
 
 ## Stripe.createProduct
@@ -1432,7 +1433,7 @@ Returns a list of your invoice items. Invoice items are returned sorted by creat
 | customer  | String     | The identifier of the customer whose invoice items to return. If none is provided, all invoice items will be returned.
 
 ## Stripe.createPlan
-Returns a list of your invoice items. Invoice items are returned sorted by creation date, with the most recently created invoice items appearing first.
+You can create plans easily via the plan management page of the Stripe dashboard. Plan creation is also accessible via the API if you need to create plans on the fly.
 
 | Field              | Type       | Description
 |--------------------|------------|----------

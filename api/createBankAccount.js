@@ -9,14 +9,14 @@ module.exports = (req, res) => {
 
     req.body.args = _.clearArgs(req.body.args);
 
-    let { 
+    let {
         apiKey,
         accountId,
         source,
         externalAccount,
         defaultForCurrency,
         metadata,
-         to="to" 
+         to="to"
      } = req.body.args;
 
     let r  = {
@@ -24,8 +24,8 @@ module.exports = (req, res) => {
         contextWrites: {}
     };
 
-    if(!apiKey || !(source || externalAccount)) {
-        _.echoBadEnd(r, to, res, 'apiKey, (source or externalAccount)');
+    if(!accountId || !apiKey || !(source || externalAccount)) {
+        _.echoBadEnd(r, to, res, 'apiKey, (source or externalAccount), accountId');
         return;
     }
 
@@ -34,6 +34,7 @@ module.exports = (req, res) => {
     let options = {};
 
     if(metadata!=undefined){
+
 
         if(typeof metadata !== 'object'){
             try {
@@ -52,21 +53,23 @@ module.exports = (req, res) => {
             metadataArr[metadata[i]['keyName']] = metadata[i]['value'];
         }
         metadata = metadataArr;
+        if(metadata) options.metadata = metadata;
     }
 
     if(externalAccount) options.external_account = externalAccount;
     else                options.source           = source;
 
+    if(defaultForCurrency) options.default_for_currency = defaultForCurrency;
 
     stripe.accounts.createExternalAccount(accountId, options, function(err, result) {
         if(!err) {
             r.contextWrites[to] = result;
-            r.callback = 'success'; 
+            r.callback = 'success';
         } else {
             r.contextWrites[to] = err.raw.message;
             r.callback = 'error';
         }
 
         res.status(200).send(r);
-    });    
+    });
 }

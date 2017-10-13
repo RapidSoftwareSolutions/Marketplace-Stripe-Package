@@ -50,6 +50,7 @@ module.exports = (req, res) => {
             metadataArr[metadata[i]['keyName']] = metadata[i]['value'];
         }
         metadata = metadataArr;
+        if(metadata) options.metadata = metadata;
     }
 
     stripe.accounts.updateExternalAccount(accountId, bankAccountId, options, function(err, result) {

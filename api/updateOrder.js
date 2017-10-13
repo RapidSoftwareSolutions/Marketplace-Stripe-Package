@@ -60,7 +60,7 @@ module.exports = (req, res) => {
         shipping: shipping
     });
 
-    stripe.orders.update(orderId, function(err, result) {
+    stripe.orders.update(orderId,options, function(err, result) {
         if(!err) {
             r.contextWrites[to] = result;
             r.callback = 'success'; 
